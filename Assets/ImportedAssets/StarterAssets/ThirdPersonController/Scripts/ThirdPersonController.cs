@@ -51,6 +51,8 @@ namespace StarterAssets
 
         [Header("Player Grounded")]
         [Tooltip("If the character is grounded or not. Not part of the CharacterController built in grounded check")]
+        [SerializeField] private int maxJumps = 2;
+        [SerializeField] private int jumpCount = 0;
         public bool Grounded = true;
 
         [Tooltip("Useful for rough ground")]
@@ -286,6 +288,8 @@ namespace StarterAssets
         {
             if (Grounded)
             {
+                jumpCount = 0;//reset jumps when touching ground
+
                 // reset the fall timeout timer
                 _fallTimeoutDelta = FallTimeout;
 
@@ -302,24 +306,28 @@ namespace StarterAssets
                     _verticalVelocity = -2f;
                 }
 
-                // Jump
-                if (_input.jump && _jumpTimeoutDelta <= 0.0f)
-                {
-                    // the square root of H * -2 * G = how much velocity needed to reach desired height
-                    _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
+                // // Jump
+                // if (_input.jump)// && _jumpTimeoutDelta <= 0.0f
+                // {
+                //     if(jumpCount < maxJumps)
+                //     {
+                //         jumpCount++;
+                //         // the square root of H * -2 * G = how much velocity needed to reach desired height
+                //         _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
 
-                    // update animator if using character
-                    if (_hasAnimator)
-                    {
-                        _animator.SetBool(_animIDJump, true);
-                    }
-                }
+                //         // update animator if using character
+                //         if (_hasAnimator)
+                //         {
+                //             _animator.SetBool(_animIDJump, true);
+                //         }
+                //     }
+                // }
 
                 // jump timeout
-                if (_jumpTimeoutDelta >= 0.0f)
-                {
-                    _jumpTimeoutDelta -= Time.deltaTime;
-                }
+                // if (_jumpTimeoutDelta >= 0.0f)
+                // {
+                //     _jumpTimeoutDelta -= Time.deltaTime;
+                // }
             }
             else
             {
@@ -340,8 +348,28 @@ namespace StarterAssets
                     }
                 }
 
-                // if we are not grounded, do not jump
-                _input.jump = false;
+                /// if we are not grounded, do not jump
+                // if(jumpCount >= maxJumps)
+                // {
+                //     _input.jump = false;
+                // }
+            }
+            // Jump
+            if (_input.jump)// && _jumpTimeoutDelta <= 0.0f
+            {
+                if(jumpCount < maxJumps)
+                {
+                    jumpCount++;
+                    // the square root of H * -2 * G = how much velocity needed to reach desired height
+                    _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
+
+                    // update animator if using character
+                    if (_hasAnimator)
+                    {
+                        _animator.SetBool(_animIDJump, true);
+                    }
+                    _input.jump = false;
+                }
             }
 
             // apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
