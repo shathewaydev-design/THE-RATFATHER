@@ -10,8 +10,8 @@ public class PickUpObjectScript : MonoBehaviour, IInteractable
     public CheeseIngredientData cheeseIngredientData;
 
     [Header("Interaction")]
-    [SerializeField] private float holdTime = 1.0f;
-    [SerializeField] private float currentHoldTime = 0f;
+    // [SerializeField] private float holdTime = 1.0f;
+    // [SerializeField] private float currentHoldTime = 0f;
     private bool playerInRange = false;
 
     [Header("UI")]
@@ -78,7 +78,7 @@ public class PickUpObjectScript : MonoBehaviour, IInteractable
         {
             playerInRange = false;
             Debug.Log("playerInRange is "+playerInRange);
-            currentHoldTime = 0f;
+            //currentHoldTime = 0f;
             if(promptAnimator != null)
             {
                 promptAnimator.SetBool("UIappeared", false);

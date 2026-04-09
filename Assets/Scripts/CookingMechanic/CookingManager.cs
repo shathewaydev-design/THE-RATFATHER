@@ -1,0 +1,187 @@
+using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.InputSystem;
+using Unity.Cinemachine;
+
+public class CookingManager : MonoBehaviour, IInteractable
+{
+    public static CookingManager Instance;
+
+    [Header("Camera")]
+    public CinemachineCamera playerCamera;
+    public Transform cookingPot;//view cooking pot
+
+    [Header("Player")]
+    public GameObject player;//playerCameraRoot
+    public MonoBehaviour ThirdPersonControllerScript;
+
+    [Header("UI Steps")]
+    public GameObject recipeMenu;
+    public GameObject stepPourMilk;
+    public GameObject stepFlavor;
+    public GameObject stepHeat;
+    public GameObject stepAdditive;
+
+    [Header("Interaction")]
+    // [SerializeField] private float holdTime = 1.0f;
+    // [SerializeField] private float currentHoldTime = 0f;
+    private bool playerInRange = false;
+    public InputActionAsset InputActions;//import all function from the input system
+
+    public InputAction stopInteract;//press Q
+    [Header("UI")]
+    public Animator promptAnimator;
+
+    public Image holdProgressBar;
+    [Header("Movement")]
+    public InputAction move;//player Movement
+    public InputAction sprint;//player Sprint
+    public InputAction jump;//player Jump
+
+    private void OnEnable()//this is necessary to avoid bugs
+    {
+        InputActions.FindActionMap("Player").Enable();
+
+    }
+    private void OnDisable()//this is necessary to avoid bugs
+    {
+        InputActions.FindActionMap("Player").Disable();
+
+    }
+    private void Awake()//this is necessary to avoid bugs
+    {
+        Instance = this;
+        stopInteract = InputSystem.actions.FindAction("StopInteract");
+        // move = InputSystem.actions.FindAction("Move");
+        // sprint = InputSystem.actions.FindAction("Sprint");
+        // jump = InputSystem.actions.FindAction("Jump");
+    }
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if(stopInteract.WasPressedThisFrame())
+        {
+            ExitCookingMode();
+        }
+        
+    }
+
+    public void Interact()//runs when player press E to interact
+    {
+        EnterCookingMode();
+        ShowRecipeMenu();
+    }
+    public void EnterCookingMode()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+
+        // InputSystem.actions.FindAction("Move").Disable();
+        // InputSystem.actions.FindAction("Sprint").Disable();
+        // InputSystem.actions.FindAction("Jump").Disable();
+
+        // Camera zoom to pot
+        playerCamera.Follow = cookingPot;
+        //playerCamera.LookAt = cookingPot;
+
+        // Disable player control
+        ThirdPersonControllerScript.enabled = false;
+    } 
+
+    public void ExitCookingMode()
+    {
+        // Restore camera
+        playerCamera.Follow = player.transform;
+        //playerCamera.LookAt = player.transform;
+
+        ThirdPersonControllerScript.enabled = true;
+
+        recipeMenu.SetActive(false);
+        stepPourMilk.SetActive(false);
+        stepFlavor.SetActive(false);
+        stepHeat.SetActive(false);
+        stepAdditive.SetActive(false);
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    // ---------- FLOW ----------
+
+    public void ShowRecipeMenu()
+    {
+        recipeMenu.SetActive(true);
+    }
+
+    public void StartPourMilk()
+    {
+        recipeMenu.SetActive(false);
+        stepPourMilk.SetActive(true);
+    }
+
+    public void StartFlavor()
+    {
+        stepPourMilk.SetActive(false);
+        stepFlavor.SetActive(true);
+    }
+
+    public void StartHeat()
+    {
+        stepFlavor.SetActive(false);
+        stepHeat.SetActive(true);
+    }
+
+    public void StartAdditive()
+    {
+        stepHeat.SetActive(false);
+        stepAdditive.SetActive(true);
+    }
+
+    public void FinishCooking()
+    {
+        stepAdditive.SetActive(false);
+        ExitCookingMode();
+    }
+
+/////UI ONLY////
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = true;
+            Debug.Log("playerInRange is "+playerInRange);
+            if(promptAnimator != null)
+            {
+                promptAnimator.SetBool("UIappeared", true);
+                promptAnimator.SetTrigger("UIappearing");
+            }
+
+
+            Debug.Log("Hold E to extract sample"); // Replace with UI later
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = false;
+            Debug.Log("playerInRange is "+playerInRange);
+            //currentHoldTime = 0f;
+            if(promptAnimator != null)
+            {
+                promptAnimator.SetBool("UIappeared", false);
+                promptAnimator.SetTrigger("UIdisappearing");
+            }
+        }
+    }
+}
