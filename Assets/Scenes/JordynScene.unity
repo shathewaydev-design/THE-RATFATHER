@@ -960,7 +960,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8150a422278cae341a3cbc45bc1dd22b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 11.9
+      value: 10.2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8150a422278cae341a3cbc45bc1dd22b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1086,11 +1086,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e37029426694d9e4cabcdf79a98d2d06, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -24.6
+      value: -26.49
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e37029426694d9e4cabcdf79a98d2d06, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10.2
+      value: 10.79
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e37029426694d9e4cabcdf79a98d2d06, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3043,6 +3043,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 541d9555edad4e04f8988d55d33631b7, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 8150a422278cae341a3cbc45bc1dd22b, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: -159877278262990678, guid: 2ac1a6c87576ce746b2e2d315417383c, type: 3}
     - target: {fileID: 919132149155446097, guid: 8150a422278cae341a3cbc45bc1dd22b, type: 3}
       propertyPath: m_Name
       value: Building_Three (2)
@@ -3286,6 +3290,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -580.50903
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 8150a422278cae341a3cbc45bc1dd22b, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 5033703511601670329, guid: 8150a422278cae341a3cbc45bc1dd22b, type: 3}
+    - target: {fileID: -7511558181221131132, guid: 8150a422278cae341a3cbc45bc1dd22b, type: 3}
+      propertyPath: 'm_Materials.Array.data[2]'
+      value: 
+      objectReference: {fileID: 5033703511601670329, guid: 8150a422278cae341a3cbc45bc1dd22b, type: 3}
     - target: {fileID: 919132149155446097, guid: 8150a422278cae341a3cbc45bc1dd22b, type: 3}
       propertyPath: m_Name
       value: Building_Three (5)
@@ -3343,6 +3355,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 47.877
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 2ac1a6c87576ce746b2e2d315417383c, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 288421c13dfd7a740bff7b7f1586e6e2, type: 2}
     - target: {fileID: 919132149155446097, guid: 2ac1a6c87576ce746b2e2d315417383c, type: 3}
       propertyPath: m_Name
       value: Building_Five
@@ -3412,6 +3428,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 1.939
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 29291070435854c46b332e4c89e4ce48, type: 3}
+      propertyPath: 'm_Materials.Array.data[4]'
+      value: 
+      objectReference: {fileID: -159877278262990678, guid: 2ac1a6c87576ce746b2e2d315417383c, type: 3}
     - target: {fileID: 919132149155446097, guid: 29291070435854c46b332e4c89e4ce48, type: 3}
       propertyPath: m_Name
       value: Building_Four (2)
@@ -3508,7 +3528,7 @@ Transform:
   m_GameObject: {fileID: 1199247934}
   serializedVersion: 2
   m_LocalRotation: {x: -0.0022839496, y: -0.21749437, z: 0.010249214, w: 0.9760051}
-  m_LocalPosition: {x: 39.2, y: 27.3, z: -126.9}
+  m_LocalPosition: {x: 39.2, y: 27.3, z: -120.92}
   m_LocalScale: {x: 0.4215, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4022,7 +4042,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c6219e1cf528ea14780bbd1b6d7d44fd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 17.296839
+      value: 15.3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c6219e1cf528ea14780bbd1b6d7d44fd, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4113,6 +4133,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -537.787
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 8150a422278cae341a3cbc45bc1dd22b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8068735254310325297, guid: 2ac1a6c87576ce746b2e2d315417383c, type: 3}
+    - target: {fileID: -7511558181221131132, guid: 8150a422278cae341a3cbc45bc1dd22b, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: -159877278262990678, guid: 2ac1a6c87576ce746b2e2d315417383c, type: 3}
     - target: {fileID: 919132149155446097, guid: 8150a422278cae341a3cbc45bc1dd22b, type: 3}
       propertyPath: m_Name
       value: Building_Three (4)
@@ -4261,7 +4289,7 @@ GameObject:
   - component: {fileID: 1613493164}
   - component: {fileID: 1613493163}
   m_Layer: 0
-  m_Name: Area Light (3)
+  m_Name: Directional_Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4370,7 +4398,7 @@ Transform:
   m_GameObject: {fileID: 1613493162}
   serializedVersion: 2
   m_LocalRotation: {x: -0.077414624, y: 0.48201895, z: 0.12581338, w: -0.86361784}
-  m_LocalPosition: {x: -33, y: 6.1, z: -48.9}
+  m_LocalPosition: {x: -15.12, y: 125.72, z: -17.03}
   m_LocalScale: {x: 308.07657, y: 10.1492815, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
