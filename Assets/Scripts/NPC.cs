@@ -5,11 +5,13 @@ using UnityEngine;
 
 public class NPC : MonoBehaviour, IInteractable
 {
+    public NPCProfile profile;
+    public NPCState state;
 
-    public DialogueData dialogue;
+    public ConversationData intro;
     public DialogueManager dialogueManager;
 
-    [SerializeField] private float interactionRadius = 1.0f; // checking distancer manualy, not using triggers
+    [SerializeField] private float interactionRadius = 1.5f; // checking distancer manualy, not using triggers
     [SerializeField] private Transform playerTransform;
 
     // private Coroutine exitRoutine; // for some reason prompt ui is acting up, so this is an attempt to fix that
@@ -24,10 +26,18 @@ public class NPC : MonoBehaviour, IInteractable
 
     public Image holdProgressBar;
 
-
+    void Start()
+    {
+        state = new NPCState();
+    }
     public void Interact()
     {
-        dialogueManager.StartDialogue(dialogue);
+        if (!state.hasMetPlayer)
+        {
+            dialogueManager.StartConversation(intro);
+            state.hasMetPlayer = true;
+        }
+
     }
 
     // Update is called once per frame
@@ -71,54 +81,4 @@ public class NPC : MonoBehaviour, IInteractable
         }
     }
 
-    // OLD CODE THAT HANDLED INTERACTION PROMPTS WITH TRIGGER ZONES.
-    // MAY NEED TO CLEAN NPC TEMPLATE OBJ DUE TO UPDATE, BUT WORKS FINE FOR NOW
-    //    void OnTriggerEnter(Collider other)
-    //    {
-    //        if (other.CompareTag("Player"))
-    //        {
-    //            if (exitRoutine != null)
-    //                StopCoroutine(exitRoutine);
-
-    //            playerInRange = true;
-    //            //Debug.Log("ENTER at " + Time.time);
-    //            //Debug.Log("ENTER: " + other.name);
-    //            //Debug.Log("playerInRange is " + playerInRange);
-    //            if (promptAnimator != null)
-    //            {
-    //                promptAnimator.SetBool("UIappeared", true);
-    //                promptAnimator.SetTrigger("UIappearing");
-    //            }
-
-
-    //           Debug.Log("Press E to advance dialogue"); // Replace with UI later
-    //        }
-    //    }
-
-    //    void OnTriggerExit(Collider other)
-    //    {
-
-    //        if (other.CompareTag("Player"))
-    //        {
-    //           // if (exitRoutine != null)
-    //             //   StopCoroutine(exitRoutine);
-
-    //            exitRoutine = StartCoroutine(HandleExit());
-    //        }
-
-    //    }
-
-    //    IEnumerator HandleExit() // fixes UI prompt reappearing after collider exit
-    //    {
-    //        yield return new WaitForSeconds(0.4f); // small delay
-
-    //        playerInRange = false;
-    //        currentHoldTime = 0f;
-
-    //        if (promptAnimator != null)
-    //        {
-    //            promptAnimator.SetBool("UIappeared", false);
-    //            promptAnimator.SetTrigger("UIdisappearing");
-    //        }
-    //    }
 }

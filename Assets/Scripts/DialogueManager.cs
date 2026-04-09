@@ -1,70 +1,120 @@
+using StarterAssets;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class DialogueManager : MonoBehaviour
 {
     // note for dialogue - specific lines held by NPC, start and stop logic here
-  
-    private Queue<string> lines = new Queue<string>();
+    public ConversationData currentConversation;
+    public int currentLineIndex = 0;
+
+    public UIManager UIManager;
+    public ThirdPersonController player;
+    //private Queue<string> lines = new Queue<string>();
     private bool isDialogueActive = false;
     private bool canAdvance = true; // help w typewriter effect -- always true for now
-    // ^^ also can handle in another script, keep in mind for now
+                                    // ^^ also can handle in another script, keep in mind for now
 
 
     // start dialogue
-    public void StartDialogue(DialogueData dialogue)
+    // Call this to start a conversation
+    public void StartConversation(ConversationData conversation)
     {
         isDialogueActive = true;
-        lines.Clear(); // clear out any previous lines
+        player.enabled = false;
 
-        foreach (string line in dialogue.lines) // loop through each line in the dialoge data
-        {
-            lines.Enqueue(line); // add line from dialogue data to queue
-        }
+        currentConversation = conversation;
+        currentLineIndex = 0;
 
-        // after each line is added to queue, display next line
-        DisplayNextLine();
+        UIManager.ShowDialoguePanel();      // turn panel on
+        ShowCurrentLine();
     }
 
     // display next line in dialogue
-    public void DisplayNextLine()
+    public void ShowCurrentLine()
     {
-        if (!isDialogueActive) // if dialogue isnt active, don't display
-            return;
-
-        if (lines.Count == 0) // end dialogue if count is 0
+        if (currentLineIndex >= currentConversation.lines.Count)
         {
             EndDialogue();
             return;
         }
 
-        string currentLine = lines.Dequeue();
+        DialogueLine line = currentConversation.lines[currentLineIndex];
 
-        // Replace this with UI later
-        Debug.Log(currentLine);
+        // Show line in the UI
+        UIManager.SetSpeaker(line.speaker);
+        UIManager.SetText(line.text);
+
+        // Show options if they exist
+        if (line.options != null && line.options.Count > 0)
+        {
+            UIManager.ShowOptions(line.options, OnOptionSelected);
+        }
+        else
+        {
+            UIManager.HideOptions();
+            // automatically advance when player clicks "Next" button (optional)
+        }
+
+    }
+
+
+    // Called when player clicks an option
+    public void OnOptionSelected(int selectedOptionIndex)
+    {
+        DialogueOption selected = currentConversation.lines[currentLineIndex].options[selectedOptionIndex];
+
+        if (selected.endConversation && currentLineIndex == currentConversation.lines.Count)
+        {
+            EndDialogue(); // panel hides, flow stops
+            return;
+        }
+
+        if (selected.nextLineIndex >= 0)
+            currentLineIndex = selected.nextLineIndex;
+        else
+            currentLineIndex++;
+
+        ShowCurrentLine();
     }
 
     // end dialogue
     void EndDialogue()
     {
+        UIManager.HideDialoguePanel();
+        currentConversation = null;
+        currentLineIndex = 0;
+
         isDialogueActive = false;
-        Debug.Log("Dialogue ended.");
+        player.enabled = true;
+
+        Debug.Log("Conversation ended!");
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
 
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        if (isDialogueActive && canAdvance && Keyboard.current.eKey.wasPressedThisFrame) // Input.GetKeyDown(KeyCode.E) is legacy...
+        if (currentConversation == null)
+            return;
+
+        if (currentConversation.lines[currentLineIndex].endConversation && Keyboard.current.eKey.wasPressedThisFrame)
         {
-            DisplayNextLine();
+            EndDialogue();
+            return;
+        }
+
+        // Only advance with E if no options are active
+        if ((currentConversation.lines.Count > currentLineIndex) &&
+            (currentConversation.lines[currentLineIndex].options == null ||
+             currentConversation.lines[currentLineIndex].options.Count == 0))
+        {
+            if (Keyboard.current.eKey.wasPressedThisFrame)
+            {
+                currentLineIndex++;
+                ShowCurrentLine();
+            }
         }
     }
 }
