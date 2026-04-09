@@ -11,11 +11,16 @@ public class CookingManager : MonoBehaviour, IInteractable
 
     [Header("Camera")]
     public CinemachineCamera playerCamera;
+    public GameObject mainCamera;
     public Transform cookingPot;//view cooking pot
+    private Vector3 savedMainCameraPosition;
+    private Quaternion savedMainCameraRotation;
 
     [Header("Player")]
     public GameObject player;//playerCameraRoot
-    public MonoBehaviour ThirdPersonControllerScript;
+    public GameObject playerGeo;//player Geo
+    public GameObject playerFollowCamera;//cinemachine
+    // public MonoBehaviour ThirdPersonControllerScript;
 
     [Header("UI Steps")]
     public GameObject recipeMenu;
@@ -88,22 +93,35 @@ public class CookingManager : MonoBehaviour, IInteractable
         // InputSystem.actions.FindAction("Move").Disable();
         // InputSystem.actions.FindAction("Sprint").Disable();
         // InputSystem.actions.FindAction("Jump").Disable();
-
+        //Save current camera data
+        savedMainCameraPosition = mainCamera.transform.position;
+        savedMainCameraRotation = mainCamera.transform.rotation;
         // Camera zoom to pot
         playerCamera.Follow = cookingPot;
         //playerCamera.LookAt = cookingPot;
+        mainCamera.transform.position = new Vector3(3.747427f, 2.5f, -5.494404f);
+        mainCamera.transform.rotation = Quaternion.Euler(14.08f, -0.086f, -0.025f);
+
 
         // Disable player control
-        ThirdPersonControllerScript.enabled = false;
+        //ThirdPersonControllerScript.enabled = false;
+        playerGeo.SetActive(false);
+        playerFollowCamera.SetActive(false);
     } 
 
     public void ExitCookingMode()
     {
+        
+
+        //ThirdPersonControllerScript.enabled = true;
+        playerGeo.SetActive(true);
+        playerFollowCamera.SetActive(true);
         // Restore camera
         playerCamera.Follow = player.transform;
         //playerCamera.LookAt = player.transform;
+        mainCamera.transform.position = savedMainCameraPosition;
+        mainCamera.transform.rotation = savedMainCameraRotation;
 
-        ThirdPersonControllerScript.enabled = true;
 
         recipeMenu.SetActive(false);
         stepPourMilk.SetActive(false);
