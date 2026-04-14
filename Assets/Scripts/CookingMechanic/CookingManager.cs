@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using Unity.Cinemachine;
+using StarterAssets;
 
 public class CookingManager : MonoBehaviour, IInteractable
 {
@@ -33,70 +34,30 @@ public class CookingManager : MonoBehaviour, IInteractable
     // [SerializeField] private float currentHoldTime = 0f;
     public ThirdPersonController thirdPersonController;
     private bool playerInRange = false;
-    //public InputActionAsset InputActions;//import all function from the input system
-    // public PlayerInput playerInput;
-    // private InputActionMap playerMap;
-    // private InputActionMap cookingMap;
-
-    // private InputAction stopInteract;//press Q
-    // public InputAction tiltLeft;//press A
-    // public InputAction tiltRight;//press D
 
     [Header("UI")]
     public Animator promptAnimator;
 
     public Image holdProgressBar;
-    //[Header("Movement")]
     
-
-    // private void OnEnable()//this is necessary to avoid bugs
-    // {
-    //     InputActions.FindActionMap("Player").Enable();
-    //     InputActions.FindActionMap("Cooking").Enable();
-
-    // }
-    // private void OnDisable()//this is necessary to avoid bugs
-    // {
-    //     InputActions.FindActionMap("Player").Disable();
-    //     InputActions.FindActionMap("Cooking").Disable();
-
-    // }
     private void Awake()//this is necessary to avoid bugs
     {
         Instance = this;
-        
-    //     if (playerInput == null)
-    //     playerInput = FindFirstObjectByType<PlayerInput>();
-    //     // Grab actions from PlayerInput's asset
-    // var cookingMap = playerInput.actions.FindActionMap("Cooking");
-
-    //     tiltLeft = cookingMap.FindAction("TiltLeft");
-    //     tiltRight = cookingMap.FindAction("TiltRight");
-    //     stopInteract = cookingMap.FindAction("StopInteract");
-        
-        
+       
+       
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         thirdPersonController = ThirdPersonController.Instance;
-
         thirdPersonController.OnStopInteract += ExitCookingMode;
-        thirdPersonController.OnTiltLeft += HandleTiltLeft;
-        thirdPersonController.OnTiltRight += HandleTiltRight;
     }
 
     // Update is called once per frame
     void Update()
     {
-        // if (playerInput.currentActionMap.name == "Cooking")
-        // {
-        //     if(ThirdPersonController.Instance.stopInteract.WasPressedThisFrame())
-        //     {
-        //         ExitCookingMode();
-        //     }
-        // }
+        
 
         
     }
@@ -112,17 +73,16 @@ public class CookingManager : MonoBehaviour, IInteractable
         Cursor.lockState = CursorLockMode.None;
 
         thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Cooking");
-        //ThirdPersonController.Instance.playerInput.SwitchCurrentActionMap("Cooking");
         
         //Save current camera data
         savedMainCameraPosition = mainCamera.transform.position;
         savedMainCameraRotation = mainCamera.transform.rotation;
         // Camera zoom to pot
+        //playerCamera.Lens.FieldOfView = 19f;
         playerCamera.Follow = cookingPot;
         mainCamera.transform.position = new Vector3(3.747427f, 2.5f, -5.494404f);
         mainCamera.transform.rotation = Quaternion.Euler(14.08f, -0.086f, -0.025f);
-
-
+        
         // Disable player control
         //playerGeo.SetActive(false);
         playerFollowCamera.SetActive(false);
@@ -130,18 +90,16 @@ public class CookingManager : MonoBehaviour, IInteractable
 
     public void ExitCookingMode()
     {
-        
-        
-        //ThirdPersonController.Instance.playerInput.SwitchCurrentActionMap("Player");
         thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
 
         //playerGeo.SetActive(true);
         playerFollowCamera.SetActive(true);
         // Restore camera
+        //playerCamera.Lens.FieldOfView = 40f;
         playerCamera.Follow = player.transform;
         mainCamera.transform.position = savedMainCameraPosition;
         mainCamera.transform.rotation = savedMainCameraRotation;
-
+        
 
         recipeMenu.SetActive(false);
         stepPourMilk.SetActive(false);
@@ -170,6 +128,7 @@ public class CookingManager : MonoBehaviour, IInteractable
     {
         stepPourMilk.SetActive(false);
         stepFlavor.SetActive(true);
+        thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Mouse");
     }
 
     public void StartHeat()
@@ -225,10 +184,8 @@ public class CookingManager : MonoBehaviour, IInteractable
 
     private void OnDestroy()
     {
-        if (controller == null) return;
+        if (thirdPersonController == null) return;
 
-        controller.OnStopInteract -= ExitCookingMode;
-        controller.OnTiltLeft -= HandleTiltLeft;
-        controller.OnTiltRight -= HandleTiltRight;
+        thirdPersonController.OnStopInteract -= ExitCookingMode;
     }
 }

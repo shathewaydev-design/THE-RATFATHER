@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using StarterAssets;
 
 public class PourMilkStep : MonoBehaviour
 {
@@ -7,13 +8,18 @@ public class PourMilkStep : MonoBehaviour
     public float rotateSpeed = 100f;
 
     public Image progressBar;
-    public float fillSpeed = 20f;
+    public float fillSpeed = 0.005f;
 
     public float targetMin = 40f;
     public float targetMax = 60f;
 
     private float currentFill = 0f;
+    public ThirdPersonController thirdPersonController;
     
+    void Start ()
+    {
+        thirdPersonController = ThirdPersonController.Instance;
+    }
     void Update()
     {
         HandleRotation();
@@ -24,11 +30,11 @@ public class PourMilkStep : MonoBehaviour
     {
         float input = 0;
 
-        if (CookingManager.Instance.tiltLeft.IsPressed()) 
+        if (thirdPersonController.tiltLeft.IsPressed()) 
         {
             input += 1;
         }
-        if (CookingManager.Instance.tiltRight.IsPressed()) 
+        if (thirdPersonController.tiltRight.IsPressed()) 
         {
             input -= 1;
         }
@@ -39,17 +45,20 @@ public class PourMilkStep : MonoBehaviour
     void HandlePour()
     {
         float tilt = Mathf.Abs(milkCarton.localEulerAngles.z);
-        if (tilt > 180) tilt = 360 - tilt;
+        if (tilt > 360f) 
+        {
+            tilt = 360f - tilt;
+        }
 
         float pourAmount = tilt / 90f; // normalized
 
-        if (pourAmount > 0.2f)
+        if (pourAmount > 0.5f)//start pouring when tilt is greater than 45 degrees
         {
             currentFill += pourAmount * fillSpeed * Time.deltaTime;
-            progressBar.fillAmount = currentFill;
+            progressBar.fillAmount = currentFill / 100.0f;
         }
 
-        if (currentFill >= targetMin)
+        if (pourAmount < 0.5f && currentFill > 0f)//stop pouring when tilt is less than 45 degrees
         {
             Evaluate();
         }
@@ -57,16 +66,21 @@ public class PourMilkStep : MonoBehaviour
 
     void Evaluate()
     {
+        bool finishPour = false;
         if (currentFill >= targetMin && currentFill <= targetMax)
         {
-            Debug.Log("Perfect pour");
+            //Debug.Log("Perfect pour");
+            finishPour = true;
         }
-        else
+        if(currentFill > targetMax)
         {
-            Debug.Log("Overpour penalty");
+            //Debug.Log("Overpour penalty");
+            finishPour = true;
         }
-
-        CookingManager.Instance.StartFlavor();
-        gameObject.SetActive(false);
+        if(finishPour)
+        {
+            CookingManager.Instance.StartFlavor();
+            gameObject.SetActive(false);
+        }
     }
 }

@@ -87,13 +87,42 @@ namespace StarterAssets
         public event Action OnTiltLeft;
         public event Action OnTiltRight;
         public event Action OnInteract; 
+        public event Action OnMouseClick; 
+        public event Action OnMousePositionChange; 
         private InputActionMap playerMap;
         private InputActionMap cookingMap;
+        private InputActionMap mouseMap;
 
         public InputAction stopInteract;//press Q
         public InputAction tiltLeft;//press A
         public InputAction tiltRight;//press D
+        public InputAction mouseClick;//press (Left) Mouse Button
+        public InputAction mousePosition;//mouse position for dragging objects
+        public event Action<Vector2> OnMousePosition;
+        public event Action<bool> OnMouseDrag;
+        private void OnEnable()//used to subscribe to input events, make sure to unsubscribe in OnDisable to avoid bugs
+        {
+        #if ENABLE_INPUT_SYSTEM
+            tiltLeft.performed += OnTiltLeftPerformed;
+            tiltRight.performed += OnTiltRightPerformed;
+            stopInteract.performed += OnStopInteractPerformed;
 
+            mouseClick.performed += OnMouseClickPerformed;
+            mouseClick.canceled += OnMouseClickCanceled;
+        #endif
+        }
+
+        private void OnDisable()
+        {
+        #if ENABLE_INPUT_SYSTEM
+            tiltLeft.performed -= OnTiltLeftPerformed;
+            tiltRight.performed -= OnTiltRightPerformed;
+            stopInteract.performed -= OnStopInteractPerformed;
+
+            mouseClick.performed -= OnMouseClickPerformed;
+            mouseClick.canceled -= OnMouseClickCanceled;
+        #endif
+        }
 
         // cinemachine
         private float _cinemachineTargetYaw;
@@ -169,6 +198,10 @@ namespace StarterAssets
             tiltLeft = cookingMap.FindAction("TiltLeft");
             tiltRight = cookingMap.FindAction("TiltRight");
             stopInteract = cookingMap.FindAction("StopInteract");
+            var mouseMap = _playerInput.actions.FindActionMap("Mouse");
+            mouseClick = mouseMap.FindAction("LeftClick");
+            mousePosition = mouseMap.FindAction("MousePosition");
+
 
             // OPTIONAL: if you have interact in Player map
             var playerMap = _playerInput.actions.FindActionMap("Player");
@@ -196,8 +229,25 @@ namespace StarterAssets
             JumpAndGravity();
             GroundedCheck();
             Move();
+            
+            #if ENABLE_INPUT_SYSTEM
+            if (mousePosition != null)
+            {
+                OnMousePosition?.Invoke(mousePosition.ReadValue<Vector2>());
+            }
 
-            HandleGameMechanicInput(); // Check for game mechanic input each frame
+            if (mouseClick != null)
+            {
+                OnMouseDrag?.Invoke(mouseClick.IsPressed());
+            }
+        #endif
+
+            // HandleGameMechanicInput(); // Check for game mechanic input each frame
+            // tiltLeft.performed += ctx => OnTiltLeft?.Invoke();
+            // tiltRight.performed += ctx => OnTiltRight?.Invoke();
+            // stopInteract.performed += ctx => OnStopInteract?.Invoke();  
+            // mouseClick.performed += ctx => OnMouseClick?.Invoke();
+            // mousePosition.performed += ctx => OnMousePositionChange?.Invoke();
         }
 
         private void LateUpdate()
@@ -456,29 +506,29 @@ namespace StarterAssets
             }
         }
 
-        private void HandleGameMechanicInput()
+        private void OnTiltLeftPerformed(InputAction.CallbackContext ctx)
         {
-        #if ENABLE_INPUT_SYSTEM
-            if (_playerInput.currentActionMap == null) return;
+            OnTiltLeft?.Invoke();
+        }
 
-            // Only process cooking inputs when in Cooking map
-            if (_playerInput.currentActionMap.name != "Cooking") return;
+        private void OnTiltRightPerformed(InputAction.CallbackContext ctx)
+        {
+            OnTiltRight?.Invoke();
+        }
 
-            if (stopInteract != null && stopInteract.WasPressedThisFrame())
-            {
-                OnStopInteract?.Invoke();
-            }
+        private void OnStopInteractPerformed(InputAction.CallbackContext ctx)
+        {
+            OnStopInteract?.Invoke();
+        }
 
-            if (tiltLeft != null && tiltLeft.isPressed())
-            {
-                OnTiltLeft?.Invoke();
-            }
+        private void OnMouseClickPerformed(InputAction.CallbackContext ctx)
+        {
+            OnMouseClick?.Invoke();
+        }
 
-            if (tiltRight != null && tiltRight.isPressed())
-            {
-                OnTiltRight?.Invoke();
-            }
-        #endif
+        private void OnMouseClickCanceled(InputAction.CallbackContext ctx)
+        {
+            // optional: release event 
         }
     }
 }
