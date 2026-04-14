@@ -129,15 +129,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""StopInteract"",
-                    ""type"": ""Button"",
-                    ""id"": ""436d5b4d-9130-4845-a393-0891d9c028f4"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": ""Press"",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Crouch"",
                     ""type"": ""Button"",
                     ""id"": ""27c5f898-bc57-4ee1-8800-db469aca5fe3"",
@@ -566,17 +557,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Crouch"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""92f92b5d-4838-492c-9dae-728b48b73453"",
-                    ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""StopInteract"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1097,6 +1077,74 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Cooking"",
+            ""id"": ""b0cb8cd5-7454-4d1c-ac1b-7f00ea18e803"",
+            ""actions"": [
+                {
+                    ""name"": ""TiltLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""d70355e2-cc05-4945-8c8b-220c5dc74ea2"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TiltRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""b1217a96-c1e0-4ecf-ba91-1be4829b7e99"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""StopInteract"",
+                    ""type"": ""Button"",
+                    ""id"": ""fc83c668-9062-46ac-be68-05e35cdef3df"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""31afd9ba-9176-4458-a52a-749c3af2437d"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""TiltLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d9c77a3d-3ff8-4c9c-9a00-c5550961bd2b"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""StopInteract"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0c0ac570-dbad-4703-98a0-bb581c021f7e"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TiltRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -1168,7 +1216,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
-        m_Player_StopInteract = m_Player.FindAction("StopInteract", throwIfNotFound: true);
         m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Previous = m_Player.FindAction("Previous", throwIfNotFound: true);
@@ -1186,12 +1233,18 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_UI_ScrollWheel = m_UI.FindAction("ScrollWheel", throwIfNotFound: true);
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
+        // Cooking
+        m_Cooking = asset.FindActionMap("Cooking", throwIfNotFound: true);
+        m_Cooking_TiltLeft = m_Cooking.FindAction("TiltLeft", throwIfNotFound: true);
+        m_Cooking_TiltRight = m_Cooking.FindAction("TiltRight", throwIfNotFound: true);
+        m_Cooking_StopInteract = m_Cooking.FindAction("StopInteract", throwIfNotFound: true);
     }
 
     ~@InputSystem_Actions()
     {
         UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, InputSystem_Actions.Player.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_UI.enabled, "This will cause a leak and performance issues, InputSystem_Actions.UI.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_Cooking.enabled, "This will cause a leak and performance issues, InputSystem_Actions.Cooking.Disable() has not been called.");
     }
 
     /// <summary>
@@ -1271,7 +1324,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_Interact;
-    private readonly InputAction m_Player_StopInteract;
     private readonly InputAction m_Player_Crouch;
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Previous;
@@ -1304,10 +1356,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/Interact".
         /// </summary>
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
-        /// <summary>
-        /// Provides access to the underlying input action "Player/StopInteract".
-        /// </summary>
-        public InputAction @StopInteract => m_Wrapper.m_Player_StopInteract;
         /// <summary>
         /// Provides access to the underlying input action "Player/Crouch".
         /// </summary>
@@ -1366,9 +1414,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
-            @StopInteract.started += instance.OnStopInteract;
-            @StopInteract.performed += instance.OnStopInteract;
-            @StopInteract.canceled += instance.OnStopInteract;
             @Crouch.started += instance.OnCrouch;
             @Crouch.performed += instance.OnCrouch;
             @Crouch.canceled += instance.OnCrouch;
@@ -1407,9 +1452,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
-            @StopInteract.started -= instance.OnStopInteract;
-            @StopInteract.performed -= instance.OnStopInteract;
-            @StopInteract.canceled -= instance.OnStopInteract;
             @Crouch.started -= instance.OnCrouch;
             @Crouch.performed -= instance.OnCrouch;
             @Crouch.canceled -= instance.OnCrouch;
@@ -1653,6 +1695,124 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     /// Provides a new <see cref="UIActions" /> instance referencing this action map.
     /// </summary>
     public UIActions @UI => new UIActions(this);
+
+    // Cooking
+    private readonly InputActionMap m_Cooking;
+    private List<ICookingActions> m_CookingActionsCallbackInterfaces = new List<ICookingActions>();
+    private readonly InputAction m_Cooking_TiltLeft;
+    private readonly InputAction m_Cooking_TiltRight;
+    private readonly InputAction m_Cooking_StopInteract;
+    /// <summary>
+    /// Provides access to input actions defined in input action map "Cooking".
+    /// </summary>
+    public struct CookingActions
+    {
+        private @InputSystem_Actions m_Wrapper;
+
+        /// <summary>
+        /// Construct a new instance of the input action map wrapper class.
+        /// </summary>
+        public CookingActions(@InputSystem_Actions wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action "Cooking/TiltLeft".
+        /// </summary>
+        public InputAction @TiltLeft => m_Wrapper.m_Cooking_TiltLeft;
+        /// <summary>
+        /// Provides access to the underlying input action "Cooking/TiltRight".
+        /// </summary>
+        public InputAction @TiltRight => m_Wrapper.m_Cooking_TiltRight;
+        /// <summary>
+        /// Provides access to the underlying input action "Cooking/StopInteract".
+        /// </summary>
+        public InputAction @StopInteract => m_Wrapper.m_Cooking_StopInteract;
+        /// <summary>
+        /// Provides access to the underlying input action map instance.
+        /// </summary>
+        public InputActionMap Get() { return m_Wrapper.m_Cooking; }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+        public void Enable() { Get().Enable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+        public void Disable() { Get().Disable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+        public bool enabled => Get().enabled;
+        /// <summary>
+        /// Implicitly converts an <see ref="CookingActions" /> to an <see ref="InputActionMap" /> instance.
+        /// </summary>
+        public static implicit operator InputActionMap(CookingActions set) { return set.Get(); }
+        /// <summary>
+        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <param name="instance">Callback instance.</param>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+        /// </remarks>
+        /// <seealso cref="CookingActions" />
+        public void AddCallbacks(ICookingActions instance)
+        {
+            if (instance == null || m_Wrapper.m_CookingActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_CookingActionsCallbackInterfaces.Add(instance);
+            @TiltLeft.started += instance.OnTiltLeft;
+            @TiltLeft.performed += instance.OnTiltLeft;
+            @TiltLeft.canceled += instance.OnTiltLeft;
+            @TiltRight.started += instance.OnTiltRight;
+            @TiltRight.performed += instance.OnTiltRight;
+            @TiltRight.canceled += instance.OnTiltRight;
+            @StopInteract.started += instance.OnStopInteract;
+            @StopInteract.performed += instance.OnStopInteract;
+            @StopInteract.canceled += instance.OnStopInteract;
+        }
+
+        /// <summary>
+        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <remarks>
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+        /// </remarks>
+        /// <seealso cref="CookingActions" />
+        private void UnregisterCallbacks(ICookingActions instance)
+        {
+            @TiltLeft.started -= instance.OnTiltLeft;
+            @TiltLeft.performed -= instance.OnTiltLeft;
+            @TiltLeft.canceled -= instance.OnTiltLeft;
+            @TiltRight.started -= instance.OnTiltRight;
+            @TiltRight.performed -= instance.OnTiltRight;
+            @TiltRight.canceled -= instance.OnTiltRight;
+            @StopInteract.started -= instance.OnStopInteract;
+            @StopInteract.performed -= instance.OnStopInteract;
+            @StopInteract.canceled -= instance.OnStopInteract;
+        }
+
+        /// <summary>
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="CookingActions.UnregisterCallbacks(ICookingActions)" />.
+        /// </summary>
+        /// <seealso cref="CookingActions.UnregisterCallbacks(ICookingActions)" />
+        public void RemoveCallbacks(ICookingActions instance)
+        {
+            if (m_Wrapper.m_CookingActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        /// <summary>
+        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+        /// </summary>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// </remarks>
+        /// <seealso cref="CookingActions.AddCallbacks(ICookingActions)" />
+        /// <seealso cref="CookingActions.RemoveCallbacks(ICookingActions)" />
+        /// <seealso cref="CookingActions.UnregisterCallbacks(ICookingActions)" />
+        public void SetCallbacks(ICookingActions instance)
+        {
+            foreach (var item in m_Wrapper.m_CookingActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_CookingActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    /// <summary>
+    /// Provides a new <see cref="CookingActions" /> instance referencing this action map.
+    /// </summary>
+    public CookingActions @Cooking => new CookingActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     /// <summary>
     /// Provides access to the input control scheme.
@@ -1753,13 +1913,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnInteract(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "StopInteract" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnStopInteract(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "Crouch" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
@@ -1873,5 +2026,34 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
+    }
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Cooking" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="CookingActions.AddCallbacks(ICookingActions)" />
+    /// <seealso cref="CookingActions.RemoveCallbacks(ICookingActions)" />
+    public interface ICookingActions
+    {
+        /// <summary>
+        /// Method invoked when associated input action "TiltLeft" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnTiltLeft(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "TiltRight" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnTiltRight(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "StopInteract" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnStopInteract(InputAction.CallbackContext context);
     }
 }

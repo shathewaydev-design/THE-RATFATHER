@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
 #endif
@@ -80,6 +81,20 @@ namespace StarterAssets
         [Tooltip("For locking the camera position on all axis")]
         public bool LockCameraPosition = false;
 
+        [Header("Game mechanic Input")]
+        public static ThirdPersonController Instance;
+        public event Action OnStopInteract;
+        public event Action OnTiltLeft;
+        public event Action OnTiltRight;
+        public event Action OnInteract; 
+        private InputActionMap playerMap;
+        private InputActionMap cookingMap;
+
+        public InputAction stopInteract;//press Q
+        public InputAction tiltLeft;//press A
+        public InputAction tiltRight;//press D
+
+
         // cinemachine
         private float _cinemachineTargetYaw;
         private float _cinemachineTargetPitch;
@@ -135,6 +150,8 @@ namespace StarterAssets
             {
                 _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
             }
+            //game mechanic input
+            Instance = this;
         }
 
         private void Start()
@@ -146,6 +163,21 @@ namespace StarterAssets
             _input = GetComponent<StarterAssetsInputs>();
 #if ENABLE_INPUT_SYSTEM 
             _playerInput = GetComponent<PlayerInput>();
+
+            var cookingMap = _playerInput.actions.FindActionMap("Cooking");
+
+            tiltLeft = cookingMap.FindAction("TiltLeft");
+            tiltRight = cookingMap.FindAction("TiltRight");
+            stopInteract = cookingMap.FindAction("StopInteract");
+
+            // OPTIONAL: if you have interact in Player map
+            var playerMap = _playerInput.actions.FindActionMap("Player");
+            if (playerMap != null)
+            {
+                var interact = playerMap.FindAction("Interact");
+                if (interact != null)
+                    interact.performed += ctx => OnInteract?.Invoke();
+            }
 #else
 			Debug.LogError( "Starter Assets package is missing dependencies. Please use Tools/Starter Assets/Reinstall Dependencies to fix it");
 #endif
@@ -164,6 +196,8 @@ namespace StarterAssets
             JumpAndGravity();
             GroundedCheck();
             Move();
+
+            HandleGameMechanicInput(); // Check for game mechanic input each frame
         }
 
         private void LateUpdate()
@@ -420,6 +454,31 @@ namespace StarterAssets
                     LandingAudio.Play();
 
             }
+        }
+
+        private void HandleGameMechanicInput()
+        {
+        #if ENABLE_INPUT_SYSTEM
+            if (_playerInput.currentActionMap == null) return;
+
+            // Only process cooking inputs when in Cooking map
+            if (_playerInput.currentActionMap.name != "Cooking") return;
+
+            if (stopInteract != null && stopInteract.WasPressedThisFrame())
+            {
+                OnStopInteract?.Invoke();
+            }
+
+            if (tiltLeft != null && tiltLeft.isPressed())
+            {
+                OnTiltLeft?.Invoke();
+            }
+
+            if (tiltRight != null && tiltRight.isPressed())
+            {
+                OnTiltRight?.Invoke();
+            }
+        #endif
         }
     }
 }

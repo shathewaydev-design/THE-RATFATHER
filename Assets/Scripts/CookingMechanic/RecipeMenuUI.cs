@@ -15,14 +15,17 @@ public class RecipeMenuUI : MonoBehaviour
         {
             case IngredientType.Milk:
                 SetSelection(ref selectedMilk, button);
+                Debug.Log("selectedMilk is "+selectedMilk);
                 break;
 
             case IngredientType.Flavor:
                 SetSelection(ref selectedFlavor, button);
+                Debug.Log("selected Flavor is "+selectedFlavor);
                 break;
 
             case IngredientType.Additive:
                 SetSelection(ref selectedAdditive, button);
+                Debug.Log("selectedAdditive is "+selectedAdditive);
                 break;
         }
 
@@ -47,12 +50,21 @@ public class RecipeMenuUI : MonoBehaviour
 
     void CheckReady()
     {
-        bool ready = selectedMilk && selectedFlavor && selectedAdditive;
-        cookButton.interactable = ready;
+        if(selectedMilk != null && selectedFlavor != null && selectedAdditive != null)
+        {    
+            bool ready = true;
+            cookButton.interactable = ready;
+        }
     }
 
     public void OnCookPressed()
     {
         CookingManager.Instance.StartPourMilk();
+        cookButton.interactable = false;
+    }
+
+    void Start ()
+    {
+        cookButton.interactable = false;
     }
 }
