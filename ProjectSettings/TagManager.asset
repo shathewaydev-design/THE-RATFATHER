@@ -6,6 +6,7 @@ TagManager:
   tags:
   - CinemachineTarget
   - InteractableObj
+  - CookingPot
   layers:
   - Default
   - TransparentFX

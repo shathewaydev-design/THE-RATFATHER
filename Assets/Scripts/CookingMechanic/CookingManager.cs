@@ -24,6 +24,7 @@ public class CookingManager : MonoBehaviour, IInteractable
 
     [Header("UI Steps")]
     public GameObject recipeMenu;
+    public GameObject inventoryPanel;
     public GameObject stepPourMilk;
     public GameObject stepFlavor;
     public GameObject stepHeat;
@@ -120,7 +121,7 @@ public class CookingManager : MonoBehaviour, IInteractable
 
     public void StartPourMilk()
     {
-        recipeMenu.SetActive(false);
+        inventoryPanel.SetActive(false);
         stepPourMilk.SetActive(true);
     }
 

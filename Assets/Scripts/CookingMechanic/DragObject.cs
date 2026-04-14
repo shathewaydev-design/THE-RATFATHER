@@ -51,4 +51,14 @@ public class DragObject : MonoBehaviour
         transform.position = new Vector3(worldPos.x, worldPos.y, transform.position.z);
     }
 
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("CookingPot"))
+        {
+            CookingManager.Instance.StartHeat();
+            Debug.Log("Entered area");
+
+        }
+    }
+
 }

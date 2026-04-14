@@ -1074,10 +1074,10 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Position",
+                    "name": "MousePosition",
                     "type": "Value",
                     "id": "78422010-1885-4445-b44b-814ac34ecec3",
-                    "expectedControlType": "",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -1102,7 +1102,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "Position",
+                    "action": "MousePosition",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
