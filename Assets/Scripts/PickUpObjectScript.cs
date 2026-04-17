@@ -60,7 +60,6 @@ public class PickUpObjectScript : MonoBehaviour, IInteractable
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
-            Debug.Log("playerInRange is "+playerInRange);
             if(promptAnimator != null)
             {
                 promptAnimator.SetBool("UIappeared", true);
@@ -77,7 +76,7 @@ public class PickUpObjectScript : MonoBehaviour, IInteractable
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
-            Debug.Log("playerInRange is "+playerInRange);
+            //Debug.Log("playerInRange is "+playerInRange);
             //currentHoldTime = 0f;
             if(promptAnimator != null)
             {

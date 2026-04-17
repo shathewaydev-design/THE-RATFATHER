@@ -156,7 +156,6 @@ public class CookingManager : MonoBehaviour, IInteractable
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
-            Debug.Log("playerInRange is "+playerInRange);
             if(promptAnimator != null)
             {
                 promptAnimator.SetBool("UIappeared", true);
@@ -164,7 +163,7 @@ public class CookingManager : MonoBehaviour, IInteractable
             }
 
 
-            Debug.Log("Hold E to extract sample"); // Replace with UI later
+            //Debug.Log("Hold E to extract sample"); // Replace with UI later
         }
     }
 
@@ -173,7 +172,6 @@ public class CookingManager : MonoBehaviour, IInteractable
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
-            Debug.Log("playerInRange is "+playerInRange);
             //currentHoldTime = 0f;
             if(promptAnimator != null)
             {

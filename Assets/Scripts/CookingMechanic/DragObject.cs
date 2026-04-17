@@ -13,6 +13,11 @@ public class DragObject : MonoBehaviour
     private bool isDragging;
     private Vector2 mousePos;
 
+    [SerializeField] private bool movePosition = false;
+    [SerializeField] private bool moveRotation = false;
+    [SerializeField] private float maxRotation = 28f;
+    [SerializeField] private float minRotation = 0f;
+
     private void Start()
     {
         controller = ThirdPersonController.Instance;
@@ -20,7 +25,6 @@ public class DragObject : MonoBehaviour
 
         controller.OnMouseDrag += HandleDrag;
         controller.OnMousePosition += HandleMousePosition;
-        Debug.Log("object distance from camera: " + (objectToDrag.transform.position.z - mainCamera.transform.position.z));
     }
 
     private void OnDestroy()
@@ -47,8 +51,25 @@ public class DragObject : MonoBehaviour
 
         Vector3 screenPoint = new Vector3(mousePos.x, mousePos.y, distanceFromCamera);
         Vector3 worldPos = mainCamera.ScreenToWorldPoint(screenPoint);
-
-        transform.position = new Vector3(worldPos.x, worldPos.y, transform.position.z);
+        
+        if (movePosition)
+        {
+            transform.position = new Vector3(worldPos.x, worldPos.y, transform.position.z);
+        }
+        else if(moveRotation)
+        {
+            Vector3 direction = worldPos - transform.position;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            if(angle > maxRotation)
+            {
+                angle = maxRotation;
+            }
+            else if(angle < minRotation)
+            {
+                angle = minRotation;
+            }
+            transform.rotation = Quaternion.Euler(0, 0, angle);
+        }
     }
 
     void OnTriggerEnter(Collider other)
@@ -56,7 +77,6 @@ public class DragObject : MonoBehaviour
         if (other.CompareTag("CookingPot"))
         {
             CookingManager.Instance.StartHeat();
-            Debug.Log("Entered area");
 
         }
     }

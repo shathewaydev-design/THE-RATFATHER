@@ -15,17 +15,17 @@ public class RecipeMenuUI : MonoBehaviour
         {
             case IngredientType.Milk:
                 SetSelection(ref selectedMilk, button);
-                Debug.Log("selectedMilk is "+selectedMilk);
+                //Debug.Log("selectedMilk is "+selectedMilk);
                 break;
 
             case IngredientType.Flavor:
                 SetSelection(ref selectedFlavor, button);
-                Debug.Log("selected Flavor is "+selectedFlavor);
+                //Debug.Log("selected Flavor is "+selectedFlavor);
                 break;
 
             case IngredientType.Additive:
                 SetSelection(ref selectedAdditive, button);
-                Debug.Log("selectedAdditive is "+selectedAdditive);
+                //Debug.Log("selectedAdditive is "+selectedAdditive);
                 break;
         }
 
