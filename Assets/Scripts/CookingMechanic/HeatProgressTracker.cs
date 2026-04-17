@@ -20,8 +20,11 @@ public class HeatProgressTracker : MonoBehaviour
 
     [SerializeField] private float currentFill = 0f;
     private float currentDoness = 0f;
+    //private bool isProcessingDoneness = false;
     private Coroutine  waitCoroutine= null;
     [SerializeField] private Transform belloObject;
+
+    [SerializeField] private GameObject cookingPotVFX;
 
     void Start()
     {
@@ -57,7 +60,10 @@ public class HeatProgressTracker : MonoBehaviour
 
         EvaluateHeat();
         CoolDown();
-        EvaluateDoness();
+        if ( currentDoness >= 100f)
+        {
+            EvaluateDoness();
+        }
     }
     float GetZRotation()
     {
@@ -79,6 +85,7 @@ public class HeatProgressTracker : MonoBehaviour
     {
         if(currentFill >= heatUpTargetMin && currentFill <= heatUpTargetMax)
         {//currentFill is in good heatzone, start filling doness bar
+            Debug.Log("In heat zone, filling doness bar");
             currentDoness += donessSpeed * Time.deltaTime;
             donessProgressBar.fillAmount = currentDoness / 100.0f;
         }
@@ -97,11 +104,19 @@ public class HeatProgressTracker : MonoBehaviour
     }
     private void EvaluateDoness()
     {
-        if(donessProgressBar.fillAmount >= 1f)
-        {
-            Debug.Log("Dish is done!");
-            CookingManager.Instance.StartAdditive();
-        }
+        //isProcessingDoneness = true;
+
+        currentDoness = 0f;//reset doness for next time
+        donessProgressBar.fillAmount = 0f;
+        //Play VFX
+        cookingPotVFX.SetActive(true);
+        Animator animator = cookingPotVFX.GetComponent<Animator>();
+        animator.SetTrigger("StartVFX");//put animation event at the end of animation
+
+        //CookingManager.Instance.StartAdditive();
+
+        //isProcessingDoneness = false;
+        
     }    
     private IEnumerator WaitForNextPump()
     {
@@ -109,17 +124,7 @@ public class HeatProgressTracker : MonoBehaviour
         canPump = true;
         waitCoroutine = null;
     }
-    // private IEnumerator WaitForNextPump()
-    // {
-    //     float timer = 0f;
-    //     while (timer < pumpWaitTime)
-    //     {
-    //         timer += Time.deltaTime;
-    //         yield return null;
-    //     }
-    //     canPump = true;
-    //     CoolDown();
-    // }
+    
     
 
 }
