@@ -782,6 +782,51 @@ MonoBehaviour:
   BottomClamp: -30
   CameraAngleOverride: 0
   LockCameraPosition: 0
+  stopInteract:
+    m_Name: Stop Interact
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: a8575978-9bc2-4d7d-9948-96abe0c28a55
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  tiltLeft:
+    m_Name: Tilt Left
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: bb6bf0bd-de18-4f10-b28b-9f0c0ff7bfe3
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  tiltRight:
+    m_Name: Tilt Right
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 109cfe86-52d0-48a5-ba33-6ff25b3b9e75
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  mouseClick:
+    m_Name: Mouse Click
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 95057a04-62d5-4710-beb1-e4b1f8d0eb26
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  mousePosition:
+    m_Name: Mouse Position
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: d18d8434-2f02-4f2b-b575-2c1e0ebe2e77
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!114 &130564797
 MonoBehaviour:
   m_ObjectHideFlags: 0
