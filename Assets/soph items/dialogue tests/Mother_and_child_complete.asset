@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34ee349227d32df4580398eb667c4e5d, type: 3}
+  m_Name: Mother_and_child_complete
+  m_EditorClassIdentifier: Assembly-CSharp::ConversationData
+  lines:
+  - speaker: {fileID: 11400000, guid: c8eeb8a851758824791c3b1082382b8d, type: 2}
+    text: Excuse me! I'm so sorry to bother you but...
+    options: []
+    endConversation: 0
+  - speaker: {fileID: 11400000, guid: c8eeb8a851758824791c3b1082382b8d, type: 2}
+    text: My child is terribly cold and hungry, but I can't afford proper nourishment
+      right now.
+    options: []
+    endConversation: 0
+  - speaker: {fileID: 11400000, guid: c8eeb8a851758824791c3b1082382b8d, type: 2}
+    text: Would you have the money to spare and get me some milk for my baby?
+    options: []
+    endConversation: 0
+  - speaker: {fileID: 11400000, guid: fe37e5f6c6e4ce940ab3b38f7087bab3, type: 2}
+    text: 
+    options:
+    - text: Sure!
+      nextLineIndex: 4
+      assignQuest: 1
+      quest: {fileID: 11400000, guid: 204c65a494be1484197ecac712efcd0f, type: 2}
+      endConversation: 0
+    - text: Sorry, I'm busy...
+      nextLineIndex: 5
+      assignQuest: 0
+      quest: {fileID: 0}
+      endConversation: 1
+    endConversation: 0
+  - speaker: {fileID: 11400000, guid: fe37e5f6c6e4ce940ab3b38f7087bab3, type: 2}
+    text: Oh thank you!
+    options: []
+    endConversation: 1

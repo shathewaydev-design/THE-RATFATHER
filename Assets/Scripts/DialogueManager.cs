@@ -13,15 +13,23 @@ public class DialogueManager : MonoBehaviour
     public UIManager UIManager;
     public ThirdPersonController player;
     //private Queue<string> lines = new Queue<string>();
-    private bool isDialogueActive = false;
+    public bool isDialogueActive = false;
     private bool canAdvance = true; // help w typewriter effect -- always true for now
                                     // ^^ also can handle in another script, keep in mind for now
-
+    private bool justStartedDialogue = false;
 
     // start dialogue
     // Call this to start a conversation
     public void StartConversation(ConversationData conversation)
     {
+        if (conversation == null)
+        {
+            Debug.LogError("Tried to start conversation with NULL data!");
+            return;
+        }
+
+        justStartedDialogue = true;
+
         isDialogueActive = true;
         player.enabled = false;
 
@@ -64,9 +72,11 @@ public class DialogueManager : MonoBehaviour
     // Called when player clicks an option
     public void OnOptionSelected(int selectedOptionIndex)
     {
+        //UIManager.HideOptions();
         DialogueOption selected = currentConversation.lines[currentLineIndex].options[selectedOptionIndex];
+        selected.GiveQuest();
 
-        if (selected.endConversation && currentLineIndex == currentConversation.lines.Count)
+        if (selected.endConversation) 
         {
             EndDialogue(); // panel hides, flow stops
             return;
@@ -96,10 +106,18 @@ public class DialogueManager : MonoBehaviour
 
     void Update()
     {
+        if (justStartedDialogue)
+        {
+            justStartedDialogue = false;
+            return;
+        }
+
         if (currentConversation == null)
             return;
 
-        if (currentConversation.lines[currentLineIndex].endConversation && Keyboard.current.eKey.wasPressedThisFrame)
+        if (currentLineIndex < currentConversation.lines.Count &&
+            currentConversation.lines[currentLineIndex].endConversation &&
+             Keyboard.current.eKey.wasPressedThisFrame)
         {
             EndDialogue();
             return;

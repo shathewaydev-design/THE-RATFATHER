@@ -7,6 +7,7 @@ public class InventorySystem : MonoBehaviour
     public static InventorySystem Instance;
 
     private Dictionary<CheeseIngredientData, int> inventory = new Dictionary<CheeseIngredientData, int>();
+    public IReadOnlyDictionary<CheeseIngredientData, int> Inventory => inventory; // so inventory can be read for quest requirements, etc.
     //this is like creating new definition in a dictionary, then put them in pages
     void Awake()
     {
@@ -33,6 +34,41 @@ public class InventorySystem : MonoBehaviour
         }
 
         Debug.Log(item.ingredientName + " added. Total: " + inventory[item]);
+    }
+
+    public void RemoveItem(CheeseIngredientData item) // removing an item (soph added for quest completion)
+    {
+
+        CheeseIngredientData foundKey = null; // need to find by name, not by entire data reference
+
+        foreach (var key in inventory.Keys)
+        {
+            if (key.ingredientName == item.ingredientName)
+            {
+                foundKey = key;
+                break;
+            }
+        }
+
+        if (foundKey == null)
+        {
+            Debug.LogWarning("Item not found in inventory: " + item.ingredientName);
+            return;
+        }
+
+
+        if (inventory.ContainsKey(foundKey) && inventory[foundKey] <= 1)
+        {
+            inventory.Remove(foundKey);
+        }
+        else
+        {
+            inventory[foundKey]--;
+
+        }
+
+        Debug.Log(foundKey.ingredientName + " removed.");
+
     }
 
     public int GetItemCount(CheeseIngredientData item)

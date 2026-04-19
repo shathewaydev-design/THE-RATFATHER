@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Xml.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -13,9 +14,23 @@ public class UIManager : MonoBehaviour
     public GameObject optionsPanel;   // parent panel for buttons
     public Button optionButtonPrefab; // prefab for a single option
 
+    public QuestManager questManager;
+    public GameManager gameManger;
+
+    public TextMeshProUGUI objectivePrefab;
+    public GameObject objectivePanel;
+    private TextMeshProUGUI currentObjectiveText;
+
     private List<Button> optionButtons = new List<Button>();
+
     private int selectedIndex = 0;
     private Action<int> currentCallback;
+
+
+    void Awake()
+    {
+        currentObjectiveText = Instantiate(objectivePrefab, objectivePanel.transform);
+    }
 
 
     void Update()
@@ -90,6 +105,8 @@ public class UIManager : MonoBehaviour
         foreach (Transform child in optionsPanel.transform)
             Destroy(child.gameObject);
 
+        optionButtons.Clear();
+
         // Create new buttons
         for (int i = 0; i < options.Count; i++)
         {
@@ -107,7 +124,20 @@ public class UIManager : MonoBehaviour
     {
         foreach (Transform child in optionsPanel.transform)
             Destroy(child.gameObject);
+        optionButtons.Clear();
         optionsPanel.SetActive(false);
     }
+
+    public void SetObjective(string obj)
+    {
+        currentObjectiveText.text = obj;
+    }
+
+    public void ClearObjective()
+    {
+        currentObjectiveText.text = "";
+    }
+
+
 
 }

@@ -8,8 +8,9 @@ public class NPC : MonoBehaviour, IInteractable
     public NPCProfile profile;
     public NPCState state;
 
-    public ConversationData intro;
+    public ConversationData currentConvo;
     public DialogueManager dialogueManager;
+    public QuestManager questManager;
 
     [SerializeField] private float interactionRadius = 1.5f; // checking distancer manualy, not using triggers
     [SerializeField] private Transform playerTransform;
@@ -32,23 +33,35 @@ public class NPC : MonoBehaviour, IInteractable
     }
     public void Interact()
     {
-        if (!state.hasMetPlayer)
+        if (profile.quests.Count == 0) return;
+
+        if (state.hasMetPlayer)
         {
-            dialogueManager.StartConversation(intro);
-            state.hasMetPlayer = true;
+            currentConvo = questManager.UpdateDialogue(profile.quests[0]);
         }
+        else
+        {
+            currentConvo = profile.quests[0].questIntro; // or whatever first convo is (also might need loop to find)
+        }
+        dialogueManager.StartConversation(currentConvo);
+        state.hasMetPlayer = true;
+        
 
     }
 
     // Update is called once per frame
     void Update()
     {
+        // mabe add this logic to interact method?
+        // currentConvo = questManager.UpdateDialogue(profile.quests[0]); // change to loop through all quests to find the active one
+
+
         //  if (!playerInRange) return;
         if (playerTransform == null) return;
 
         float dist = Vector3.Distance(playerTransform.position, transform.position);
 
-        if (dist <= interactionRadius && !playerInRange)
+        if (dist <= interactionRadius && !playerInRange) // might need to make ui also match this...
         {
             playerInRange = true;
             Debug.Log("Press E to advance dialogue");
@@ -80,5 +93,8 @@ public class NPC : MonoBehaviour, IInteractable
             promptAnimator.SetTrigger("UIdisappearing");
         }
     }
+
+
+
 
 }

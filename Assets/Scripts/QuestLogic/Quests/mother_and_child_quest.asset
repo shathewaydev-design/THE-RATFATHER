@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 428365d2c11ba4e46be272f31fe7be93, type: 3}
+  m_Name: mother_and_child_quest
+  m_EditorClassIdentifier: Assembly-CSharp::Quest
+  questName: Get milk for baby
+  requiredTrust: 0
+  requiredCompletedQuests: []
+  questIntro: {fileID: 11400000, guid: b9467372848e79945a2785f19633e227, type: 2}
+  questQuestioned: {fileID: 11400000, guid: 1b7f8027982d86348b1bb851ccbce817, type: 2}
+  questCompleted: {fileID: 11400000, guid: 14cad08c04e5f39438c3429d50604e34, type: 2}
+  questOver: {fileID: 11400000, guid: 631bfb36d64e5dd4082edd3ec3b6c242, type: 2}
+  requirements:
+  - {fileID: 11400000, guid: a23da532701dc9442b300d89fe402f0f, type: 2}
+  objectives:
+  - Get some milk for the mother's child.
+  rewards:
+  - {fileID: 11400000, guid: b8280881820fcaf4a98183b2804b2125, type: 2}
