@@ -87,8 +87,9 @@ namespace StarterAssets
         public event Action OnTiltLeft;
         public event Action OnTiltRight;
         public event Action OnInteract; 
+        public event Action OnSprinkle; 
         public event Action OnMouseClick; 
-        public event Action OnMousePositionChange; 
+        //public event Action OnMousePositionChange; 
         private InputActionMap playerMap;
         private InputActionMap cookingMap;
         private InputActionMap mouseMap;
@@ -96,6 +97,7 @@ namespace StarterAssets
         public InputAction stopInteract;//press Q
         public InputAction tiltLeft;//press A
         public InputAction tiltRight;//press D
+        public InputAction sprinkle;//press T
         public InputAction mouseClick;//press (Left) Mouse Button
         public InputAction mousePosition;//mouse position for dragging objects
         public event Action<Vector2> OnMousePosition;
@@ -106,6 +108,7 @@ namespace StarterAssets
             tiltLeft.performed += OnTiltLeftPerformed;
             tiltRight.performed += OnTiltRightPerformed;
             stopInteract.performed += OnStopInteractPerformed;
+            sprinkle.performed += OnSprinklePerformed;
 
             mouseClick.performed += OnMouseClickPerformed;
             mouseClick.canceled += OnMouseClickCanceled;
@@ -118,6 +121,7 @@ namespace StarterAssets
             tiltLeft.performed -= OnTiltLeftPerformed;
             tiltRight.performed -= OnTiltRightPerformed;
             stopInteract.performed -= OnStopInteractPerformed;
+            sprinkle.performed -= OnSprinklePerformed;
 
             mouseClick.performed -= OnMouseClickPerformed;
             mouseClick.canceled -= OnMouseClickCanceled;
@@ -198,6 +202,7 @@ namespace StarterAssets
             tiltLeft = cookingMap.FindAction("TiltLeft");
             tiltRight = cookingMap.FindAction("TiltRight");
             stopInteract = cookingMap.FindAction("StopInteract");
+            sprinkle = cookingMap.FindAction("Sprinkle");
             var mouseMap = _playerInput.actions.FindActionMap("Mouse");
             mouseClick = mouseMap.FindAction("LeftClick");
             mousePosition = mouseMap.FindAction("MousePosition");
@@ -514,6 +519,10 @@ namespace StarterAssets
         private void OnTiltRightPerformed(InputAction.CallbackContext ctx)
         {
             OnTiltRight?.Invoke();
+        }
+        private void OnSprinklePerformed(InputAction.CallbackContext ctx)
+        {
+            OnSprinkle?.Invoke();
         }
 
         private void OnStopInteractPerformed(InputAction.CallbackContext ctx)

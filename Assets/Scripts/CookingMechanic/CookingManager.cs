@@ -34,7 +34,7 @@ public class CookingManager : MonoBehaviour, IInteractable
     // [SerializeField] private float holdTime = 1.0f;
     // [SerializeField] private float currentHoldTime = 0f;
     public ThirdPersonController thirdPersonController;
-    private bool playerInRange = false;
+    //private bool playerInRange = false;
 
     [Header("UI")]
     public Animator promptAnimator;
@@ -155,7 +155,7 @@ public class CookingManager : MonoBehaviour, IInteractable
     {
         if (other.CompareTag("Player"))
         {
-            playerInRange = true;
+            //playerInRange = true;
             if(promptAnimator != null)
             {
                 promptAnimator.SetBool("UIappeared", true);
@@ -171,7 +171,7 @@ public class CookingManager : MonoBehaviour, IInteractable
     {
         if (other.CompareTag("Player"))
         {
-            playerInRange = false;
+            //playerInRange = false;
             //currentHoldTime = 0f;
             if(promptAnimator != null)
             {

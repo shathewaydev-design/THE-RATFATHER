@@ -1108,6 +1108,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Sprinkle"",
+                    ""type"": ""Button"",
+                    ""id"": ""47a139b7-f7e0-46b3-8052-346f11c3f438"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -1141,6 +1150,17 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""TiltRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1f9d775b-2e98-4ecf-a8a5-6bd7cecc351c"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Sprinkle"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1286,6 +1306,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Cooking_TiltLeft = m_Cooking.FindAction("TiltLeft", throwIfNotFound: true);
         m_Cooking_TiltRight = m_Cooking.FindAction("TiltRight", throwIfNotFound: true);
         m_Cooking_StopInteract = m_Cooking.FindAction("StopInteract", throwIfNotFound: true);
+        m_Cooking_Sprinkle = m_Cooking.FindAction("Sprinkle", throwIfNotFound: true);
         // Mouse
         m_Mouse = asset.FindActionMap("Mouse", throwIfNotFound: true);
         m_Mouse_LeftClick = m_Mouse.FindAction("LeftClick", throwIfNotFound: true);
@@ -1755,6 +1776,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Cooking_TiltLeft;
     private readonly InputAction m_Cooking_TiltRight;
     private readonly InputAction m_Cooking_StopInteract;
+    private readonly InputAction m_Cooking_Sprinkle;
     /// <summary>
     /// Provides access to input actions defined in input action map "Cooking".
     /// </summary>
@@ -1778,6 +1800,10 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Cooking/StopInteract".
         /// </summary>
         public InputAction @StopInteract => m_Wrapper.m_Cooking_StopInteract;
+        /// <summary>
+        /// Provides access to the underlying input action "Cooking/Sprinkle".
+        /// </summary>
+        public InputAction @Sprinkle => m_Wrapper.m_Cooking_Sprinkle;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1813,6 +1839,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @StopInteract.started += instance.OnStopInteract;
             @StopInteract.performed += instance.OnStopInteract;
             @StopInteract.canceled += instance.OnStopInteract;
+            @Sprinkle.started += instance.OnSprinkle;
+            @Sprinkle.performed += instance.OnSprinkle;
+            @Sprinkle.canceled += instance.OnSprinkle;
         }
 
         /// <summary>
@@ -1833,6 +1862,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @StopInteract.started -= instance.OnStopInteract;
             @StopInteract.performed -= instance.OnStopInteract;
             @StopInteract.canceled -= instance.OnStopInteract;
+            @Sprinkle.started -= instance.OnSprinkle;
+            @Sprinkle.performed -= instance.OnSprinkle;
+            @Sprinkle.canceled -= instance.OnSprinkle;
         }
 
         /// <summary>
@@ -2215,6 +2247,13 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnStopInteract(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Sprinkle" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSprinkle(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Mouse" which allows adding and removing callbacks.
