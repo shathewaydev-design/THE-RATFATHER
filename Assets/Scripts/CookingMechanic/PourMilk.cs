@@ -10,6 +10,7 @@ public class PourMilkStep : MonoBehaviour
     public Image progressBar;
     public float fillSpeed = 0.005f;
 
+    [SerializeField] private float startingRotation = 90f;
     public float targetMin = 40f;
     public float targetMax = 60f;
 
@@ -19,6 +20,13 @@ public class PourMilkStep : MonoBehaviour
     void Start ()
     {
         thirdPersonController = ThirdPersonController.Instance;
+        
+    }
+    void OnEnable()
+    {        //reset values
+        currentFill = 0f;
+        progressBar.fillAmount = currentFill / 100.0f;
+        milkCarton.rotation = Quaternion.Euler(milkCarton.rotation.x, milkCarton.rotation.y, startingRotation);
     }
     void Update()
     {
@@ -79,6 +87,7 @@ public class PourMilkStep : MonoBehaviour
         }
         if(finishPour)
         {
+            currentFill = 0f;
             CookingManager.Instance.StartFlavor();
             gameObject.SetActive(false);
         }

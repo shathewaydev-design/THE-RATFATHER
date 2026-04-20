@@ -12,31 +12,40 @@ public class AddAddictive : MonoBehaviour
     public RectTransform arrow;
     public RectTransform greenZone;
     public RectTransform orangeZone;
+    [SerializeField] private Image stabilityProgressBar;
 
-    public float speed = 300f;
+    private float defaultSpeed;
+    [SerializeField] private float speed = 1f;
+    [SerializeField] private float incrementalSpeed = 20f;
     private float direction = 1f;
 
     public CookingSessionData session = new CookingSessionData();
 
-    private float leftBound;
-    private float rightBound;
+    [SerializeField] private float leftBound;
+    [SerializeField] private float rightBound;
 
     void Start()
     {
         thirdPersonController = ThirdPersonController.Instance;
+        defaultSpeed = speed;
+
+
+        RandomizeOrangeZone();
+    }
+    void OnEnable()
+    {
+        //speed = defaultSpeed;
         cookingPot.SetActive(false);
-
-        leftBound = -400f;
-        rightBound = 400f;
-
-        RandomizeGreenZone();
+        session.stability = 100f;
+        session.successfulHits = 0;
+        stabilityProgressBar.fillAmount = session.stability / 100f;
     }
 
     void Update()
     {
         MoveArrow();
 
-        if (thirdPersonController.sprinkle.IsPressed())
+        if (thirdPersonController.sprinkle.WasPressedThisFrame())
         {
             HandleHit();
         }
@@ -59,34 +68,35 @@ public class AddAddictive : MonoBehaviour
     void HandleHit()
     {
         float arrowX = arrow.anchoredPosition.x;
+        session.successfulHits++;
 
+        speed = speed * (100+incrementalSpeed) / 100; // Increase speed after each hit
+        
+            
         if (IsInside(arrow, greenZone))
         {
-            session.successfulHits++;
-            Debug.Log("Perfect hit!");
+            RandomizeOrangeZone();
 
-            RandomizeGreenZone();
-
-            if (session.successfulHits >= 5)
-            {
-                FinishMinigame();
-            }
+            
         }
         else if (IsInside(arrow, orangeZone))
         {
             session.stability -= 5f;
-            Debug.Log("Minor mistake (-5%)");
         }
         else
         {
             session.stability -= 25f;
-            Debug.Log("Major mistake (-25%)");
         }
 
         // Clamp stability
         session.stability = Mathf.Clamp(session.stability, 0f, 100f);
-
+        stabilityProgressBar.fillAmount = session.stability / 100f;
         ShowSprinkleFeedback();
+
+        if (session.successfulHits >= 4)
+        {
+            FinishMinigame();
+        }
     }
 
     bool IsInside(RectTransform a, RectTransform b)
@@ -98,10 +108,10 @@ public class AddAddictive : MonoBehaviour
         return aX >= bMin && aX <= bMax;
     }
 
-    void RandomizeGreenZone()
+    void RandomizeOrangeZone()
     {
         float randomX = Random.Range(leftBound + 50f, rightBound - 50f);
-        greenZone.anchoredPosition = new Vector2(randomX, greenZone.anchoredPosition.y);
+        orangeZone.anchoredPosition = new Vector2(randomX, orangeZone.anchoredPosition.y);
     }
 
     void FinishMinigame()
@@ -109,11 +119,16 @@ public class AddAddictive : MonoBehaviour
         Debug.Log("Minigame complete!");
 
         CheeseData cheese = new CheeseData(session.stability);
+        //reset values
+        session.successfulHits = 0;
+        speed = defaultSpeed;
 
         // Send to inventory or manager
         Debug.Log("Final Stability: " + cheese.finalStability);
-
+        
+        cookingPot.SetActive(true);
         // TODO: InventorySystem.Add(cheese);
+        CookingManager.Instance.FinishCooking();
     }
 
     void ShowSprinkleFeedback()

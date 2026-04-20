@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class PourDetector : MonoBehaviour
 {
+    [Header("This script handles pouring VFX")]
     public int pourThreshold = 45; // Minimum tilt angle to consider as pouring
     public Transform origin = null;
     public GameObject streamPrefab = null;

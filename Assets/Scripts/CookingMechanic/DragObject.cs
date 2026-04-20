@@ -47,7 +47,12 @@ public class DragObject : MonoBehaviour
 
     private void Update()
     {
-        if (!isDragging) return;
+        if (!isDragging)
+        { 
+            // objectToDrag.layer = LayerMask.NameToLayer("Default");
+            return;
+        }
+        objectToDrag.layer = LayerMask.NameToLayer("Dragging");
 
         Vector3 screenPoint = new Vector3(mousePos.x, mousePos.y, distanceFromCamera);
         Vector3 worldPos = mainCamera.ScreenToWorldPoint(screenPoint);
@@ -76,8 +81,8 @@ public class DragObject : MonoBehaviour
     {
         if (other.CompareTag("CookingPot"))
         {
+            // objectToDrag.layer = LayerMask.NameToLayer("Default");
             CookingManager.Instance.StartHeat();
-
         }
     }
 

@@ -50,21 +50,44 @@ public class RecipeMenuUI : MonoBehaviour
 
     void CheckReady()
     {
-        if(selectedMilk != null && selectedFlavor != null && selectedAdditive != null)
-        {    
-            bool ready = true;
-            cookButton.interactable = ready;
-        }
+
+        bool ready = selectedMilk != null && selectedFlavor != null && selectedAdditive != null;
+        cookButton.interactable = ready;
+
     }
 
     public void OnCookPressed()
     {
         CookingManager.Instance.StartPourMilk();
         cookButton.interactable = false;
+
+        ResetSelections();
     }
 
     void Start ()
     {
         cookButton.interactable = false;
     }
+    public void ResetSelections()//reset all buttons
+{
+    if (selectedMilk != null)
+    {
+        selectedMilk.SetActive(false);
+        selectedMilk = null;
+    }
+
+    if (selectedFlavor != null)
+    {
+        selectedFlavor.SetActive(false);
+        selectedFlavor = null;
+    }
+
+    if (selectedAdditive != null)
+    {
+        selectedAdditive.SetActive(false);
+        selectedAdditive = null;
+    }
+
+    cookButton.interactable = false;
+}
 }

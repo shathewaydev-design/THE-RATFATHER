@@ -14,6 +14,7 @@ public class CookingManager : MonoBehaviour, IInteractable
     public CinemachineCamera playerCamera;
     public GameObject mainCamera;
     public Transform cookingPot;//view cooking pot
+    [SerializeField] private GameObject cookingPotGeo;// cooking pot
     private Vector3 savedMainCameraPosition;
     private Quaternion savedMainCameraRotation;
 
@@ -51,6 +52,7 @@ public class CookingManager : MonoBehaviour, IInteractable
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        cookingPotGeo.SetActive(true);
         thirdPersonController = ThirdPersonController.Instance;
         thirdPersonController.OnStopInteract += ExitCookingMode;
     }
@@ -58,7 +60,10 @@ public class CookingManager : MonoBehaviour, IInteractable
     // Update is called once per frame
     void Update()
     {
-        
+        if(thirdPersonController.stopInteract.WasPressedThisFrame())
+        {
+            ExitCookingMode();
+        }
 
         
     }
@@ -70,6 +75,9 @@ public class CookingManager : MonoBehaviour, IInteractable
     }
     public void EnterCookingMode()
     {
+        promptAnimator.SetBool("UIappeared", false);
+        promptAnimator.SetTrigger("UIdisappearing");
+
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
 
@@ -103,9 +111,13 @@ public class CookingManager : MonoBehaviour, IInteractable
         
 
         recipeMenu.SetActive(false);
+        //reset milk step
         stepPourMilk.SetActive(false);
+        //reset flavor step
         stepFlavor.SetActive(false);
+        //reset heat step
         stepHeat.SetActive(false);
+        //reset additive step
         stepAdditive.SetActive(false);
 
         Cursor.lockState = CursorLockMode.Locked;
@@ -117,6 +129,7 @@ public class CookingManager : MonoBehaviour, IInteractable
     public void ShowRecipeMenu()
     {
         recipeMenu.SetActive(true);
+        inventoryPanel.SetActive(true);
     }
 
     public void StartPourMilk()
@@ -142,11 +155,13 @@ public class CookingManager : MonoBehaviour, IInteractable
     {
         stepHeat.SetActive(false);
         stepAdditive.SetActive(true);
+        thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Cooking");
     }
 
     public void FinishCooking()
     {
         stepAdditive.SetActive(false);
+        thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
         ExitCookingMode();
     }
 
@@ -160,6 +175,7 @@ public class CookingManager : MonoBehaviour, IInteractable
             {
                 promptAnimator.SetBool("UIappeared", true);
                 promptAnimator.SetTrigger("UIappearing");
+                
             }
 
 

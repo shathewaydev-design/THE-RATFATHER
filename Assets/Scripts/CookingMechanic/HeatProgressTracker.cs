@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class HeatProgressTracker : MonoBehaviour
 {
+    [SerializeField] private GameObject heatStepUI;
     [SerializeField] private Image heatProgressBar;//how hot the pot->keep in zone->start counting doness
     [SerializeField] private Image donessProgressBar;//how close the pot is to being done->next step
     [SerializeField] private float heatAmount = 5f;//how much the progress bar fills per push
@@ -28,8 +29,16 @@ public class HeatProgressTracker : MonoBehaviour
 
     void Start()
     {
+        
+    }
+    void OnEnable()
+    {
         currentFill = 0f;
+        currentDoness = 0f;
+        heatProgressBar.fillAmount = 0f;
+        donessProgressBar.fillAmount = 0f;
         canPump = true;
+        heatStepUI.gameObject.SetActive(true);
     }
 
 
@@ -108,6 +117,8 @@ public class HeatProgressTracker : MonoBehaviour
 
         currentDoness = 0f;//reset doness for next time
         donessProgressBar.fillAmount = 0f;
+
+        heatStepUI.gameObject.SetActive(false);
         //Play VFX
         cookingPotVFX.SetActive(true);
         Animator animator = cookingPotVFX.GetComponent<Animator>();
