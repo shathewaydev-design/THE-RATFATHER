@@ -31,7 +31,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MilkStep
+  m_Name: heatStep
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Completed
@@ -97,7 +97,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: milkIdle
+  m_Name: heatIdle
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -111,7 +111,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 13cca84a6b4b34240a457e25f0b4138d, type: 2}
+  m_Motion: {fileID: 7400000, guid: f126a400ac26d4ae38aa52ca324f1d52, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -124,7 +124,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: milkActivated
+  m_Name: heatActivated
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -138,7 +138,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 578770689cfef45b083c9fb43d8780e6, type: 2}
+  m_Motion: {fileID: 7400000, guid: b891e8089071941c3a74d7f0862c3b52, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -173,7 +173,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: milkComplete
+  m_Name: heatComplete
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -187,7 +187,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 1b046dcd665df401dbed9eddba0aef97, type: 2}
+  m_Motion: {fileID: 7400000, guid: 300d01c860cb84df4afafdd9cebae746, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

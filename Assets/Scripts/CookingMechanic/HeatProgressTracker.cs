@@ -29,7 +29,7 @@ public class HeatProgressTracker : MonoBehaviour
 
     void Start()
     {
-        
+
     }
     void OnEnable()
     {

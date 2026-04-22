@@ -187,13 +187,13 @@ AnimatorStateMachine:
     m_Position: {x: 150, y: -40, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2358246060852376669}
-    m_Position: {x: -60, y: 80, z: 0}
+    m_Position: {x: 340, y: 80, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3497725645247164569}
     m_Position: {x: 140, y: 200, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4745992201755808775}
-    m_Position: {x: 380, y: 80, z: 0}
+    m_Position: {x: -40, y: 80, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -212,11 +212,11 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: UIdisappearing
-    m_EventTreshold: 0
   - m_ConditionMode: 2
     m_ConditionEvent: UIappeared
+    m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: UIdisappearing
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -4745992201755808775}
@@ -266,7 +266,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: UIappearing
+    m_ConditionEvent: UIappeared
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 2358246060852376669}

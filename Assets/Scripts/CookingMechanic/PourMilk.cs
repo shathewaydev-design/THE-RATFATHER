@@ -20,7 +20,6 @@ public class PourMilkStep : MonoBehaviour
     void Start ()
     {
         thirdPersonController = ThirdPersonController.Instance;
-        
     }
     void OnEnable()
     {        //reset values

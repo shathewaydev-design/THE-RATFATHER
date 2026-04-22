@@ -75,7 +75,7 @@ public class AddAddictive : MonoBehaviour
             
         if (IsInside(arrow, greenZone))
         {
-            RandomizeOrangeZone();
+            //RandomizeOrangeZone();
 
             
         }
@@ -92,6 +92,7 @@ public class AddAddictive : MonoBehaviour
         session.stability = Mathf.Clamp(session.stability, 0f, 100f);
         stabilityProgressBar.fillAmount = session.stability / 100f;
         ShowSprinkleFeedback();
+        RandomizeOrangeZone();
 
         if (session.successfulHits >= 4)
         {

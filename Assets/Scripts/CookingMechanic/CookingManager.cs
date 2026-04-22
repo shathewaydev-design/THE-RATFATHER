@@ -52,7 +52,8 @@ public class CookingManager : MonoBehaviour, IInteractable
     // [SerializeField] private float holdTime = 1.0f;
     // [SerializeField] private float currentHoldTime = 0f;
     public ThirdPersonController thirdPersonController;
-    //private bool playerInRange = false;
+    private bool playerInRange = false;
+    bool hasInteracted = false;
 
     [Header("UI")]
     public Animator promptAnimator;
@@ -77,6 +78,7 @@ public class CookingManager : MonoBehaviour, IInteractable
     // Update is called once per frame
     void Update()
     {
+
         if(thirdPersonController.stopInteract.WasPressedThisFrame())
         {
             ExitCookingMode();
@@ -87,13 +89,14 @@ public class CookingManager : MonoBehaviour, IInteractable
 
     public void Interact()//runs when player press E to interact
     {
+        hasInteracted = true;
         EnterCookingMode();
         ShowRecipeMenu();
     }
     public void EnterCookingMode()
     {
-        promptAnimator.SetBool("UIappeared", false);
-        promptAnimator.SetTrigger("UIdisappearing");
+        UpdatePrompt();
+        // HidePrompt();
 
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
@@ -127,7 +130,7 @@ public class CookingManager : MonoBehaviour, IInteractable
         mainCamera.transform.rotation = savedMainCameraRotation;
         
         ResetSteps();
-        // recipeMenu.SetActive(false);
+        recipeMenu.SetActive(false);
         // //reset milk step
         // stepPourMilk.SetActive(false);
         // //reset flavor step
@@ -156,7 +159,7 @@ public class CookingManager : MonoBehaviour, IInteractable
             if (i < currentStepIndex)
             {
                 // Completed
-                step.root.SetActive(true);
+                step.root.SetActive(false);
                 step.animator.SetTrigger("Completed");
             }
             else if (i == currentStepIndex)
@@ -168,16 +171,17 @@ public class CookingManager : MonoBehaviour, IInteractable
             else
             {
                 // Upcoming
-                step.root.SetActive(true);
+                step.root.SetActive(false);
                 step.animator.SetTrigger("Idle");
             }
         }
-
+        UpdatePrompt();
+        // HidePrompt();
         // Optional: animate previous step losing focus
-        if (previousIndex >= 0 && previousIndex < steps.Count)
-        {
-            steps[previousIndex].animator.SetTrigger("Deactivate");
-        }
+        // if (previousIndex >= 0 && previousIndex < steps.Count)
+        // {
+        //     steps[previousIndex].animator.SetTrigger("Idle");
+        // }
     }
     public void ShowRecipeMenu()
     {
@@ -227,13 +231,14 @@ public class CookingManager : MonoBehaviour, IInteractable
     {
         if (other.CompareTag("Player"))
         {
-            //playerInRange = true;
-            if(promptAnimator != null)
-            {
-                promptAnimator.SetBool("UIappeared", true);
-                promptAnimator.SetTrigger("UIappearing");
+            playerInRange = true;
+            UpdatePrompt();
+            // if(promptAnimator != null)
+            // {
+            //     promptAnimator.SetBool("UIappeared", true);
+                //promptAnimator.SetTrigger("UIappearing");
                 
-            }
+            //}
 
 
             //Debug.Log("Hold E to extract sample"); // Replace with UI later
@@ -244,15 +249,32 @@ public class CookingManager : MonoBehaviour, IInteractable
     {
         if (other.CompareTag("Player"))
         {
-            //playerInRange = false;
+            playerInRange = false;
+            hasInteracted = false;
             //currentHoldTime = 0f;
-            if(promptAnimator != null)
-            {
-                promptAnimator.SetBool("UIappeared", false);
-                promptAnimator.SetTrigger("UIdisappearing");
-            }
+            UpdatePrompt();
+            //HidePrompt();
         }
     }
+    void UpdatePrompt()
+    {
+        bool shouldShow = playerInRange && !hasInteracted;
+
+        promptAnimator.SetBool("UIappeared", shouldShow);
+        if(!shouldShow)
+        {
+            promptAnimator.SetTrigger("UIdisappearing");
+        }
+        
+    }
+    // private void HidePrompt()
+    // {
+    //     if(promptAnimator != null)
+    //     {
+    //         //promptAnimator.SetBool("UIappeared", false);
+    //         promptAnimator.SetTrigger("UIdisappearing");
+    //     }
+    // }
     private void ResetSteps()
     {
         currentStepIndex = -1;

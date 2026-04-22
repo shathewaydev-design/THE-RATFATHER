@@ -10,4 +10,5 @@ public class AddFlavor : MonoBehaviour
         flavorObject.transform.position = spawnPoint.transform.position;
         flavorObject.transform.rotation = spawnPoint.transform.rotation;
     }
+
 }
