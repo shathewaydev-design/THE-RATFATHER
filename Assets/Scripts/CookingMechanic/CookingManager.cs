@@ -5,7 +5,21 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using Unity.Cinemachine;
 using StarterAssets;
+public enum CookingStepType
+{
+    Milk,
+    Flavor,
+    Heat,
+    Additive
+}
 
+[System.Serializable]
+public class CookingStepUI
+{
+    public CookingStepType stepType;
+    public GameObject root;     // container object
+    public Animator animator;   // for punch/glow/etc
+}
 public class CookingManager : MonoBehaviour, IInteractable
 {
     public static CookingManager Instance;
@@ -23,13 +37,16 @@ public class CookingManager : MonoBehaviour, IInteractable
     //public GameObject playerGeo;//player Geo
     public GameObject playerFollowCamera;//cinemachine
 
-    [Header("UI Steps")]
+    // [Header("UI Steps")]
     public GameObject recipeMenu;
     public GameObject inventoryPanel;
-    public GameObject stepPourMilk;
-    public GameObject stepFlavor;
-    public GameObject stepHeat;
-    public GameObject stepAdditive;
+    // public GameObject stepPourMilk;
+    // public GameObject stepFlavor;
+    // public GameObject stepHeat;
+    // public GameObject stepAdditive;
+    [Header("UI Steps")]
+    public List<CookingStepUI> steps;
+    private int currentStepIndex = -1;
 
     [Header("Input")]
     // [SerializeField] private float holdTime = 1.0f;
@@ -109,23 +126,59 @@ public class CookingManager : MonoBehaviour, IInteractable
         mainCamera.transform.position = savedMainCameraPosition;
         mainCamera.transform.rotation = savedMainCameraRotation;
         
-
-        recipeMenu.SetActive(false);
-        //reset milk step
-        stepPourMilk.SetActive(false);
-        //reset flavor step
-        stepFlavor.SetActive(false);
-        //reset heat step
-        stepHeat.SetActive(false);
-        //reset additive step
-        stepAdditive.SetActive(false);
+        ResetSteps();
+        // recipeMenu.SetActive(false);
+        // //reset milk step
+        // stepPourMilk.SetActive(false);
+        // //reset flavor step
+        // stepFlavor.SetActive(false);
+        // //reset heat step
+        // stepHeat.SetActive(false);
+        // //reset additive step
+        // stepAdditive.SetActive(false);
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
     // ---------- FLOW ----------
+    private void SetStep(int newIndex)
+    {
+        if (newIndex < 0 || newIndex >= steps.Count) return;
 
+        int previousIndex = currentStepIndex;
+        currentStepIndex = newIndex;
+
+        for (int i = 0; i < steps.Count; i++)
+        {
+            var step = steps[i];
+
+            if (i < currentStepIndex)
+            {
+                // Completed
+                step.root.SetActive(true);
+                step.animator.SetTrigger("Completed");
+            }
+            else if (i == currentStepIndex)
+            {
+                // Active
+                step.root.SetActive(true);
+                step.animator.SetTrigger("Activate");
+            }
+            else
+            {
+                // Upcoming
+                step.root.SetActive(true);
+                step.animator.SetTrigger("Idle");
+            }
+        }
+
+        // Optional: animate previous step losing focus
+        if (previousIndex >= 0 && previousIndex < steps.Count)
+        {
+            steps[previousIndex].animator.SetTrigger("Deactivate");
+        }
+    }
     public void ShowRecipeMenu()
     {
         recipeMenu.SetActive(true);
@@ -135,32 +188,36 @@ public class CookingManager : MonoBehaviour, IInteractable
     public void StartPourMilk()
     {
         inventoryPanel.SetActive(false);
-        stepPourMilk.SetActive(true);
+        //stepPourMilk.SetActive(true);
+        SetStep(0);
     }
 
     public void StartFlavor()
     {
-        stepPourMilk.SetActive(false);
-        stepFlavor.SetActive(true);
+        // stepPourMilk.SetActive(false);
+        // stepFlavor.SetActive(true);
+        SetStep(1);
         thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Mouse");
     }
 
     public void StartHeat()
     {
-        stepFlavor.SetActive(false);
-        stepHeat.SetActive(true);
+        //stepFlavor.SetActive(false);
+        //stepHeat.SetActive(true);
+        SetStep(2);
     }
 
     public void StartAdditive()
     {
-        stepHeat.SetActive(false);
-        stepAdditive.SetActive(true);
+        //stepHeat.SetActive(false);
+        //stepAdditive.SetActive(true);
+        SetStep(3);
         thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Cooking");
     }
 
     public void FinishCooking()
     {
-        stepAdditive.SetActive(false);
+        //stepAdditive.SetActive(false);
         thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
         ExitCookingMode();
     }
@@ -196,7 +253,15 @@ public class CookingManager : MonoBehaviour, IInteractable
             }
         }
     }
+    private void ResetSteps()
+    {
+        currentStepIndex = -1;
 
+        foreach (var step in steps)
+        {
+            step.root.SetActive(false);
+        }
+    }
     private void OnDestroy()
     {
         if (thirdPersonController == null) return;
