@@ -71,6 +71,7 @@ public class InventorySystem : MonoBehaviour
 
     }
 
+
     public int GetItemCount(CheeseIngredientData item)
     {
         return inventory.ContainsKey(item) ? inventory[item] : 0;

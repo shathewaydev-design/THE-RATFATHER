@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34ee349227d32df4580398eb667c4e5d, type: 3}
+  m_Name: rat1Quest1Intro
+  m_EditorClassIdentifier: Assembly-CSharp::ConversationData
+  lines:
+  - speaker: {fileID: 11400000, guid: 628606f5850fdc541ad20f0e9cc8b57a, type: 2}
+    text: Hm...? What is it? Make it quick...
+    options: []
+    endConversation: 0
+  - speaker: {fileID: 11400000, guid: 628606f5850fdc541ad20f0e9cc8b57a, type: 2}
+    text: 
+    options:
+    - text: 'Are you interested in... some of my finest cheese? '
+      nextLineIndex: 2
+      assignQuest: 0
+      quest: {fileID: 0}
+      endConversation: 0
+    endConversation: 0
+  - speaker: {fileID: 11400000, guid: 628606f5850fdc541ad20f0e9cc8b57a, type: 2}
+    text: Woah! Keep it down...! Do you know the kind of rats that roam around here?
+    options: []
+    endConversation: 0
+  - speaker: {fileID: 11400000, guid: 628606f5850fdc541ad20f0e9cc8b57a, type: 2}
+    text: Besides, No one is going to just buy your product off the bat. Well, at
+      least not everyone.
+    options: []
+    endConversation: 0
+  - speaker: {fileID: 11400000, guid: 628606f5850fdc541ad20f0e9cc8b57a, type: 2}
+    text: 'You''ve got to... Earn their trust, so to speak. '
+    options: []
+    endConversation: 0
+  - speaker: {fileID: 11400000, guid: fe37e5f6c6e4ce940ab3b38f7087bab3, type: 2}
+    text: Earn their trust?
+    options: []
+    endConversation: 0
+  - speaker: {fileID: 11400000, guid: 628606f5850fdc541ad20f0e9cc8b57a, type: 2}
+    text: Yeah. Y'know, like doing favors for them. Speaking of...
+    options: []
+    endConversation: 0
+  - speaker: {fileID: 11400000, guid: 628606f5850fdc541ad20f0e9cc8b57a, type: 2}
+    text: I might be more inclined to take a look at your product if you help me
+      out.
+    options: []
+    endConversation: 0
+  - speaker: {fileID: 11400000, guid: fe37e5f6c6e4ce940ab3b38f7087bab3, type: 2}
+    text: ...Alright. What do you need help with?
+    options: []
+    endConversation: 0
+  - speaker: {fileID: 11400000, guid: 628606f5850fdc541ad20f0e9cc8b57a, type: 2}
+    text: Do you mind going and finding it for me?
+    options:
+    - text: Alright. But we're talking business after!
+      nextLineIndex: 0
+      assignQuest: 1
+      quest: {fileID: 11400000, guid: 33ae09237ac829640bc1bf8e0cc34236, type: 2}
+      endConversation: 1
+    - text: No way, get it yourself!
+      nextLineIndex: 0
+      assignQuest: 0
+      quest: {fileID: 0}
+      endConversation: 1
+    endConversation: 1
