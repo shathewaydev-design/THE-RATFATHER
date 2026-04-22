@@ -16,6 +16,9 @@ public class DialogueLine
     public string text;        // what they say
     public List<DialogueOption> options; // optional choices
 
+    public bool recruitRat; // does this option recruit a rat?
+    public bool openSellScreen; // does this open the sell screen?
+
     public bool endConversation; // ends conversation if true
 }
 
@@ -29,7 +32,12 @@ public class DialogueOption
     public bool assignQuest; // does this option give a quest?
     public Quest quest; // quest assigned to option if needed
 
+    public NPCProfile npc;
+
+    public bool openSellScreen; // does this open the sell screen?
     public bool endConversation; // does option end conversation?
+
+    public bool recruitRat; // does this option recruit a rat?
 
     public void GiveQuest()
     {
@@ -39,6 +47,25 @@ public class DialogueOption
             Debug.Log("Quest assigned!");
         }
         return;
+    }
+
+    public void Recruit()
+    {
+        if (recruitRat)
+        {
+            GameManager.Instance.RecruitRat(npc);
+           
+        }
+    }
+
+    public void Sell()
+    {
+        if (openSellScreen)
+        {
+            UIManager.Instance.ToggleSellScreen();
+            // ui manager open screen
+        }
+
     }
 
 }

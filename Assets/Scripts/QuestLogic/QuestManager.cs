@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEditor.Rendering.LookDev;
 using UnityEngine;
@@ -10,14 +11,8 @@ public class QuestManager : MonoBehaviour
     public DialogueManager dialogueManager;
     public UIManager UIManager;
 
-    //public ConversationData questIntro; // dialogue when npc gives quest
-    //public ConversationData questQuestioned; // dialogue when player is in middle of npc's quest
-    //public ConversationData questCompleted; // dialogue once quest is completed
-
     public bool questGiven = false;
     public bool questDone = false;
-
-    //public bool hasTurnedInReq = false;
 
     public List<Quest> allQuests;
     public List<Quest> activeQuests;
@@ -83,12 +78,6 @@ public class QuestManager : MonoBehaviour
         }
 
     }
-
-    //void StartQuest(string questName)
-    //{
-    //    //dialogueManager.StartDialogue(sampleDialogue);
-    //}
-
 
     bool CheckIfTurnedIn(Quest quest)
     {
@@ -207,7 +196,7 @@ public class QuestManager : MonoBehaviour
         questStates[quest].isCompleted = true;
         if (questStates[quest].isActive)
         {
-            UIManager.ClearObjective();
+            UIManager.RemoveObjective(quest.objectives[questStates[quest].objectiveIndex]);
             ChangeQuestActive(quest);
         }
 

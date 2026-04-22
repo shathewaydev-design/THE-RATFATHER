@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb0a4103522872c46b4bead59c0583af, type: 3}
+  m_Name: 1stLevel_Rat
+  m_EditorClassIdentifier: Assembly-CSharp::NPCProfile
+  characterName: Serious Rat
+  trait: serious
+  description: A serious looking rat
+  pfp: {fileID: 0}
+  trustDifficulty: 10
+  recruited: 0
+  quests:
+  - {fileID: 11400000, guid: 33ae09237ac829640bc1bf8e0cc34236, type: 2}
+  - {fileID: 11400000, guid: 24b6a2e46b8656747af7e7f8b6541217, type: 2}
+  availability:
+  - 

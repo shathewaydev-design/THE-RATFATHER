@@ -9,11 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb0a4103522872c46b4bead59c0583af, type: 3}
-  m_Name: NPCProfile_1_TEST
-  m_EditorClassIdentifier: Assembly-CSharp::NPCProfile
-  characterName: Rat 1
-  trait: Nervous
-  trustDifficulty: 10
-  quests:
-  - {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 35bb55c571ba9cd43b355daf228e0ebd, type: 3}
+  m_Name: playerHasObject
+  m_EditorClassIdentifier: Assembly-CSharp::ItemRequirement
+  item: {fileID: 11400000, guid: a1ce5c61c99cd8d488e3f4fe7ce858e1, type: 2}

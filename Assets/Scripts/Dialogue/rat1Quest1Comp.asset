@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34ee349227d32df4580398eb667c4e5d, type: 3}
+  m_Name: rat1Quest1Comp
+  m_EditorClassIdentifier: Assembly-CSharp::ConversationData
+  lines:
+  - speaker: {fileID: 11400000, guid: 628606f5850fdc541ad20f0e9cc8b57a, type: 2}
+    text: You found it? Heck yeah!
+    options: []
+    recruitRat: 0
+    openSellScreen: 0
+    endConversation: 0
+  - speaker: {fileID: 11400000, guid: 628606f5850fdc541ad20f0e9cc8b57a, type: 2}
+    text: As promised, let's do business. What do you have?
+    options:
+    - text: Take a look...
+      nextLineIndex: 2
+      assignQuest: 0
+      quest: {fileID: 0}
+      npc: {fileID: 0}
+      openSellScreen: 1
+      endConversation: 1
+      recruitRat: 0
+    recruitRat: 0
+    openSellScreen: 0
+    endConversation: 0
+  - speaker: {fileID: 11400000, guid: 628606f5850fdc541ad20f0e9cc8b57a, type: 2}
+    text: Okay... Doesn't look horrible. If you're te one who made this, you're definetly
+      a natural.
+    options: []
+    recruitRat: 0
+    openSellScreen: 0
+    endConversation: 0
+  - speaker: {fileID: 11400000, guid: 628606f5850fdc541ad20f0e9cc8b57a, type: 2}
+    text: But, it could be even better with more ingredients... BETTER ingredients.
+    options: []
+    recruitRat: 0
+    openSellScreen: 0
+    endConversation: 0
+  - speaker: {fileID: 11400000, guid: 628606f5850fdc541ad20f0e9cc8b57a, type: 2}
+    text: Obviously you're keeping you're eye out for them, right?
+    options: []
+    recruitRat: 0
+    openSellScreen: 0
+    endConversation: 0
+  - speaker: {fileID: 11400000, guid: 628606f5850fdc541ad20f0e9cc8b57a, type: 2}
+    text: But if you had an extra set of paws... Now that could really up your game.
+    options: []
+    recruitRat: 0
+    openSellScreen: 0
+    endConversation: 1

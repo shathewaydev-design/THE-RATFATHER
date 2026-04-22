@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 428365d2c11ba4e46be272f31fe7be93, type: 3}
+  m_Name: getRatObject
+  m_EditorClassIdentifier: Assembly-CSharp::Quest
+  questName: Get Rat Lost Knife
+  requiredTrust: 0
+  requiredCompletedQuests: []
+  questIntro: {fileID: 11400000, guid: dbd6e9347abfb1644a700fd46eee5091, type: 2}
+  questQuestioned: {fileID: 11400000, guid: 4ec56e882f44843499eb72e7cdb5196c, type: 2}
+  questCompleted: {fileID: 11400000, guid: c7781593b93448d40a151767b789fa91, type: 2}
+  questOver: {fileID: 11400000, guid: e353ae6b134a47a44947dd6728f2fd15, type: 2}
+  requirements:
+  - {fileID: 11400000, guid: 9fca18afd1eaae14c929018dc2596c75, type: 2}
+  objectives:
+  - Find the lost swiss army knife.
+  rewards:
+  - {fileID: 11400000, guid: e41587806b3678843867567029296296, type: 2}

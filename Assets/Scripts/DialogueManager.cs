@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Playables;
 
 public class DialogueManager : MonoBehaviour
 {
+
+    public static DialogueManager Instance;
+
     // note for dialogue - specific lines held by NPC, start and stop logic here
     public ConversationData currentConversation;
     public int currentLineIndex = 0;
@@ -17,6 +21,19 @@ public class DialogueManager : MonoBehaviour
     private bool canAdvance = true; // help w typewriter effect -- always true for now
                                     // ^^ also can handle in another script, keep in mind for now
     private bool justStartedDialogue = false;
+
+
+    private void Awake()
+    {
+
+        // Singleton pattern (simple version); avoid duplicates
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
+
+    }
+
 
     // start dialogue
     // Call this to start a conversation
@@ -36,7 +53,7 @@ public class DialogueManager : MonoBehaviour
         currentConversation = conversation;
         currentLineIndex = 0;
 
-        UIManager.ShowDialoguePanel();      // turn panel on
+        UIManager.ShowDialoguePanel();  // turn panel on
         ShowCurrentLine();
     }
 
@@ -75,6 +92,8 @@ public class DialogueManager : MonoBehaviour
         //UIManager.HideOptions();
         DialogueOption selected = currentConversation.lines[currentLineIndex].options[selectedOptionIndex];
         selected.GiveQuest();
+        selected.Recruit();
+        selected.Sell();
 
         if (selected.endConversation) 
         {

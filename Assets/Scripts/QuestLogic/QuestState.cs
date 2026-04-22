@@ -16,5 +16,4 @@ public class QuestState
     public bool hasGivenRewards;
 
 
-    // WORK ON UI TO DISPLAY
 }

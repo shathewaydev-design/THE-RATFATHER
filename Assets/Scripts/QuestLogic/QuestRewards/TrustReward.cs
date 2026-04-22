@@ -5,6 +5,7 @@ public class TrustReward : QuestReward
 {
     public override void Apply()
     {
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
+        Debug.Log("+10 Trust for this Rat!");
     }
 }
