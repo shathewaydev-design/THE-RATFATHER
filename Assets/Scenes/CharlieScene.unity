@@ -3086,7 +3086,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &462911552
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3311,7 +3311,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &521469667
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3750,7 +3750,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &595443637
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6758,7 +6758,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1104789183
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8477,7 +8477,7 @@ GameObject:
   - component: {fileID: 1375015956}
   - component: {fileID: 1375015955}
   m_Layer: 0
-  m_Name: InventoryPanel
+  m_Name: itemSlotContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8628,7 +8628,7 @@ GameObject:
   - component: {fileID: 1474996634}
   - component: {fileID: 1474996637}
   m_Layer: 0
-  m_Name: Button (Legacy)
+  m_Name: itemSlotTemplate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9021,7 +9021,7 @@ GameObject:
   - component: {fileID: 1508038197}
   - component: {fileID: 1508038196}
   m_Layer: 0
-  m_Name: IngredientsBoard
+  m_Name: IngredientsBoardBG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9638,7 +9638,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1646490523
 Transform:
   m_ObjectHideFlags: 0
@@ -10850,6 +10850,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1905931022
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1090267613999448909, guid: aed332ffc55744a74823b4d01c7003de, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1090267613999448909, guid: aed332ffc55744a74823b4d01c7003de, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.74
+      objectReference: {fileID: 0}
+    - target: {fileID: 1090267613999448909, guid: aed332ffc55744a74823b4d01c7003de, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 1090267613999448909, guid: aed332ffc55744a74823b4d01c7003de, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1090267613999448909, guid: aed332ffc55744a74823b4d01c7003de, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1090267613999448909, guid: aed332ffc55744a74823b4d01c7003de, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1090267613999448909, guid: aed332ffc55744a74823b4d01c7003de, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1090267613999448909, guid: aed332ffc55744a74823b4d01c7003de, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1090267613999448909, guid: aed332ffc55744a74823b4d01c7003de, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1090267613999448909, guid: aed332ffc55744a74823b4d01c7003de, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8961226834968121802, guid: aed332ffc55744a74823b4d01c7003de, type: 3}
+      propertyPath: m_Name
+      value: PickUpObjectTemplate
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: aed332ffc55744a74823b4d01c7003de, type: 3}
 --- !u!1 &1914679894
 GameObject:
   m_ObjectHideFlags: 0
@@ -11602,7 +11659,7 @@ GameObject:
   - component: {fileID: 1999910364}
   - component: {fileID: 1999910363}
   m_Layer: 0
-  m_Name: Inventory
+  m_Name: Inventory Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11907,7 +11964,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2033308773
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13072,3 +13129,4 @@ SceneRoots:
   - {fileID: 194852883}
   - {fileID: 6376851500893090680}
   - {fileID: 954634597}
+  - {fileID: 1905931022}

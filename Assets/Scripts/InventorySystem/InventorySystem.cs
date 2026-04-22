@@ -5,7 +5,8 @@ using UnityEngine;
 public class InventorySystem : MonoBehaviour
 {
     public static InventorySystem Instance;
-
+    public List<InventorySlot> inventoryTest = new();//test new system; inventory
+    [SerializeField] private UI_Inventory inventoryUI;
     private Dictionary<CheeseIngredientData, int> inventory = new Dictionary<CheeseIngredientData, int>();
     public IReadOnlyDictionary<CheeseIngredientData, int> Inventory => inventory; // so inventory can be read for quest requirements, etc.
     //this is like creating new definition in a dictionary, then put them in pages
@@ -75,5 +76,83 @@ public class InventorySystem : MonoBehaviour
     public int GetItemCount(CheeseIngredientData item)
     {
         return inventory.ContainsKey(item) ? inventory[item] : 0;
+    }
+
+
+/// Test new functions
+    public void AddIngredientItem(CheeseIngredientData item, int amount = 1)
+    {
+        int remaining = amount;
+
+        // fill existing stacks first
+        foreach (InventorySlot slot in inventoryTest)
+        {
+            if (slot.itemData == item && !slot.IsFull())
+            {
+                int spaceLeft = item.maxStack - slot.quantity;
+
+                int amountToAdd = Mathf.Min(spaceLeft, remaining);
+
+                slot.quantity += amountToAdd;
+
+                remaining -= amountToAdd;
+
+                if (remaining <= 0)
+                {
+                    RefreshUI();
+                    return;
+                }
+            }
+        }
+
+        // create new stacks if needed
+        while (remaining > 0)
+        {
+            int amountToAdd = Mathf.Min(item.maxStack, remaining);
+
+            InventorySlot newSlot =
+                new InventorySlot(item, amountToAdd);
+
+            inventoryTest.Add(newSlot);
+
+            remaining -= amountToAdd;
+        }
+
+        RefreshUI();
+
+        Debug.Log($"Added {item.ingredientName}");
+    }
+
+    public void RemoveIngredientItem(CheeseIngredientData item, int amount = 1)
+    {
+        int remaining = amount;
+
+        for (int i = inventoryTest.Count - 1; i >= 0; i--)
+        {
+            InventorySlot slot = inventoryTest[i];
+
+            if (slot.itemData == item)
+            {
+                if (slot.quantity > remaining)
+                {
+                    slot.quantity -= remaining;
+                    break;
+                }
+                else
+                {
+                    remaining -= slot.quantity;
+                    inventoryTest.RemoveAt(i);
+                }
+            }
+
+            if (remaining <= 0)
+                break;
+        }
+
+        RefreshUI();
+    }
+    private void RefreshUI()
+    {
+        inventoryUI.Refresh(inventoryTest);
     }
 }

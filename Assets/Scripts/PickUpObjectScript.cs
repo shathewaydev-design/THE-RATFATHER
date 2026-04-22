@@ -55,34 +55,34 @@ public class PickUpObjectScript : MonoBehaviour, IInteractable
         Destroy(gameObject);
     }
     
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            playerInRange = true;
-            if(promptAnimator != null)
-            {
-                promptAnimator.SetBool("UIappeared", true);
-                promptAnimator.SetTrigger("UIappearing");
-            }
+    // void OnTriggerEnter(Collider other)
+    // {
+    //     if (other.CompareTag("Player"))
+    //     {
+    //         playerInRange = true;
+    //         if(promptAnimator != null)
+    //         {
+    //             promptAnimator.SetBool("UIappeared", true);
+    //             promptAnimator.SetTrigger("UIappearing");
+    //         }
 
 
-            Debug.Log("Hold E to extract sample"); // Replace with UI later
-        }
-    }
+    //         Debug.Log("Hold E to extract sample"); // Replace with UI later
+    //     }
+    // }
 
-    void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            playerInRange = false;
-            //Debug.Log("playerInRange is "+playerInRange);
-            //currentHoldTime = 0f;
-            if(promptAnimator != null)
-            {
-                promptAnimator.SetBool("UIappeared", false);
-                promptAnimator.SetTrigger("UIdisappearing");
-            }
-        }
-    }
+    // void OnTriggerExit(Collider other)
+    // {
+    //     if (other.CompareTag("Player"))
+    //     {
+    //         playerInRange = false;
+    //         //Debug.Log("playerInRange is "+playerInRange);
+    //         //currentHoldTime = 0f;
+    //         if(promptAnimator != null)
+    //         {
+    //             promptAnimator.SetBool("UIappeared", false);
+    //             promptAnimator.SetTrigger("UIdisappearing");
+    //         }
+    //     }
+    // }
 }
