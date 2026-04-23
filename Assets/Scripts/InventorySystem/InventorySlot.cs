@@ -6,8 +6,8 @@ public class InventorySlot
 
     public InventorySlot(CheeseIngredientData data, int amount)
     {
-        itemData = data;
-        quantity = amount;
+        itemData = data;//reference to the cheese ingredient data ScriptableObject, which contains all the info about this item (name, description, icon, etc.)
+        quantity = amount;//amount is how many of this item (cheese ingredient) are in this slot
     }
     public bool IsFull()
     {

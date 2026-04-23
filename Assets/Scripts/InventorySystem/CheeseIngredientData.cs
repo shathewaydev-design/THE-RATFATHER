@@ -14,13 +14,14 @@ public class CheeseIngredientData : ScriptableObject
     [TextArea] public string description;
     public string ingredientName;
     [Header("Visual")]
-    public string price;
+    
     public Sprite icon;
     [Header("Gameplay")]
     public IngredientRarity rarity;
-    // public IngredientType type;
+    public IngredientType type;
 
     [Header("Economy")]
+    public string price;
     public int basePrice;
 
     [Header("Stacking")]
@@ -33,10 +34,10 @@ public class CheeseIngredientData : ScriptableObject
         Epic,
         Legendary
     }
-    // public enum IngredientType
-    // {
-    //     Milk,
-    //     Flavor,
-    //     Addictive
-    // }
+    public enum IngredientType
+    {
+        Milk,
+        Flavor,
+        Addictive
+    }
     

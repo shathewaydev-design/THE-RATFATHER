@@ -1,12 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum IngredientType
-{
-    Milk,
-    Flavor,
-    Additive
-}
 
 public class IngredientButton : MonoBehaviour
 {
@@ -14,19 +8,35 @@ public class IngredientButton : MonoBehaviour
     public Image highlight;
 
     private RecipeMenuUI menu;
+    //public CheeseIngredientData ingredientData;
+    public InventorySlot inventorySlot;
+    //public CheeseIngredientData IngredientData => inventorySlot.itemData;
 
     void Start()
     {
-        menu = GetComponentInParent<RecipeMenuUI>();
+        
     }
+    public void Initialize(RecipeMenuUI recipeMenu)
+    {
+        menu = recipeMenu;
+    }
+    // public void Setup(InventorySlot slot)
+    // {
+    //     inventorySlot = slot;
+    //     //ingredientData = slot.itemData;
+    //     // slot = inventorySlot;
+    //     // type = inventorySlot.itemData.type;
 
+    // }
     public void OnClick()
     {
         menu.SelectIngredient(this);
+        //CookingManager.Instance.SelectIngredient(inventorySlot);
     }
 
     public void SetActive(bool active)
     {
         highlight.enabled = active;
     }
+    
 }

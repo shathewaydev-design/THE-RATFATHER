@@ -7,7 +7,7 @@ public class RecipeMenuUI : MonoBehaviour
 
     private IngredientButton selectedMilk;
     private IngredientButton selectedFlavor;
-    private IngredientButton selectedAdditive;
+    private IngredientButton selectedAddictive;
 
     public void SelectIngredient(IngredientButton button)
     {
@@ -15,17 +15,20 @@ public class RecipeMenuUI : MonoBehaviour
         {
             case IngredientType.Milk:
                 SetSelection(ref selectedMilk, button);
-                //Debug.Log("selectedMilk is "+selectedMilk);
+                //button.Setup(inventorySlot.itemData);
+                Debug.Log("selectedMilk is "+selectedMilk);
                 break;
 
             case IngredientType.Flavor:
                 SetSelection(ref selectedFlavor, button);
-                //Debug.Log("selected Flavor is "+selectedFlavor);
+                //button.Setup(inventorySlot.itemData);
+                Debug.Log("selected Flavor is "+selectedFlavor);
                 break;
 
-            case IngredientType.Additive:
-                SetSelection(ref selectedAdditive, button);
-                //Debug.Log("selectedAdditive is "+selectedAdditive);
+            case IngredientType.Addictive:
+                SetSelection(ref selectedAddictive, button);
+                //button.Setup(inventorySlot.itemData);
+                Debug.Log("selectedAddictive is "+selectedAddictive);
                 break;
         }
 
@@ -51,7 +54,7 @@ public class RecipeMenuUI : MonoBehaviour
     void CheckReady()
     {
 
-        bool ready = selectedMilk != null && selectedFlavor != null && selectedAdditive != null;
+        bool ready = selectedMilk != null && selectedFlavor != null && selectedAddictive != null;
         cookButton.interactable = ready;
 
     }
@@ -82,10 +85,10 @@ public class RecipeMenuUI : MonoBehaviour
         selectedFlavor = null;
     }
 
-    if (selectedAdditive != null)
+    if (selectedAddictive != null)
     {
-        selectedAdditive.SetActive(false);
-        selectedAdditive = null;
+        selectedAddictive.SetActive(false);
+        selectedAddictive = null;
     }
 
     cookButton.interactable = false;

@@ -37,13 +37,8 @@ public class CookingManager : MonoBehaviour, IInteractable
     //public GameObject playerGeo;//player Geo
     public GameObject playerFollowCamera;//cinemachine
 
-    // [Header("UI Steps")]
     public GameObject recipeMenu;
     public GameObject inventoryPanel;
-    // public GameObject stepPourMilk;
-    // public GameObject stepFlavor;
-    // public GameObject stepHeat;
-    // public GameObject stepAdditive;
     [Header("UI Steps")]
     public List<CookingStepUI> steps;
     private int currentStepIndex = -1;
@@ -54,6 +49,8 @@ public class CookingManager : MonoBehaviour, IInteractable
     public ThirdPersonController thirdPersonController;
     private bool playerInRange = false;
     bool hasInteracted = false;
+    private List<CheeseIngredientData> selectedIngredients = new();//store selected ingredients that are selected when player click on IngredientButton.
+    // private List<InventorySlot> selectedSlots = new();
 
     [Header("UI")]
     public Animator promptAnimator;
@@ -63,8 +60,6 @@ public class CookingManager : MonoBehaviour, IInteractable
     private void Awake()//this is necessary to avoid bugs
     {
         Instance = this;
-       
-       
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -119,6 +114,9 @@ public class CookingManager : MonoBehaviour, IInteractable
 
     public void ExitCookingMode()
     {
+        selectedIngredients.Clear();//clear selected ingredients in case player exit cooking mode in the middle of cooking process
+        //selectedSlots.Clear();
+
         thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
 
         //playerGeo.SetActive(true);
@@ -131,14 +129,7 @@ public class CookingManager : MonoBehaviour, IInteractable
         
         ResetSteps();
         recipeMenu.SetActive(false);
-        // //reset milk step
-        // stepPourMilk.SetActive(false);
-        // //reset flavor step
-        // stepFlavor.SetActive(false);
-        // //reset heat step
-        // stepHeat.SetActive(false);
-        // //reset additive step
-        // stepAdditive.SetActive(false);
+        inventoryPanel.SetActive(false);
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -176,7 +167,7 @@ public class CookingManager : MonoBehaviour, IInteractable
             }
         }
         UpdatePrompt();
-        // HidePrompt();
+        
         // Optional: animate previous step losing focus
         // if (previousIndex >= 0 && previousIndex < steps.Count)
         // {
@@ -192,39 +183,58 @@ public class CookingManager : MonoBehaviour, IInteractable
     public void StartPourMilk()
     {
         inventoryPanel.SetActive(false);
-        //stepPourMilk.SetActive(true);
+        
         SetStep(0);
     }
 
     public void StartFlavor()
     {
-        // stepPourMilk.SetActive(false);
-        // stepFlavor.SetActive(true);
+        
         SetStep(1);
         thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Mouse");
     }
 
     public void StartHeat()
     {
-        //stepFlavor.SetActive(false);
-        //stepHeat.SetActive(true);
+        
         SetStep(2);
     }
 
     public void StartAdditive()
     {
-        //stepHeat.SetActive(false);
-        //stepAdditive.SetActive(true);
+        
         SetStep(3);
         thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Cooking");
     }
 
     public void FinishCooking()
     {
-        //stepAdditive.SetActive(false);
+        //foreach (var ingredient in selectedIngredients)
+        //{
+            //InventorySystem.Instance.RemoveIngredientSlot(ingredient, 1);
+            //InventorySystem.Instance.RemoveIngredientItem(ingredient, 1);
+        //}
+        // foreach (var slot in selectedSlots)
+        // {
+        //     InventorySystem.Instance.RemoveIngredientSlot(slot, 1);
+        // }
+
+        selectedIngredients.Clear();
+        //selectedSlots.Clear();
         thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
         ExitCookingMode();
     }
+/////Data Transfering from IngredientButton////
+    public void SelectIngredient(CheeseIngredientData ingredient)
+    {
+        if (!selectedIngredients.Contains(ingredient))
+            selectedIngredients.Add(ingredient);
+    }
+    // public void SelectIngredient(InventorySlot slot)
+    // {
+    //     if (!selectedSlots.Contains(slot))
+    //         selectedSlots.Add(slot);
+    // }
 
 /////UI ONLY////
     void OnTriggerEnter(Collider other)
@@ -267,14 +277,7 @@ public class CookingManager : MonoBehaviour, IInteractable
         }
         
     }
-    // private void HidePrompt()
-    // {
-    //     if(promptAnimator != null)
-    //     {
-    //         //promptAnimator.SetBool("UIappeared", false);
-    //         promptAnimator.SetTrigger("UIdisappearing");
-    //     }
-    // }
+    
     private void ResetSteps()
     {
         currentStepIndex = -1;
