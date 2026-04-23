@@ -107,7 +107,7 @@ public class UIManager : MonoBehaviour
             }
 
             // Press selected button
-            if (Keyboard.current.sKey.wasPressedThisFrame)
+            if (Keyboard.current.zKey.wasPressedThisFrame)
             {
                  sellButtons[sellSelectedIndex].onClick.Invoke();
             }
@@ -312,7 +312,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void AddToSoldLog(NPCProfile npc)
+    public void AddToSoldLog(NPCProfile npc) 
     {
         var newTag = Instantiate(emptyTag, soldLog.transform);
         newTag.text = npc.characterName + ": example selling desc";

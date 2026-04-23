@@ -15,12 +15,12 @@ MonoBehaviour:
   questName: Get Rat Meal
   requiredTrust: 0
   requiredCompletedQuests: []
-  questIntro: {fileID: 0}
-  questQuestioned: {fileID: 0}
-  questCompleted: {fileID: 0}
-  questOver: {fileID: 0}
+  questIntro: {fileID: 11400000, guid: e60bb4fca10ceda4e88f3bb8ff887c42, type: 2}
+  questQuestioned: {fileID: 11400000, guid: 684cce1e5f8383e458156bc99379a3f0, type: 2}
+  questCompleted: {fileID: 11400000, guid: 0457002db4d4c7641a4aaff19bef2eb3, type: 2}
+  questOver: {fileID: 11400000, guid: 157f184528696174fb9f2e4cc04d46e8, type: 2}
   requirements:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: b8685e1ab2753804889bed5ebf613064, type: 2}
   objectives:
   - Get the rat a warm meal.
   rewards:

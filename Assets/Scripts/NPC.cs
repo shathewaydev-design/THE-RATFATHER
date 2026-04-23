@@ -35,17 +35,24 @@ public class NPC : MonoBehaviour, IInteractable
     {
         if (profile.quests.Count == 0) return;
 
-        if (state.hasMetPlayer)
+        Quest relevantQuest = questManager.GetRelevantQuest(profile.quests);
+
+        if (relevantQuest == null)
+            return;
+
+        if (!state.hasMetPlayer)
         {
-            currentConvo = questManager.UpdateDialogue(profile.quests[0]);
+            currentConvo = relevantQuest.questIntro;
         }
         else
         {
-            currentConvo = profile.quests[0].questIntro; // or whatever first convo is (also might need loop to find)
+            currentConvo = questManager.UpdateDialogue(relevantQuest);
         }
+
         dialogueManager.StartConversation(currentConvo);
         state.hasMetPlayer = true;
-        
+
+        Debug.Log("Relevant quest: " + relevantQuest.questName);
 
     }
 

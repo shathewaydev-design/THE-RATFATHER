@@ -26,16 +26,22 @@ MonoBehaviour:
       nextLineIndex: 2
       assignQuest: 0
       quest: {fileID: 0}
-      npc: {fileID: 0}
+      npc: {fileID: 11400000, guid: 628606f5850fdc541ad20f0e9cc8b57a, type: 2}
       openSellScreen: 1
-      endConversation: 1
+      endConversation: 0
       recruitRat: 0
     recruitRat: 0
     openSellScreen: 0
     endConversation: 0
   - speaker: {fileID: 11400000, guid: 628606f5850fdc541ad20f0e9cc8b57a, type: 2}
-    text: Okay... Doesn't look horrible. If you're te one who made this, you're definetly
-      a natural.
+    text: ...
+    options: []
+    recruitRat: 0
+    openSellScreen: 0
+    endConversation: 0
+  - speaker: {fileID: 11400000, guid: 628606f5850fdc541ad20f0e9cc8b57a, type: 2}
+    text: Okay... Doesn't look horrible. If you're the one who made this, you're
+      definetly a natural.
     options: []
     recruitRat: 0
     openSellScreen: 0
@@ -55,6 +61,46 @@ MonoBehaviour:
   - speaker: {fileID: 11400000, guid: 628606f5850fdc541ad20f0e9cc8b57a, type: 2}
     text: But if you had an extra set of paws... Now that could really up your game.
     options: []
+    recruitRat: 0
+    openSellScreen: 0
+    endConversation: 0
+  - speaker: {fileID: 11400000, guid: fe37e5f6c6e4ce940ab3b38f7087bab3, type: 2}
+    text: 'Are you offering to help me? '
+    options: []
+    recruitRat: 0
+    openSellScreen: 0
+    endConversation: 0
+  - speaker: {fileID: 11400000, guid: 628606f5850fdc541ad20f0e9cc8b57a, type: 2}
+    text: I mean, I could, couldn't I?
+    options: []
+    recruitRat: 0
+    openSellScreen: 0
+    endConversation: 0
+  - speaker: {fileID: 11400000, guid: 628606f5850fdc541ad20f0e9cc8b57a, type: 2}
+    text: 'But we don''t really know each other... So perhaps if you do one more
+      favor for me? '
+    options: []
+    recruitRat: 0
+    openSellScreen: 0
+    endConversation: 0
+  - speaker: {fileID: 11400000, guid: fe37e5f6c6e4ce940ab3b38f7087bab3, type: 2}
+    text: Another favor...? Ugh, fine. What do you want this time?
+    options: []
+    recruitRat: 0
+    openSellScreen: 0
+    endConversation: 0
+  - speaker: {fileID: 11400000, guid: 628606f5850fdc541ad20f0e9cc8b57a, type: 2}
+    text: Well thank you! I haven't eaten anything since this morning. Mind getting
+      me a meal?
+    options:
+    - text: Alright...
+      nextLineIndex: 0
+      assignQuest: 1
+      quest: {fileID: 11400000, guid: 24b6a2e46b8656747af7e7f8b6541217, type: 2}
+      npc: {fileID: 0}
+      openSellScreen: 0
+      endConversation: 1
+      recruitRat: 0
     recruitRat: 0
     openSellScreen: 0
     endConversation: 1
