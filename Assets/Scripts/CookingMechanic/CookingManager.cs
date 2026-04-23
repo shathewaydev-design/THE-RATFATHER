@@ -102,14 +102,11 @@ public class CookingManager : MonoBehaviour, IInteractable
         savedMainCameraPosition = mainCamera.transform.position;
         savedMainCameraRotation = mainCamera.transform.rotation;
         // Camera zoom to pot
-        //playerCamera.Lens.FieldOfView = 19f;
         playerCamera.Follow = cookingPot;
         mainCamera.transform.position = new Vector3(3.747427f, 2.5f, -5.494404f);
         mainCamera.transform.rotation = Quaternion.Euler(14.08f, -0.086f, -0.025f);
         
-        // Disable player control
-        //playerGeo.SetActive(false);
-        playerFollowCamera.SetActive(false);
+    
     } 
 
     public void ExitCookingMode()
@@ -119,10 +116,6 @@ public class CookingManager : MonoBehaviour, IInteractable
 
         thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
 
-        //playerGeo.SetActive(true);
-        playerFollowCamera.SetActive(true);
-        // Restore camera
-        //playerCamera.Lens.FieldOfView = 40f;
         playerCamera.Follow = player.transform;
         mainCamera.transform.position = savedMainCameraPosition;
         mainCamera.transform.rotation = savedMainCameraRotation;
