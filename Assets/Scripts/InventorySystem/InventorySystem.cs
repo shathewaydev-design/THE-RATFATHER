@@ -17,6 +17,8 @@ public class InventorySystem : MonoBehaviour
             Instance = this;
         else
             Destroy(gameObject);
+
+        RefreshUI();
     }
 
     public void AddItem(CheeseIngredientData item)
@@ -34,7 +36,7 @@ public class InventorySystem : MonoBehaviour
             inventory.Add(item, 1);
         }
 
-        Debug.Log(item.ingredientName + " added. Total: " + inventory[item]);
+        //Debug.Log(item.ingredientName + " added. Total: " + inventory[item]);
     }
 
     public void RemoveItem(CheeseIngredientData item) // removing an item (soph added for quest completion)
@@ -53,7 +55,7 @@ public class InventorySystem : MonoBehaviour
 
         if (foundKey == null)
         {
-            Debug.LogWarning("Item not found in inventory: " + item.ingredientName);
+            //Debug.LogWarning("Item not found in inventory: " + item.ingredientName);
             return;
         }
 
@@ -68,7 +70,7 @@ public class InventorySystem : MonoBehaviour
 
         }
 
-        Debug.Log(foundKey.ingredientName + " removed.");
+        //Debug.Log(foundKey.ingredientName + " removed.");
 
     }
 
@@ -120,7 +122,7 @@ public class InventorySystem : MonoBehaviour
 
         RefreshUI();
 
-        Debug.Log($"Added {item.ingredientName}");
+        //Debug.Log($"Added {item.ingredientName}");
     }
 
     public void RemoveIngredientItem(CheeseIngredientData item, int amount = 1)
@@ -147,6 +149,23 @@ public class InventorySystem : MonoBehaviour
 
             if (remaining <= 0)
                 break;
+        }
+
+        RefreshUI();
+    }
+    public void RemoveIngredientSlot(InventorySlot slot, int amount)
+    {
+        if (slot == null) return;
+
+        if (!inventoryTest.Contains(slot)) return;
+
+        if (slot.quantity > amount)
+        {
+            slot.quantity -= amount;
+        }
+        else
+        {
+            inventoryTest.Remove(slot);
         }
 
         RefreshUI();

@@ -102,6 +102,8 @@ namespace StarterAssets
         public InputAction mousePosition;//mouse position for dragging objects
         public event Action<Vector2> OnMousePosition;
         public event Action<bool> OnMouseDrag;
+
+        //[SerializeField] private UI_Inventory uiInventory;
         private void OnEnable()//used to subscribe to input events, make sure to unsubscribe in OnDisable to avoid bugs
         {
         #if ENABLE_INPUT_SYSTEM
@@ -225,6 +227,9 @@ namespace StarterAssets
             // reset our timeouts on start
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
+
+            //initialize inventory UI
+            //uiInventory.SetInventory(inventorySystem);
         }
 
         private void Update()

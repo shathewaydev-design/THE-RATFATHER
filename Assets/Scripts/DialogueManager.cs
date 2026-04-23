@@ -21,6 +21,7 @@ public class DialogueManager : MonoBehaviour
     private bool canAdvance = true; // help w typewriter effect -- always true for now
                                     // ^^ also can handle in another script, keep in mind for now
     private bool justStartedDialogue = false;
+    public bool isPaused = false;
 
 
     private void Awake()
@@ -32,6 +33,30 @@ public class DialogueManager : MonoBehaviour
         else
             Destroy(gameObject);
 
+    }
+
+
+    public void PauseDialogue()
+    {
+        
+        isPaused = true;
+        player.enabled = false;
+    }
+
+    public void ResumeDialogue(bool advanceLine = false)
+    {
+        isPaused = false;
+
+        if (currentConversation != null)
+        {
+            if (advanceLine)
+            {
+                currentLineIndex++; // advance once
+            }
+
+            player.enabled = false;
+            ShowCurrentLine();
+        }
     }
 
 
@@ -93,7 +118,13 @@ public class DialogueManager : MonoBehaviour
         DialogueOption selected = currentConversation.lines[currentLineIndex].options[selectedOptionIndex];
         selected.GiveQuest();
         selected.Recruit();
-        selected.Sell();
+
+        if (selected.openSellScreen)
+        {
+            selected.Sell();
+            PauseDialogue();   // pause before anything else
+            return;            // no advancing dialogue
+        }
 
         if (selected.endConversation) 
         {
@@ -125,6 +156,15 @@ public class DialogueManager : MonoBehaviour
 
     void Update()
     {
+
+        if (isPaused)
+        {
+            //player.enabled = false;
+            return;
+
+        }
+
+
         if (justStartedDialogue)
         {
             justStartedDialogue = false;

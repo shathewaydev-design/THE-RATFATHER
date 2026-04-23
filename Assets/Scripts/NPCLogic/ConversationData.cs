@@ -53,6 +53,7 @@ public class DialogueOption
     {
         if (recruitRat)
         {
+            //UIManager.Instance.AddToRecruitLog(npc);
             GameManager.Instance.RecruitRat(npc);
            
         }
@@ -62,6 +63,9 @@ public class DialogueOption
     {
         if (openSellScreen)
         {
+
+            DialogueManager.Instance.PauseDialogue();
+            UIManager.Instance.AddToSoldLog(npc); // might have to change location location
             UIManager.Instance.ToggleSellScreen();
             // ui manager open screen
         }

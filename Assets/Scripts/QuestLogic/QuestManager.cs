@@ -73,10 +73,47 @@ public class QuestManager : MonoBehaviour
                 foreach (QuestReward reward in quest.rewards)
                 {
                     reward.Apply();
+                    questStates[quest].hasGivenRewards = true;
                 }
             }
         }
 
+    }
+
+    public Quest GetRelevantQuest(List<Quest> npcQuests)
+    {
+        // TURN-IN (completed but not turned in yet)
+        foreach (var quest in npcQuests)
+        {
+            var state = questStates[quest];
+
+            if (state.isCompleted && !state.hasGivenRewards)
+            {
+                return quest;
+            }
+        }
+
+        // IN PROGRESS
+        foreach (var quest in npcQuests)
+        {
+            if (questStates[quest].isActive)
+            {
+                return quest;
+            }
+        }
+
+        // AVAILABLE (NOT completed yet)
+        foreach (var quest in npcQuests)
+        {
+            var state = questStates[quest];
+
+            if (!state.isCompleted && !state.isActive)
+            {
+                return quest;
+            }
+        }
+
+        return null;
     }
 
     bool CheckIfTurnedIn(Quest quest)
