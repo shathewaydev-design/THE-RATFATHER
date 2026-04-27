@@ -22,7 +22,7 @@ public class UIInventorySlot : MonoBehaviour
     {
         recipeMenuUI = menu;
     }
-    public void SetSlot(InventorySlot slot)//grab data from the inventory slot and set the UI elements accordingly
+    public void SetSlot(InventorySlot slot)//grab data from the inventory slot and display the UI elements accordingly
     {
         ingredientButton.Initialize(recipeMenuUI);
         icon.sprite = slot.itemData.icon;
@@ -30,6 +30,10 @@ public class UIInventorySlot : MonoBehaviour
 
         quantityText.text = slot.quantity.ToString();
         ingredientButton.type = slot.itemData.type;
+        ingredientButton.inventorySlot = slot;//pass the inventory slot data to the ingredient button 
+        // so when player click on the button, it can call the remove function 
+        // and know which item to remove from the inventory system
+        
         // if (slot == null)
         // {
         //     Debug.LogError("Slot is NULL");

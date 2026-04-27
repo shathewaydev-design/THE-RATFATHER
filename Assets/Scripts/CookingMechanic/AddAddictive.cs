@@ -6,7 +6,6 @@ using StarterAssets;
 
 public class AddAddictive : MonoBehaviour
 {
-    public GameObject cookingPot;
     public ThirdPersonController thirdPersonController;
     
     public RectTransform arrow;
@@ -35,7 +34,6 @@ public class AddAddictive : MonoBehaviour
     void OnEnable()
     {
         //speed = defaultSpeed;
-        cookingPot.SetActive(false);
         session.stability = 100f;
         session.successfulHits = 0;
         stabilityProgressBar.fillAmount = session.stability / 100f;
@@ -127,7 +125,6 @@ public class AddAddictive : MonoBehaviour
         // Send to inventory or manager
         Debug.Log("Final Stability: " + cheese.finalStability);
         
-        cookingPot.SetActive(true);
         // TODO: InventorySystem.Add(cheese);
         CookingManager.Instance.FinishCooking();
     }

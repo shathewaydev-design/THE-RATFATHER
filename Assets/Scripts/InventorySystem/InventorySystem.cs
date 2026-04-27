@@ -129,7 +129,9 @@ public class InventorySystem : MonoBehaviour
     {
         int remaining = amount;
 
-        for (int i = inventoryTest.Count - 1; i >= 0; i--)
+        for (int i = inventoryTest.Count - 1; i >= 0; i--)//check every item inside the inventorySlot
+        //if the item data matches the one we want to remove, check if the quantity is enough to remove, 
+        // if yes, keep removing from the stacks until 1. then remove from the list
         {
             InventorySlot slot = inventoryTest[i];
 

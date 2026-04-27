@@ -1,6 +1,7 @@
 [System.Serializable]
 public class InventorySlot
 {
+    //this is where CheeseIngredientData is store. you can reference this to grab items out and remove items from
     public CheeseIngredientData itemData;
     public int quantity;
 

@@ -35,7 +35,7 @@ public class RecipeMenuUI : MonoBehaviour
         CheckReady();
     }
 
-    void SetSelection(ref IngredientButton current, IngredientButton newButton)
+    void SetSelection(ref IngredientButton current, IngredientButton newButton)//if ingredientButton is same type, select the new one
     {
         if (current == newButton)
         {

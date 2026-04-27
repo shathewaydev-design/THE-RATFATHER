@@ -34,7 +34,7 @@ public class CookingManager : MonoBehaviour, IInteractable
 
     [Header("Player")]
     public GameObject player;//playerCameraRoot
-    //public GameObject playerGeo;//player Geo
+    public GameObject playerGeo;//player Geo
     public GameObject playerFollowCamera;//cinemachine
 
     public GameObject recipeMenu;
@@ -49,7 +49,7 @@ public class CookingManager : MonoBehaviour, IInteractable
     public ThirdPersonController thirdPersonController;
     private bool playerInRange = false;
     bool hasInteracted = false;
-    private List<CheeseIngredientData> selectedIngredients = new();//store selected ingredients that are selected when player click on IngredientButton.
+    public List<IngredientButton> selectedIngredients = new List<IngredientButton>();//store selected ingredients that are selected when player click on IngredientButton.
     // private List<InventorySlot> selectedSlots = new();
 
     [Header("UI")]
@@ -93,6 +93,8 @@ public class CookingManager : MonoBehaviour, IInteractable
         UpdatePrompt();
         // HidePrompt();
 
+        playerGeo.SetActive(false);
+
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
 
@@ -114,6 +116,8 @@ public class CookingManager : MonoBehaviour, IInteractable
         selectedIngredients.Clear();//clear selected ingredients in case player exit cooking mode in the middle of cooking process
         //selectedSlots.Clear();
 
+        playerGeo.SetActive(true);
+        
         thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
 
         playerCamera.Follow = player.transform;
@@ -211,6 +215,12 @@ public class CookingManager : MonoBehaviour, IInteractable
         // {
         //     InventorySystem.Instance.RemoveIngredientSlot(slot, 1);
         // }
+        foreach (IngredientButton ingredient in selectedIngredients)
+        {
+            ingredient.RemoveIngredient();
+        }
+        
+
 
         selectedIngredients.Clear();
         //selectedSlots.Clear();
@@ -218,11 +228,11 @@ public class CookingManager : MonoBehaviour, IInteractable
         ExitCookingMode();
     }
 /////Data Transfering from IngredientButton////
-    public void SelectIngredient(CheeseIngredientData ingredient)
-    {
-        if (!selectedIngredients.Contains(ingredient))
-            selectedIngredients.Add(ingredient);
-    }
+    // public void SelectIngredient(CheeseIngredientData ingredient)
+    // {
+    //     if (!selectedIngredients.Contains(ingredient))
+    //         selectedIngredients.Add(ingredient);
+    // }
     // public void SelectIngredient(InventorySlot slot)
     // {
     //     if (!selectedSlots.Contains(slot))
