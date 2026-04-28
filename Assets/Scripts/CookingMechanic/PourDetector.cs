@@ -40,14 +40,14 @@ public class PourDetector : MonoBehaviour
 
     private void StartPour()
     {
-        print("Start Pouring");
+        //print("Start Pouring");
         currentStream = CreateStream();
         currentStream.Begin();
     }
 
     private void EndPour()
     {
-        print("End Pouring");
+        //print("End Pouring");
         currentStream.End();
         currentStream = null;
     }

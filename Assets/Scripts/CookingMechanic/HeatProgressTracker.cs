@@ -52,7 +52,7 @@ public class HeatProgressTracker : MonoBehaviour
         // ENTERING the zone → count as a pump
         if(isInPumpZone && canPump)
         {
-            Debug.Log("pumped");
+            //Debug.Log("pumped");
             HeatUp();
             canPump = false;
         } 
@@ -85,7 +85,7 @@ public class HeatProgressTracker : MonoBehaviour
     }
     private void HeatUp()
     {
-        Debug.Log("Heat Up!");
+        //Debug.Log("Heat Up!");
         currentFill += heatAmount;
         heatProgressBar.fillAmount = currentFill / 100.0f;
         canPump = false;
@@ -94,7 +94,7 @@ public class HeatProgressTracker : MonoBehaviour
     {
         if(currentFill >= heatUpTargetMin && currentFill <= heatUpTargetMax)
         {//currentFill is in good heatzone, start filling doness bar
-            Debug.Log("In heat zone, filling doness bar");
+            //Debug.Log("In heat zone, filling doness bar");
             currentDoness += donessSpeed * Time.deltaTime;
             donessProgressBar.fillAmount = currentDoness / 100.0f;
         }

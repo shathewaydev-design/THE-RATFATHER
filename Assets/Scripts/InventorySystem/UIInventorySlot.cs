@@ -31,21 +31,7 @@ public class UIInventorySlot : MonoBehaviour
         quantityText.text = slot.quantity.ToString();
         ingredientButton.type = slot.itemData.type;
         ingredientButton.inventorySlot = slot;//pass the inventory slot data to the ingredient button 
-        // so when player click on the button, it can call the remove function 
-        // and know which item to remove from the inventory system
-        
-        // if (slot == null)
-        // {
-        //     Debug.LogError("Slot is NULL");
-        //     return;
-        // }
 
-        // if (slot.itemData == null)
-        // {
-        //     Debug.LogError("slot.itemData is NULL");
-        //     return;
-        // }
-        // ingredientButtonComponent.Setup(slot);
     }
     
 }

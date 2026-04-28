@@ -6,6 +6,7 @@ public class InventorySystem : MonoBehaviour
 {
     public static InventorySystem Instance;
     public List<InventorySlot> inventoryTest = new();//test new system; inventory
+    public List<CheeseInventorySlot> cheeseInventory = new();//cheese inventory
     [SerializeField] private UI_Inventory inventoryUI;
     private Dictionary<CheeseIngredientData, int> inventory = new Dictionary<CheeseIngredientData, int>();
     public IReadOnlyDictionary<CheeseIngredientData, int> Inventory => inventory; // so inventory can be read for quest requirements, etc.
@@ -81,7 +82,7 @@ public class InventorySystem : MonoBehaviour
     }
 
 
-/// Test new functions
+/// Add and remove ingredients that make the cheese
     public void AddIngredientItem(CheeseIngredientData item, int amount = 1)
     {
         int remaining = amount;
@@ -155,23 +156,81 @@ public class InventorySystem : MonoBehaviour
 
         RefreshUI();
     }
-    public void RemoveIngredientSlot(InventorySlot slot, int amount)
+    /// Add and remove final result cheese
+    public void AddFinalCheese(FinalResultCheese cheese, int amount = 1)
     {
-        if (slot == null) return;
+        int remaining = amount;
 
-        if (!inventoryTest.Contains(slot)) return;
-
-        if (slot.quantity > amount)
+        // fill existing stacks first
+        foreach (CheeseInventorySlot slot in cheeseInventory)
         {
-            slot.quantity -= amount;
-        }
-        else
-        {
-            inventoryTest.Remove(slot);
+            if (slot.finalCheeseData == cheese && !slot.IsFull())
+            {
+                int spaceLeft = cheese.maxStack - slot.quantity;
+
+                int amountToAdd = Mathf.Min(spaceLeft, remaining);
+
+                slot.quantity += amountToAdd;
+
+                remaining -= amountToAdd;
+
+                if (remaining <= 0)
+                {
+                    //RefreshUI();
+                    return;
+                }
+            }
         }
 
-        RefreshUI();
+        // create new stacks if needed
+        while (remaining > 0)
+        {
+            int amountToAdd = Mathf.Min(cheese.maxStack, remaining);
+
+            CheeseInventorySlot newSlot =
+                new CheeseInventorySlot(cheese, amountToAdd);
+
+            cheeseInventory.Add(newSlot);
+
+            remaining -= amountToAdd;
+        }
+
+        //RefreshUI();
+
+        //Debug.Log($"Added {item.ingredientName}");
     }
+
+    public void RemoveFinalCheese(FinalResultCheese cheese, int amount = 1)
+    {
+        int remaining = amount;
+
+        for (int i = cheeseInventory.Count - 1; i >= 0; i--)//check every item inside the inventorySlot
+        //if the item data matches the one we want to remove, check if the quantity is enough to remove, 
+        // if yes, keep removing from the stacks until 1. then remove from the list
+        {
+            CheeseInventorySlot slot = cheeseInventory[i];
+
+            if (slot.finalCheeseData == cheese)
+            {
+                if (slot.quantity > remaining)
+                {
+                    slot.quantity -= remaining;
+                    break;
+                }
+                else
+                {
+                    remaining -= slot.quantity;
+                    cheeseInventory.RemoveAt(i);
+                }
+            }
+
+            if (remaining <= 0)
+                break;
+        }
+
+        //RefreshUI();
+    }
+    
     private void RefreshUI()
     {
         inventoryUI.Refresh(inventoryTest);

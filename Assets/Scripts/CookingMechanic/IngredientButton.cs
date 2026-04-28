@@ -8,29 +8,19 @@ public class IngredientButton : MonoBehaviour
     public Image highlight;
 
     private RecipeMenuUI menu;
-    //public CheeseIngredientData ingredientData;
     public InventorySlot inventorySlot;//this locally stores inventory slot data.
-    //public CheeseIngredientData IngredientData => inventorySlot.itemData;
+
     private InventorySystem inventorySystem;
     private bool isSelected = false;
 
     void Start()
     {
-        //Setup(inventorySlot);
         inventorySystem = InventorySystem.Instance;
     }
     public void Initialize(RecipeMenuUI recipeMenu)
     {
         menu = recipeMenu;
     }
-    // public void Setup(InventorySlot slot)
-    // {
-    //     inventorySlot = slot;
-        //ingredientData = slot.itemData;
-    //     // slot = inventorySlot;
-    //     // type = inventorySlot.itemData.type;
-
-    //}
     public void OnClick()
     {
         menu.SelectIngredient(this);

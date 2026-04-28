@@ -50,7 +50,7 @@ public class CookingManager : MonoBehaviour, IInteractable
     private bool playerInRange = false;
     bool hasInteracted = false;
     public List<IngredientButton> selectedIngredients = new List<IngredientButton>();//store selected ingredients that are selected when player click on IngredientButton.
-    // private List<InventorySlot> selectedSlots = new();
+    public List<CheeseRecipeTemplate> allRecipes;//all cheese recipes
 
     [Header("UI")]
     public Animator promptAnimator;
@@ -206,15 +206,7 @@ public class CookingManager : MonoBehaviour, IInteractable
 
     public void FinishCooking()
     {
-        //foreach (var ingredient in selectedIngredients)
-        //{
-            //InventorySystem.Instance.RemoveIngredientSlot(ingredient, 1);
-            //InventorySystem.Instance.RemoveIngredientItem(ingredient, 1);
-        //}
-        // foreach (var slot in selectedSlots)
-        // {
-        //     InventorySystem.Instance.RemoveIngredientSlot(slot, 1);
-        // }
+        CraftCheese();
         foreach (IngredientButton ingredient in selectedIngredients)
         {
             ingredient.RemoveIngredient();
@@ -222,22 +214,74 @@ public class CookingManager : MonoBehaviour, IInteractable
         
 
 
-        selectedIngredients.Clear();
+        //selectedIngredients.Clear();
         //selectedSlots.Clear();
         thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
         ExitCookingMode();
     }
-/////Data Transfering from IngredientButton////
-    // public void SelectIngredient(CheeseIngredientData ingredient)
-    // {
-    //     if (!selectedIngredients.Contains(ingredient))
-    //         selectedIngredients.Add(ingredient);
-    // }
-    // public void SelectIngredient(InventorySlot slot)
-    // {
-    //     if (!selectedSlots.Contains(slot))
-    //         selectedSlots.Add(slot);
-    // }
+/////CHEESE RECIPES AND CRAFTING CHEESE////
+    
+    public CheeseRecipeTemplate GetMatchingRecipe(List<IngredientButton> selectedIngredients)
+    //This method checks the selected ingredients against all recipes to find a match. 
+    //It returns the matching recipe .
+    {
+        List<CheeseIngredientData> selectedData = new List<CheeseIngredientData>();
+
+        foreach (IngredientButton ingredient in selectedIngredients)
+        {
+            selectedData.Add(ingredient.inventorySlot.itemData);
+            //inside IngredientButton, there is a reference to the InventorySlot, 
+            // which contains the CheeseIngredientData. we need to extract the CheeseIngredientData 
+            // from each selected ingredient to compare with the recipes.
+        }
+
+        foreach (CheeseRecipeTemplate recipe in allRecipes)
+        {
+            if (RecipeMatches(recipe.requiredIngredients, selectedData))
+            {
+                return recipe;
+            }
+        }
+
+        return null;
+    }
+    private bool RecipeMatches(List<CheeseIngredientData> recipeIngredients,
+    List<CheeseIngredientData> selectedIngredients)
+    {
+        if (recipeIngredients.Count != selectedIngredients.Count)
+            return false;
+
+        foreach (CheeseIngredientData ingredient in recipeIngredients)
+        {
+            if (!selectedIngredients.Contains(ingredient))
+                return false;
+        }
+
+        return true;
+    }
+    public void CraftCheese()//CookingManager checks if the selected ingredients match any recipe, 
+    // if it does, it gives the player the resulting cheese.
+    {
+        CheeseRecipeTemplate recipe = GetMatchingRecipe(selectedIngredients);
+        
+        if (recipe == null)
+        {
+            Debug.Log("Invalid recipe");
+            return;
+        }
+
+        //ConsumeSelectedIngredients();
+
+        GivePlayerCheese(recipe.resultCheese);
+
+        Debug.Log("Crafted: " + recipe.resultCheese.cheeseName);
+    }
+    
+    public void GivePlayerCheese(FinalResultCheese cheese)
+    {
+        InventorySystem.Instance.AddFinalCheese(cheese);
+    }
+
 
 /////UI ONLY////
     void OnTriggerEnter(Collider other)
