@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
             currency = 0,
             reputation = 0,
             currLevel = 1,
+            playerHealth = 30,
             recruitedRats = new List<NPCProfile>(),
             soldTo = new List<NPCProfile>()
 
@@ -74,6 +75,30 @@ public class GameManager : MonoBehaviour
         
 
     //}
+
+    public void TakeDamage()
+    {
+        // for now all ways of taking damage hurt the player the same amount
+
+        if (playerState.playerHealth <= 0)
+        {
+            DeathManager();
+            return;
+        }
+
+        playerState.playerHealth -= 5;
+
+
+    }
+
+    private void DeathManager()
+    {
+        // game over -> fade to black?? May only be called for
+        // boss level right now, so can be specific to that.
+
+        // for boss level -> fade to black, start the boss level over
+
+    }
 
     public void RecruitRat(NPCProfile npc)
     {

@@ -10,6 +10,8 @@ public class PlayerState
 
     public int currLevel;
 
+    public int playerHealth;
+
     public List<NPCProfile> recruitedRats;
 
     public List<NPCProfile> soldTo;
