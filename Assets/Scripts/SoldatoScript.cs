@@ -14,6 +14,8 @@ public class SoldatoScript : MonoBehaviour
     public Transform player;
     public NavMeshAgent agent;
 
+    public int health = 16;
+
     public float stompRange = 2f;
     public float stompCooldown = 1.5f;
 
@@ -33,6 +35,9 @@ public class SoldatoScript : MonoBehaviour
     private State currentState;
 
     private Vector3 chargeDirection;
+
+    public LineRenderer chargeLine;
+    public float maxChargeDistance = 10f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -76,6 +81,8 @@ public class SoldatoScript : MonoBehaviour
 
     void Chase()
     {
+        chargeLine.enabled = false; // to be safe, line is disabled in other states
+
         agent.isStopped = false;
         agent.SetDestination(player.position);
 
@@ -98,6 +105,8 @@ public class SoldatoScript : MonoBehaviour
 
     void Stomp()
     {
+        chargeLine.enabled = false;
+
         agent.isStopped = true;
 
         transform.LookAt(player);
@@ -110,7 +119,7 @@ public class SoldatoScript : MonoBehaviour
             if (distance <= stompRange)
             {
                 Debug.Log("Player takes stomp damage");
-                // Apply damage here
+                // need to apply damage here
             }
             else
             {
@@ -126,7 +135,7 @@ public class SoldatoScript : MonoBehaviour
 
         agent.isStopped = true;
         agent.velocity = Vector3.zero;
-        agent.ResetPath(); // stops boss
+        agent.ResetPath(); // ensures stops boss
 
         windupTimer += Time.deltaTime;
 
@@ -141,6 +150,31 @@ public class SoldatoScript : MonoBehaviour
 
         }
 
+
+        // enable line
+        chargeLine.enabled = true;
+        chargeLine.positionCount = 2;
+        chargeLine.startWidth = 0.6f;
+        chargeLine.endWidth = 0.6f;
+
+        // START 
+        Vector3 start = transform.position;
+        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 5f))
+        {
+            start = hit.point + Vector3.up * 0.05f;
+        }
+
+        // END
+        Vector3 end = player.position;
+        if (Physics.Raycast(player.position, Vector3.down, out RaycastHit hit2, 5f))
+        {
+            end = hit2.point + Vector3.up * 0.05f;
+        }
+
+        chargeLine.SetPosition(0, start);
+        chargeLine.SetPosition(1, end);
+
+        // check timer
         if (windupTimer >= windupTime)
         {
 
@@ -158,6 +192,7 @@ public class SoldatoScript : MonoBehaviour
 
     void ChargeDash()
     {
+        chargeLine.enabled = false;
 
         //agent.isStopped = false;
 
