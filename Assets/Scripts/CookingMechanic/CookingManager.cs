@@ -50,6 +50,7 @@ public class CookingManager : MonoBehaviour, IInteractable
     private bool playerInRange = false;
     bool hasInteracted = false;
     public List<IngredientButton> selectedIngredients = new List<IngredientButton>();//store selected ingredients that are selected when player click on IngredientButton.
+    public List<CheeseButton> selectedCheeses = new List<CheeseButton>();//store selected cheeses that are selected when player click on CheeseButton.
     public List<CheeseRecipeTemplate> allRecipes;//all cheese recipes
 
     [Header("UI")]

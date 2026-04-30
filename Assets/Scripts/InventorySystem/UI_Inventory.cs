@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class UI_Inventory : MonoBehaviour
 {
-    //This is a container that spawns slot child based on inventory list
+    //This is a Ingredient Container that spawns slot child based on inventory list
     private InventorySystem inventorySystem;
 
     public GameObject slotPrefab;
     public Transform slotParent;
-    [SerializeField] private RecipeMenuUI recipeMenuUI;
+    [SerializeField] private RecipeMenuUI recipeMenuUI;//used for cheese cooking process
 
     private void Awake()
     {

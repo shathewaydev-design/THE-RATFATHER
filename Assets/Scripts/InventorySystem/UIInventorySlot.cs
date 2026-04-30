@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class UIInventorySlot : MonoBehaviour
 {
+    //Ingredient Container Child.
     public Image icon;
     // public TextMeshProUGUI quantityText;
     public Text quantityText;

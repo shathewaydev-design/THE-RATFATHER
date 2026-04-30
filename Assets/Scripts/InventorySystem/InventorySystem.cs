@@ -7,7 +7,8 @@ public class InventorySystem : MonoBehaviour
     public static InventorySystem Instance;
     public List<InventorySlot> inventoryTest = new();//test new system; inventory
     public List<CheeseInventorySlot> cheeseInventory = new();//cheese inventory
-    [SerializeField] private UI_Inventory inventoryUI;
+    [SerializeField] private UI_Inventory inventoryUI;//for ingredients
+    [SerializeField] private UI_CheeseInventory cheeseInventoryUI;//for cheese
     private Dictionary<CheeseIngredientData, int> inventory = new Dictionary<CheeseIngredientData, int>();
     public IReadOnlyDictionary<CheeseIngredientData, int> Inventory => inventory; // so inventory can be read for quest requirements, etc.
     //this is like creating new definition in a dictionary, then put them in pages
@@ -19,7 +20,8 @@ public class InventorySystem : MonoBehaviour
         else
             Destroy(gameObject);
 
-        RefreshUI();
+        RefreshIngredientUI();
+        RefreshCheeseUI();
     }
 
     public void AddItem(CheeseIngredientData item)
@@ -102,7 +104,7 @@ public class InventorySystem : MonoBehaviour
 
                 if (remaining <= 0)
                 {
-                    RefreshUI();
+                    RefreshIngredientUI();
                     return;
                 }
             }
@@ -121,7 +123,7 @@ public class InventorySystem : MonoBehaviour
             remaining -= amountToAdd;
         }
 
-        RefreshUI();
+        RefreshIngredientUI();
 
         //Debug.Log($"Added {item.ingredientName}");
     }
@@ -154,7 +156,7 @@ public class InventorySystem : MonoBehaviour
                 break;
         }
 
-        RefreshUI();
+        RefreshIngredientUI();
     }
     /// Add and remove final result cheese
     public void AddFinalCheese(FinalResultCheese cheese, int amount = 1)
@@ -176,7 +178,7 @@ public class InventorySystem : MonoBehaviour
 
                 if (remaining <= 0)
                 {
-                    //RefreshUI();
+                    RefreshCheeseUI();
                     return;
                 }
             }
@@ -195,7 +197,7 @@ public class InventorySystem : MonoBehaviour
             remaining -= amountToAdd;
         }
 
-        //RefreshUI();
+        RefreshCheeseUI();
 
         //Debug.Log($"Added {item.ingredientName}");
     }
@@ -228,11 +230,15 @@ public class InventorySystem : MonoBehaviour
                 break;
         }
 
-        //RefreshUI();
+        //RefreshCheeseUI();
     }
     
-    private void RefreshUI()
+    private void RefreshIngredientUI()
     {
         inventoryUI.Refresh(inventoryTest);
+    }
+    private void RefreshCheeseUI()
+    {
+        cheeseInventoryUI.RefreshCheeseUIInventory(cheeseInventory);
     }
 }

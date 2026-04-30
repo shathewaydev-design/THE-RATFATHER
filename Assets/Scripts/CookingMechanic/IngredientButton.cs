@@ -8,7 +8,7 @@ public class IngredientButton : MonoBehaviour
     public Image highlight;
 
     private RecipeMenuUI menu;
-    public InventorySlot inventorySlot;//this locally stores inventory slot data.
+    public InventorySlot inventorySlot;//this locally stores inventory slot data/ingredient data.
 
     private InventorySystem inventorySystem;
     private bool isSelected = false;
