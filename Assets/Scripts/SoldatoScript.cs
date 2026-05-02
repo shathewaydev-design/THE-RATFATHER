@@ -23,6 +23,8 @@ public class SoldatoScript : MonoBehaviour
     public float chargeSpeed = 15f;
     public float chargeDuration = 1.5f;
 
+    public Rigidbody rb;
+
     private float stompTimer;
     private float chargeTimer;
 
@@ -43,6 +45,7 @@ public class SoldatoScript : MonoBehaviour
     void Start()
     {
         currentState = State.Chase;
+        //Rigidbody rb = GetComponent<Rigidbody>();
 
     }
 
@@ -200,7 +203,8 @@ public class SoldatoScript : MonoBehaviour
 
         agent.isStopped = true;
 
-        transform.position += chargeDirection * chargeSpeed * Time.deltaTime;
+        //transform.position += chargeDirection * chargeSpeed * Time.deltaTime;
+        rb.linearVelocity = chargeDirection * chargeSpeed;
 
         if (dashTimer >= chargeDuration) 
         {
