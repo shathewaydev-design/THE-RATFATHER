@@ -90,6 +90,7 @@ namespace StarterAssets
         public event Action OnSprinkle; 
         public event Action OnMouseClick; 
         //public event Action OnMousePositionChange; 
+        public event Action OnOpenInventory; 
         private InputActionMap playerMap;
         private InputActionMap cookingMap;
         private InputActionMap mouseMap;
@@ -100,6 +101,7 @@ namespace StarterAssets
         public InputAction sprinkle;//press T
         public InputAction mouseClick;//press (Left) Mouse Button
         public InputAction mousePosition;//mouse position for dragging objects
+        public InputAction openInventory;//press Tab
         public event Action<Vector2> OnMousePosition;
         public event Action<bool> OnMouseDrag;
 
@@ -111,9 +113,11 @@ namespace StarterAssets
             tiltRight.performed += OnTiltRightPerformed;
             stopInteract.performed += OnStopInteractPerformed;
             sprinkle.performed += OnSprinklePerformed;
+            openInventory.performed += OnOpenInventoryPerformed;
 
             mouseClick.performed += OnMouseClickPerformed;
             mouseClick.canceled += OnMouseClickCanceled;
+            
         #endif
         }
 
@@ -124,6 +128,7 @@ namespace StarterAssets
             tiltRight.performed -= OnTiltRightPerformed;
             stopInteract.performed -= OnStopInteractPerformed;
             sprinkle.performed -= OnSprinklePerformed;
+            openInventory.performed -= OnOpenInventoryPerformed;
 
             mouseClick.performed -= OnMouseClickPerformed;
             mouseClick.canceled -= OnMouseClickCanceled;
@@ -217,6 +222,9 @@ namespace StarterAssets
                 var interact = playerMap.FindAction("Interact");
                 if (interact != null)
                     interact.performed += ctx => OnInteract?.Invoke();
+                openInventory = playerMap.FindAction("OpenInventory");
+                if (openInventory != null)                    
+                    openInventory.performed += ctx => OnOpenInventory?.Invoke();
             }
 #else
 			Debug.LogError( "Starter Assets package is missing dependencies. Please use Tools/Starter Assets/Reinstall Dependencies to fix it");
@@ -533,6 +541,10 @@ namespace StarterAssets
         private void OnStopInteractPerformed(InputAction.CallbackContext ctx)
         {
             OnStopInteract?.Invoke();
+        }
+        private void OnOpenInventoryPerformed(InputAction.CallbackContext ctx)
+        {
+            OnOpenInventory?.Invoke();
         }
 
         private void OnMouseClickPerformed(InputAction.CallbackContext ctx)

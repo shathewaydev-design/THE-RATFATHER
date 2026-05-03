@@ -13,6 +13,7 @@ public class CheeseButton : MonoBehaviour
 
     private InventorySystem inventorySystem;
     private bool isSelected = false;
+    [SerializeField] private GameObject useButton;//this button is for consuming the cheese or selling
 
     void Start()
     {
@@ -28,12 +29,13 @@ public class CheeseButton : MonoBehaviour
         if (isSelected)//deselect
         {
             isSelected = false;
+            useButton.SetActive(false);
             ClearSelectedCheese();
         }
         else//select
         {
             isSelected = true;
-            
+            useButton.SetActive(true);
             ClearSelectedCheese();//if the player already has a selected cheese, 
             CacheSelectedCheese();//replace it with the new one
         }

@@ -115,7 +115,7 @@ public class AddAddictive : MonoBehaviour
 
     void FinishMinigame()
     {
-        Debug.Log("Minigame complete!");
+
 
         CheeseData cheese = new CheeseData(session.stability);
         //reset values
