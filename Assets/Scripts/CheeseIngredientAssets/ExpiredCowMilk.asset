@@ -15,8 +15,9 @@ MonoBehaviour:
   itemID: expiredCowMilk
   description: This milk is expired but can still be used. Better than nothing
   ingredientName: Expired Cow Milk
-  icon: {fileID: 21300000, guid: ad4d54a8ceda245dda7b66d913c0b90b, type: 3}
+  icon: {fileID: 21300000, guid: 9d69e8784297a4a60a023bfde1a18e29, type: 3}
   rarity: 0
+  type: 0
   price: 100
   basePrice: 100
   maxStack: 10

@@ -37,8 +37,7 @@ public class CookingManager : MonoBehaviour, IInteractable
     public GameObject playerGeo;//player Geo
     public GameObject playerFollowCamera;//cinemachine
 
-    public GameObject recipeMenu;
-    public GameObject inventoryPanel;
+    
     [Header("UI Steps")]
     public List<CookingStepUI> steps;
     private int currentStepIndex = -1;
@@ -57,6 +56,10 @@ public class CookingManager : MonoBehaviour, IInteractable
     public Animator promptAnimator;
 
     public Image holdProgressBar;
+    [SerializeField] private GameObject inventoryBigPanel;
+    public GameObject recipeMenu;
+    public GameObject ingredientInventoryPanel;
+    [SerializeField] private GameObject cookButtonUI;
     
     private void Awake()//this is necessary to avoid bugs
     {
@@ -93,7 +96,8 @@ public class CookingManager : MonoBehaviour, IInteractable
     {
         UpdatePrompt();
         // HidePrompt();
-
+        inventoryBigPanel.SetActive(true);
+        cookButtonUI.SetActive(true);
         playerGeo.SetActive(false);
 
         Cursor.visible = true;
@@ -126,8 +130,11 @@ public class CookingManager : MonoBehaviour, IInteractable
         mainCamera.transform.rotation = savedMainCameraRotation;
         
         ResetSteps();
+    //////UI//////
         recipeMenu.SetActive(false);
-        inventoryPanel.SetActive(false);
+        ingredientInventoryPanel.SetActive(false);
+        inventoryBigPanel.SetActive(false);
+        cookButtonUI.SetActive(false);
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -175,12 +182,12 @@ public class CookingManager : MonoBehaviour, IInteractable
     public void ShowRecipeMenu()
     {
         recipeMenu.SetActive(true);
-        inventoryPanel.SetActive(true);
+        ingredientInventoryPanel.SetActive(true);
     }
 
     public void StartPourMilk()
     {
-        inventoryPanel.SetActive(false);
+        ingredientInventoryPanel.SetActive(false);
         
         SetStep(0);
     }

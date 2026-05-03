@@ -9,7 +9,8 @@ public class UI_CheeseInventory : MonoBehaviour
 
     public GameObject cheeseSlotPrefab;//Cheese Child
     public Transform cheeseSlotParent;//Cheese Container Parent
-    //[SerializeField] private RecipeMenuUI recipeMenuUI;
+    //[SerializeField] private UseButton useButton;//save reference to pass to cheese button
+    //[SerializeField] private GameObject useButton;//save reference to pass to cheese button
 
     private void Awake()
     {
@@ -25,10 +26,10 @@ public class UI_CheeseInventory : MonoBehaviour
         foreach (CheeseInventorySlot slot in cheeseInventory)//based on the order of each item inside the InventorySlot (place store all the data)
         {// add inventory slots on the UI when a new item is collected
             GameObject slotObject = Instantiate(cheeseSlotPrefab, cheeseSlotParent);
-            Debug.Log("Spawned Cheese Slot");
+            // Debug.Log("Spawned Cheese Slot");
             UI_CheeseInventorySlot uiSlot =
                 slotObject.GetComponent<UI_CheeseInventorySlot>();
-            //uiSlot.Initialize(recipeMenuUI);//initialize so player can press on the button and have it highlighted
+            //uiSlot.Initialize(useButton);//initialize so player can press on the use button
             // button.Setup(inventorySlot.itemData);
             uiSlot.SetSlot(slot);
             

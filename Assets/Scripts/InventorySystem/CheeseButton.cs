@@ -7,51 +7,57 @@ public class CheeseButton : MonoBehaviour
     //public IngredientType type;
     public Image highlight;
 
-    //private RecipeMenuUI menu;
     public CheeseInventorySlot cheeseInventorySlot;
     //this locally stores cheeseinventory slot data/cheese data.
 
     private InventorySystem inventorySystem;
     private bool isSelected = false;
-    [SerializeField] private GameObject useButton;//this button is for consuming the cheese or selling
 
     void Start()
     {
         inventorySystem = InventorySystem.Instance;
     }
-    // public void Initialize(RecipeMenuUI recipeMenu)
-    // {
-    //     menu = recipeMenu;
-    // }
+    
     public void OnClick()
     {
-        //menu.SelectIngredient(this);
         if (isSelected)//deselect
         {
             isSelected = false;
-            useButton.SetActive(false);
-            ClearSelectedCheese();
+            //ClearSelectedCheese();
         }
         else//select
         {
             isSelected = true;
-            useButton.SetActive(true);
-            ClearSelectedCheese();//if the player already has a selected cheese, 
-            CacheSelectedCheese();//replace it with the new one
+            //ClearSelectedCheese();//if the player already has a selected cheese, 
+            //CacheSelectedCheese();//replace it with the new one
         }
-        
-    }
-    public void CacheSelectedCheese()
-    {
-        if(!CookingManager.Instance.selectedCheeses.Contains(this))
+        if (InventoryUIController.Instance.selectedCheeses.Contains(this))
         {
-            CookingManager.Instance.selectedCheeses.Add(this);
+            InventoryUIController.Instance.selectedCheeses.Remove(this);
+            //if player click on the same cheese button, deselect it and remove from selected cheeses list; 
+            //SetActive(false);
         }
+        else
+        {
+            InventoryUIController.Instance.selectedCheeses.Clear(); // if single select
+            InventoryUIController.Instance.selectedCheeses.Add(this);//cacheSelectedCheese
+            //SetActive(true);
+        }
+
+        InventoryUIController.Instance.UpdateUseButton();
     }
-    public void ClearSelectedCheese()
-    {
-        CookingManager.Instance.selectedCheeses.Clear();
-    }
+    // public void CacheSelectedCheese()
+    // {
+    //     if(!InventoryUIController.Instance.selectedCheeses.Contains(this))
+    //     {
+    //         InventoryUIController.Instance.selectedCheeses.Add(this);
+    //         InventoryUIController.Instance.UpdateUseButton();//initialize the use button with the selected cheese;this
+    //     }
+    // }
+    // public void ClearSelectedCheese()
+    // {
+    //     InventoryUIController.Instance.selectedCheeses.Clear();
+    
     // public void RemoveIngredient()
     // {
     //     inventorySystem.RemoveIngredientItem(this.inventorySlot.itemData, 1);

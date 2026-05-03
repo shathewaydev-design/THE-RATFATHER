@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: afb98a8dbf6864716942009340b32fae, type: 3}
-  m_Name: WingCheeseRecipe
+  m_Name: MoldyWingCheeseRecipe
   m_EditorClassIdentifier: Assembly-CSharp::CheeseRecipeTemplate
-  cheeseName: WingCheese
-  icon: {fileID: 21300000, guid: af21f5339af7a4829b4f43668337b01c, type: 3}
+  cheeseName: MoldyWingCheese
+  icon: {fileID: 21300000, guid: b145089651b4c40f8a784299fa80e83f, type: 3}
   requiredIngredients:
-  - {fileID: 11400000, guid: 8b19c1d70f0c444c982b3174595004da, type: 2}
+  - {fileID: 11400000, guid: 61f98e36248e04060899e1cf2b0898ff, type: 2}
   - {fileID: 11400000, guid: f167ee106e3a04699a42cf2cea149324, type: 2}
   - {fileID: 11400000, guid: ed50e61f9e5dc488188cf5c9df08ef36, type: 2}
-  resultCheese: {fileID: 11400000, guid: af318da88b95f4526815d5695cf73182, type: 2}
+  resultCheese: {fileID: 11400000, guid: 06e3213c195ac4b61a7c2d75044d5264, type: 2}
   stability: 0

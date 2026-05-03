@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9893e5880382441db8a8118def70e82a, type: 3}
-  m_Name: FinalWingCheese
+  m_Name: FinalMoldyWingCheese
   m_EditorClassIdentifier: Assembly-CSharp::FinalResultCheese
-  cheeseName: Wing Cheese
-  icon: {fileID: 21300000, guid: af21f5339af7a4829b4f43668337b01c, type: 3}
+  cheeseName: Moldy Wing Cheese
+  icon: {fileID: 21300000, guid: b145089651b4c40f8a784299fa80e83f, type: 3}
   description: 
   sellValue: 0
   grantsDoubleJump: 0

@@ -230,7 +230,7 @@ public class InventorySystem : MonoBehaviour
                 break;
         }
 
-        //RefreshCheeseUI();
+        RefreshCheeseUI();
     }
     
     private void RefreshIngredientUI()
