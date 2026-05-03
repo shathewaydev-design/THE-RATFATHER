@@ -337,11 +337,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 565c99b0749a1284ab7633b9c0e10727, type: 3}
       propertyPath: m_LocalScale.y
-      value: 80
+      value: 64.0344
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 565c99b0749a1284ab7633b9c0e10727, type: 3}
       propertyPath: m_LocalScale.z
-      value: 10
+      value: 6.8203998
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 565c99b0749a1284ab7633b9c0e10727, type: 3}
       propertyPath: m_LocalPosition.x
@@ -406,15 +406,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: f44e323f5ea4bee48b7ff2d8c1d73edd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 45.54
+      value: 46.12
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f44e323f5ea4bee48b7ff2d8c1d73edd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 11.59
+      value: 11.79
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f44e323f5ea4bee48b7ff2d8c1d73edd, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 56.97
+      value: 56.98
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f44e323f5ea4bee48b7ff2d8c1d73edd, type: 3}
       propertyPath: m_LocalRotation.w
@@ -508,7 +508,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 565bf9e417ec7ec4cbe2c5ba210e3d28, type: 2}
+      objectReference: {fileID: 2100000, guid: e4a2e4babc8af97409732e6345e2f795, type: 2}
     - target: {fileID: 919132149155446097, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: m_Name
       value: Grey_Fence (74)
@@ -1844,7 +1844,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 565bf9e417ec7ec4cbe2c5ba210e3d28, type: 2}
+      objectReference: {fileID: 2100000, guid: e4a2e4babc8af97409732e6345e2f795, type: 2}
     - target: {fileID: 919132149155446097, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: m_Name
       value: Grey_Fence (49)
@@ -2109,48 +2109,48 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 33f383e6b0114c64b92de80fcb8b5166, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -23.3
+      value: -25.1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 33f383e6b0114c64b92de80fcb8b5166, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 14.4
+      value: 15.8
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 33f383e6b0114c64b92de80fcb8b5166, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 75.1
+      value: 78.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 33f383e6b0114c64b92de80fcb8b5166, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.3853626
+      value: 0.5599907
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 33f383e6b0114c64b92de80fcb8b5166, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.597489
+      value: -0.8284412
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 33f383e6b0114c64b92de80fcb8b5166, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.597338
+      value: 0.0000694911
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 33f383e6b0114c64b92de80fcb8b5166, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.37106588
+      value: -0.009777385
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 33f383e6b0114c64b92de80fcb8b5166, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -64.663
+      value: -68.1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 33f383e6b0114c64b92de80fcb8b5166, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 177.728
+      value: 177.499
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 33f383e6b0114c64b92de80fcb8b5166, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -88.576
+      value: -178.3
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 33f383e6b0114c64b92de80fcb8b5166, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 10ee8cb9e3a09404f9496e2e07855e5c, type: 2}
+      objectReference: {fileID: 2100000, guid: e4a2e4babc8af97409732e6345e2f795, type: 2}
     - target: {fileID: 919132149155446097, guid: 33f383e6b0114c64b92de80fcb8b5166, type: 3}
       propertyPath: m_Name
       value: Black_Destroyed_Building (1)
@@ -2950,7 +2950,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 565bf9e417ec7ec4cbe2c5ba210e3d28, type: 2}
+      objectReference: {fileID: 2100000, guid: e4a2e4babc8af97409732e6345e2f795, type: 2}
     - target: {fileID: 919132149155446097, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: m_Name
       value: Grey_Fence (59)
@@ -3366,11 +3366,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 565c99b0749a1284ab7633b9c0e10727, type: 3}
       propertyPath: m_LocalScale.y
-      value: 80
+      value: 64.0344
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 565c99b0749a1284ab7633b9c0e10727, type: 3}
       propertyPath: m_LocalScale.z
-      value: 10
+      value: 6.8203998
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 565c99b0749a1284ab7633b9c0e10727, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3533,7 +3533,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 565bf9e417ec7ec4cbe2c5ba210e3d28, type: 2}
+      objectReference: {fileID: 2100000, guid: e4a2e4babc8af97409732e6345e2f795, type: 2}
     - target: {fileID: 919132149155446097, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: m_Name
       value: Grey_Fence (12)
@@ -3769,11 +3769,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 565c99b0749a1284ab7633b9c0e10727, type: 3}
       propertyPath: m_LocalScale.y
-      value: 80
+      value: 64.0344
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 565c99b0749a1284ab7633b9c0e10727, type: 3}
       propertyPath: m_LocalScale.z
-      value: 10
+      value: 6.8203998
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 565c99b0749a1284ab7633b9c0e10727, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3911,7 +3911,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 565bf9e417ec7ec4cbe2c5ba210e3d28, type: 2}
+      objectReference: {fileID: 2100000, guid: e4a2e4babc8af97409732e6345e2f795, type: 2}
     - target: {fileID: 919132149155446097, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: m_Name
       value: Grey_Fence (54)
@@ -4180,6 +4180,96 @@ Transform:
   m_Children:
   - {fileID: 1599138158}
   m_Father: {fileID: 493213954}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &282357113
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 751c9700eeaf8a44e96682efea2c52c3, type: 3}
+  m_PrefabInstance: {fileID: 1931926710}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 282357116}
+  - component: {fileID: 282357115}
+  - component: {fileID: 282357114}
+  m_Layer: 0
+  m_Name: Medal_Beam_Testing (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!23 &282357114
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 751c9700eeaf8a44e96682efea2c52c3, type: 3}
+  m_PrefabInstance: {fileID: 1931926710}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 282357113}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 709278a0610765b4593c7e977594134b, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &282357115
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: -5754084199372789682, guid: 751c9700eeaf8a44e96682efea2c52c3, type: 3}
+  m_PrefabInstance: {fileID: 1931926710}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 282357113}
+  m_Mesh: {fileID: 210929109749281239, guid: 751c9700eeaf8a44e96682efea2c52c3, type: 3}
+--- !u!4 &282357116
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 751c9700eeaf8a44e96682efea2c52c3, type: 3}
+  m_PrefabInstance: {fileID: 1931926710}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 282357113}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.0015721295, y: 0.7071051, z: 0.70710504, w: -0.0015721297}
+  m_LocalPosition: {x: 31, y: 1.4, z: 6.1}
+  m_LocalScale: {x: 113.67, y: 108.41999, z: 129.51}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &282813254
 PrefabInstance:
@@ -5604,7 +5694,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 565bf9e417ec7ec4cbe2c5ba210e3d28, type: 2}
+      objectReference: {fileID: 2100000, guid: e4a2e4babc8af97409732e6345e2f795, type: 2}
     - target: {fileID: 919132149155446097, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: m_Name
       value: Grey_Fence (4)
@@ -6353,7 +6443,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 565bf9e417ec7ec4cbe2c5ba210e3d28, type: 2}
+      objectReference: {fileID: 2100000, guid: e4a2e4babc8af97409732e6345e2f795, type: 2}
     - target: {fileID: 919132149155446097, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: m_Name
       value: Grey_Fence (50)
@@ -6519,7 +6609,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 565bf9e417ec7ec4cbe2c5ba210e3d28, type: 2}
+      objectReference: {fileID: 2100000, guid: e4a2e4babc8af97409732e6345e2f795, type: 2}
     - target: {fileID: 919132149155446097, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: m_Name
       value: Grey_Fence (8)
@@ -6884,7 +6974,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 565bf9e417ec7ec4cbe2c5ba210e3d28, type: 2}
+      objectReference: {fileID: 2100000, guid: e4a2e4babc8af97409732e6345e2f795, type: 2}
     - target: {fileID: 919132149155446097, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: m_Name
       value: Grey_Fence (5)
@@ -7550,7 +7640,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 565bf9e417ec7ec4cbe2c5ba210e3d28, type: 2}
+      objectReference: {fileID: 2100000, guid: e4a2e4babc8af97409732e6345e2f795, type: 2}
     - target: {fileID: 919132149155446097, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: m_Name
       value: Grey_Fence (45)
@@ -7611,7 +7701,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 565bf9e417ec7ec4cbe2c5ba210e3d28, type: 2}
+      objectReference: {fileID: 2100000, guid: e4a2e4babc8af97409732e6345e2f795, type: 2}
     - target: {fileID: 919132149155446097, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: m_Name
       value: Grey_Fence (13)
@@ -8084,7 +8174,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 565bf9e417ec7ec4cbe2c5ba210e3d28, type: 2}
+      objectReference: {fileID: 2100000, guid: e4a2e4babc8af97409732e6345e2f795, type: 2}
     - target: {fileID: 919132149155446097, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: m_Name
       value: Grey_Fence (67)
@@ -8472,7 +8562,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 565bf9e417ec7ec4cbe2c5ba210e3d28, type: 2}
+      objectReference: {fileID: 2100000, guid: e4a2e4babc8af97409732e6345e2f795, type: 2}
     - target: {fileID: 919132149155446097, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: m_Name
       value: Grey_Fence (3)
@@ -8673,7 +8763,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 565bf9e417ec7ec4cbe2c5ba210e3d28, type: 2}
+      objectReference: {fileID: 2100000, guid: e4a2e4babc8af97409732e6345e2f795, type: 2}
     - target: {fileID: 919132149155446097, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: m_Name
       value: Grey_Fence (46)
@@ -13561,11 +13651,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 565c99b0749a1284ab7633b9c0e10727, type: 3}
       propertyPath: m_LocalScale.y
-      value: 80
+      value: 64.0344
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 565c99b0749a1284ab7633b9c0e10727, type: 3}
       propertyPath: m_LocalScale.z
-      value: 10
+      value: 6.8203998
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 565c99b0749a1284ab7633b9c0e10727, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13806,7 +13896,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 565bf9e417ec7ec4cbe2c5ba210e3d28, type: 2}
+      objectReference: {fileID: 2100000, guid: e4a2e4babc8af97409732e6345e2f795, type: 2}
     - target: {fileID: 919132149155446097, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: m_Name
       value: Grey_Fence (72)
@@ -14228,11 +14318,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 565c99b0749a1284ab7633b9c0e10727, type: 3}
       propertyPath: m_LocalScale.y
-      value: 80
+      value: 64.0344
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 565c99b0749a1284ab7633b9c0e10727, type: 3}
       propertyPath: m_LocalScale.z
-      value: 10
+      value: 6.8203998
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 565c99b0749a1284ab7633b9c0e10727, type: 3}
       propertyPath: m_LocalPosition.x
@@ -14411,7 +14501,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 565bf9e417ec7ec4cbe2c5ba210e3d28, type: 2}
+      objectReference: {fileID: 2100000, guid: e4a2e4babc8af97409732e6345e2f795, type: 2}
     - target: {fileID: 919132149155446097, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: m_Name
       value: Grey_Fence (10)
@@ -15031,7 +15121,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 565bf9e417ec7ec4cbe2c5ba210e3d28, type: 2}
+      objectReference: {fileID: 2100000, guid: e4a2e4babc8af97409732e6345e2f795, type: 2}
     - target: {fileID: 919132149155446097, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: m_Name
       value: Grey_Fence (9)
@@ -15891,7 +15981,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 565bf9e417ec7ec4cbe2c5ba210e3d28, type: 2}
+      objectReference: {fileID: 2100000, guid: e4a2e4babc8af97409732e6345e2f795, type: 2}
     - target: {fileID: 919132149155446097, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: m_Name
       value: Grey_Fence (77)
@@ -16150,7 +16240,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 565bf9e417ec7ec4cbe2c5ba210e3d28, type: 2}
+      objectReference: {fileID: 2100000, guid: e4a2e4babc8af97409732e6345e2f795, type: 2}
     - target: {fileID: 919132149155446097, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: m_Name
       value: Grey_Fence (69)
@@ -16338,6 +16428,96 @@ Mesh:
       - serializedVersion: 1
         m_IndexStart: 0
         m_IndexCount: 0
+--- !u!1 &1024733573
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 751c9700eeaf8a44e96682efea2c52c3, type: 3}
+  m_PrefabInstance: {fileID: 1266893339}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1024733576}
+  - component: {fileID: 1024733575}
+  - component: {fileID: 1024733574}
+  m_Layer: 0
+  m_Name: Medal_Beam_Testing (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!23 &1024733574
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 751c9700eeaf8a44e96682efea2c52c3, type: 3}
+  m_PrefabInstance: {fileID: 1266893339}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1024733573}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: e758bccf0d419624bb5c3c2d9e5e5af7, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1024733575
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: -5754084199372789682, guid: 751c9700eeaf8a44e96682efea2c52c3, type: 3}
+  m_PrefabInstance: {fileID: 1266893339}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1024733573}
+  m_Mesh: {fileID: 210929109749281239, guid: 751c9700eeaf8a44e96682efea2c52c3, type: 3}
+--- !u!4 &1024733576
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 751c9700eeaf8a44e96682efea2c52c3, type: 3}
+  m_PrefabInstance: {fileID: 1266893339}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1024733573}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.0015721295, y: 0.7071051, z: 0.70710504, w: -0.0015721297}
+  m_LocalPosition: {x: -32.21, y: 1.57, z: 5.91}
+  m_LocalScale: {x: 113.67, y: 108.41999, z: 129.51}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1032651325
 GameObject:
   m_ObjectHideFlags: 0
@@ -16668,7 +16848,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 565bf9e417ec7ec4cbe2c5ba210e3d28, type: 2}
+      objectReference: {fileID: 2100000, guid: e4a2e4babc8af97409732e6345e2f795, type: 2}
     - target: {fileID: 919132149155446097, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: m_Name
       value: Grey_Fence (14)
@@ -17098,6 +17278,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1bc272a4f507b02409bb2acccde5e425, type: 3}
+--- !u!1001 &1112945957
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 0928168179cac8b40bbbbc3725fce7b0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 34.987076
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0928168179cac8b40bbbbc3725fce7b0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0928168179cac8b40bbbbc3725fce7b0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 65.89343
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0928168179cac8b40bbbbc3725fce7b0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.0015721297
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0928168179cac8b40bbbbc3725fce7b0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.0015721295
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0928168179cac8b40bbbbc3725fce7b0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071051
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0928168179cac8b40bbbbc3725fce7b0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.70710504
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0928168179cac8b40bbbbc3725fce7b0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0928168179cac8b40bbbbc3725fce7b0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0928168179cac8b40bbbbc3725fce7b0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0928168179cac8b40bbbbc3725fce7b0, type: 3}
+      propertyPath: m_Name
+      value: Metal_Pillar
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0928168179cac8b40bbbbc3725fce7b0, type: 3}
 --- !u!1 &1113875682
 GameObject:
   m_ObjectHideFlags: 0
@@ -19095,7 +19332,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 565bf9e417ec7ec4cbe2c5ba210e3d28, type: 2}
+      objectReference: {fileID: 2100000, guid: e4a2e4babc8af97409732e6345e2f795, type: 2}
     - target: {fileID: 919132149155446097, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: m_Name
       value: Grey_Fence (7)
@@ -19249,7 +19486,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 22d1769f3f0df0d4cb79dce5bc7ac3db, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 565bf9e417ec7ec4cbe2c5ba210e3d28, type: 2}
+      objectReference: {fileID: 2100000, guid: e4a2e4babc8af97409732e6345e2f795, type: 2}
     - target: {fileID: 919132149155446097, guid: 22d1769f3f0df0d4cb79dce5bc7ac3db, type: 3}
       propertyPath: m_Name
       value: Grey_Before_Destroyed_Building (3)
@@ -19480,7 +19717,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 565bf9e417ec7ec4cbe2c5ba210e3d28, type: 2}
+      objectReference: {fileID: 2100000, guid: e4a2e4babc8af97409732e6345e2f795, type: 2}
     - target: {fileID: 919132149155446097, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: m_Name
       value: Grey_Fence (42)
@@ -24871,7 +25108,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 565bf9e417ec7ec4cbe2c5ba210e3d28, type: 2}
+      objectReference: {fileID: 2100000, guid: e4a2e4babc8af97409732e6345e2f795, type: 2}
     - target: {fileID: 919132149155446097, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: m_Name
       value: Grey_Fence (11)
@@ -25783,7 +26020,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 565bf9e417ec7ec4cbe2c5ba210e3d28, type: 2}
+      objectReference: {fileID: 2100000, guid: e4a2e4babc8af97409732e6345e2f795, type: 2}
     - target: {fileID: 919132149155446097, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: m_Name
       value: Grey_Fence (75)
@@ -26013,7 +26250,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 565bf9e417ec7ec4cbe2c5ba210e3d28, type: 2}
+      objectReference: {fileID: 2100000, guid: e4a2e4babc8af97409732e6345e2f795, type: 2}
     - target: {fileID: 919132149155446097, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: m_Name
       value: Grey_Fence (51)
@@ -26285,7 +26522,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 565bf9e417ec7ec4cbe2c5ba210e3d28, type: 2}
+      objectReference: {fileID: 2100000, guid: e4a2e4babc8af97409732e6345e2f795, type: 2}
     - target: {fileID: 919132149155446097, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: m_Name
       value: Grey_Fence (70)
@@ -26461,6 +26698,96 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
+--- !u!1 &1435724413
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 751c9700eeaf8a44e96682efea2c52c3, type: 3}
+  m_PrefabInstance: {fileID: 1755348075}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1435724416}
+  - component: {fileID: 1435724415}
+  - component: {fileID: 1435724414}
+  m_Layer: 0
+  m_Name: Medal_Beam_Testing (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!23 &1435724414
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 751c9700eeaf8a44e96682efea2c52c3, type: 3}
+  m_PrefabInstance: {fileID: 1755348075}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1435724413}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: e758bccf0d419624bb5c3c2d9e5e5af7, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1435724415
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: -5754084199372789682, guid: 751c9700eeaf8a44e96682efea2c52c3, type: 3}
+  m_PrefabInstance: {fileID: 1755348075}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1435724413}
+  m_Mesh: {fileID: 210929109749281239, guid: 751c9700eeaf8a44e96682efea2c52c3, type: 3}
+--- !u!4 &1435724416
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 751c9700eeaf8a44e96682efea2c52c3, type: 3}
+  m_PrefabInstance: {fileID: 1755348075}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1435724413}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.0015721295, y: 0.7071051, z: 0.70710504, w: -0.0015721297}
+  m_LocalPosition: {x: -31.97, y: 1.57, z: 60.06}
+  m_LocalScale: {x: 113.67, y: 108.41999, z: 129.51}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1441990832
 GameObject:
   m_ObjectHideFlags: 0
@@ -26912,7 +27239,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 565bf9e417ec7ec4cbe2c5ba210e3d28, type: 2}
+      objectReference: {fileID: 2100000, guid: e4a2e4babc8af97409732e6345e2f795, type: 2}
     - target: {fileID: 919132149155446097, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: m_Name
       value: Grey_Fence
@@ -26973,7 +27300,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 22d1769f3f0df0d4cb79dce5bc7ac3db, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 565bf9e417ec7ec4cbe2c5ba210e3d28, type: 2}
+      objectReference: {fileID: 2100000, guid: e4a2e4babc8af97409732e6345e2f795, type: 2}
     - target: {fileID: 919132149155446097, guid: 22d1769f3f0df0d4cb79dce5bc7ac3db, type: 3}
       propertyPath: m_Name
       value: Grey_Before_Destroyed_Building (1)
@@ -27215,7 +27542,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 565bf9e417ec7ec4cbe2c5ba210e3d28, type: 2}
+      objectReference: {fileID: 2100000, guid: e4a2e4babc8af97409732e6345e2f795, type: 2}
     - target: {fileID: 919132149155446097, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: m_Name
       value: Grey_Fence (71)
@@ -28402,7 +28729,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 565bf9e417ec7ec4cbe2c5ba210e3d28, type: 2}
+      objectReference: {fileID: 2100000, guid: e4a2e4babc8af97409732e6345e2f795, type: 2}
     - target: {fileID: 919132149155446097, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: m_Name
       value: Grey_Fence (58)
@@ -28458,11 +28785,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 565c99b0749a1284ab7633b9c0e10727, type: 3}
       propertyPath: m_LocalScale.y
-      value: 80
+      value: 64.0344
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 565c99b0749a1284ab7633b9c0e10727, type: 3}
       propertyPath: m_LocalScale.z
-      value: 10
+      value: 6.8203998
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 565c99b0749a1284ab7633b9c0e10727, type: 3}
       propertyPath: m_LocalPosition.x
@@ -28902,7 +29229,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 565bf9e417ec7ec4cbe2c5ba210e3d28, type: 2}
+      objectReference: {fileID: 2100000, guid: e4a2e4babc8af97409732e6345e2f795, type: 2}
     - target: {fileID: 919132149155446097, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: m_Name
       value: Grey_Fence (73)
@@ -30090,75 +30417,6 @@ Transform:
   - {fileID: 1901368987}
   m_Father: {fileID: 865528482}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1664910157
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: 751c9700eeaf8a44e96682efea2c52c3, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 113.67
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 751c9700eeaf8a44e96682efea2c52c3, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 108.41999
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 751c9700eeaf8a44e96682efea2c52c3, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 129.51
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 751c9700eeaf8a44e96682efea2c52c3, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 31.23
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 751c9700eeaf8a44e96682efea2c52c3, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.4
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 751c9700eeaf8a44e96682efea2c52c3, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 60.82
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 751c9700eeaf8a44e96682efea2c52c3, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.0015721297
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 751c9700eeaf8a44e96682efea2c52c3, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.0015721295
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 751c9700eeaf8a44e96682efea2c52c3, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.7071051
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 751c9700eeaf8a44e96682efea2c52c3, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.70710504
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 751c9700eeaf8a44e96682efea2c52c3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 751c9700eeaf8a44e96682efea2c52c3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 751c9700eeaf8a44e96682efea2c52c3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 751c9700eeaf8a44e96682efea2c52c3, type: 3}
-      propertyPath: m_Name
-      value: Medal_Beam_Testing (3)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 751c9700eeaf8a44e96682efea2c52c3, type: 3}
 --- !u!1 &1666480719
 GameObject:
   m_ObjectHideFlags: 0
@@ -31573,7 +31831,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 565bf9e417ec7ec4cbe2c5ba210e3d28, type: 2}
+      objectReference: {fileID: 2100000, guid: e4a2e4babc8af97409732e6345e2f795, type: 2}
     - target: {fileID: 919132149155446097, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: m_Name
       value: Grey_Fence (48)
@@ -31735,7 +31993,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 565bf9e417ec7ec4cbe2c5ba210e3d28, type: 2}
+      objectReference: {fileID: 2100000, guid: e4a2e4babc8af97409732e6345e2f795, type: 2}
     - target: {fileID: 919132149155446097, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: m_Name
       value: Grey_Fence (6)
@@ -33392,7 +33650,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 565bf9e417ec7ec4cbe2c5ba210e3d28, type: 2}
+      objectReference: {fileID: 2100000, guid: e4a2e4babc8af97409732e6345e2f795, type: 2}
     - target: {fileID: 919132149155446097, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: m_Name
       value: Grey_Fence (2)
@@ -33881,7 +34139,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 565bf9e417ec7ec4cbe2c5ba210e3d28, type: 2}
+      objectReference: {fileID: 2100000, guid: e4a2e4babc8af97409732e6345e2f795, type: 2}
     - target: {fileID: 919132149155446097, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: m_Name
       value: Grey_Fence (44)
@@ -34239,7 +34497,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 565bf9e417ec7ec4cbe2c5ba210e3d28, type: 2}
+      objectReference: {fileID: 2100000, guid: e4a2e4babc8af97409732e6345e2f795, type: 2}
     - target: {fileID: 919132149155446097, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: m_Name
       value: Grey_Fence (76)
@@ -34411,6 +34669,96 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1975226300
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 0928168179cac8b40bbbbc3725fce7b0, type: 3}
+  m_PrefabInstance: {fileID: 1112945957}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1975226303}
+  - component: {fileID: 1975226302}
+  - component: {fileID: 1975226301}
+  m_Layer: 0
+  m_Name: Metal_Pillar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!23 &1975226301
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 0928168179cac8b40bbbbc3725fce7b0, type: 3}
+  m_PrefabInstance: {fileID: 1112945957}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1975226300}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 187106415177163282, guid: 0928168179cac8b40bbbbc3725fce7b0, type: 3}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1975226302
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: -5754084199372789682, guid: 0928168179cac8b40bbbbc3725fce7b0, type: 3}
+  m_PrefabInstance: {fileID: 1112945957}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1975226300}
+  m_Mesh: {fileID: 210929109749281239, guid: 0928168179cac8b40bbbbc3725fce7b0, type: 3}
+--- !u!4 &1975226303
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0928168179cac8b40bbbbc3725fce7b0, type: 3}
+  m_PrefabInstance: {fileID: 1112945957}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1975226300}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.0015721295, y: 0.7071051, z: 0.70710504, w: -0.0015721297}
+  m_LocalPosition: {x: 34.987076, y: 1.25, z: 65.89343}
+  m_LocalScale: {x: 99.99999, y: 99.99999, z: 100}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1988829201
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34912,7 +35260,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 565bf9e417ec7ec4cbe2c5ba210e3d28, type: 2}
+      objectReference: {fileID: 2100000, guid: e4a2e4babc8af97409732e6345e2f795, type: 2}
     - target: {fileID: 919132149155446097, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: m_Name
       value: Grey_Fence (68)
@@ -35103,7 +35451,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 565bf9e417ec7ec4cbe2c5ba210e3d28, type: 2}
+      objectReference: {fileID: 2100000, guid: e4a2e4babc8af97409732e6345e2f795, type: 2}
     - target: {fileID: 919132149155446097, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: m_Name
       value: Grey_Fence (1)
@@ -35459,11 +35807,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 565c99b0749a1284ab7633b9c0e10727, type: 3}
       propertyPath: m_LocalScale.y
-      value: 80
+      value: 64.0344
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 565c99b0749a1284ab7633b9c0e10727, type: 3}
       propertyPath: m_LocalScale.z
-      value: 10
+      value: 6.8203998
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 565c99b0749a1284ab7633b9c0e10727, type: 3}
       propertyPath: m_LocalPosition.x
@@ -35736,7 +36084,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 565bf9e417ec7ec4cbe2c5ba210e3d28, type: 2}
+      objectReference: {fileID: 2100000, guid: e4a2e4babc8af97409732e6345e2f795, type: 2}
     - target: {fileID: 919132149155446097, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: m_Name
       value: Grey_Fence (47)
@@ -35797,7 +36145,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 565bf9e417ec7ec4cbe2c5ba210e3d28, type: 2}
+      objectReference: {fileID: 2100000, guid: e4a2e4babc8af97409732e6345e2f795, type: 2}
     - target: {fileID: 919132149155446097, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: m_Name
       value: Grey_Fence (78)
@@ -35884,7 +36232,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 565bf9e417ec7ec4cbe2c5ba210e3d28, type: 2}
+  - {fileID: 2100000, guid: e4a2e4babc8af97409732e6345e2f795, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -36193,7 +36541,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 565bf9e417ec7ec4cbe2c5ba210e3d28, type: 2}
+      objectReference: {fileID: 2100000, guid: e4a2e4babc8af97409732e6345e2f795, type: 2}
     - target: {fileID: 919132149155446097, guid: 7f2bde02f787a624ba936a9623c02769, type: 3}
       propertyPath: m_Name
       value: Grey_Fence (43)
@@ -36566,7 +36914,6 @@ SceneRoots:
   - {fileID: 266068902}
   - {fileID: 962754814}
   - {fileID: 1755348075}
-  - {fileID: 1664910157}
   - {fileID: 1931926710}
   - {fileID: 1266893339}
   - {fileID: 1577868918}
@@ -36607,3 +36954,4 @@ SceneRoots:
   - {fileID: 7301300186195161180}
   - {fileID: 566919792}
   - {fileID: 763329473}
+  - {fileID: 1112945957}
