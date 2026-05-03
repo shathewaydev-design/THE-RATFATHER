@@ -8,6 +8,7 @@ TagManager:
   - InteractableObj
   - CookingPot
   - MetalBeam
+  - SoldatoBoss
   layers:
   - Default
   - TransparentFX

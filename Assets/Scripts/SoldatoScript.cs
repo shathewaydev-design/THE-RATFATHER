@@ -17,9 +17,9 @@ public class SoldatoScript : MonoBehaviour
     public int health = 16;
 
     public float stompRange = 2f;
-    public float stompCooldown = 1.5f;
+    public float stompCooldown = 2f;
 
-    public float chargeCooldown = 5f;
+    public float chargeCooldown = 15f;
     public float chargeSpeed = 15f;
     public float chargeDuration = 1.5f;
 
@@ -33,8 +33,11 @@ public class SoldatoScript : MonoBehaviour
 
     float dashTimer = 0f;
 
-    private enum State { Chase, Stomp, ChargeWindup, ChargeDash }
-    private State currentState;
+    float stunDuration = 10f;
+    float stunTimer = 0f;
+
+    public enum State { Chase, Stomp, ChargeWindup, ChargeDash, Stunned }
+    public State currentState;
 
     private Vector3 chargeDirection;
 
@@ -62,8 +65,8 @@ public class SoldatoScript : MonoBehaviour
     void Update()
     {
         stompTimer += Time.deltaTime;
-        chargeTimer += Time.deltaTime;
-
+        //chargeTimer += Time.deltaTime;
+        Debug.Log("Charge Timer: " + chargeTimer);
         CheckHealth();
 
         // movement test
@@ -87,20 +90,58 @@ public class SoldatoScript : MonoBehaviour
             case State.ChargeDash:
                 ChargeDash();
                 break;
+            case State.Stunned:
+                Stunned();
+                break;
         }
 
 
 
     }
 
-    void TakeDamage()
+    public void TakeDamage()
     {
         
         health -= 4;
 
-
         Debug.Log("Boss Takes Damage! " + health);
+
+        EnterStun();
+
     }
+
+    void EnterStun()
+    {
+        currentState = State.Stunned;
+
+        stunTimer = 0f;
+
+        // stop everything immediately
+        agent.isStopped = true;
+        agent.ResetPath();
+
+        rb.linearVelocity = Vector3.zero;
+
+        chargeTimer = 0f;
+
+    }
+
+    void Stunned()
+    {
+        stunTimer += Time.deltaTime;
+
+        agent.isStopped = true;
+
+        rb.linearVelocity = Vector3.zero;
+
+        if (stunTimer >= stunDuration)
+        {
+            stunTimer = 0f;
+
+            currentState = State.Chase;
+        }
+    }
+
 
     void CheckHealth()
     {
@@ -118,6 +159,8 @@ public class SoldatoScript : MonoBehaviour
         agent.isStopped = false;
         agent.SetDestination(player.position);
 
+        chargeTimer += Time.deltaTime;
+
         float distance = Vector3.Distance(transform.position, player.position);
 
         if (distance <= stompRange)
@@ -127,12 +170,22 @@ public class SoldatoScript : MonoBehaviour
             return;
         }
 
-        if (chargeTimer >= chargeCooldown)
+        if (CanCharge() && chargeTimer >= chargeCooldown)
         {
             currentState = State.ChargeWindup;
             agent.isStopped = true;
         }
 
+    }
+
+    bool CanCharge()
+    {
+        if (chargeTimer >= 15)
+        {
+            return true;
+        }
+
+        return false;
     }
 
     void Stomp()
@@ -155,6 +208,7 @@ public class SoldatoScript : MonoBehaviour
             }
             else
             {
+                chargeTimer = 0f;
                 currentState = State.Chase;
             }
 
