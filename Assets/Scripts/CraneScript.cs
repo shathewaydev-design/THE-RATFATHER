@@ -10,65 +10,103 @@ public class CraneScript : MonoBehaviour
 
     private bool inRange = false;
 
+    private float resetTimer = 0f;
+    private float resetReq = 3f;
+
+    private bool buttonPressed;
+    private bool hasSwungAndMissed;
+    private bool hasReset;
+
+    public bool hitBoss = false;
+
+
+
     // remember to set animation bools false when another is set true
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //craneAnimator = GameObject.Find("Cube.153").GetComponent<Animator>();
 
-        //if (craneAnimator == null)
-        //{
-        //    Debug.LogError("Animator NOT found!");
-        //}
-        //else
-        //{
-        //    Debug.Log("Animator found on: " + craneAnimator.gameObject.name);
-        //}
+
+
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Keyboard.current.eKey.wasPressedThisFrame && inRange)
+
+        CheckAnimationState();
+
+        if (hasSwungAndMissed)
         {
-    
-           
-            // trigger anim
-            craneAnimator.SetBool("ButtonPressed", true);
-
-            bool test = craneAnimator.GetBool("ButtonPressed");
-            Debug.Log("ButtonPressed value: " + test);
-
-            //Debug.Log("E pressed, bool set!");
-            
+            ResetTimer();
         }
 
-        
+
     }
 
     void CheckAnimationState() 
     {
+
+
         // if e is pressed, AND the other bools are false,
-        // trigger crane swiing
+        // trigger crane swing
+        if (hitBoss)
+        {
+            buttonPressed = false;
+            hasSwungAndMissed = false;
+            hasReset = false;
+
+            craneAnimator.SetBool("ButtonPressed", false);
+            craneAnimator.SetBool("HasSwung&Missed", false);
+            craneAnimator.SetBool("HasReset", false);
+
+            return;
+        }
+
+        if (Keyboard.current.eKey.wasPressedThisFrame && inRange && !buttonPressed)
+        {
+            // trigger anim
+            hasReset = false;
+            craneAnimator.SetBool("HasReset", false);
+
+            craneAnimator.SetBool("ButtonPressed", true);
+            buttonPressed = true;
+            StartHitWindow();
+
+        }
 
         // if crane has swung already but missed, trigger crane reset
+        if (!SoldatoScript.Instance.IsCraneWindowActive() && buttonPressed && hitBoss)
+        {
+            Debug.Log(name + " Missed so will reset");
 
-        // after reset, needs t go back to no movement (all bool false?)
+            hasSwungAndMissed = true;
 
+            craneAnimator.SetBool("HasSwung&Missed", true);
+            craneAnimator.SetBool("ButtonPressed", false);
 
+            buttonPressed = false; 
 
+            resetTimer = 0f; // reset timer ONCE
+        }
+
+        
+
+        // after reset, needs to go back to no movement (all bool false?)
 
     }
 
-    //public void Interact()
-    //{
-    //    //throw new System.NotImplementedException();
-    //    //bool test = craneAnimator.GetBool(ButtonPressed);
-    //    craneAnimator.SetBool("ButtonPressed", true);
+    public float hitWindowDuration = 2f;
 
-    //}
+    public void StartHitWindow()
+    {
+        Debug.Log(name + " started hit window");
+
+        SoldatoScript.Instance.StartCraneWindow(this, hitWindowDuration);
+    }
+
 
 
     void OnTriggerEnter(Collider other)
@@ -87,4 +125,26 @@ public class CraneScript : MonoBehaviour
             inRange = false;
         }
     }
+
+
+    void ResetTimer()
+    {
+        resetTimer += Time.deltaTime;
+
+        if (resetTimer >= resetReq)
+        {
+            craneAnimator.SetBool("HasReset", true);
+            hasReset = true;
+            craneAnimator.SetBool("HasSwung&Missed", false);
+
+            hasSwungAndMissed = false; // stop timer loop
+            resetTimer = 0f;
+        }
+
+
+    }
+
+
 }
+
+

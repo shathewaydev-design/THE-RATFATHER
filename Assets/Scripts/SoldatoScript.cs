@@ -41,11 +41,20 @@ public class SoldatoScript : MonoBehaviour
     public LineRenderer chargeLine;
     public float maxChargeDistance = 10f;
 
+    public static SoldatoScript Instance;
+
+    public CraneScript currCrane;
+
+
+    void Awake()
+    {
+        Instance = this;
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         currentState = State.Chase;
-        //Rigidbody rb = GetComponent<Rigidbody>();
 
     }
 
@@ -54,6 +63,8 @@ public class SoldatoScript : MonoBehaviour
     {
         stompTimer += Time.deltaTime;
         chargeTimer += Time.deltaTime;
+
+        CheckHealth();
 
         // movement test
         // agent.SetDestination(player.position);
@@ -80,6 +91,24 @@ public class SoldatoScript : MonoBehaviour
 
 
 
+    }
+
+    void TakeDamage()
+    {
+        
+        health -= 4;
+
+
+        Debug.Log("Boss Takes Damage! " + health);
+    }
+
+    void CheckHealth()
+    {
+        if (health <= 0)
+        {
+            // trigger ending (for now comic ending + demo ending)
+            // triggered in game manager
+        }
     }
 
     void Chase()
@@ -138,6 +167,7 @@ public class SoldatoScript : MonoBehaviour
 
         agent.isStopped = true;
         agent.velocity = Vector3.zero;
+        rb.linearVelocity = Vector3.zero;
         agent.ResetPath(); // ensures stops boss
 
         windupTimer += Time.deltaTime;
@@ -199,9 +229,11 @@ public class SoldatoScript : MonoBehaviour
 
         //agent.isStopped = false;
 
+        agent.enabled = false;
+
         dashTimer += Time.deltaTime;
 
-        agent.isStopped = true;
+        //agent.isStopped = true;
 
         //transform.position += chargeDirection * chargeSpeed * Time.deltaTime;
         rb.linearVelocity = chargeDirection * chargeSpeed;
@@ -209,7 +241,54 @@ public class SoldatoScript : MonoBehaviour
         if (dashTimer >= chargeDuration) 
         {
             dashTimer = 0f;
+
+            //rb.linearVelocity = Vector3.zero; // check this
+
+            agent.enabled = true;
+            agent.Warp(transform.position);
+
             currentState = State.Chase;
+        }
+    }
+
+
+    private float lastCraneHitTime = -999f;
+    private float currentWindowDuration = 0f;
+
+    public void StartCraneWindow(CraneScript sourceCrane, float duration)
+    {
+        currCrane = sourceCrane;
+        lastCraneHitTime = Time.time;
+        currentWindowDuration = duration;
+
+        Debug.Log("Crane window started by: " + sourceCrane.name);
+       
+    }
+
+    public bool IsCraneWindowActive()
+    {
+        return Time.time <= lastCraneHitTime + currentWindowDuration;
+    }
+
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("MetalBeam"))
+        {
+            if (IsCraneWindowActive())
+            {
+                //Debug.Log("VALID crane hit!");
+                // disable crane
+                currCrane.hitBoss = true;
+                TakeDamage();
+            }
+            else
+            {
+                Debug.Log("Hit ignored");
+                // need to reset
+                currCrane.hitBoss = false;
+
+            }
         }
     }
 
