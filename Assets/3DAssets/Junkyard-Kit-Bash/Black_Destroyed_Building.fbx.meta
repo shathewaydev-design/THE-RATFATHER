@@ -8,7 +8,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Material.168
-    second: {fileID: 2100000, guid: 48e35a4647760eb45ba01109b52ce9b7, type: 2}
+    second: {fileID: 2100000, guid: a3f62db60adc9174e993697f7f325749, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
