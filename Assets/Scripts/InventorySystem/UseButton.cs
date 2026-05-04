@@ -16,6 +16,19 @@ public class UseButton : MonoBehaviour
     public void UseButtonInteracted()
     {
 
+        // if (NPCDialogueManager.Instance.IsTalkingToNPC())
+        // {
+        //     SellCheese(selectedCheese);
+        // }
+        // else
+        // {
+        //     ConsumeCheese(selectedCheese);
+        // }
+        ConsumeCheese();
+        
+    }
+    void ConsumeCheese()
+    {
         InventorySystem inventorySystem = InventorySystem.Instance;
         if (cheeseButtonRef != null && cheeseButtonRef.cheeseInventorySlot != null)
         {

@@ -49,24 +49,24 @@ public class InventoryUIController : MonoBehaviour
         isOpen = !isOpen;
 
         inventoryBigPanel.SetActive(isOpen);
-        ingredientInventoryPanel.SetActive(isOpen);
+        //ingredientInventoryPanel.SetActive(isOpen);
         if(isOpen)//close everything
         {
+            OpenIngredientInventory();
+        }
+        else
+        {   
             ingredientInventoryPanel.SetActive(false);
             cheeseInventoryPanel.SetActive(false);
             logPanel.SetActive(false);
-        }
-        else
-        {
-            ingredientInventoryPanel.SetActive(true);//always open ingredientInventoryPanel
-            cheeseInventoryPanel.SetActive(false);
-            logPanel.SetActive(false);
-        }
-
-        if (!isOpen)//hides use button
-        {
+            
             ClearCheeseSelection();
         }
+
+        // if (!isOpen)//hides use button
+        // {
+        //     ClearCheeseSelection();
+        // }
 
         Cursor.visible = isOpen;
 

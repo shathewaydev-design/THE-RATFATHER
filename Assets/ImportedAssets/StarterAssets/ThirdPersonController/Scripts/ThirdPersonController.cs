@@ -80,7 +80,16 @@ namespace StarterAssets
 
         [Tooltip("For locking the camera position on all axis")]
         public bool LockCameraPosition = false;
+        [Header("Camera Settings")]
+        [Tooltip("Mouse sensitivity multiplier")]
+        public float MouseSensitivity = 1.0f;
+        public float GamepadSensitivity = 100.0f;
 
+        [Tooltip("Invert vertical camera axis")]
+        public bool InvertY = false;
+
+        [Tooltip("Invert horizontal camera axis")]
+        public bool InvertX = false;
         [Header("Game mechanic Input")]
         public static ThirdPersonController Instance;
         public event Action OnStopInteract;
@@ -304,9 +313,25 @@ namespace StarterAssets
             {
                 //Don't multiply mouse input by Time.deltaTime;
                 float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
+                
+                //added mouse sensitivity and inversion options
+                float sensitivity = IsCurrentDeviceMouse ? MouseSensitivity : GamepadSensitivity;
 
-                _cinemachineTargetYaw += _input.look.x * deltaTimeMultiplier;
-                _cinemachineTargetPitch += _input.look.y * deltaTimeMultiplier;
+                float lookX = _input.look.x;
+                float lookY = _input.look.y;
+
+                // Apply inversion
+                if (InvertX) lookX *= -1f;
+                if (InvertY) lookY *= -1f;
+
+                // Apply sensitivity
+                lookX *= MouseSensitivity;
+                lookY *= MouseSensitivity;
+                _cinemachineTargetYaw += lookX * deltaTimeMultiplier;
+                _cinemachineTargetPitch += lookY * deltaTimeMultiplier;
+                //^original below
+                //_cinemachineTargetYaw += _input.look.x * deltaTimeMultiplier;
+                //_cinemachineTargetPitch += _input.look.y * deltaTimeMultiplier;
             }
 
             // clamp our rotations so our values are limited 360 degrees

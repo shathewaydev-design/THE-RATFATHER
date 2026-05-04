@@ -2761,6 +2761,8 @@ MonoBehaviour:
   Gravity: -15
   JumpTimeout: 0.3
   FallTimeout: 0.15
+  maxJumps: 2
+  jumpCount: 0
   Grounded: 1
   GroundedOffset: -0.14
   GroundedRadius: 0.28
@@ -2772,6 +2774,73 @@ MonoBehaviour:
   BottomClamp: -30
   CameraAngleOverride: 0
   LockCameraPosition: 0
+  MouseSensitivity: 100
+  GamepadSensitivity: 100
+  InvertY: 0
+  InvertX: 0
+  stopInteract:
+    m_Name: Stop Interact
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: a7c7c6c4-8057-420e-b3a1-2be2ebf211e4
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  tiltLeft:
+    m_Name: Tilt Left
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 773c1516-5380-487b-8be4-c44f92c2a591
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  tiltRight:
+    m_Name: Tilt Right
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 6e911699-d266-43e4-95dc-17032ce2190e
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  sprinkle:
+    m_Name: Sprinkle
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: a1048339-5043-4d36-80f7-6f1f70795d63
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  mouseClick:
+    m_Name: Mouse Click
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: f9424d14-e75a-476f-b5cf-c9900fa9657c
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  mousePosition:
+    m_Name: Mouse Position
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: c6ca4752-f636-44a3-88b9-d6c57f25e88f
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  openInventory:
+    m_Name: Open Inventory
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 89176c46-845e-4b8f-bddc-8a1de5cc070d
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!143 &4416926083347132233
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2809,7 +2878,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 4419d82f33d36e848b3ed5af4c8da37e, type: 3}
+  m_Actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_NotificationBehavior: 0
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
