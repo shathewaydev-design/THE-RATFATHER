@@ -113,8 +113,7 @@ public class HeatProgressTracker : MonoBehaviour
     }
     private void EvaluateDoness()
     {
-        //isProcessingDoneness = true;
-
+        Debug.Log("Dish is done!");
         currentDoness = 0f;//reset doness for next time
         donessProgressBar.fillAmount = 0f;
 
@@ -124,9 +123,6 @@ public class HeatProgressTracker : MonoBehaviour
         Animator animator = cookingPotVFX.GetComponent<Animator>();
         animator.SetTrigger("StartVFX");//put animation event at the end of animation
 
-        //CookingManager.Instance.StartAdditive();
-
-        //isProcessingDoneness = false;
         
     }    
     private IEnumerator WaitForNextPump()

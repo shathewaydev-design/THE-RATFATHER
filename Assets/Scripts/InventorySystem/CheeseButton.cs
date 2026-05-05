@@ -23,11 +23,15 @@ public class CheeseButton : MonoBehaviour
         if (isSelected)//deselect
         {
             isSelected = false;
+            // HIDE INFO PANEL
+            InventoryUIController.Instance.HideCheeseInfo();
             //ClearSelectedCheese();
         }
         else//select
         {
             isSelected = true;
+            // SHOW INFO PANEL
+            InventoryUIController.Instance.ShowCheeseInfo(cheeseInventorySlot.finalCheeseData);
             //ClearSelectedCheese();//if the player already has a selected cheese, 
             //CacheSelectedCheese();//replace it with the new one
         }

@@ -100,6 +100,8 @@ public class CookingManager : MonoBehaviour, IInteractable
         cookButtonUI.SetActive(true);
         playerGeo.SetActive(false);
 
+        inventoryBigPanel.SetActive(true);
+
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
 
@@ -119,11 +121,8 @@ public class CookingManager : MonoBehaviour, IInteractable
     public void ExitCookingMode()
     {
         selectedIngredients.Clear();//clear selected ingredients in case player exit cooking mode in the middle of cooking process
-        //selectedSlots.Clear();
 
         playerGeo.SetActive(true);
-        
-        thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
 
         playerCamera.Follow = player.transform;
         mainCamera.transform.position = savedMainCameraPosition;
@@ -138,6 +137,7 @@ public class CookingManager : MonoBehaviour, IInteractable
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
     }
 
     // ---------- FLOW ----------
@@ -188,6 +188,7 @@ public class CookingManager : MonoBehaviour, IInteractable
     public void StartPourMilk()
     {
         ingredientInventoryPanel.SetActive(false);
+        inventoryBigPanel.SetActive(false);
         
         SetStep(0);
     }
@@ -220,11 +221,7 @@ public class CookingManager : MonoBehaviour, IInteractable
             ingredient.RemoveIngredient();
         }
         
-
-
-        //selectedIngredients.Clear();
-        //selectedSlots.Clear();
-        thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
+        //thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
         ExitCookingMode();
     }
 /////CHEESE RECIPES AND CRAFTING CHEESE////

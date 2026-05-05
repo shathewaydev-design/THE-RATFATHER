@@ -16,6 +16,7 @@ public class InventoryUIController : MonoBehaviour
     private bool isOpen = false;
     [Header("Input")]
     public List<CheeseButton> selectedCheeses = new List<CheeseButton>();//store selected cheeses that are selected when player click on CheeseButton.
+    [SerializeField] private UI_ItemInfoPanel itemInfoPanel;//data for more details textBox 
 
     void Awake()
     {
@@ -47,6 +48,7 @@ public class InventoryUIController : MonoBehaviour
     private void ToggleInventory()
     {
         isOpen = !isOpen;
+        itemInfoPanel.Hide();
 
         inventoryBigPanel.SetActive(isOpen);
         //ingredientInventoryPanel.SetActive(isOpen);
@@ -81,6 +83,8 @@ public class InventoryUIController : MonoBehaviour
         ingredientInventoryPanel.SetActive(true);
         cheeseInventoryPanel.SetActive(false);
         logPanel.SetActive(false);
+
+        itemInfoPanel.Hide();//hide info panel
     }
     public void OpenCheeseInventory()
     {
@@ -89,6 +93,8 @@ public class InventoryUIController : MonoBehaviour
         ingredientInventoryPanel.SetActive(false);
         cheeseInventoryPanel.SetActive(true);
         logPanel.SetActive(false);
+
+        itemInfoPanel.Hide();
     }
     public void OpenLogPanel()
     {
@@ -97,6 +103,8 @@ public class InventoryUIController : MonoBehaviour
         ingredientInventoryPanel.SetActive(false);
         cheeseInventoryPanel.SetActive(false);
         logPanel.SetActive(true);
+        
+        itemInfoPanel.Hide();
     }
     public void UpdateUseButton()
     //initialize the use button with the selected cheese; 
@@ -120,6 +128,26 @@ public class InventoryUIController : MonoBehaviour
         selectedCheeses.Clear();
 
         useButton.SetActive(false);
+    }
+    public void ShowIngredientInfo(CheeseIngredientData data)
+    //for more details TextBox
+    {
+        itemInfoPanel.ShowIngredient(data);
+    }
+    public void HideIngredientInfo()
+    //for more details TextBox
+    {
+        itemInfoPanel.Hide();
+    }
+    public void ShowCheeseInfo(FinalResultCheese data)
+    //for more details TextBox
+    {
+        itemInfoPanel.ShowCheese(data);
+    }
+    public void HideCheeseInfo()
+    //for more details TextBox
+    {
+        itemInfoPanel.Hide();
     }
     private void OnDestroy()
     {

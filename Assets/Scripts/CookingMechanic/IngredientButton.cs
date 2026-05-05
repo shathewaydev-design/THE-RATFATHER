@@ -27,12 +27,15 @@ public class IngredientButton : MonoBehaviour
         if (isSelected)//deselect
         {
             isSelected = false;
+            // HIDE INFO PANEL
+            InventoryUIController.Instance.HideIngredientInfo();
             ClearSelectedIngredient();
         }
         else//select
         {
             isSelected = true;
-            
+            // SHOW INFO PANEL
+            InventoryUIController.Instance.ShowIngredientInfo(inventorySlot.itemData);
             ReplaceIngredientOfSameType();//if the player already has a selected ingredient of the same type, replace it with the new one
             CacheSelectedIngredient();
         }

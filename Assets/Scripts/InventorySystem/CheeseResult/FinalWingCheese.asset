@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: FinalWingCheese
   m_EditorClassIdentifier: Assembly-CSharp::FinalResultCheese
   cheeseName: Wing Cheese
+  rarity: 2
   icon: {fileID: 21300000, guid: af21f5339af7a4829b4f43668337b01c, type: 3}
   description: 
-  sellValue: 0
+  basePrice: 0
   grantsDoubleJump: 0
   maxStack: 10
   stability: 2

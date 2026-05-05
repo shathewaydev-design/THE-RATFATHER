@@ -7,10 +7,8 @@ public class FinishCookingVFX : MonoBehaviour
     [SerializeField] private GameObject cookingPotVFX;    
     private void FinishCooking()
     {
-        Animator animator = cookingPotVFX.GetComponent<Animator>();
-        animator.SetTrigger("FinishVFX");
         CookingManager.Instance.StartAdditive();
-
+        Debug.Log("Finish cooking, start additive!");
     }    
 
 
