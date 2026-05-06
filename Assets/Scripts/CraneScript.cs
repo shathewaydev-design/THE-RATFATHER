@@ -78,9 +78,9 @@ public class CraneScript : MonoBehaviour
         }
 
         // if crane has swung already but missed, trigger crane reset
-        if (!SoldatoScript.Instance.IsCraneWindowActive() && buttonPressed && hitBoss)
+        if (!SoldatoScript.Instance.IsCraneWindowActive() && buttonPressed && !hitBoss)
         {
-            Debug.Log(name + " Missed so will reset");
+            //Debug.Log(name + " Missed so will reset");
 
             hasSwungAndMissed = true;
 

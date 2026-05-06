@@ -46,6 +46,7 @@ public class UIManager : MonoBehaviour
     private Action<int> currentCallback;
 
 
+
     void Awake()
     {
         // Singleton pattern (simple version); avoid duplicates
@@ -120,6 +121,24 @@ public class UIManager : MonoBehaviour
 
         }
 
+
+    }
+
+    //public void UpdateBossHealth()
+    //{
+
+    //    if (currBossHealthImg >= bossHealth.Length)
+    //    {
+    //        return;
+    //    }
+
+    //    bossHealthImg.texture = bossHealth[currBossHealthImg].texture;
+    //    currBossHealthImg += 1;
+
+    //}
+
+    public void UpdatePlayerHealth()
+    {
 
     }
 

@@ -138,4 +138,10 @@ public class GameManager : MonoBehaviour
 
     }
 
+
+    public void UpdatePlayerHealth()
+    {
+
+    }
+
 }

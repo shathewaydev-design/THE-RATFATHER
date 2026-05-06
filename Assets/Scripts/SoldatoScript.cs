@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 
 public class SoldatoScript : MonoBehaviour
@@ -22,8 +23,6 @@ public class SoldatoScript : MonoBehaviour
     public float chargeCooldown = 15f;
     public float chargeSpeed = 15f;
     public float chargeDuration = 1.5f;
-
-    public Rigidbody rb;
 
     private float stompTimer;
     private float chargeTimer;
@@ -49,6 +48,11 @@ public class SoldatoScript : MonoBehaviour
     public CraneScript currCrane;
 
 
+    int currBossHealthImg = 0;
+    public Texture[] bossHealth;
+    public RawImage bossHealthImg;
+
+
     void Awake()
     {
         Instance = this;
@@ -66,7 +70,7 @@ public class SoldatoScript : MonoBehaviour
     {
         stompTimer += Time.deltaTime;
         //chargeTimer += Time.deltaTime;
-        Debug.Log("Charge Timer: " + chargeTimer);
+        //Debug.Log("Charge Timer: " + chargeTimer);
         CheckHealth();
 
         // movement test
@@ -104,7 +108,10 @@ public class SoldatoScript : MonoBehaviour
         
         health -= 4;
 
+
         Debug.Log("Boss Takes Damage! " + health);
+
+        UpdateBossHealth();
 
         EnterStun();
 
@@ -120,7 +127,7 @@ public class SoldatoScript : MonoBehaviour
         agent.isStopped = true;
         agent.ResetPath();
 
-        rb.linearVelocity = Vector3.zero;
+        //rb.linearVelocity = Vector3.zero;
 
         chargeTimer = 0f;
 
@@ -130,9 +137,9 @@ public class SoldatoScript : MonoBehaviour
     {
         stunTimer += Time.deltaTime;
 
-        agent.isStopped = true;
+        agent.isStopped = true; 
 
-        rb.linearVelocity = Vector3.zero;
+        //rb.linearVelocity = Vector3.zero;
 
         if (stunTimer >= stunDuration)
         {
@@ -149,6 +156,9 @@ public class SoldatoScript : MonoBehaviour
         {
             // trigger ending (for now comic ending + demo ending)
             // triggered in game manager
+            Debug.Log("Boss is dead!!!");
+            agent.isStopped = true;
+
         }
     }
 
@@ -166,7 +176,7 @@ public class SoldatoScript : MonoBehaviour
         if (distance <= stompRange)
         {
             currentState = State.Stomp;
-            Debug.Log("Stomping!"); // move to stomp method?
+            //Debug.Log("Stomping!"); // move to stomp method?
             return;
         }
 
@@ -203,7 +213,7 @@ public class SoldatoScript : MonoBehaviour
 
             if (distance <= stompRange)
             {
-                Debug.Log("Player takes stomp damage");
+                //Debug.Log("Player takes stomp damage");
                 // need to apply damage here
             }
             else
@@ -221,7 +231,7 @@ public class SoldatoScript : MonoBehaviour
 
         agent.isStopped = true;
         agent.velocity = Vector3.zero;
-        rb.linearVelocity = Vector3.zero;
+        //rb.linearVelocity = Vector3.zero;
         agent.ResetPath(); // ensures stops boss
 
         windupTimer += Time.deltaTime;
@@ -281,16 +291,16 @@ public class SoldatoScript : MonoBehaviour
     {
         chargeLine.enabled = false;
 
-        //agent.isStopped = false;
+        agent.isStopped = false;
 
-        agent.enabled = false;
+        //agent.enabled = false;
 
         dashTimer += Time.deltaTime;
 
         //agent.isStopped = true;
 
-        //transform.position += chargeDirection * chargeSpeed * Time.deltaTime;
-        rb.linearVelocity = chargeDirection * chargeSpeed;
+        transform.position += chargeDirection * chargeSpeed * Time.deltaTime;
+        //rb.linearVelocity = chargeDirection * chargeSpeed;
 
         if (dashTimer >= chargeDuration) 
         {
@@ -298,7 +308,7 @@ public class SoldatoScript : MonoBehaviour
 
             //rb.linearVelocity = Vector3.zero; // check this
 
-            agent.enabled = true;
+            //agent.enabled = true;
             agent.Warp(transform.position);
 
             currentState = State.Chase;
@@ -315,7 +325,7 @@ public class SoldatoScript : MonoBehaviour
         lastCraneHitTime = Time.time;
         currentWindowDuration = duration;
 
-        Debug.Log("Crane window started by: " + sourceCrane.name);
+        //Debug.Log("Crane window started by: " + sourceCrane.name);
        
     }
 
@@ -327,11 +337,14 @@ public class SoldatoScript : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+
+        //Debug.Log("Something entered: " + other.name);
+
         if (other.gameObject.CompareTag("MetalBeam"))
         {
             if (IsCraneWindowActive())
             {
-                //Debug.Log("VALID crane hit!");
+                Debug.Log("VALID crane hit!");
                 // disable crane
                 currCrane.hitBoss = true;
                 TakeDamage();
@@ -340,6 +353,10 @@ public class SoldatoScript : MonoBehaviour
             {
                 Debug.Log("Hit ignored");
                 // need to reset
+                if (currCrane == null)
+                {
+                    return;
+                }
                 currCrane.hitBoss = false;
 
             }
@@ -347,4 +364,21 @@ public class SoldatoScript : MonoBehaviour
     }
 
 
+    public void UpdateBossHealth()
+    {
+
+        if (currBossHealthImg >= bossHealth.Length)
+        {
+            return;
+        }
+
+        bossHealthImg.texture = bossHealth[currBossHealthImg];
+        currBossHealthImg += 1;
+
+    }
+
+
+
 }
+
+
