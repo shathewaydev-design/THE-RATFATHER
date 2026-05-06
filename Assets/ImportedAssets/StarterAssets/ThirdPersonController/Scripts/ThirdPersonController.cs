@@ -50,10 +50,11 @@ namespace StarterAssets
         [Tooltip("Time required to pass before entering the fall state. Useful for walking down stairs")]
         public float FallTimeout = 0.15f;
 
-        [Header("Player Grounded")]
+        [Header("Player Grounded and DoubleJump logic")]
         [Tooltip("If the character is grounded or not. Not part of the CharacterController built in grounded check")]
         private int maxJumps = 1;
         [SerializeField] private int jumpCount = 0;
+        //private bool _jumpPressedLastFrame;
         public bool Grounded = true;
 
         [Tooltip("Useful for rough ground")]
@@ -503,6 +504,8 @@ namespace StarterAssets
                     _input.jump = false;
                 }
             }
+            
+            
 
             // apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
             if (_verticalVelocity < _terminalVelocity)
