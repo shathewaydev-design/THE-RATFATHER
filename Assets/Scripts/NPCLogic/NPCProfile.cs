@@ -17,6 +17,7 @@ public class NPCProfile : ScriptableObject
     public int trustDifficulty;
 
     public bool recruited;
+    public bool hasMet = false;
 
     public List<Quest> quests;
     public List<string> availability;

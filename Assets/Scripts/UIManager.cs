@@ -137,11 +137,6 @@ public class UIManager : MonoBehaviour
 
     //}
 
-    public void UpdatePlayerHealth()
-    {
-
-    }
-
     private void UpdateButtonHighlight()
     {
         for (int i = 0; i < optionButtons.Count; i++)

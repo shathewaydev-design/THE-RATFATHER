@@ -12,7 +12,7 @@ public class NPC : MonoBehaviour, IInteractable
     public DialogueManager dialogueManager;
     public QuestManager questManager;
 
-    [SerializeField] private float interactionRadius = 1.5f; // checking distancer manualy, not using triggers
+    [SerializeField] private float interactionRadius = 2.0f; // checking distancer manualy, not using triggers
     [SerializeField] private Transform playerTransform;
 
     // private Coroutine exitRoutine; // for some reason prompt ui is acting up, so this is an attempt to fix that
@@ -51,6 +51,7 @@ public class NPC : MonoBehaviour, IInteractable
 
         dialogueManager.StartConversation(currentConvo);
         state.hasMetPlayer = true;
+        profile.hasMet = true;
 
         Debug.Log("Relevant quest: " + relevantQuest.questName);
 

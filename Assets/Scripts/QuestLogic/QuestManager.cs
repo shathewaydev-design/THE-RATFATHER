@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,6 +29,9 @@ public class QuestManager : MonoBehaviour
         else
             Destroy(gameObject);
 
+        activeQuests = new List<Quest>();
+        compQuests = new List<Quest>();
+
         questStates = new Dictionary<Quest, QuestState>();
 
         foreach (Quest quest in allQuests)
@@ -44,11 +48,19 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    IEnumerator Start()
     {
-        
+        yield return null; // wait 1 frame
+
+        ChangeQuestActive(allQuests[3]);
     }
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    //void Start()
+    //{
+    //    ChangeQuestActive(allQuests[3]);
+        
+    //}
 
     // Update is called once per frame
     void Update()

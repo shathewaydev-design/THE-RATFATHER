@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb0a4103522872c46b4bead59c0583af, type: 3}
+  m_Name: Francheesqua_prof
+  m_EditorClassIdentifier: Assembly-CSharp::NPCProfile
+  characterName: Francheesqua
+  trait: 
+  description: My girlfriend
+  pfp: {fileID: 0}
+  trustDifficulty: 0
+  recruited: 0
+  hasMet: 0
+  quests:
+  - {fileID: 11400000, guid: 70b3eafeaabf2404f80fe4893b65be36, type: 2}
+  - {fileID: 11400000, guid: e8384880248cc924fba9bd485a3bf334, type: 2}
+  availability: []

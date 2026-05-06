@@ -27,6 +27,13 @@ public class IngredientSpawner : MonoBehaviour
 
     private void OnEnable()
     {
+
+        if (DayNightManager.Instance == null)
+        {
+            Debug.LogWarning("DayNightManager not ready yet!");
+            return;
+        }
+
         DayNightManager.Instance.OnNewDay += HandleNewDay;
         
         if (clearAtNight)

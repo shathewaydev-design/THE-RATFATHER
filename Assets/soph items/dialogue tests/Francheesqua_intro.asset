@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34ee349227d32df4580398eb667c4e5d, type: 3}
+  m_Name: Francheesqua_intro
+  m_EditorClassIdentifier: Assembly-CSharp::ConversationData
+  lines:
+  - speaker: {fileID: 11400000, guid: cfb194994a17ecd40a6902f62e2c1baa, type: 2}
+    text: Hey baby... How have you been?
+    options: []
+    recruitRat: 0
+    openSellScreen: 0
+    endConversation: 0
+  - speaker: {fileID: 11400000, guid: cfb194994a17ecd40a6902f62e2c1baa, type: 2}
+    text: I know times are rough right now, but you can get through it, promise.
+    options: []
+    recruitRat: 0
+    openSellScreen: 0
+    endConversation: 0
+  - speaker: {fileID: 11400000, guid: cfb194994a17ecd40a6902f62e2c1baa, type: 2}
+    text: In fact, why don't you show me what you've got?
+    options: []
+    recruitRat: 0
+    openSellScreen: 0
+    endConversation: 0
+  - speaker: {fileID: 11400000, guid: cfb194994a17ecd40a6902f62e2c1baa, type: 2}
+    text: You know, for this little business you're trying to start.
+    options:
+    - text: Alright. I'll get to cooking.
+      nextLineIndex: 0
+      assignQuest: 0
+      quest: {fileID: 11400000, guid: e8384880248cc924fba9bd485a3bf334, type: 2}
+      npc: {fileID: 0}
+      openSellScreen: 0
+      endConversation: 1
+      recruitRat: 0
+    recruitRat: 0
+    openSellScreen: 0
+    endConversation: 1

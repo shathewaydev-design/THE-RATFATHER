@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 428365d2c11ba4e46be272f31fe7be93, type: 3}
+  m_Name: talkToFrancheesqua
+  m_EditorClassIdentifier: Assembly-CSharp::Quest
+  questName: Talk to Francheesqua
+  requiredTrust: 0
+  requiredCompletedQuests: []
+  questIntro: {fileID: 11400000, guid: aef1c1e27a96f8f498b6caa43a4f39f2, type: 2}
+  questQuestioned: {fileID: 11400000, guid: dd6bee41078b53d45bdaf521d43252c4, type: 2}
+  questCompleted: {fileID: 11400000, guid: dd6bee41078b53d45bdaf521d43252c4, type: 2}
+  questOver: {fileID: 11400000, guid: dd6bee41078b53d45bdaf521d43252c4, type: 2}
+  requirements:
+  - {fileID: 11400000, guid: eb7b1ea0b7bfcb04d9c385f4a93568c6, type: 2}
+  objectives:
+  - Talk to Francheesqua
+  rewards: []
