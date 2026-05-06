@@ -39,22 +39,6 @@ public class PileOfScrapsScript : MonoBehaviour
 
 
 
-
-
-
-
-
-
-
-
-
-            //SoldatoScript.Instance.TakeDamage();
-
-
-            //Instantiate(scrapReplacement, transform.position, Quaternion.identity);
-            //Destroy(gameObject);
-
-
         }
     }
 

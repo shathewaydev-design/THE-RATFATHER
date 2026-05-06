@@ -52,16 +52,40 @@ public class SoldatoScript : MonoBehaviour
     public Texture[] bossHealth;
     public RawImage bossHealthImg;
 
+    float damageCooldown = 1.5f;   
+    float lastDamageTime = -999f;
+
+    public Animator animator;
 
     void Awake()
     {
         Instance = this;
+
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+
+        NavMeshHit hit;
+
+        if (NavMesh.SamplePosition(transform.position, out hit, 5f, NavMesh.AllAreas))
+        {
+            transform.position = hit.position;
+            agent.Warp(hit.position);
+        }
+        else
+        {
+            Debug.LogError("No NavMesh found near boss spawn point!");
+        }
+
+
+
         currentState = State.Chase;
+
+
+
+
 
     }
 
@@ -70,7 +94,7 @@ public class SoldatoScript : MonoBehaviour
     {
         stompTimer += Time.deltaTime;
         //chargeTimer += Time.deltaTime;
-        //Debug.Log("Charge Timer: " + chargeTimer);
+        Debug.Log("Charge Timer: " + chargeTimer);
         CheckHealth();
 
         // movement test
@@ -105,7 +129,13 @@ public class SoldatoScript : MonoBehaviour
 
     public void TakeDamage()
     {
-        
+        if (Time.time < lastDamageTime + damageCooldown)
+        {
+            return;
+        }
+
+        lastDamageTime = Time.time;
+
         health -= 4;
 
 
@@ -121,6 +151,9 @@ public class SoldatoScript : MonoBehaviour
     {
         currentState = State.Stunned;
 
+        //animator.SetBool("IsStunned", true);
+        animator.SetTrigger("StunTrigger");
+
         stunTimer = 0f;
 
         // stop everything immediately
@@ -130,11 +163,17 @@ public class SoldatoScript : MonoBehaviour
         //rb.linearVelocity = Vector3.zero;
 
         chargeTimer = 0f;
+        windupTimer = 0f;
+        dashTimer = 0f;
 
     }
 
     void Stunned()
     {
+
+
+        animator.SetBool("IsStunned", true);
+
         stunTimer += Time.deltaTime;
 
         agent.isStopped = true; 
@@ -143,9 +182,16 @@ public class SoldatoScript : MonoBehaviour
 
         if (stunTimer >= stunDuration)
         {
+
+            animator.SetBool("IsStunned", false);
+
+            animator.SetBool("IsCharging", false);
+
             stunTimer = 0f;
 
             currentState = State.Chase;
+
+            
         }
     }
 
@@ -164,6 +210,9 @@ public class SoldatoScript : MonoBehaviour
 
     void Chase()
     {
+        //animator.SetBool("StunnedOver", false);
+        animator.SetFloat("Speed", agent.velocity.magnitude);
+
         chargeLine.enabled = false; // to be safe, line is disabled in other states
 
         agent.isStopped = false;
@@ -182,6 +231,11 @@ public class SoldatoScript : MonoBehaviour
 
         if (CanCharge() && chargeTimer >= chargeCooldown)
         {
+            chargeTimer = 0f; 
+            chargeTimer = 0f; 
+            windupTimer = 0f;
+
+
             currentState = State.ChargeWindup;
             agent.isStopped = true;
         }
@@ -192,6 +246,7 @@ public class SoldatoScript : MonoBehaviour
     {
         if (chargeTimer >= 15)
         {
+            //animator.SetBool("TimerIsUp", true);
             return true;
         }
 
@@ -200,6 +255,9 @@ public class SoldatoScript : MonoBehaviour
 
     void Stomp()
     {
+
+        animator.SetTrigger("Stomp");
+
         chargeLine.enabled = false;
 
         agent.isStopped = true;
@@ -218,6 +276,8 @@ public class SoldatoScript : MonoBehaviour
             }
             else
             {
+                //animator.ResetTrigger("Stomp");
+                //animator.ResetTrigger("Walking");
                 chargeTimer = 0f;
                 currentState = State.Chase;
             }
@@ -228,6 +288,8 @@ public class SoldatoScript : MonoBehaviour
 
     void ChargeWindup()
     {
+
+        animator.SetBool("IsCharging", true);
 
         agent.isStopped = true;
         agent.velocity = Vector3.zero;
@@ -287,11 +349,26 @@ public class SoldatoScript : MonoBehaviour
 
     }
 
+
+    private bool chargeAnimPlayed;
+
     void ChargeDash()
     {
+
+        animator.SetTrigger("Charge");
+
         chargeLine.enabled = false;
 
         agent.isStopped = false;
+
+
+        // ONLY trigger animation once
+        if (!chargeAnimPlayed)
+        {
+            animator.SetTrigger("Charge");
+            chargeAnimPlayed = true;
+        }
+
 
         //agent.enabled = false;
 
@@ -304,7 +381,14 @@ public class SoldatoScript : MonoBehaviour
 
         if (dashTimer >= chargeDuration) 
         {
+            chargeAnimPlayed = false;
+
+            animator.SetBool("IsCharging", false);
+            //animator.SetBool("TimerIsUp", false);
+
             dashTimer = 0f;
+            chargeTimer = 0f;
+            windupTimer = 0f;
 
             //rb.linearVelocity = Vector3.zero; // check this
 
@@ -313,6 +397,10 @@ public class SoldatoScript : MonoBehaviour
 
             currentState = State.Chase;
         }
+
+        //dashTimer = 0f;
+
+
     }
 
 
@@ -376,8 +464,6 @@ public class SoldatoScript : MonoBehaviour
         currBossHealthImg += 1;
 
     }
-
-
 
 }
 
