@@ -52,7 +52,7 @@ namespace StarterAssets
 
         [Header("Player Grounded")]
         [Tooltip("If the character is grounded or not. Not part of the CharacterController built in grounded check")]
-        [SerializeField] private int maxJumps = 2;
+        private int maxJumps = 1;
         [SerializeField] private int jumpCount = 0;
         public bool Grounded = true;
 
@@ -409,6 +409,11 @@ namespace StarterAssets
                 _animator.SetFloat(_animIDSpeed, _animationBlend);
                 _animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
             }
+        }
+
+        public void EnableDoubleJump()
+        {
+            maxJumps = 2;
         }
 
         private void JumpAndGravity()

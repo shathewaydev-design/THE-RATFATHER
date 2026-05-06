@@ -37,6 +37,7 @@ public class UseButton : MonoBehaviour
             // Consume the cheese (can add more logic here, e.g., apply effects to the player)
             {
                 Debug.Log("Used cheese: " + cheeseSlot.finalCheeseData.cheeseName);
+                InventoryUIController.Instance.ApplyEffect();
                 inventorySystem.RemoveFinalCheese(cheeseSlot.finalCheeseData, 1);
                 // After using the cheese, you might want to refresh the UI or perform other actions    
             }
@@ -45,6 +46,8 @@ public class UseButton : MonoBehaviour
             
         }
     }
+
+    
     
     
     

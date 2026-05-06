@@ -1529,11 +1529,13 @@ MonoBehaviour:
   chargeCooldown: 5
   chargeSpeed: 15
   chargeDuration: 1.5
-  rb: {fileID: 89101512}
   currentState: 0
   chargeLine: {fileID: 89101511}
   maxChargeDistance: 10
   currCrane: {fileID: 0}
+  bossHealth: []
+  bossHealthImg: {fileID: 0}
+  animator: {fileID: 0}
 --- !u!64 &89101505
 MeshCollider:
   m_ObjectHideFlags: 0

@@ -215,6 +215,7 @@ GameObject:
   - component: {fileID: 8142202865715205031}
   - component: {fileID: 2615474620541480173}
   - component: {fileID: 6577235950706097051}
+  - component: {fileID: 1425760819272739578}
   m_Layer: 0
   m_Name: Cube.152
   m_TagString: Untagged
@@ -315,6 +316,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.02007533, y: 0.019781401, z: 0.20305535}
   m_Center: {x: 0.00006012534, y: 0.00026192822, z: 0.07962764}
+--- !u!208 &1425760819272739578
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2720112694311789119}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.035, y: 0.035, z: 0.102000006}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0.080000006}
+  m_TimeToStationary: 0.5
 --- !u!1 &4298141694082856200
 GameObject:
   m_ObjectHideFlags: 0
@@ -425,8 +442,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.033637695, y: 0.09250599, z: 0.06330443}
-  m_Center: {x: 0.0001937309, y: 0.001184298, z: -0.012759619}
+  m_Size: {x: 0.033637695, y: 0.10070713, z: 0.06330443}
+  m_Center: {x: 0.00019373104, y: 0.005284823, z: -0.012759652}
 --- !u!1 &4561490481773067033
 GameObject:
   m_ObjectHideFlags: 0
@@ -839,6 +856,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CraneScript
   craneAnimator: {fileID: 4901318913572285498}
+  hitBoss: 0
   hitWindowDuration: 2
 --- !u!95 &1202394749679089617
 Animator:
