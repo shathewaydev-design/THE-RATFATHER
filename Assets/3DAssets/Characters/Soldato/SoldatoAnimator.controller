@@ -518,9 +518,6 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: IsCharging
     m_EventTreshold: 0
-  - m_ConditionMode: 1
-    m_ConditionEvent: TimerIsUp
-    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -8576152766985898457}
   m_Solo: 0

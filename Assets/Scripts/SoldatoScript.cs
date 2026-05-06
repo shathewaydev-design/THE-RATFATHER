@@ -94,7 +94,7 @@ public class SoldatoScript : MonoBehaviour
     {
         stompTimer += Time.deltaTime;
         //chargeTimer += Time.deltaTime;
-        Debug.Log("Charge Timer: " + chargeTimer);
+        //Debug.Log("Charge Timer: " + chargeTimer);
         CheckHealth();
 
         // movement test
@@ -273,6 +273,9 @@ public class SoldatoScript : MonoBehaviour
             {
                 //Debug.Log("Player takes stomp damage");
                 // need to apply damage here
+
+                GameManager.Instance.TakeDamage();
+
             }
             else
             {

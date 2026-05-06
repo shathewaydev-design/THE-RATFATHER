@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Windows;
 
 public class GameManager : MonoBehaviour
@@ -13,6 +14,10 @@ public class GameManager : MonoBehaviour
     public ConversationData sellConvo;
 
     public bool firstBossDefeated;
+
+    public int currHealth = 0;
+    public Texture[] health;
+    public RawImage healthBar;
 
     private void Awake()
     {
@@ -28,7 +33,7 @@ public class GameManager : MonoBehaviour
             currency = 0,
             reputation = 0,
             currLevel = 1,
-            playerHealth = 30,
+            playerHealth = 100,
             recruitedRats = new List<NPCProfile>(),
             soldTo = new List<NPCProfile>()
 
@@ -45,10 +50,14 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UIManager.Instance.ToggleLog();
-        RecruitManager();
+        if (UIManager.Instance != null)
+        {
+            UIManager.Instance.ToggleLog();
+            RecruitManager();
+        }
 
-        
+
+        //Debug.Log("Player health: " + playerState.playerHealth);
     }
 
     public void increaseCurrency(int increaseBy)
@@ -87,6 +96,7 @@ public class GameManager : MonoBehaviour
         }
 
         playerState.playerHealth -= 5;
+        UpdatePlayerHealth();
 
 
     }
@@ -97,6 +107,8 @@ public class GameManager : MonoBehaviour
         // boss level right now, so can be specific to that.
 
         // for boss level -> fade to black, start the boss level over
+
+        Debug.Log("You Died!");
 
     }
 
@@ -141,7 +153,15 @@ public class GameManager : MonoBehaviour
 
     public void UpdatePlayerHealth()
     {
+        if (currHealth >= health.Length)
+        {
+            return;
+        }
+
+        healthBar.texture = health[currHealth];
+        currHealth += 1;
 
     }
+
 
 }
