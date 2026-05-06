@@ -50468,7 +50468,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &924073152
 Transform:
   m_ObjectHideFlags: 0
@@ -50496,12 +50496,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3d79f284c45545d4b60c53d97e1fda9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IngredientSpawner
-  spawnPoints:
-  - location: {fileID: 0}
-    useRandom: 0
-    possibleIngredients: []
-    fixedIngredient: {fileID: 0}
-    spawnEveryXDays: 0
+  spawnPoints: []
   clearBeforeSpawning: 1
   clearAtNight: 0
 --- !u!1001 &924724105
