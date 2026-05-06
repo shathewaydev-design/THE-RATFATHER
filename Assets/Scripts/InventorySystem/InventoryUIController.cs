@@ -123,10 +123,12 @@ public class InventoryUIController : MonoBehaviour
         }
         
     }
-    void ApplyEffect()//this will be redone later when we have an effect system, then this pass the data to that script later
+    public void ApplyEffect()//this will be redone later when we have an effect system, then this pass the data to that script later
     {
+        UseButton useButtonScript = useButton.GetComponent<UseButton>();
+        // useButtonScript.cheeseButtonRef.cheeseInventorySlot.finalCheeseData.grantsDoubleJump
         // Double jump
-        if (cheeseButtonRef.finalResultCheese.grantDoubleJump)
+        if (useButtonScript.cheeseButtonRef.cheeseInventorySlot.finalCheeseData.grantsDoubleJump)
         {
             ThirdPersonController.Instance.EnableDoubleJump();
         }
