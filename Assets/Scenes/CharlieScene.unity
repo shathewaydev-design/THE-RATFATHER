@@ -59780,7 +59780,7 @@ MonoBehaviour:
   Gravity: -15
   JumpTimeout: 0.3
   FallTimeout: 0.15
-  maxJumps: 3
+  maxJumps: 2
   jumpCount: 0
   Grounded: 1
   GroundedOffset: -0.14

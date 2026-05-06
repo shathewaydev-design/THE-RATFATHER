@@ -17,6 +17,6 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: af21f5339af7a4829b4f43668337b01c, type: 3}
   description: 
   basePrice: 0
-  grantsDoubleJump: 0
+  grantsDoubleJump: 1
   maxStack: 10
   stability: 2

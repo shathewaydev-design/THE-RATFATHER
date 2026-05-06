@@ -123,6 +123,14 @@ public class InventoryUIController : MonoBehaviour
         }
         
     }
+    void ApplyEffect()//this will be redone later when we have an effect system, then this pass the data to that script later
+    {
+        // Double jump
+        if (cheeseButtonRef.finalResultCheese.grantDoubleJump)
+        {
+            ThirdPersonController.Instance.EnableDoubleJump();
+        }
+    }
     private void ClearCheeseSelection()
     {
         selectedCheeses.Clear();
