@@ -48,12 +48,12 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-    IEnumerator Start()
-    {
-        yield return null; // wait 1 frame
+    //IEnumerator Start()
+    //{
+    //    yield return null; // wait 1 frame
 
-        ChangeQuestActive(allQuests[3]);
-    }
+    //    ChangeQuestActive(allQuests[3]);
+    //}
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     //void Start()

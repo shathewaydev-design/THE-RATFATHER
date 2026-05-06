@@ -45290,6 +45290,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8134069492650363691, guid: d27929d52515e314885af7dd02c9643a, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 64eb2c15a6efeda4fa327806a656ed0e, type: 2}
     - target: {fileID: 919132149155446097, guid: d27929d52515e314885af7dd02c9643a, type: 3}
       propertyPath: m_Name
       value: Soldato
