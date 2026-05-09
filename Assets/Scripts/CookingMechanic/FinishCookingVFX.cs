@@ -7,8 +7,11 @@ public class FinishCookingVFX : MonoBehaviour
     [SerializeField] private GameObject cookingPotVFX;    
     private void FinishCooking()
     {
-        CookingManager.Instance.StartAdditive();
-        Debug.Log("Finish cooking, start additive!");
+        //CookingManager.Instance.StartAddictive();
+        //CookingManager.Instance.FinishCooking();
+        CookingManager.Instance.CraftCheese();
+
+        Debug.Log("Finish cooking!");
     }    
 
 

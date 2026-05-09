@@ -25,7 +25,7 @@ public class HeatProgressTracker : MonoBehaviour
     private Coroutine  waitCoroutine= null;
     [SerializeField] private Transform belloObject;
 
-    [SerializeField] private GameObject cookingPotVFX;
+    //[SerializeField] private GameObject cookingPotVFX;
 
     void Start()
     {
@@ -118,11 +118,14 @@ public class HeatProgressTracker : MonoBehaviour
         donessProgressBar.fillAmount = 0f;
 
         heatStepUI.gameObject.SetActive(false);
+
+        CookingManager.Instance.StartAddictive();
+        /*
         //Play VFX
         cookingPotVFX.SetActive(true);
         Animator animator = cookingPotVFX.GetComponent<Animator>();
         animator.SetTrigger("StartVFX");//put animation event at the end of animation
-
+        */
         
     }    
     private IEnumerator WaitForNextPump()

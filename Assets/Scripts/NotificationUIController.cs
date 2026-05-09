@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -10,11 +11,13 @@ public class NotificationUIController : MonoBehaviour
     [SerializeField]
     private RectTransform panel;
 
-    [SerializeField]
-    private TextMeshProUGUI messageText;
+    //[SerializeField] private Text messageText;
+    [SerializeField] private TextMeshProUGUI messageText;
+    
 
     private Vector2 hiddenPos;
     private Vector2 shownPos;
+    private Animator notificationController;
 
     private void Awake()
     {
@@ -23,7 +26,12 @@ public class NotificationUIController : MonoBehaviour
         hiddenPos = new Vector2(600, 0);
         shownPos = new Vector2(0, 0);
 
-        panel.anchoredPosition = hiddenPos;
+        //panel.anchoredPosition = hiddenPos;
+    }
+    void Start()
+    {
+        notificationController = GetComponent<Animator>();
+        
     }
 
     public void ShowNotification(string message)
@@ -40,10 +48,12 @@ public class NotificationUIController : MonoBehaviour
     {
         messageText.text = message;
 
-        panel.anchoredPosition = shownPos;
+        // panel.anchoredPosition = shownPos;
 
-        yield return new WaitForSeconds(2f);
+        // yield return new WaitForSeconds(2f);
 
-        panel.anchoredPosition = hiddenPos;
+        // panel.anchoredPosition = hiddenPos;
+        notificationController.SetTrigger("appear");
+        yield return new WaitForSeconds(0.1f);
     }
 }

@@ -53,6 +53,7 @@ public class PickUpObjectScript : MonoBehaviour, IInteractable
         //Debug.Log(cheeseIngredientData);
         InventorySystem.Instance.AddItem(cheeseIngredientData);
         InventorySystem.Instance.AddIngredientItem(cheeseIngredientData);
+        NotificationUIController.Instance.ShowNotification($"{cheeseIngredientData.ingredientName} is added");
         Destroy(gameObject);
     }
     

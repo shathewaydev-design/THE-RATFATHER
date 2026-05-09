@@ -10,7 +10,7 @@ public enum CookingStepType
     Milk,
     Flavor,
     Heat,
-    Additive
+    Addictive
 }
 
 [System.Serializable]
@@ -51,6 +51,7 @@ public class CookingManager : MonoBehaviour, IInteractable
     public List<IngredientButton> selectedIngredients = new List<IngredientButton>();//store selected ingredients that are selected when player click on IngredientButton.
     public List<CheeseButton> selectedCheeses = new List<CheeseButton>();//store selected cheeses that are selected when player click on CheeseButton.
     public List<CheeseRecipeTemplate> allRecipes;//all cheese recipes
+    private CheeseRecipeTemplate currentRecipe;
 
     [Header("UI")]
     public Animator promptAnimator;
@@ -60,6 +61,8 @@ public class CookingManager : MonoBehaviour, IInteractable
     public GameObject recipeMenu;
     public GameObject ingredientInventoryPanel;
     [SerializeField] private GameObject cookButtonUI;
+    [Header("VFX/SFX")]
+    [SerializeField] private GameObject cookingPotVFX;
     
     private void Awake()//this is necessary to avoid bugs
     {
@@ -120,8 +123,7 @@ public class CookingManager : MonoBehaviour, IInteractable
 
     public void ExitCookingMode()
     {
-        selectedIngredients.Clear();//clear selected ingredients in case player exit cooking mode in the middle of cooking process
-
+        selectedIngredients.Clear();
         playerGeo.SetActive(true);
 
         playerCamera.Follow = player.transform;
@@ -129,11 +131,12 @@ public class CookingManager : MonoBehaviour, IInteractable
         mainCamera.transform.rotation = savedMainCameraRotation;
         
         ResetSteps();
-    //////UI//////
+        ResetUI();
+    /*//////UI//////
         recipeMenu.SetActive(false);
         ingredientInventoryPanel.SetActive(false);
         inventoryBigPanel.SetActive(false);
-        cookButtonUI.SetActive(false);
+        cookButtonUI.SetActive(false);*/
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -206,7 +209,7 @@ public class CookingManager : MonoBehaviour, IInteractable
         SetStep(2);
     }
 
-    public void StartAdditive()
+    public void StartAddictive()
     {
         
         SetStep(3);
@@ -215,14 +218,14 @@ public class CookingManager : MonoBehaviour, IInteractable
 
     public void FinishCooking()
     {
-        CraftCheese();
-        foreach (IngredientButton ingredient in selectedIngredients)
-        {
-            ingredient.RemoveIngredient();
-        }
+        CheckRecipe();
+        // foreach (IngredientButton ingredient in selectedIngredients)
+        // {
+        //     ingredient.RemoveIngredient();
+        // }
         
         //thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
-        ExitCookingMode();
+        //ExitCookingMode();
     }
 /////CHEESE RECIPES AND CRAFTING CHEESE////
     
@@ -264,22 +267,55 @@ public class CookingManager : MonoBehaviour, IInteractable
 
         return true;
     }
-    public void CraftCheese()//CookingManager checks if the selected ingredients match any recipe, 
-    // if it does, it gives the player the resulting cheese.
+    public void CheckRecipe()//check for valid recipe, then give player cheese
     {
-        CheeseRecipeTemplate recipe = GetMatchingRecipe(selectedIngredients);
+        currentRecipe = GetMatchingRecipe(selectedIngredients);//cache this recipe
         
-        if (recipe == null)
+        if (currentRecipe == null)
         {
             Debug.Log("Invalid recipe");
             return;
         }
+        
+        //ResetUI();
+        ResetSteps();
+        //Play VFX
+        cookingPotVFX.SetActive(true);
+        Animator animator = cookingPotVFX.GetComponent<Animator>();
+        animator.SetTrigger("StartVFX");//put animation event at the end of animation
+        //after animation finishes, runs CraftCheese()
+    }
+    public void CraftCheese()//CookingManager checks if the selected ingredients match any recipe, 
+    // if it does, it gives the player the resulting cheese.
+    {
+        if (currentRecipe == null)
+        {
+            Debug.LogWarning("No recipe cached");
+            return;
+        }
+        
+        // if (recipe == null)
+        // {
+        //     Debug.Log("Invalid recipe");
+        //     return;
+        // }
 
         //ConsumeSelectedIngredients();
 
-        GivePlayerCheese(recipe.resultCheese);
+        
 
-        Debug.Log("Crafted: " + recipe.resultCheese.cheeseName);
+        GivePlayerCheese(currentRecipe.resultCheese);
+        NotificationUIController.Instance.ShowNotification($"{currentRecipe.resultCheese.cheeseName} is added");
+        //show UI notification then remove the cached selectedIngredients
+        foreach (IngredientButton ingredient in selectedIngredients)
+        {
+            ingredient.RemoveIngredient();
+        }
+        Debug.Log("Crafted: " + currentRecipe.resultCheese.cheeseName);
+        //selectedIngredients.Clear();
+
+        ExitCookingMode();
+        currentRecipe = null;
     }
     
     public void GivePlayerCheese(FinalResultCheese cheese)
@@ -328,6 +364,14 @@ public class CookingManager : MonoBehaviour, IInteractable
             promptAnimator.SetTrigger("UIdisappearing");
         }
         
+    }
+    void ResetUI()
+    {
+        //////UI//////
+        recipeMenu.SetActive(false);
+        ingredientInventoryPanel.SetActive(false);
+        inventoryBigPanel.SetActive(false);
+        cookButtonUI.SetActive(false);
     }
     
     private void ResetSteps()

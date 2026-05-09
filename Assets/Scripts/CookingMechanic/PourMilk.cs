@@ -47,6 +47,17 @@ public class PourMilkStep : MonoBehaviour
         }
 
         milkCarton.Rotate(Vector3.forward * input * rotateSpeed * Time.deltaTime);
+
+        // Clamp rotation
+        Vector3 angles = milkCarton.localEulerAngles;
+
+        // Convert 0-360 into -180 to 180
+        if (angles.z > 180f)
+            angles.z -= 360f;
+
+        angles.z = Mathf.Clamp(angles.z, 0f, 100f);
+
+        milkCarton.localEulerAngles = angles;
     }
 
     void HandlePour()
