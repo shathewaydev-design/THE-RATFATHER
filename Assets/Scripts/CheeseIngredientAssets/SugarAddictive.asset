@@ -15,7 +15,7 @@ MonoBehaviour:
   itemID: sugarAddictive
   description: This will make customers come back for more!
   ingredientName: Sugar
-  icon: {fileID: 21300000, guid: a28c82ab4c1e14e2c803152267662986, type: 3}
+  icon: {fileID: 1180879489, guid: 6778b1f5fdd0942b4b4cc6ce6e81e311, type: 3}
   rarity: 0
   type: 2
   price: 100

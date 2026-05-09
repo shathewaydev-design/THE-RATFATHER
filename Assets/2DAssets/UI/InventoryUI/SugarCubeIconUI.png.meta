@@ -100,9 +100,9 @@ TextureImporter:
       name: SugarCubeIconUI_0
       rect:
         serializedVersion: 2
-        x: 52
+        x: 110
         y: 1720
-        width: 358
+        width: 300
         height: 320
       alignment: 0
       pivot: {x: 0.5, y: 0.5}

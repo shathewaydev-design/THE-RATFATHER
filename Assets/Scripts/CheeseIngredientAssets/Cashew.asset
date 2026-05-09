@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f73af059b830c41b381bc1c07d47d9e9, type: 3}
-  m_Name: FreshCowMilk
+  m_Name: Cashew
   m_EditorClassIdentifier: Assembly-CSharp::CheeseIngredientData
-  itemID: FreshCowMilk
-  description: New Cow Milk
-  ingredientName: Fresh Cow Milk
+  itemID: Cashew
+  description: Cashew
+  ingredientName: Cashew
   icon: {fileID: -361980987, guid: 4361f1649a574439aafbb7a557b55a69, type: 3}
   rarity: 1
-  type: 0
+  type: 1
   price: 
   basePrice: 0
   maxStack: 10

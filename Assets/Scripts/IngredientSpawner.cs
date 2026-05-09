@@ -25,7 +25,7 @@ public class IngredientSpawner : MonoBehaviour
     public bool clearBeforeSpawning = true;
     public bool clearAtNight = false;
 
-    private void OnEnable()
+    /*private void OnEnable()
     {
 
         if (DayNightManager.Instance == null)
@@ -48,6 +48,23 @@ public class IngredientSpawner : MonoBehaviour
 
             if (clearAtNight)
                 DayNightManager.Instance.OnNightStart -= ClearIngredients;
+        }
+    }*/
+    private void Start()
+    {
+        if (DayNightManager.Instance != null)
+        {
+            DayNightManager.Instance.OnNewDay += HandleNewDay;
+
+            if (clearAtNight)
+                DayNightManager.Instance.OnNightStart += ClearIngredients;
+
+            // Spawn immediately for Day 1
+            HandleNewDay();
+        }
+        else
+        {
+            Debug.LogWarning("DayNightManager not ready yet!");
         }
     }
     void HandleNewDay()

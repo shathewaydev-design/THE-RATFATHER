@@ -15,7 +15,7 @@ MonoBehaviour:
   itemID: featherFlavor
   description: A light feather. Maybe using this might make you become lighter
   ingredientName: Feather
-  icon: {fileID: 21300000, guid: 1b096ced756f04435a5bea19065dbdad, type: 3}
+  icon: {fileID: -969290372, guid: 8d91357996e7540b9be70982afa7a121, type: 3}
   rarity: 0
   type: 1
   price: 100
