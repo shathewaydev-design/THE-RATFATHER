@@ -249,19 +249,21 @@ public class UIManager : MonoBehaviour
 
     public void ToggleSellScreen()
     {
+        Debug.Log("is selling right now");
 
-        bool isActive = sellingPanel.activeSelf;
-
-        if (isActive)
+        if (InventoryUIController.Instance.isOpen)
         {
-            //player.enabled = true;
-            sellingPanel.SetActive(false);
+            InventoryUIController.Instance.ToggleInventory();
             InventoryUIController.Instance.isSelling = false;//turn off selling mode after selling 1 cheese
+            InventoryUIController.Instance.isConsuming = true;//leave selling mode: turn off selling mode after selling 1 cheese
             ClearSellUI();
             return;
         }
 
-        InventoryUIController.Instance.isSelling = true;//make sure sell button run SellCheese()
+        InventoryUIController.Instance.isSelling = true;//enter selling mode: make sure sell button run SellCheese()
+        InventoryUIController.Instance.isConsuming = false;//make sure sell button run SellCheese()
+        InventoryUIController.Instance.UpdateUseButton();//make sure sell button run SellCheese()
+
         //player.enabled = false;
 
         Debug.Log("opening sell screen! Press S to sell and B to close");

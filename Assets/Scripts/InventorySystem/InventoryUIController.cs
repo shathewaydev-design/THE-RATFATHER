@@ -13,7 +13,7 @@ public class InventoryUIController : MonoBehaviour
     public GameObject useButton;//ref to use button to pass to cheese button
     
     public ThirdPersonController thirdPersonController;
-    private bool isOpen = false;
+    public bool isOpen = false;
     [Header("Input")]
     public List<CheeseButton> selectedCheeses = new List<CheeseButton>();//store selected cheeses that are selected when player click on CheeseButton.
     [SerializeField] private UI_ItemInfoPanel itemInfoPanel;//data for more details textBox 

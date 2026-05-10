@@ -70,9 +70,14 @@ public class UseButton : MonoBehaviour
             {
                 Debug.Log("Sold cheese: " + cheeseSlot.finalCheeseData.cheeseName);
                 //InventoryUIController.Instance.ApplyEffect();
+                DialogueManager.Instance.ResumeDialogue(true);//continue dialogue
+                UIManager.Instance.ToggleSellScreen();
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
                 inventorySystem.RemoveFinalCheese(cheeseSlot.finalCheeseData, 1);
                 // After using the cheese, you might want to refresh the UI or perform other actions    
             }
+            
             
             InventoryUIController.Instance.useButton.SetActive(false);
             
