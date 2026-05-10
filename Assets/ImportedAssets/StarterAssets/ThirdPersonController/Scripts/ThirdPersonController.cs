@@ -112,6 +112,9 @@ namespace StarterAssets
         public InputAction mouseClick;//press (Left) Mouse Button
         public InputAction mousePosition;//mouse position for dragging objects
         public InputAction openInventory;//press Tab
+
+        public InputAction toggleCursor;//unlock cursor for debugging
+        public event Action OnToggleCursor;
         public event Action<Vector2> OnMousePosition;
         public event Action<bool> OnMouseDrag;
 
@@ -121,7 +124,7 @@ namespace StarterAssets
         #if ENABLE_INPUT_SYSTEM
             tiltLeft.performed += OnTiltLeftPerformed;
             tiltRight.performed += OnTiltRightPerformed;
-            stopInteract.performed += OnStopInteractPerformed;
+            //stopInteract.performed += OnStopInteractPerformed;
             sprinkle.performed += OnSprinklePerformed;
             openInventory.performed += OnOpenInventoryPerformed;
 
@@ -218,12 +221,25 @@ namespace StarterAssets
 
             tiltLeft = cookingMap.FindAction("TiltLeft");
             tiltRight = cookingMap.FindAction("TiltRight");
-            stopInteract = cookingMap.FindAction("StopInteract");
+            //stopInteract = cookingMap.FindAction("StopInteract");
             sprinkle = cookingMap.FindAction("Sprinkle");
             var mouseMap = _playerInput.actions.FindActionMap("Mouse");
             mouseClick = mouseMap.FindAction("LeftClick");
             mousePosition = mouseMap.FindAction("MousePosition");
 
+            var globalMap = _playerInput.actions.FindActionMap("Global");
+            if (globalMap != null)
+            {
+                globalMap.Enable();
+
+                stopInteract = globalMap.FindAction("StopInteract");
+
+                if (stopInteract != null)
+                    stopInteract.performed += OnStopInteractPerformed;
+            }
+            toggleCursor = globalMap.FindAction("ToggleCursor");
+
+            toggleCursor.performed += ctx => OnToggleCursor?.Invoke();
 
             // OPTIONAL: if you have interact in Player map
             var playerMap = _playerInput.actions.FindActionMap("Player");
