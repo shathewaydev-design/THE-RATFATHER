@@ -73,11 +73,21 @@ public class InventoryUIController : MonoBehaviour
         //     ClearCheeseSelection();
         // }
 
-        Cursor.visible = isOpen;
-
-        Cursor.lockState = isOpen
-            ? CursorLockMode.None//use this if isOpen is trur
-            : CursorLockMode.Locked;//use this if isOpen is false
+        if (isOpen)
+        {
+            CursorManager.Instance.UnlockCursor();
+        }
+        else
+        {
+            if (DialogueManager.Instance.isDialogueActive)
+            {
+                CursorManager.Instance.UnlockCursor();
+            }
+            else
+            {
+                CursorManager.Instance.LockCursor();
+            }
+        }
     }
     public void OpenIngredientInventory()
     {

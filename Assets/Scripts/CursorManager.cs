@@ -5,7 +5,7 @@ using StarterAssets;
 public class CursorManager : MonoBehaviour
 {
     public static CursorManager Instance;
-    private bool cursorUnlocked;
+    private bool cursorUnlocked= false;
     public ThirdPersonController thirdPersonController;
 
     private void Awake()
