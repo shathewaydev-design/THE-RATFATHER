@@ -8,6 +8,7 @@ public class RecipeMenuUI : MonoBehaviour
     private IngredientButton selectedMilk;
     private IngredientButton selectedFlavor;
     private IngredientButton selectedAddictive;
+    private CheeseRecipeTemplate currentRecipe;//for caching recipe and check if player has selected correct ingredients
 
     public void SelectIngredient(IngredientButton button)
     {
@@ -53,7 +54,7 @@ public class RecipeMenuUI : MonoBehaviour
 
     void CheckReady()
     {
-
+        
         bool ready = selectedMilk != null && selectedFlavor != null && selectedAddictive != null;
         cookButton.interactable = ready;
 
@@ -61,6 +62,13 @@ public class RecipeMenuUI : MonoBehaviour
 
     public void OnCookPressed()
     {
+        currentRecipe = CookingManager.Instance.GetMatchingRecipe(CookingManager.Instance.selectedIngredients);//cache this recipe
+        if(currentRecipe == null)
+        {
+            NotificationUIController.Instance.ShowNotification("Invalid recipe");
+            return;
+        }
+        // Valid recipe
         CookingManager.Instance.StartPourMilk();
         cookButton.interactable = false;
 

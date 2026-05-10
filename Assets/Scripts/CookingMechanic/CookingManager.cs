@@ -43,8 +43,6 @@ public class CookingManager : MonoBehaviour, IInteractable
     private int currentStepIndex = -1;
 
     [Header("Input")]
-    // [SerializeField] private float holdTime = 1.0f;
-    // [SerializeField] private float currentHoldTime = 0f;
     public ThirdPersonController thirdPersonController;
     private bool playerInRange = false;
     bool hasInteracted = false;
@@ -61,6 +59,7 @@ public class CookingManager : MonoBehaviour, IInteractable
     public GameObject recipeMenu;
     public GameObject ingredientInventoryPanel;
     [SerializeField] private GameObject cookButtonUI;
+    [SerializeField] private GameObject exitCookingModeUI;
     [Header("VFX/SFX")]
     [SerializeField] private GameObject cookingPotVFX;
     
@@ -81,10 +80,10 @@ public class CookingManager : MonoBehaviour, IInteractable
     void Update()
     {
 
-        if(thirdPersonController.stopInteract.WasPressedThisFrame())
-        {
-            ExitCookingMode();
-        }
+        // if(thirdPersonController.stopInteract.WasPressedThisFrame())
+        // {
+        //     ExitCookingMode();
+        // }
 
         
     }
@@ -104,6 +103,7 @@ public class CookingManager : MonoBehaviour, IInteractable
         playerGeo.SetActive(false);
 
         inventoryBigPanel.SetActive(true);
+        exitCookingModeUI.SetActive(true);
 
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
@@ -123,8 +123,17 @@ public class CookingManager : MonoBehaviour, IInteractable
 
     public void ExitCookingMode()
     {
+        
+        //reset ingredient button
+        foreach (IngredientButton ingredient in selectedIngredients)
+        {
+            ingredient.ResetSelectionBool();
+            Debug.Log("Reset bool");
+        }
         selectedIngredients.Clear();
         playerGeo.SetActive(true);
+
+        exitCookingModeUI.SetActive(false);
 
         playerCamera.Follow = player.transform;
         mainCamera.transform.position = savedMainCameraPosition;
@@ -219,13 +228,7 @@ public class CookingManager : MonoBehaviour, IInteractable
     public void FinishCooking()
     {
         CheckRecipe();
-        // foreach (IngredientButton ingredient in selectedIngredients)
-        // {
-        //     ingredient.RemoveIngredient();
-        // }
         
-        //thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
-        //ExitCookingMode();
     }
 /////CHEESE RECIPES AND CRAFTING CHEESE////
     
@@ -294,16 +297,6 @@ public class CookingManager : MonoBehaviour, IInteractable
             return;
         }
         
-        // if (recipe == null)
-        // {
-        //     Debug.Log("Invalid recipe");
-        //     return;
-        // }
-
-        //ConsumeSelectedIngredients();
-
-        
-
         GivePlayerCheese(currentRecipe.resultCheese);
         NotificationUIController.Instance.ShowNotification($"{currentRecipe.resultCheese.cheeseName} is added");
         //show UI notification then remove the cached selectedIngredients
@@ -312,7 +305,6 @@ public class CookingManager : MonoBehaviour, IInteractable
             ingredient.RemoveIngredient();
         }
         Debug.Log("Crafted: " + currentRecipe.resultCheese.cheeseName);
-        //selectedIngredients.Clear();
 
         ExitCookingMode();
         currentRecipe = null;

@@ -11,7 +11,7 @@ public class IngredientButton : MonoBehaviour
     public InventorySlot inventorySlot;//this locally stores inventory slot data/ingredient data.
 
     private InventorySystem inventorySystem;
-    private bool isSelected = false;
+    public bool isSelected = false;
 
     void Start()
     {
@@ -40,6 +40,10 @@ public class IngredientButton : MonoBehaviour
             CacheSelectedIngredient();
         }
         
+    }
+    public void ResetSelectionBool()
+    {
+        isSelected = false;
     }
     public void CacheSelectedIngredient()
     {
