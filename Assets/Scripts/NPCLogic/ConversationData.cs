@@ -54,8 +54,8 @@ public class DialogueOption
         if (recruitRat)
         {
             //UIManager.Instance.AddToRecruitLog(npc);
-            GameManager.Instance.RecruitRat(npc);
-           
+            GameManager.Instance.RecruitRat(npc); // Change location and change to invetory
+
         }
     }
 
@@ -65,7 +65,7 @@ public class DialogueOption
         {
 
             DialogueManager.Instance.PauseDialogue();
-            UIManager.Instance.AddToSoldLog(npc); // might have to change location location
+            UIManager.Instance.AddToSoldLog(npc); // Change location and change to invetory
             UIManager.Instance.ToggleSellScreen();
             // ui manager open screen
         }
