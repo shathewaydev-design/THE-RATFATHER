@@ -15,7 +15,7 @@ MonoBehaviour:
   itemID: Cashew
   description: Cashew
   ingredientName: Cashew
-  icon: {fileID: -361980987, guid: 4361f1649a574439aafbb7a557b55a69, type: 3}
+  icon: {fileID: 21300000, guid: 1196a90066fe8421a92333ed2c9c8a38, type: 3}
   rarity: 1
   type: 1
   price: 

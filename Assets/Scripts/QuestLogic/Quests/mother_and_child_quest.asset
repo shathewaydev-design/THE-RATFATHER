@@ -20,7 +20,7 @@ MonoBehaviour:
   questCompleted: {fileID: 11400000, guid: 14cad08c04e5f39438c3429d50604e34, type: 2}
   questOver: {fileID: 11400000, guid: 631bfb36d64e5dd4082edd3ec3b6c242, type: 2}
   requirements:
-  - {fileID: 11400000, guid: a23da532701dc9442b300d89fe402f0f, type: 2}
+  - {fileID: 11400000, guid: 208447ae855de48ddb604602399d87a9, type: 2}
   objectives:
   - Get some milk for the mother's child.
   rewards:

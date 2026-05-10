@@ -131,7 +131,7 @@ public class GameManager : MonoBehaviour
 
     //}
 
-    public void SellItem(CheeseIngredientData cheese)
+    public void SellItem(FinalResultCheese cheese)
     {
         // logic will become more complicated later on
         // can check if rat wants the cheese here later
@@ -140,8 +140,8 @@ public class GameManager : MonoBehaviour
         // sell cheese here, increase reputation
         // remove specific cheese from inventory
 
-        InventorySystem.Instance.RemoveItem(cheese);
-        increaseCurrency(int.Parse(cheese.price));
+        InventorySystem.Instance.RemoveFinalCheese(cheese, 1);
+        //increaseCurrency(int.Parse(cheese.basePrice));
         DialogueManager.Instance.ResumeDialogue(true);
         UIManager.Instance.ToggleSellScreen();
     

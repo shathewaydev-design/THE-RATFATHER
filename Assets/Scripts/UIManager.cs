@@ -40,12 +40,11 @@ public class UIManager : MonoBehaviour
 
     private List<Button> optionButtons = new List<Button>();
 
-    public ThirdPersonController player;
 
     private int selectedIndex = 0;
     private Action<int> currentCallback;
 
-
+    // [SerializedField] private InventoryUIController inventoryUIController;
 
     void Awake()
     {
@@ -68,26 +67,26 @@ public class UIManager : MonoBehaviour
             return;
         }
 
-        if (optionsPanel.activeSelf && optionButtons.Count > 0)
-        {
-            // Navigate options
-            if (Keyboard.current.downArrowKey.wasPressedThisFrame)
-            {
-                selectedIndex = (selectedIndex + 1) % optionButtons.Count;
-                UpdateButtonHighlight();
-            }
-            else if (Keyboard.current.upArrowKey.wasPressedThisFrame)
-            {
-                selectedIndex = (selectedIndex - 1 + optionButtons.Count) % optionButtons.Count;
-                UpdateButtonHighlight();
-            }
+        // if (optionsPanel.activeSelf && optionButtons.Count > 0)
+        // {
+        //     // Navigate options
+        //     if (Keyboard.current.downArrowKey.wasPressedThisFrame)
+        //     {
+        //         selectedIndex = (selectedIndex + 1) % optionButtons.Count;
+        //         UpdateButtonHighlight();
+        //     }
+        //     else if (Keyboard.current.upArrowKey.wasPressedThisFrame)
+        //     {
+        //         selectedIndex = (selectedIndex - 1 + optionButtons.Count) % optionButtons.Count;
+        //         UpdateButtonHighlight();
+        //     }
 
-            // Select option
-            if (Keyboard.current.enterKey.wasPressedThisFrame)
-            {
-                currentCallback?.Invoke(selectedIndex);
-            }
-        }
+        //     // Select option
+        //     if (Keyboard.current.enterKey.wasPressedThisFrame)
+        //     {
+        //         currentCallback?.Invoke(selectedIndex);
+        //     }
+        // }
 
         // SELLING SCREEN IS OPEN
         if (sellingPanel.activeSelf && sellButtons.Count > 0)
@@ -255,19 +254,22 @@ public class UIManager : MonoBehaviour
 
         if (isActive)
         {
-            player.enabled = true;
+            //player.enabled = true;
             sellingPanel.SetActive(false);
+            InventoryUIController.Instance.isSelling = false;//turn off selling mode after selling 1 cheese
             ClearSellUI();
             return;
         }
 
-        player.enabled = false;
+        InventoryUIController.Instance.isSelling = true;//make sure sell button run SellCheese()
+        //player.enabled = false;
 
         Debug.Log("opening sell screen! Press S to sell and B to close");
-        sellingPanel.SetActive(true);
+        //sellingPanel.SetActive(true);
+        InventoryUIController.Instance.ToggleInventory();
 
         justOpenedSellScreen = true;
-        PopulateSellUI();
+        //PopulateSellUI();
 
     }
 
@@ -281,37 +283,37 @@ public class UIManager : MonoBehaviour
         sellButtons.Clear();
     }
 
-    void PopulateSellUI()
-    {
-        foreach (var pair in InventorySystem.Instance.Inventory)
-        {
-            var cheese = pair.Key;
-            int count = pair.Value;
+    // void PopulateSellUI()
+    // {
+    //     foreach (var pair in InventorySystem.Instance.Inventory)
+    //     {
+    //         var cheese = pair.Key;
+    //         int count = pair.Value;
 
-            if (cheese.ingredientName == "Low Quality Cheese") // temp filter
-            {
-                for (int i = 0; i < count; i++)
-                {
-                    var newButton = Instantiate(sellButton, sellingPanel.transform);
+    //         if (cheese.ingredientName == "Low Quality Cheese") // temp filter
+    //         {
+    //             for (int i = 0; i < count; i++)
+    //             {
+    //                 var newButton = Instantiate(sellButton, sellingPanel.transform);
 
-                    var text = newButton.GetComponentInChildren<TextMeshProUGUI>();
-                    text.text = "sell: " + cheese.ingredientName;
+    //                 var text = newButton.GetComponentInChildren<TextMeshProUGUI>();
+    //                 text.text = "sell: " + cheese.ingredientName;
 
 
-                    var button = newButton.GetComponent<Button>();
-                    sellButtons.Add(button);
+    //                 var button = newButton.GetComponent<Button>();
+    //                 sellButtons.Add(button);
 
-                    var cheeseCopy = cheese; // prevent closure bug
+    //                 var cheeseCopy = cheese; // prevent closure bug
 
-                    button.onClick.AddListener(() => GameManager.Instance.SellItem(cheeseCopy));
+    //                 button.onClick.AddListener(() => GameManager.Instance.SellItem(cheeseCopy));
 
-                }
-            }
-        }
+    //             }
+    //         }
+    //     }
 
-        sellSelectedIndex = 0;
-        UpdateSellHighlight();
-    }
+    //     sellSelectedIndex = 0;
+    //     UpdateSellHighlight();
+    // }
 
     public void ToggleLog()
     {

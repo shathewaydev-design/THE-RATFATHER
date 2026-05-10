@@ -17,6 +17,9 @@ public class InventoryUIController : MonoBehaviour
     [Header("Input")]
     public List<CheeseButton> selectedCheeses = new List<CheeseButton>();//store selected cheeses that are selected when player click on CheeseButton.
     [SerializeField] private UI_ItemInfoPanel itemInfoPanel;//data for more details textBox 
+    [Header("Selling/Consuming")]
+    public bool isSelling = false;
+    public bool isConsuming = true;
 
     void Awake()
     {
@@ -45,7 +48,7 @@ public class InventoryUIController : MonoBehaviour
   
     }
 
-    private void ToggleInventory()
+    public void ToggleInventory()
     {
         isOpen = !isOpen;
         itemInfoPanel.Hide();
@@ -117,6 +120,8 @@ public class InventoryUIController : MonoBehaviour
         if (selectedCheeses.Count > 0)
         {
             UseButton useButtonScript = useButton.GetComponent<UseButton>();
+            useButtonScript.isSelling = isSelling;
+            useButtonScript.isConsuming = isConsuming;
             useButtonScript.cheeseButtonRef = selectedCheeses[0];//pass the reference of the selected cheese button to the use button
             //note about this: if we want to support multiple cheese selection in the future, 
             // we can modify the use button to handle multiple cheeses instead of just one;

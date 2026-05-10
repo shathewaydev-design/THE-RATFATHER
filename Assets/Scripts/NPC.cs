@@ -18,8 +18,8 @@ public class NPC : MonoBehaviour, IInteractable
     // private Coroutine exitRoutine; // for some reason prompt ui is acting up, so this is an attempt to fix that
 
     [Header("Interaction")]
-    [SerializeField] private float holdTime = 1.0f;
-    [SerializeField] private float currentHoldTime = 0f;
+    // [SerializeField] private float holdTime = 1.0f;
+    // [SerializeField] private float currentHoldTime = 0f;
     private bool playerInRange = false;
 
     [Header("UI")] 

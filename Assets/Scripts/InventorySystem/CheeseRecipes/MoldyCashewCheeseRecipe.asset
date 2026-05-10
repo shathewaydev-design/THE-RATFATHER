@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afb98a8dbf6864716942009340b32fae, type: 3}
+  m_Name: MoldyCashewCheeseRecipe
+  m_EditorClassIdentifier: Assembly-CSharp::CheeseRecipeTemplate
+  cheeseName: MoldyWingCheese
+  icon: {fileID: 21300000, guid: b145089651b4c40f8a784299fa80e83f, type: 3}
+  requiredIngredients:
+  - {fileID: 11400000, guid: 61f98e36248e04060899e1cf2b0898ff, type: 2}
+  - {fileID: 11400000, guid: 554e8a2ea4b5e4c16af6be62fd31b0c5, type: 2}
+  - {fileID: 11400000, guid: ed50e61f9e5dc488188cf5c9df08ef36, type: 2}
+  resultCheese: {fileID: 11400000, guid: fa691ec12a0304e26ba019ca699dec8c, type: 2}
+  stability: 0

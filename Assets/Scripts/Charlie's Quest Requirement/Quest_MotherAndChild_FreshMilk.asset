@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35bb55c571ba9cd43b355daf228e0ebd, type: 3}
+  m_Name: Quest_MotherAndChild_FreshMilk
+  m_EditorClassIdentifier: Assembly-CSharp::ItemRequirement
+  item: {fileID: 11400000, guid: 8b19c1d70f0c444c982b3174595004da, type: 2}

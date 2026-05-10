@@ -15,13 +15,15 @@ public class DialogueManager : MonoBehaviour
     public int currentLineIndex = 0;
 
     public UIManager UIManager;
-    public ThirdPersonController player;
     //private Queue<string> lines = new Queue<string>();
     public bool isDialogueActive = false;
     private bool canAdvance = true; // help w typewriter effect -- always true for now
                                     // ^^ also can handle in another script, keep in mind for now
     private bool justStartedDialogue = false;
     public bool isPaused = false;
+    
+    [Header("Input")]//player inputs
+    public ThirdPersonController thirdPersonController;
 
 
     private void Awake()
@@ -40,7 +42,6 @@ public class DialogueManager : MonoBehaviour
     {
         
         isPaused = true;
-        player.enabled = false;
     }
 
     public void ResumeDialogue(bool advanceLine = false)
@@ -54,7 +55,6 @@ public class DialogueManager : MonoBehaviour
                 currentLineIndex++; // advance once
             }
 
-            player.enabled = false;
             ShowCurrentLine();
         }
     }
@@ -71,9 +71,13 @@ public class DialogueManager : MonoBehaviour
         }
 
         justStartedDialogue = true;
+        //change to Mouse Map
+        thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Mouse");
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+
 
         isDialogueActive = true;
-        player.enabled = false;
 
         currentConversation = conversation;
         currentLineIndex = 0;
@@ -148,8 +152,10 @@ public class DialogueManager : MonoBehaviour
         currentLineIndex = 0;
 
         isDialogueActive = false;
-        player.enabled = true;
 
+        thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         Debug.Log("Conversation ended!");
     }
 
@@ -159,7 +165,6 @@ public class DialogueManager : MonoBehaviour
 
         if (isPaused)
         {
-            //player.enabled = false;
             return;
 
         }
@@ -187,7 +192,7 @@ public class DialogueManager : MonoBehaviour
             (currentConversation.lines[currentLineIndex].options == null ||
              currentConversation.lines[currentLineIndex].options.Count == 0))
         {
-            if (Keyboard.current.eKey.wasPressedThisFrame)
+            if (thirdPersonController.mouseClick.IsPressed())//Keyboard.current.eKey.wasPressedThisFrame
             {
                 currentLineIndex++;
                 ShowCurrentLine();
