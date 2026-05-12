@@ -181,7 +181,7 @@ public class DialogueManager : MonoBehaviour
 
         if (currentLineIndex < currentConversation.lines.Count &&
             currentConversation.lines[currentLineIndex].endConversation &&
-             Keyboard.current.eKey.wasPressedThisFrame)
+             Keyboard.current.eKey.wasPressedThisFrame) //Keyboard.current.eKey.wasPressedThisFrame
         {
             EndDialogue();
             return;
@@ -192,7 +192,7 @@ public class DialogueManager : MonoBehaviour
             (currentConversation.lines[currentLineIndex].options == null ||
              currentConversation.lines[currentLineIndex].options.Count == 0))
         {
-            if (thirdPersonController.mouseClick.IsPressed())//Keyboard.current.eKey.wasPressedThisFrame
+            if (Mouse.current.leftButton.wasPressedThisFrame)//Keyboard.current.eKey.wasPressedThisFrame // thirdPersonController.mouseClick.WasPressedThisFrame()
             {
                 currentLineIndex++;
                 ShowCurrentLine();

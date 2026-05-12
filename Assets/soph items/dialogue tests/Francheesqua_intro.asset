@@ -37,7 +37,7 @@ MonoBehaviour:
     - text: Alright. I'll get to cooking.
       nextLineIndex: 0
       assignQuest: 0
-      quest: {fileID: 11400000, guid: e8384880248cc924fba9bd485a3bf334, type: 2}
+      quest: {fileID: 0}
       npc: {fileID: 0}
       openSellScreen: 0
       endConversation: 1

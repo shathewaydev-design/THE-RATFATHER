@@ -15,12 +15,12 @@ MonoBehaviour:
   questName: 
   requiredTrust: 0
   requiredCompletedQuests: []
-  questIntro: {fileID: 0}
-  questQuestioned: {fileID: 0}
-  questCompleted: {fileID: 0}
-  questOver: {fileID: 0}
+  questIntro: {fileID: 11400000, guid: aef1c1e27a96f8f498b6caa43a4f39f2, type: 2}
+  questQuestioned: {fileID: 11400000, guid: dd6bee41078b53d45bdaf521d43252c4, type: 2}
+  questCompleted: {fileID: 11400000, guid: fe090040118f5d046a43d2b155fe8d94, type: 2}
+  questOver: {fileID: 11400000, guid: fe090040118f5d046a43d2b155fe8d94, type: 2}
   requirements:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 9cc0eeb222eb33b458354621fc85e261, type: 2}
   objectives:
-  - Cook cheese, like your girlfriend asked.
+  - Cook your first cheese.
   rewards: []

@@ -60,7 +60,7 @@ public class SoldatoScript : MonoBehaviour
     void Awake()
     {
         Instance = this;
-
+        GameManager.Instance.inBossScene = true;
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -68,6 +68,8 @@ public class SoldatoScript : MonoBehaviour
     {
 
         NavMeshHit hit;
+
+        //GameManager.Instance.inBossScene = true;
 
         if (NavMesh.SamplePosition(transform.position, out hit, 5f, NavMesh.AllAreas))
         {
@@ -201,6 +203,8 @@ public class SoldatoScript : MonoBehaviour
         if (health <= 0)
         {
             // trigger ending (for now comic ending + demo ending)
+            GameManager.Instance.blackScreenPanel.SetActive(true);
+            GameManager.Instance.cutsceneText.text = "Thank you for playing the vertical slice of THE RAT FATHER. ALT+F4 to quit.";
             // triggered in game manager
             Debug.Log("Boss is dead!!!");
             agent.isStopped = true;
@@ -244,7 +248,7 @@ public class SoldatoScript : MonoBehaviour
 
     bool CanCharge()
     {
-        if (chargeTimer >= 15)
+        if (chargeTimer >= 10)
         {
             //animator.SetBool("TimerIsUp", true);
             return true;

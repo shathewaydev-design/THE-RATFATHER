@@ -20,6 +20,5 @@ MonoBehaviour:
   recruited: 0
   hasMet: 0
   quests:
-  - {fileID: 11400000, guid: 70b3eafeaabf2404f80fe4893b65be36, type: 2}
   - {fileID: 11400000, guid: e8384880248cc924fba9bd485a3bf334, type: 2}
   availability: []

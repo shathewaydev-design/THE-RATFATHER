@@ -17,7 +17,7 @@ MonoBehaviour:
   requiredCompletedQuests: []
   questIntro: {fileID: 11400000, guid: aef1c1e27a96f8f498b6caa43a4f39f2, type: 2}
   questQuestioned: {fileID: 11400000, guid: dd6bee41078b53d45bdaf521d43252c4, type: 2}
-  questCompleted: {fileID: 11400000, guid: dd6bee41078b53d45bdaf521d43252c4, type: 2}
+  questCompleted: {fileID: 11400000, guid: fe090040118f5d046a43d2b155fe8d94, type: 2}
   questOver: {fileID: 11400000, guid: dd6bee41078b53d45bdaf521d43252c4, type: 2}
   requirements:
   - {fileID: 11400000, guid: eb7b1ea0b7bfcb04d9c385f4a93568c6, type: 2}

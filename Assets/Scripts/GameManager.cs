@@ -1,11 +1,21 @@
+using StarterAssets;
+using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.Video;
 using UnityEngine.Windows;
+using UnityEngine.SceneManagement;
+
 
 public class GameManager : MonoBehaviour
 {
     //public int currCurrency;
+
+    public GameObject JunkYardEntrance;
 
     public static GameManager Instance;
     public PlayerState playerState;
@@ -18,6 +28,32 @@ public class GameManager : MonoBehaviour
     public int currHealth = 0;
     public Texture[] health;
     public RawImage healthBar;
+
+
+    public VideoPlayer videoPlayer;
+    public RawImage videoRenderer;
+
+
+    public int cutsceneIndex = 0;
+    public GameObject blackScreenPanel;
+    public TextMeshProUGUI cutsceneText;
+    private bool cutsceneActive = false;
+    public string[] bossCutsceneLines;
+
+    public ThirdPersonController player; // movement reference
+
+    public TutorialManager tutorialManager;
+
+    bool introDone = false;
+    public bool inBossScene = false;
+
+    bool bossCutsceneStarted = false;
+
+
+
+    private bool waitingForClick = false;
+
+
 
     private void Awake()
     {
@@ -45,45 +81,104 @@ public class GameManager : MonoBehaviour
     void Start()
     {
        
+        if (!introDone && !inBossScene)
+        {
+            StartCoroutine(IntroSequence());
+        }
+
     }
+
 
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("List counts " + playerState.soldTo.Count + " " +  playerState.recruitedRats.Count );
+
+
         if (UIManager.Instance != null)
         {
             UIManager.Instance.ToggleLog();
             RecruitManager();
         }
 
+        CheckStatus();
+
+        if (!cutsceneActive)
+            return;
+
+        if (Mouse.current.leftButton.wasPressedThisFrame)
+        {
+            AdvanceCutscene();
+        }
+
+
 
         //Debug.Log("Player health: " + playerState.playerHealth);
     }
+
+    void AdvanceCutscene()
+    {
+        cutsceneIndex++;
+
+        // if more lines exist
+        if (cutsceneIndex < bossCutsceneLines.Length)
+        {
+            cutsceneText.text = bossCutsceneLines[cutsceneIndex];
+        }
+        else
+        {
+            EndCutscene();
+        }
+    }
+
+    void EndCutscene()
+    {
+        cutsceneActive = false;
+        blackScreenPanel.SetActive(false);
+
+        // continue game logic here
+        //tutorialManager.currentStage = TutorialManager.TutorialStage.CompleteQuest;
+    }
+
+
+    public IEnumerator IntroSequence()
+    {
+        player.enabled = false;
+
+        // Make sure video object is active
+        videoPlayer.gameObject.SetActive(true);
+
+        videoPlayer.Prepare();
+        yield return new WaitUntil(() => videoPlayer.isPrepared);
+
+        videoPlayer.Play();
+
+        // wait until it finishes properly
+        yield return new WaitUntil(() => !videoPlayer.isPlaying);
+
+        videoPlayer.gameObject.SetActive(false);
+        videoRenderer.gameObject.SetActive(false);
+
+        blackScreenPanel.SetActive(true);
+
+        yield return new WaitUntil(() => Mouse.current.leftButton.wasPressedThisFrame);
+
+        blackScreenPanel.SetActive(false);
+
+        player.enabled = true;
+
+        tutorialManager.currentStage = TutorialManager.TutorialStage.TalkToNPC;
+
+        introDone = true;
+    }
+
 
     public void increaseCurrency(int increaseBy)
     {
         playerState.currency += increaseBy;
     }
 
-    // called from button press
-    //public void SellCheese(NPCProfile npc, CheeseIngredientData cheese) // add cheese perameter
-    //{
-    //    // check if correct cheese
-    //    // sell cheese here, increase reputation
-    //    // remove specific cheese from inventory
-    //    if (correctCheese) 
-    //    {
-    //        InventorySystem.Instance.RemoveItem(cheese);
-    //        playerState.soldTo.Add(npc);
-    //        return;
 
-    //    }
-
-    //    Debug.Log("This rat doesn't want that.");
-
-        
-
-    //}
 
     public void TakeDamage()
     {
@@ -109,6 +204,8 @@ public class GameManager : MonoBehaviour
         // for boss level -> fade to black, start the boss level over
 
         Debug.Log("You Died!");
+        // start whole scene over
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
     }
 
@@ -150,11 +247,42 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public bool CheckStatus()
+    {
+        if (bossCutsceneStarted)
+            return true;
+
+        if (playerState.soldTo.Count > 0 && playerState.recruitedRats.Count > 0)
+        {
+
+            FirstBossCutscene();
+            bossCutsceneStarted = true;
+            return true;
+
+
+        }
+
+        return false;
+    }
+
+    void FirstBossCutscene()
+    {
+
+        blackScreenPanel.SetActive(true);
+
+        cutsceneIndex = 0;
+        cutsceneActive = true;
+
+        cutsceneText.text = bossCutsceneLines[cutsceneIndex];
+
+
+    }
 
     public void UpdatePlayerHealth()
     {
         if (currHealth >= health.Length)
         {
+
             return;
         }
 

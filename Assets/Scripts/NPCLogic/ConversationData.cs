@@ -66,6 +66,7 @@ public class DialogueOption
 
             DialogueManager.Instance.PauseDialogue();
             UIManager.Instance.AddToSoldLog(npc); // Change location and change to invetory
+            GameManager.Instance.playerState.soldTo.Add(npc);
             UIManager.Instance.ToggleSellScreen();
             // ui manager open screen
         }

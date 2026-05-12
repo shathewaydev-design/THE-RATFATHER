@@ -16,6 +16,8 @@ MonoBehaviour:
   - speaker: {fileID: 11400000, guid: 628606f5850fdc541ad20f0e9cc8b57a, type: 2}
     text: Hm...? What is it? Make it quick...
     options: []
+    recruitRat: 0
+    openSellScreen: 0
     endConversation: 0
   - speaker: {fileID: 11400000, guid: 628606f5850fdc541ad20f0e9cc8b57a, type: 2}
     text: 
@@ -24,49 +26,76 @@ MonoBehaviour:
       nextLineIndex: 2
       assignQuest: 0
       quest: {fileID: 0}
+      npc: {fileID: 0}
+      openSellScreen: 0
       endConversation: 0
+      recruitRat: 0
+    recruitRat: 0
+    openSellScreen: 0
     endConversation: 0
   - speaker: {fileID: 11400000, guid: 628606f5850fdc541ad20f0e9cc8b57a, type: 2}
     text: Woah! Keep it down...! Do you know the kind of rats that roam around here?
     options: []
+    recruitRat: 0
+    openSellScreen: 0
     endConversation: 0
   - speaker: {fileID: 11400000, guid: 628606f5850fdc541ad20f0e9cc8b57a, type: 2}
     text: Besides, No one is going to just buy your product off the bat. Well, at
       least not everyone.
     options: []
+    recruitRat: 0
+    openSellScreen: 0
     endConversation: 0
   - speaker: {fileID: 11400000, guid: 628606f5850fdc541ad20f0e9cc8b57a, type: 2}
     text: 'You''ve got to... Earn their trust, so to speak. '
     options: []
+    recruitRat: 0
+    openSellScreen: 0
     endConversation: 0
   - speaker: {fileID: 11400000, guid: fe37e5f6c6e4ce940ab3b38f7087bab3, type: 2}
     text: Earn their trust?
     options: []
+    recruitRat: 0
+    openSellScreen: 0
     endConversation: 0
   - speaker: {fileID: 11400000, guid: 628606f5850fdc541ad20f0e9cc8b57a, type: 2}
     text: Yeah. Y'know, like doing favors for them. Speaking of...
     options: []
+    recruitRat: 0
+    openSellScreen: 0
     endConversation: 0
   - speaker: {fileID: 11400000, guid: 628606f5850fdc541ad20f0e9cc8b57a, type: 2}
     text: I might be more inclined to take a look at your product if you help me
       out.
     options: []
+    recruitRat: 0
+    openSellScreen: 0
     endConversation: 0
   - speaker: {fileID: 11400000, guid: fe37e5f6c6e4ce940ab3b38f7087bab3, type: 2}
     text: ...Alright. What do you need help with?
     options: []
+    recruitRat: 0
+    openSellScreen: 0
     endConversation: 0
   - speaker: {fileID: 11400000, guid: 628606f5850fdc541ad20f0e9cc8b57a, type: 2}
-    text: Do you mind going and finding it for me?
+    text: Do you mind going and finding the swiss army knife I lost?
     options:
     - text: Alright. But we're talking business after!
       nextLineIndex: 0
       assignQuest: 1
       quest: {fileID: 11400000, guid: 33ae09237ac829640bc1bf8e0cc34236, type: 2}
+      npc: {fileID: 0}
+      openSellScreen: 0
       endConversation: 1
+      recruitRat: 0
     - text: No way, get it yourself!
       nextLineIndex: 0
       assignQuest: 0
       quest: {fileID: 0}
+      npc: {fileID: 0}
+      openSellScreen: 0
       endConversation: 1
+      recruitRat: 0
+    recruitRat: 0
+    openSellScreen: 0
     endConversation: 1

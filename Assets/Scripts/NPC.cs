@@ -1,10 +1,15 @@
-using UnityEngine.UI;
-using UnityEngine.InputSystem;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class NPC : MonoBehaviour, IInteractable
 {
+
+    [Header("Tutorial")]
+    public bool isTutorialNPC;
+
+
     public NPCProfile profile;
     public NPCState state;
 
@@ -33,7 +38,49 @@ public class NPC : MonoBehaviour, IInteractable
     }
     public void Interact()
     {
-        if (profile.quests.Count == 0) return;
+
+
+
+        // BLOCK non-tutorial NPCs during tutorial
+        if (TutorialManager.Instance.currentStage != TutorialManager.TutorialStage.Finished)
+        {
+            if (!isTutorialNPC)
+                return;
+        }
+
+        // ---------------- TUTORIAL PHASES ----------------
+
+        if (TutorialManager.Instance.currentStage == TutorialManager.TutorialStage.TalkToNPC)
+        {
+            dialogueManager.StartConversation(currentConvo);
+
+            TutorialManager.Instance.currentStage = TutorialManager.TutorialStage.CompleteQuest;
+
+            questManager.ChangeQuestActive(profile.quests[0]);
+
+            return;
+        }
+
+        if (TutorialManager.Instance.currentStage == TutorialManager.TutorialStage.CompleteQuest)
+        {
+            dialogueManager.StartConversation(profile.quests[0].questQuestioned);
+
+            return;
+        }
+
+        if (TutorialManager.Instance.currentStage == TutorialManager.TutorialStage.ReturnToNPC)
+        {
+            dialogueManager.StartConversation(profile.quests[0].questCompleted);
+
+            TutorialManager.Instance.currentStage = TutorialManager.TutorialStage.Finished;
+
+            return;
+        }
+
+        // ---------------- NORMAL NPC LOGIC ----------------
+
+        if (profile.quests.Count == 0)
+            return;
 
         Quest relevantQuest = questManager.GetRelevantQuest(profile.quests);
 
@@ -50,10 +97,117 @@ public class NPC : MonoBehaviour, IInteractable
         }
 
         dialogueManager.StartConversation(currentConvo);
+
         state.hasMetPlayer = true;
         profile.hasMet = true;
 
         Debug.Log("Relevant quest: " + relevantQuest.questName);
+
+
+
+
+
+
+
+
+
+
+
+
+        //if (TutorialManager.Instance.currentStage == TutorialManager.TutorialStage.Finished && !isTutorialNPC)
+        //{
+        //    if (isTutorialNPC)
+        //        return;
+
+
+        //    if (profile.quests.Count == 0) return;
+
+        //    Quest relevantQuest = questManager.GetRelevantQuest(profile.quests);
+
+        //    if (relevantQuest == null)
+        //        return;
+
+        //    if (!state.hasMetPlayer)
+        //    {
+        //        currentConvo = relevantQuest.questIntro;
+        //    }
+        //    else
+        //    {
+        //        currentConvo = questManager.UpdateDialogue(relevantQuest);
+        //    }
+
+        //    dialogueManager.StartConversation(currentConvo);
+        //    state.hasMetPlayer = true;
+        //    profile.hasMet = true;
+
+        //    Debug.Log("Relevant quest: " + relevantQuest.questName);
+
+        //}
+
+        //if (TutorialManager.Instance.currentStage == TutorialManager.TutorialStage.TalkToNPC) // TutorialManager.Instance.currentStage == TutorialStage.TalkToNPC
+        //{
+        //    if (!isTutorialNPC)
+        //        return;
+
+        //    dialogueManager.StartConversation(currentConvo);
+
+        //    TutorialManager.Instance.currentStage = TutorialManager.TutorialStage.CompleteQuest;
+
+        //    // activate first quest
+        //    questManager.ChangeQuestActive(profile.quests[0]);
+
+
+        //    return;
+        //}
+
+
+        //if (TutorialManager.Instance.currentStage == TutorialManager.TutorialStage.CompleteQuest) // TutorialManager.Instance.currentStage == TutorialStage.TalkToNPC
+        //{
+        //    if (!isTutorialNPC)
+        //        return;
+
+        //    dialogueManager.StartConversation(profile.quests[0].questQuestioned);
+
+
+        //    return;
+        //}
+
+        //if (TutorialManager.Instance.currentStage == TutorialManager.TutorialStage.ReturnToNPC) // TutorialManager.Instance.currentStage == TutorialStage.TalkToNPC
+        //{
+        //    if (!isTutorialNPC)
+        //        return;
+
+        //    dialogueManager.StartConversation(profile.quests[0].questCompleted);
+
+        //    TutorialManager.Instance.currentStage = TutorialManager.TutorialStage.Finished;
+
+
+        //    return;
+        //}
+
+
+
+        //if (profile.quests.Count == 0) return;
+
+        //Quest relevantQuest = questManager.GetRelevantQuest(profile.quests);
+
+        //if (relevantQuest == null)
+        //    return;
+
+        //if (!state.hasMetPlayer)
+        //{
+        //    currentConvo = relevantQuest.questIntro;
+        //}
+        //else
+        //{
+        //    currentConvo = questManager.UpdateDialogue(relevantQuest);
+        //}
+
+        //dialogueManager.StartConversation(currentConvo);
+        //state.hasMetPlayer = true;
+        //profile.hasMet = true;
+
+        //Debug.Log("Relevant quest: " + relevantQuest.questName);
 
     }
 
@@ -62,6 +216,15 @@ public class NPC : MonoBehaviour, IInteractable
     {
         // mabe add this logic to interact method?
         // currentConvo = questManager.UpdateDialogue(profile.quests[0]); // change to loop through all quests to find the active one
+
+        if (TutorialManager.Instance.currentStage == TutorialManager.TutorialStage.CompleteQuest)
+        {
+            if (QuestManager.Instance.compQuests.Contains(profile.quests[0]))
+            {
+                TutorialManager.Instance.currentStage = TutorialManager.TutorialStage.ReturnToNPC;
+            }
+        }
+
 
 
         //  if (!playerInRange) return;

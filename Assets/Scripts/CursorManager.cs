@@ -11,7 +11,7 @@ public class CursorManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        thirdPersonController = ThirdPersonController.Instance;
+        //thirdPersonController = ThirdPersonController.Instance;
     }
     private void Start()
     {

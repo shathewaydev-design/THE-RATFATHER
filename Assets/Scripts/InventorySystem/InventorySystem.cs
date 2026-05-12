@@ -201,6 +201,19 @@ public class InventorySystem : MonoBehaviour
 
         //Debug.Log($"Added {item.ingredientName}");
     }
+    public bool ContainsCheese(FinalResultCheese cheese)
+    {
+        foreach (CheeseInventorySlot slot in cheeseInventory)
+        {
+            if (slot.finalCheeseData == cheese)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 
     public void RemoveFinalCheese(FinalResultCheese cheese, int amount = 1)
     {

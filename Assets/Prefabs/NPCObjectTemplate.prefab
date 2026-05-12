@@ -131,10 +131,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.45
+  m_Radius: 0.5663458
   m_Height: 1.905014
   m_Direction: 1
-  m_Center: {x: 0, y: 0.0028669834, z: 0}
+  m_Center: {x: 0, y: 0.0028669834, z: -0.11634576}
 --- !u!54 &5681438648178988421
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -174,10 +174,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a420dc71f85557c40b847073428da1eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPC
-  dialogue: {fileID: 11400000, guid: b029faaec2b08214f8bcec27e3da34f5, type: 2}
+  profile: {fileID: 11400000, guid: 628606f5850fdc541ad20f0e9cc8b57a, type: 2}
+  state:
+    hasMetPlayer: 0
+    currentTrustLevel: 0
+    currQuest: 
+  currentConvo: {fileID: 11400000, guid: dbd6e9347abfb1644a700fd46eee5091, type: 2}
   dialogueManager: {fileID: 0}
-  holdTime: 1
-  currentHoldTime: 0
+  questManager: {fileID: 0}
+  interactionRadius: 2
+  playerTransform: {fileID: 0}
   promptAnimator: {fileID: 3806566885635157346}
   holdProgressBar: {fileID: 0}
 --- !u!95 &3806566885635157346
