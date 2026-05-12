@@ -9,6 +9,7 @@ using UnityEngine.UI;
 using UnityEngine.Video;
 using UnityEngine.Windows;
 using UnityEngine.SceneManagement;
+using StarterAssets;
 
 
 public class GameManager : MonoBehaviour
@@ -40,7 +41,7 @@ public class GameManager : MonoBehaviour
     private bool cutsceneActive = false;
     public string[] bossCutsceneLines;
 
-    public ThirdPersonController player; // movement reference
+    public ThirdPersonController thirdPersonController; // movement reference
 
     public TutorialManager tutorialManager;
 
@@ -74,6 +75,7 @@ public class GameManager : MonoBehaviour
             soldTo = new List<NPCProfile>()
 
         };
+        thirdPersonController = ThirdPersonController.Instance;
     }
 
 
@@ -106,7 +108,7 @@ public class GameManager : MonoBehaviour
         if (!cutsceneActive)
             return;
 
-        if (Mouse.current.leftButton.wasPressedThisFrame)
+        if (thirdPersonController.mouseClick.WasPressedThisFrame())
         {
             AdvanceCutscene();
         }
@@ -135,7 +137,7 @@ public class GameManager : MonoBehaviour
     {
         cutsceneActive = false;
         blackScreenPanel.SetActive(false);
-
+        thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
         // continue game logic here
         //tutorialManager.currentStage = TutorialManager.TutorialStage.CompleteQuest;
     }
@@ -143,7 +145,7 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator IntroSequence()
     {
-        player.enabled = false;
+        thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Mouse");
 
         // Make sure video object is active
         videoPlayer.gameObject.SetActive(true);
@@ -161,11 +163,12 @@ public class GameManager : MonoBehaviour
 
         blackScreenPanel.SetActive(true);
 
-        yield return new WaitUntil(() => Mouse.current.leftButton.wasPressedThisFrame);
+        // yield return new WaitUntil(() => Mouse.current.leftButton.wasPressedThisFrame);
+        yield return new WaitUntil(() => thirdPersonController.mouseClick.WasPressedThisFrame());
 
         blackScreenPanel.SetActive(false);
 
-        player.enabled = true;
+        thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
 
         tutorialManager.currentStage = TutorialManager.TutorialStage.TalkToNPC;
 
@@ -254,7 +257,7 @@ public class GameManager : MonoBehaviour
 
         if (playerState.soldTo.Count > 0 && playerState.recruitedRats.Count > 0)
         {
-
+            thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Mouse");
             FirstBossCutscene();
             bossCutsceneStarted = true;
             return true;

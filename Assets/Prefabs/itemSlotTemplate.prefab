@@ -168,6 +168,7 @@ GameObject:
   - component: {fileID: 8683332092817113694}
   - component: {fileID: 954326202565339361}
   - component: {fileID: 871365943031978651}
+  - component: {fileID: 7342431580952815156}
   m_Layer: 0
   m_Name: itemSlotTemplate
   m_TagString: Untagged
@@ -312,6 +313,7 @@ MonoBehaviour:
   inventorySlot:
     itemData: {fileID: 11400000, guid: 61f98e36248e04060899e1cf2b0898ff, type: 2}
     quantity: 0
+  isSelected: 0
 --- !u!114 &871365943031978651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -328,6 +330,19 @@ MonoBehaviour:
   quantityText: {fileID: 8703385768577586682}
   ingredientNameText: {fileID: 898959159147657550}
   ingredientButton: {fileID: 954326202565339361}
+--- !u!114 &7342431580952815156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2122427893728435538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1adb713f60c754fe39d1601650a505e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIButtonSound
+  hoverCooldown: 0.05
 --- !u!1 &2209289485277761131
 GameObject:
   m_ObjectHideFlags: 0

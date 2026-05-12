@@ -47,7 +47,7 @@ public class NotificationUIController : MonoBehaviour
         string message)
     {
         messageText.text = message;
-
+        SoundManager.Instance.PlayUISound(SoundManager.Instance.notificationSound);
         // panel.anchoredPosition = shownPos;
 
         // yield return new WaitForSeconds(2f);

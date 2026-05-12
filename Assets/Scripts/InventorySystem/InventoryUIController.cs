@@ -55,6 +55,10 @@ public class InventoryUIController : MonoBehaviour
 
         inventoryBigPanel.SetActive(isOpen);
         //ingredientInventoryPanel.SetActive(isOpen);
+
+        //play inventory Sounds
+        SoundManager.Instance.PlayUISound(SoundManager.Instance.toggleInventory);
+
         if(isOpen)//close everything
         {
             OpenIngredientInventory();

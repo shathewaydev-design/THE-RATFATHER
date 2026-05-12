@@ -104,6 +104,7 @@ GameObject:
   - component: {fileID: 3174360472488883276}
   - component: {fileID: 3699016090439305178}
   - component: {fileID: 7982245736445598153}
+  - component: {fileID: 6123739660035823793}
   m_Layer: 0
   m_Name: cheeseSlotTemplate
   m_TagString: Untagged
@@ -263,6 +264,19 @@ MonoBehaviour:
   quantityText: {fileID: 3828621365826383352}
   cheeseNameText: {fileID: 3594361007819384525}
   cheeseButton: {fileID: 3699016090439305178}
+--- !u!114 &6123739660035823793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 754365280662673632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1adb713f60c754fe39d1601650a505e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIButtonSound
+  hoverCooldown: 0.05
 --- !u!1 &801932404905682934
 GameObject:
   m_ObjectHideFlags: 0
@@ -753,7 +767,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.4000015, y: 3.0999985}
+  m_AnchoredPosition: {x: 1.4000015, y: 3.0999756}
   m_SizeDelta: {x: 644.5, y: 601.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1639184252718190171
