@@ -23,8 +23,8 @@ public class DayNightManager : MonoBehaviour
     public Text dayText;
 
     [Header("Lighting")]
-    public Light dayLight;
-    public Light nightLight;
+    public GameObject dayLight;
+    public GameObject nightLight;
 
     [Header("End Game")]
     public bool allQuestsAreCompleted;
@@ -68,8 +68,8 @@ public class DayNightManager : MonoBehaviour
         sunIcon.SetActive(true);
         moonIcon.SetActive(false);
 
-        if (dayLight) dayLight.enabled = true;
-        if (nightLight) nightLight.enabled = false;
+        if (dayLight) dayLight.SetActive(true);
+        if (nightLight) nightLight.SetActive(false);
 
         UpdateUI();
 
@@ -84,9 +84,9 @@ public class DayNightManager : MonoBehaviour
         sunIcon.SetActive(false);
         moonIcon.SetActive(true);
 
-        if (dayLight) dayLight.enabled = false;
-        if (nightLight) nightLight.enabled = true;
-        
+        if (dayLight) dayLight.SetActive(false);
+        if (nightLight) nightLight.SetActive(true);
+
         OnNightStart?.Invoke();
     }
 

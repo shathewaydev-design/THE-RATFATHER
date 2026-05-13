@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/DO NOT TOUCH/CharlieScene.unity
-    guid: 6f40c6f13374c4a31a2bd0bd7a8bc8f5
+    path: Assets/Scenes/MainMenu.unity
+    guid: 120d3d027806d4cd1847f3d2433ceeca
   - enabled: 1
     path: Assets/Scenes/FinalLevel1Scene/Level1SceneFinal.unity
     guid: aaff7c017ab3243d7b8257f64dab0036

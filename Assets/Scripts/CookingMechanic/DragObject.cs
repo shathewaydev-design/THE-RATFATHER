@@ -82,6 +82,8 @@ public class DragObject : MonoBehaviour
         if (other.CompareTag("CookingPot"))
         {
             // objectToDrag.layer = LayerMask.NameToLayer("Default");
+            SoundManager.Instance.PlayUISound(SoundManager.Instance.addFlavor);
+
             CookingManager.Instance.StartHeat();
         }
     }

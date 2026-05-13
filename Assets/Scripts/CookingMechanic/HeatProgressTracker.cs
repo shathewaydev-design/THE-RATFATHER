@@ -53,6 +53,8 @@ public class HeatProgressTracker : MonoBehaviour
         if(isInPumpZone && canPump)
         {
             //Debug.Log("pumped");
+            SoundManager.Instance.PlayUISound(SoundManager.Instance.bellowSound);
+
             HeatUp();
             canPump = false;
         } 

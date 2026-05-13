@@ -15,8 +15,17 @@ public class SoundManager : MonoBehaviour
     [Header("Clips")]
     public AudioClip uiHover;
     public AudioClip uiClick;
+    public AudioClip inventoryTAB;//page turn
     public AudioClip notificationSound;
     public AudioClip toggleInventory;
+    [Header("Cooking")]
+    public AudioClip fireCrackling;//fire ambience near pot
+    public AudioClip dropIngredients;//start cooking, sounds like ingredients being dropped into a pot
+    public AudioClip pourMilk;//water slosh
+    public AudioClip addFlavor;//water drop
+    public AudioClip bellowSound;//air blow or spray
+    public AudioClip sprinkleAddictive;//sprinkle salt
+    public AudioClip cookingComplete;//
 
     private void Awake()
     {

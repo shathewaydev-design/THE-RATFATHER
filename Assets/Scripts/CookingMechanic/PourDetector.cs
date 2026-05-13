@@ -43,6 +43,8 @@ public class PourDetector : MonoBehaviour
         //print("Start Pouring");
         currentStream = CreateStream();
         currentStream.Begin();
+
+        SoundManager.Instance.PlayUISound(SoundManager.Instance.pourMilk);
     }
 
     private void EndPour()

@@ -1145,7 +1145,6 @@ MonoBehaviour:
   Gravity: -15
   JumpTimeout: 0.3
   FallTimeout: 0.15
-  maxJumps: 2
   jumpCount: 0
   Grounded: 1
   GroundedOffset: -0.14
@@ -1158,6 +1157,10 @@ MonoBehaviour:
   BottomClamp: -30
   CameraAngleOverride: 0
   LockCameraPosition: 0
+  MouseSensitivity: 1
+  GamepadSensitivity: 100
+  InvertY: 0
+  InvertX: 0
   stopInteract:
     m_Name: Stop Interact
     m_Type: 0
@@ -1217,6 +1220,15 @@ MonoBehaviour:
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: 946ad76e-1ac9-42dc-a725-aaa11c843e34
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  toggleCursor:
+    m_Name: Toggle Cursor
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: eadc9eda-8c8d-4ab8-940a-82eb27afe277
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []

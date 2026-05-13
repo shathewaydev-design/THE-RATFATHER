@@ -201,7 +201,8 @@ public class CookingManager : MonoBehaviour, IInteractable
     {
         ingredientInventoryPanel.SetActive(false);
         inventoryBigPanel.SetActive(false);
-        
+
+        SoundManager.Instance.PlayUISound(SoundManager.Instance.dropIngredients);   
         SetStep(0);
     }
 

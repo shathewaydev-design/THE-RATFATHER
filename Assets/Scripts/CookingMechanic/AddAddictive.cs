@@ -65,6 +65,8 @@ public class AddAddictive : MonoBehaviour
 
     void HandleHit()
     {
+        SoundManager.Instance.PlayUISound(SoundManager.Instance.sprinkleAddictive);
+
         float arrowX = arrow.anchoredPosition.x;
         session.successfulHits++;
 
@@ -95,6 +97,7 @@ public class AddAddictive : MonoBehaviour
         if (session.successfulHits >= 4)
         {
             FinishMinigame();
+            SoundManager.Instance.PlayUISound(SoundManager.Instance.cookingComplete);
         }
     }
 
