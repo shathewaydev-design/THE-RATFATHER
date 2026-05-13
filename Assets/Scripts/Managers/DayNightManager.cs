@@ -57,7 +57,7 @@ public class DayNightManager : MonoBehaviour
             StartNextDay();
         }
 
-        UpdateLightRotation();
+        //UpdateLightRotation();
     }
 
     void StartDay()

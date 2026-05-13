@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9893e5880382441db8a8118def70e82a, type: 3}
   m_Name: FinalMoldyCashewCheese
   m_EditorClassIdentifier: Assembly-CSharp::FinalResultCheese
-  cheeseName: Moldy Wing Cheese
+  cheeseName: Moldy Cashew Cheese
   rarity: 1
   icon: {fileID: 21300000, guid: 96d52f2cd04a2449c95693ec05545a97, type: 3}
   description: 

@@ -52,6 +52,11 @@ public class DragObject : MonoBehaviour
             // objectToDrag.layer = LayerMask.NameToLayer("Default");
             return;
         }
+        Ray ray = mainCamera.ScreenPointToRay(mousePos);
+
+        // Draws a red ray in Scene view
+        Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red);
+        
         objectToDrag.layer = LayerMask.NameToLayer("Dragging");
 
         Vector3 screenPoint = new Vector3(mousePos.x, mousePos.y, distanceFromCamera);
