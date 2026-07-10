@@ -1,0 +1,127 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac8e435a64bd09f409fe9dc59563bc2e, type: 3}
+  m_Name: IntroData
+  m_EditorClassIdentifier: Assembly-CSharp::ComicCutscene
+  panels:
+  - image: {fileID: 2800000, guid: 4566cad7795a8eb43924919c7ac47f48, type: 3}
+    dialogue: .........
+    speaker: Renatto
+  - image: {fileID: 2800000, guid: 117035728df4396499a6680d18c6d03b, type: 3}
+    dialogue: ...!
+    speaker: Renatto
+  - image: {fileID: 2800000, guid: 117035728df4396499a6680d18c6d03b, type: 3}
+    dialogue: Hey what are you doing!?
+    speaker: Renatto
+  - image: {fileID: 2800000, guid: c32bd264546ffbe448c4c9a89d545baf, type: 3}
+    dialogue: "We know what you\u2019ve done, Renatto. You\u2019ve been a very, very
+      bad rat..."
+    speaker: ???
+  - image: {fileID: 2800000, guid: c32bd264546ffbe448c4c9a89d545baf, type: 3}
+    dialogue: " Whatever you\u2019re talking about, you\u2019ve got the wrong guy...!"
+    speaker: Renatto
+  - image: {fileID: 2800000, guid: 011ff9bc0f8527a4b8b01c2898ce6d36, type: 3}
+    dialogue: ...
+    speaker: ???
+  - image: {fileID: 2800000, guid: c32bd264546ffbe448c4c9a89d545baf, type: 3}
+    dialogue: This cheese tastes good, where did you get it?
+    speaker: ???
+  - image: {fileID: 2800000, guid: c32bd264546ffbe448c4c9a89d545baf, type: 3}
+    dialogue: "I bought some stuff from another enforcer of yours\u2026 *gulp*"
+    speaker: Renatto
+  - image: {fileID: 2800000, guid: c32bd264546ffbe448c4c9a89d545baf, type: 3}
+    dialogue: "If I had it my way, you would be dead where you stand, you\u2019re
+      lucky the higher-ups are so nice\u2026"
+    speaker: ???
+  - image: {fileID: 2800000, guid: c32bd264546ffbe448c4c9a89d545baf, type: 3}
+    dialogue: Is it that I forgot to teach you, or is it that your brains went away
+      when you started snorting all our cheese?
+    speaker: ???
+  - image: {fileID: 2800000, guid: 826f9bc2bd84e9f419a28a74c0abda58, type: 3}
+    dialogue: Shut it, kid, you know you can't buy from another one of our fucking
+      sellers.
+    speaker: ???
+  - image: {fileID: 2800000, guid: 826f9bc2bd84e9f419a28a74c0abda58, type: 3}
+    dialogue: "Cheezus, back in my day, sellers had some depth to them. You new age
+      freaks can't spend a minute away from cheese. You\u2019re fucking pathetic."
+    speaker: ???
+  - image: {fileID: 2800000, guid: 826f9bc2bd84e9f419a28a74c0abda58, type: 3}
+    dialogue: "I promise I\u2019m going to pay it all back, I just need some time."
+    speaker: Renatto
+  - image: {fileID: 2800000, guid: 826f9bc2bd84e9f419a28a74c0abda58, type: 3}
+    dialogue: "I promise I\u2019m going to pay it all back, I just need some time."
+    speaker: Renatto
+  - image: {fileID: 2800000, guid: c32bd264546ffbe448c4c9a89d545baf, type: 3}
+    dialogue: '*huffs* Yeah, how much time?'
+    speaker: ???
+  - image: {fileID: 2800000, guid: c32bd264546ffbe448c4c9a89d545baf, type: 3}
+    dialogue: "Just a few months, that's all, maybe around 4 months I can definitely
+      get it back, I just need some more product and then I\u2019ll be good to go!"
+    speaker: Renatto
+  - image: {fileID: 2800000, guid: c32bd264546ffbe448c4c9a89d545baf, type: 3}
+    dialogue: That's the thing, Renatto ... .you won't be selling for us anymore.
+    speaker: ???
+  - image: {fileID: 2800000, guid: c32bd264546ffbe448c4c9a89d545baf, type: 3}
+    dialogue: ...! (N-No... I can't afford to lose this job! I won't be able to afford
+      cheese anymore!)
+    speaker: Renatto
+  - image: {fileID: 2800000, guid: c32bd264546ffbe448c4c9a89d545baf, type: 3}
+    dialogue: "Oh, that's perfectly understandable actually, I\u2019m sure with the
+      time I can find a way..."
+    speaker: Renatto
+  - image: {fileID: 2800000, guid: c32bd264546ffbe448c4c9a89d545baf, type: 3}
+    dialogue: "Yes, I'm sure in 4 weeks you will be able to\u2026"
+    speaker: ???
+  - image: {fileID: 2800000, guid: c32bd264546ffbe448c4c9a89d545baf, type: 3}
+    dialogue: ...? I said four mo-
+    speaker: Renatto
+  - image: {fileID: 2800000, guid: 826f9bc2bd84e9f419a28a74c0abda58, type: 3}
+    dialogue: "Yes, four weeks\u2026"
+    speaker: ???
+  - image: {fileID: 2800000, guid: 826f9bc2bd84e9f419a28a74c0abda58, type: 3}
+    dialogue: "Boss, that's impossible, that much money\u2026 in 4 weeks. Please
+      ive been working with you guys for years\u2026 give me some leniency, what
+      am I supposed to do."
+    speaker: Renatto
+  - image: {fileID: 2800000, guid: 826f9bc2bd84e9f419a28a74c0abda58, type: 3}
+    dialogue: Perrhaps, you could be a man and figure it out, or be a woman and use
+      that pretty mouth of yours.
+    speaker: ???
+  - image: {fileID: 2800000, guid: 826f9bc2bd84e9f419a28a74c0abda58, type: 3}
+    dialogue: I won't do-!
+    speaker: Renatto
+  - image: {fileID: 2800000, guid: 826f9bc2bd84e9f419a28a74c0abda58, type: 3}
+    dialogue: 'You will. And if you don''t have the money...
+
+      listen, you got
+      four weeks buddy.'
+    speaker: ???
+  - image: {fileID: 2800000, guid: 5300b5fbdfebf3f4e88c9f49812f99c5, type: 3}
+    dialogue: I think this is a little bit of an incentive...
+    speaker: ???
+  - image: {fileID: 2800000, guid: 5300b5fbdfebf3f4e88c9f49812f99c5, type: 3}
+    dialogue: ...!
+    speaker: Renatto
+  - image: {fileID: 2800000, guid: 1e22e2f0ce11faf4f9fa3a4482783396, type: 3}
+    dialogue: '!!!
+
+      !!!
+
+      !!!'
+    speaker: Renatto
+  - image: {fileID: 2800000, guid: 5b591cfa3b419a34ab24b3ebcaa5cda2, type: 3}
+    dialogue: ...
+    speaker: Renatto
+  - image: {fileID: 2800000, guid: 5b591cfa3b419a34ab24b3ebcaa5cda2, type: 3}
+    dialogue: "Four weeks\u2026. That's impossible, I\u2019m never going to get enough
+      in that time. "
+    speaker: Renatto
