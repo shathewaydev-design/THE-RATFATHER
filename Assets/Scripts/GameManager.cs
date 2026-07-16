@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
 {
     //public int currCurrency;
 
+    [SerializeField] private List<ComicCutscene> InGameScenes;
+
     public GameObject JunkYardEntrance;
 
     public static GameManager Instance;
@@ -31,8 +33,8 @@ public class GameManager : MonoBehaviour
     public RawImage healthBar;
 
 
-    public VideoPlayer videoPlayer;
-    public RawImage videoRenderer;
+    //public VideoPlayer videoPlayer;
+    //public RawImage videoRenderer;
 
 
     public int cutsceneIndex = 0;
@@ -49,8 +51,6 @@ public class GameManager : MonoBehaviour
     public bool inBossScene = false;
 
     bool bossCutsceneStarted = false;
-
-
 
     private bool waitingForClick = false;
 
@@ -82,11 +82,23 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-       
-        if (!introDone && !inBossScene)
+
+
+        //if (!introDone && !inBossScene)
+        //{
+        //    StartCoroutine(IntroSequence());
+        //}
+
+        //CutsceneManager.Instance.currCutscene = InGameScenes[0];
+        if (!inBossScene)
         {
-            StartCoroutine(IntroSequence());
+            CutsceneManager.Instance.currCutscene = InGameScenes[0];
+            CutsceneManager.Instance.StartCutscene();
         }
+
+
+
+
 
     }
 
@@ -94,7 +106,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("List counts " + playerState.soldTo.Count + " " +  playerState.recruitedRats.Count );
+        //Debug.Log("List counts " + playerState.soldTo.Count + " " +  playerState.recruitedRats.Count );
 
 
         if (UIManager.Instance != null)
@@ -143,37 +155,37 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public IEnumerator IntroSequence()
-    {
-        thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Mouse");
+    //public IEnumerator IntroSequence()
+    //{
+    //    thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Mouse");
 
-        // Make sure video object is active
-        videoPlayer.gameObject.SetActive(true);
+    //    // Make sure video object is active
+    //    videoPlayer.gameObject.SetActive(true);
 
-        videoPlayer.Prepare();
-        yield return new WaitUntil(() => videoPlayer.isPrepared);
+    //    videoPlayer.Prepare();
+    //    yield return new WaitUntil(() => videoPlayer.isPrepared);
 
-        videoPlayer.Play();
+    //    videoPlayer.Play();
 
-        // wait until it finishes properly
-        yield return new WaitUntil(() => !videoPlayer.isPlaying);
+    //    // wait until it finishes properly
+    //    yield return new WaitUntil(() => !videoPlayer.isPlaying);
 
-        videoPlayer.gameObject.SetActive(false);
-        videoRenderer.gameObject.SetActive(false);
+    //    videoPlayer.gameObject.SetActive(false);
+    //    videoRenderer.gameObject.SetActive(false);
 
-        blackScreenPanel.SetActive(true);
+    //    blackScreenPanel.SetActive(true);
 
-        // yield return new WaitUntil(() => Mouse.current.leftButton.wasPressedThisFrame);
-        yield return new WaitUntil(() => thirdPersonController.mouseClick.WasPressedThisFrame());
+    //    // yield return new WaitUntil(() => Mouse.current.leftButton.wasPressedThisFrame);
+    //    yield return new WaitUntil(() => thirdPersonController.mouseClick.WasPressedThisFrame());
 
-        blackScreenPanel.SetActive(false);
+    //    blackScreenPanel.SetActive(false);
 
-        thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
+    //    thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
 
-        tutorialManager.currentStage = TutorialManager.TutorialStage.TalkToNPC;
+    //    tutorialManager.currentStage = TutorialManager.TutorialStage.TalkToNPC;
 
-        introDone = true;
-    }
+    //    introDone = true;
+    //}
 
 
     public void increaseCurrency(int increaseBy)

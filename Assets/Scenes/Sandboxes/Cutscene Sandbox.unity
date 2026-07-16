@@ -752,7 +752,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CutsceneManager
   cutscenePanel: {fileID: 1866699023}
+  currComic: {fileID: 164869936}
+  currDialogue: {fileID: 1178492146}
+  currSpeaker: {fileID: 1646431951}
+  currCutscene: {fileID: 0}
   isCutsceneActive: 0
+  thirdPersonController: {fileID: 0}
 --- !u!4 &912383883
 Transform:
   m_ObjectHideFlags: 0

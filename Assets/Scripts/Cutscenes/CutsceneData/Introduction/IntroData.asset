@@ -57,9 +57,6 @@ MonoBehaviour:
   - image: {fileID: 2800000, guid: 826f9bc2bd84e9f419a28a74c0abda58, type: 3}
     dialogue: "I promise I\u2019m going to pay it all back, I just need some time."
     speaker: Renatto
-  - image: {fileID: 2800000, guid: 826f9bc2bd84e9f419a28a74c0abda58, type: 3}
-    dialogue: "I promise I\u2019m going to pay it all back, I just need some time."
-    speaker: Renatto
   - image: {fileID: 2800000, guid: c32bd264546ffbe448c4c9a89d545baf, type: 3}
     dialogue: '*huffs* Yeah, how much time?'
     speaker: ???
