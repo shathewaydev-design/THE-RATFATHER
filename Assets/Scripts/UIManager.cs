@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using static System.Net.Mime.MediaTypeNames;
 public class UIManager : MonoBehaviour
 {
 
@@ -15,7 +16,10 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI nameText;     // UI element for the speaker's name
     public TextMeshProUGUI dialogueText;    // UI element for the line text
     public GameObject dialoguePanel;   // parent panel for dialogue and name
+
+
     public GameObject optionsPanel;   // parent panel for buttons
+    public GameObject optionsBoundary; // allow for a background while filling in this space
     public Button optionButtonPrefab; // prefab for a single option
 
     public QuestManager questManager;
@@ -189,7 +193,7 @@ public class UIManager : MonoBehaviour
         currentCallback = callback;
 
         // Clear old buttons
-        foreach (Transform child in optionsPanel.transform)
+        foreach (Transform child in optionsBoundary.transform) // changed
             Destroy(child.gameObject);
 
         optionButtons.Clear();
@@ -198,8 +202,23 @@ public class UIManager : MonoBehaviour
         for (int i = 0; i < options.Count; i++)
         {
             int index = i; // capture for closure
-            Button button = Instantiate(optionButtonPrefab, optionsPanel.transform);
-            button.GetComponentInChildren<TextMeshProUGUI>().text = options[i].text;
+            Button button = Instantiate(optionButtonPrefab, optionsBoundary.transform); // changed
+
+
+            //button.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
+            //button.GetComponentInChildren<TextMeshProUGUI>().text = TextAlignmentOptions.Midline;
+            //button.GetComponentInChildren<TextMeshProUGUI>().text = options[i].text;
+
+            TextMeshProUGUI text = button.GetComponentInChildren<TextMeshProUGUI>();
+
+            text.color = Color.white;
+            text.text = options[i].text;
+
+            // alignment
+            text.alignment = TextAlignmentOptions.Right;
+            text.alignment = TextAlignmentOptions.Midline;
+
+
             button.onClick.AddListener(() => callback(index));
             optionButtons.Add(button); // add to list for highlighting and selecting
         }
@@ -209,7 +228,7 @@ public class UIManager : MonoBehaviour
     }
     public void HideOptions()
     {
-        foreach (Transform child in optionsPanel.transform)
+        foreach (Transform child in optionsBoundary.transform)
             Destroy(child.gameObject);
         optionButtons.Clear();
         optionsPanel.SetActive(false);

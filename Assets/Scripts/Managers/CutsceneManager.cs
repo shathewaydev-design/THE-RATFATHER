@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Playables;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
 
 
 public class CutsceneManager : MonoBehaviour
@@ -19,6 +20,12 @@ public class CutsceneManager : MonoBehaviour
     [SerializeField] private RawImage currComic;
     [SerializeField] private TMP_Text currDialogue;
     [SerializeField] private TMP_Text currSpeaker;
+
+    [SerializeField] private AudioSource musicSource;
+    [SerializeField] private AudioSource sfxSource;
+
+    //[SerializeField] private AudioClip currBKGMusic; // attatched to entire cutscene object
+    //[SerializeField] private AudioClip currBKGNoise; // tied to each individual panel
 
     [SerializeField] private CanvasGroup cutsceneCanvasGroup;
     //[SerializeField] private RawImage fadeOverlay;
@@ -102,10 +109,18 @@ public class CutsceneManager : MonoBehaviour
         // CURSOR NEEDS TO BE LOCKED
         thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Mouse");
 
+        // BKG MUSIC IF THERE
+        if (currCutscene.bkgMusic != null)
+            musicSource.clip = currCutscene.bkgMusic;
+            musicSource.Play();
+
         // FIND FIRST PANEL
         currComic.texture = currCutscene.panels[0].image;
         currDialogue.text = currCutscene.panels[0].dialogue;
         currSpeaker.text = currCutscene.panels[0].speaker;
+
+        if (currCutscene.panels[0].soundEffect != null)
+            sfxSource.PlayOneShot(currCutscene.panels[0].soundEffect); // sound effect if there
 
         cutsceneIndex++;
 
@@ -121,6 +136,9 @@ public class CutsceneManager : MonoBehaviour
             currComic.texture = currCutscene.panels[cutsceneIndex].image;
             currDialogue.text = currCutscene.panels[cutsceneIndex].dialogue;
             currSpeaker.text = currCutscene.panels[cutsceneIndex].speaker;
+
+            if (currCutscene.panels[cutsceneIndex].soundEffect != null)
+                sfxSource.PlayOneShot(currCutscene.panels[cutsceneIndex].soundEffect); // sound effect if there
 
             cutsceneIndex++;
 
@@ -140,6 +158,9 @@ public class CutsceneManager : MonoBehaviour
         yield return FadeOut();
         // cutscenePanel is no longer active
         isCutsceneActive = false;
+
+        // end bkgmusic
+        musicSource.Stop();
 
         // remove cutscene panel
         cutscenePanel.SetActive(false);

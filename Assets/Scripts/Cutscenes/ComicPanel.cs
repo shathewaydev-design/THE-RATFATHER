@@ -5,6 +5,8 @@ public class ComicPanel
 {
     public Texture image;
 
+    public AudioClip soundEffect;
+
     [TextArea(3, 6)]
     public string dialogue;
 

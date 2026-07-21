@@ -5,4 +5,6 @@ using UnityEngine;
 public class ComicCutscene : ScriptableObject
 {
     public List<ComicPanel> panels = new();
+
+    public AudioClip bkgMusic;
 }
