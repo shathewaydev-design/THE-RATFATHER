@@ -83,7 +83,8 @@ public class QuestManager : MonoBehaviour
             {
                 foreach (QuestReward reward in quest.rewards)
                 {
-                    reward.Apply();
+                    if (!reward.applied)
+                        reward.Apply();
                     questStates[quest].hasGivenRewards = true;
                 }
             }

@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
         //}
 
         //CutsceneManager.Instance.currCutscene = InGameScenes[0];
-        if (!inBossScene)
+        if (!inBossScene) // ADDING MORE LEVELS -- CLEAN UP
         {
             CutsceneManager.Instance.currCutscene = InGameScenes[0];
             CutsceneManager.Instance.StartCutscene();

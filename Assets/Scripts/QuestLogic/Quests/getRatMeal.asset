@@ -24,4 +24,5 @@ MonoBehaviour:
   objectives:
   - Get the rat a warm meal.
   rewards:
+  - {fileID: 11400000, guid: 8a1bc19b5607acc4f9996cb737f10d7b, type: 2}
   - {fileID: 11400000, guid: 69cb9a31324c6154f898e453e6c2af21, type: 2}
