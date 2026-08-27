@@ -24025,6 +24025,9 @@ MonoBehaviour:
   moveRotation: 0
   maxRotation: 28
   minRotation: 0
+  draggableMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!136 &199640198
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -116880,6 +116883,9 @@ MonoBehaviour:
   moveRotation: 1
   maxRotation: 23
   minRotation: 0
+  draggableMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &964707808
 GameObject:
   m_ObjectHideFlags: 0
@@ -121572,7 +121578,6 @@ MonoBehaviour:
   canPump: 1
   currentFill: 0
   belloObject: {fileID: 964090838}
-  cookingPotVFX: {fileID: 1218203490}
 --- !u!1001 &1017628465
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -140047,8 +140052,11 @@ MonoBehaviour:
   logPanel: {fileID: 706002970}
   useButton: {fileID: 2000352287}
   thirdPersonController: {fileID: 1103609271}
+  isOpen: 0
   selectedCheeses: []
   itemInfoPanel: {fileID: 725374405}
+  isSelling: 0
+  isConsuming: 1
 --- !u!43 &1060150265
 Mesh:
   m_ObjectHideFlags: 0
@@ -143993,6 +144001,15 @@ MonoBehaviour:
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: 890f9a52-0bb4-443b-a4ac-fa66976069a1
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  toggleCursor:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 26d22249-4e18-421d-be59-56a17d048632
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -176336,6 +176353,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 544144418}
     m_Modifications:
+    - target: {fileID: 417444522960572779, guid: ad626c9a846d942609e2731be646a531, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 417444522960572779, guid: ad626c9a846d942609e2731be646a531, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 417444522960572779, guid: ad626c9a846d942609e2731be646a531, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2122427893728435538, guid: ad626c9a846d942609e2731be646a531, type: 3}
       propertyPath: m_Name
       value: itemSlotTemplate
@@ -275801,6 +275830,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UseButton
   cheeseButtonRef: {fileID: 0}
+  ingredientButtonRef: {fileID: 0}
+  isSelling: 0
+  isConsuming: 1
 --- !u!1001 &2001434736
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -306270,6 +306302,63 @@ RectTransform:
   m_AnchoredPosition: {x: 36, y: -15}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1001 &4197013797900673868
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8623130395509457402, guid: 4180c5f50826d864aaa7bd1a327ec9df, type: 3}
+      propertyPath: m_Name
+      value: Banana
+      objectReference: {fileID: 0}
+    - target: {fileID: 8998284160364141376, guid: 4180c5f50826d864aaa7bd1a327ec9df, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.72
+      objectReference: {fileID: 0}
+    - target: {fileID: 8998284160364141376, guid: 4180c5f50826d864aaa7bd1a327ec9df, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0000009586593
+      objectReference: {fileID: 0}
+    - target: {fileID: 8998284160364141376, guid: 4180c5f50826d864aaa7bd1a327ec9df, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -280.82
+      objectReference: {fileID: 0}
+    - target: {fileID: 8998284160364141376, guid: 4180c5f50826d864aaa7bd1a327ec9df, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8998284160364141376, guid: 4180c5f50826d864aaa7bd1a327ec9df, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8998284160364141376, guid: 4180c5f50826d864aaa7bd1a327ec9df, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8998284160364141376, guid: 4180c5f50826d864aaa7bd1a327ec9df, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8998284160364141376, guid: 4180c5f50826d864aaa7bd1a327ec9df, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8998284160364141376, guid: 4180c5f50826d864aaa7bd1a327ec9df, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8998284160364141376, guid: 4180c5f50826d864aaa7bd1a327ec9df, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4180c5f50826d864aaa7bd1a327ec9df, type: 3}
 --- !u!114 &4432460853430857796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -307150,6 +307239,8 @@ MonoBehaviour:
   recipeMenu: {fileID: 3723980693859025091}
   ingredientInventoryPanel: {fileID: 1550494705}
   cookButtonUI: {fileID: 1187684117}
+  exitCookingModeUI: {fileID: 0}
+  cookingPotVFX: {fileID: 0}
 --- !u!114 &7944982660283544583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -307528,3 +307619,4 @@ SceneRoots:
   - {fileID: 864104454}
   - {fileID: 743091948}
   - {fileID: 1505945058}
+  - {fileID: 4197013797900673868}
