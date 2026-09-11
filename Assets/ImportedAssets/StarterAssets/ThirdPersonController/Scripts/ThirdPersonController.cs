@@ -236,6 +236,10 @@ namespace StarterAssets
 
                 if (stopInteract != null)
                     stopInteract.performed += OnStopInteractPerformed;
+
+                pauseGame = globalMap.FindAction("PauseGame");
+                if (pauseGame != null)
+                    pauseGame.performed += OnPauseGamePerformed;
             }
             toggleCursor = globalMap.FindAction("ToggleCursor");
 
@@ -590,6 +594,10 @@ namespace StarterAssets
         private void OnStopInteractPerformed(InputAction.CallbackContext ctx)
         {
             OnStopInteract?.Invoke();
+        }
+        private void OnPauseGamePerformed(InputAction.CallbackContext ctx)
+        {
+            OnPauseGamePerformed?.Invoke();
         }
         private void OnOpenInventoryPerformed(InputAction.CallbackContext ctx)
         {
