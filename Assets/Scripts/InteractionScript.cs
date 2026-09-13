@@ -92,6 +92,7 @@ public class InteractionScript : MonoBehaviour
         {            
             if(other.TryGetComponent(out IInteractable interactObj))//TryGetComponent is like GetComponent but checked for null
             {
+                //Debug.Log("Entity Detected"); // soph added
                 interactablesInRange.Add(interactObj);//add this to the list so when press E, it runs interact function
             }
 
