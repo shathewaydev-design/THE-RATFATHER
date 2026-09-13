@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34ee349227d32df4580398eb667c4e5d, type: 3}
+  m_Name: NPC_1_IntroDialogue
+  m_EditorClassIdentifier: Assembly-CSharp::ConversationData
+  lines:
+  - speaker: {fileID: 11400000, guid: 05af4c8d218e0064dad48fc437d7740c, type: 2}
+    text: Hello!
+    options: []
+    recruitRat: 0
+    openSellScreen: 0
+    endConversation: 0
+  - speaker: {fileID: 11400000, guid: 05af4c8d218e0064dad48fc437d7740c, type: 2}
+    text: This is a test for refining our dialogue system!
+    options: []
+    recruitRat: 0
+    openSellScreen: 0
+    endConversation: 0
+  - speaker: {fileID: 11400000, guid: 05af4c8d218e0064dad48fc437d7740c, type: 2}
+    text: See you around! :D
+    options: []
+    recruitRat: 0
+    openSellScreen: 0
+    endConversation: 1
