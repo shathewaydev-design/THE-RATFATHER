@@ -6,34 +6,54 @@ using UnityEngine.Audio;
 
 public class VolumeSetting : MonoBehaviour
 {
-    [SerializeField] private Slider volumeSlider;
+    [SerializeField] private Slider ambientVolumeSlider;
+    [SerializeField] private Slider SFXVolumeSlider;
     [SerializeField] private AudioMixer ambientMixer;
     [SerializeField] private AudioMixer SFXMixer;
 
     private void Start()
     {
-        SetVolume(PlayerPrefs.GetFloat("SavedAmbientVolume", 100f));   
-        SetVolume(PlayerPrefs.GetFloat("SavedSFXVolume", 100f));   
+        SetAmbientVolume(PlayerPrefs.GetFloat("SavedAmbientVolume", 100f));   
+        SetSFXVolume(PlayerPrefs.GetFloat("SavedSFXVolume", 100f));   
     }
-    public void SetVolume(float _value)
+    public void SetAmbientVolume(float _value)
     {
         if(_value < 1)
         {
             _value = 0.001f; // Prevents log10(0) error
         }
 
-        RefreshSlider(_value);
+        RefreshAmbientSlider(_value);
         PlayerPrefs.SetFloat("SavedAmbientVolume", _value);
         PlayerPrefs.SetFloat("SavedSFXVolume", _value);
         ambientMixer.SetFloat("AmbientVolume", Mathf.Log10(_value/100) * 20); // Convert linear volume to decibels
+    }
+    public void SetSFXVolume(float _value)
+    {
+        if(_value < 1)
+        {
+            _value = 0.001f; // Prevents log10(0) error
+        }
+
+        RefreshSFXSlider(_value);
+        PlayerPrefs.SetFloat("SavedAmbientVolume", _value);
+        PlayerPrefs.SetFloat("SavedSFXVolume", _value);
         SFXMixer.SetFloat("SFXVolume", Mathf.Log10(_value/100) * 20); // Convert linear volume to decibels
     }
-    public void SetVolumeFromSlider()
+    public void SetAmbientVolumeFromSlider()
     {
-        SetVolume(volumeSlider.value);
+        SetAmbientVolume(ambientVolumeSlider.value);
     }
-    public void RefreshSlider(float _value)
+    public void SetSFXVolumeFromSlider()
     {
-        volumeSlider.value = _value;
+        SetSFXVolume(SFXVolumeSlider.value);
+    }
+    public void RefreshAmbientSlider(float _value)
+    {
+        ambientVolumeSlider.value = _value;
+    }
+    public void RefreshSFXSlider(float _value)
+    {
+        SFXVolumeSlider.value = _value;
     }
 }

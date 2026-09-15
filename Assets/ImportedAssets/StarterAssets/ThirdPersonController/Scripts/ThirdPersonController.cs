@@ -101,6 +101,7 @@ namespace StarterAssets
         public event Action OnMouseClick; 
         //public event Action OnMousePositionChange; 
         public event Action OnOpenInventory; 
+        public event Action OnPauseGame; 
         private InputActionMap playerMap;
         private InputActionMap cookingMap;
         private InputActionMap mouseMap;
@@ -114,6 +115,7 @@ namespace StarterAssets
         public InputAction openInventory;//press Tab
 
         public InputAction toggleCursor;//unlock cursor for debugging
+        public InputAction pauseGame;//press Esc to pause game
         public event Action OnToggleCursor;
         public event Action<Vector2> OnMousePosition;
         public event Action<bool> OnMouseDrag;
@@ -130,6 +132,8 @@ namespace StarterAssets
 
             mouseClick.performed += OnMouseClickPerformed;
             mouseClick.canceled += OnMouseClickCanceled;
+
+            pauseGame.performed += OnPauseGamePerformed;
             
         #endif
         }
@@ -145,6 +149,8 @@ namespace StarterAssets
 
             mouseClick.performed -= OnMouseClickPerformed;
             mouseClick.canceled -= OnMouseClickCanceled;
+
+            pauseGame.performed -= OnPauseGamePerformed;
         #endif
         }
 
@@ -597,7 +603,7 @@ namespace StarterAssets
         }
         private void OnPauseGamePerformed(InputAction.CallbackContext ctx)
         {
-            OnPauseGamePerformed?.Invoke();
+            OnPauseGame?.Invoke();
         }
         private void OnOpenInventoryPerformed(InputAction.CallbackContext ctx)
         {
