@@ -8,21 +8,27 @@ using UnityEngine.InputSystem;
 
 public class RebindScript : MonoBehaviour
 {
-    public InputActionAsset InputActions;
+    [SerializeField] private InputActionAsset InputActions;
+    [SerializeField] private InputActionReference m_action;
+    [SerializeField] private int m_bindingIndex = 0;//this is when i.e. Interact E and Gamepad: A,...
+
     private InputActionRebindingExtensions.RebindingOperation m_rebindingOperation;
-    private InputAction m_interact;//default is E
+    //private InputAction m_interact;//default is E
     [SerializeField] private Button m_rebindButton;
     [SerializeField] private TextMeshProUGUI m_rebindLabel;
 
-    private InputActionMap m_player;
+    private InputActionMap m_playerMap;
+    private InputActionMap m_cookingMap;
+    private InputActionMap m_globalMap;
 
     
     
     private void Awake()
     {
-        m_interact = InputActions.FindAction("Interact");
-        m_player = InputActions.FindActionMap("Player");
-       
+        //m_interact = InputActions.FindAction("Interact");
+        m_playerMap = InputActions.FindActionMap("Player");
+        m_cookingMap = InputActions.FindActionMap("Cooking");
+        m_globalMap = InputActions.FindActionMap("Global");
     }
     private void OnEnable()
     {
@@ -36,11 +42,15 @@ public class RebindScript : MonoBehaviour
 
     public void Rebind()
     {
-       m_player.Disable();
+       m_playerMap.Disable();
+       m_cookingMap.Disable();
+       m_globalMap.Disable();
+
         m_rebindLabel.text = "Choose a new button...";
         m_rebindButton.interactable = false;
         // m_interact.Disable();
-        m_rebindingOperation = m_interact.PerformInteractiveRebinding().WithCancelingThrough("<Keyboard>/escape").OnComplete(operation => RebindCompleted()).OnCancel(operation => RebindCanceled());
+        //m_rebindingOperation = m_interact.PerformInteractiveRebinding().WithCancelingThrough("<Keyboard>/escape").OnComplete(operation => RebindCompleted()).OnCancel(operation => RebindCanceled());
+        m_rebindingOperation = m_action.action.PerformInteractiveRebinding(m_bindingIndex).WithCancelingThrough("<Keyboard>/escape").OnComplete(operation => RebindCompleted()).OnCancel(operation => RebindCanceled());
         //if player needs to cancel, 
         //there's an option to cancel the rebind operation
 
@@ -50,19 +60,22 @@ public class RebindScript : MonoBehaviour
     {
         //m_rebindingOperation.Dispose();
         
-        string newBinding = m_interact.bindings[0].effectivePath;
+        //string newBinding = m_interact.bindings[0].effectivePath;
+        //string newBinding = m_action.action.bindings[m_bindingIndex].effectivePath;
+        string newBinding = m_action.action.GetBindingDisplayString(m_bindingIndex);
+        //display readable text
         m_rebindLabel.text = $"Rebind completed: {newBinding}";
 
         SaveRebinds();
 
-        m_player.Enable();
+        m_playerMap.Enable();
+        m_cookingMap.Enable();
+        m_globalMap.Enable();
         // m_interact.Enable();
         
         
         m_rebindButton.interactable = true;
         
-        //m_rebindingOperation.Dispose();
-        //m_rebindingOperation = null;
         StartCoroutine(CleanupRebindingOperation());
         //to make sure Unity has time to process the rebind operation 
         //before disposing of it
@@ -72,7 +85,9 @@ public class RebindScript : MonoBehaviour
     {
         m_rebindLabel.text = "Rebind canceled.";
 
-        m_player.Enable();
+        m_playerMap.Enable();
+        m_cookingMap.Enable();
+        m_globalMap.Enable();
         m_rebindButton.interactable = true;
 
         StartCoroutine(CleanupRebindingOperation());

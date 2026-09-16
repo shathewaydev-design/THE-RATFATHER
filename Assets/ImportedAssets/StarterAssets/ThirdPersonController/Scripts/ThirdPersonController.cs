@@ -227,7 +227,6 @@ namespace StarterAssets
 
             tiltLeft = cookingMap.FindAction("TiltLeft");
             tiltRight = cookingMap.FindAction("TiltRight");
-            //stopInteract = cookingMap.FindAction("StopInteract");
             sprinkle = cookingMap.FindAction("Sprinkle");
             var mouseMap = _playerInput.actions.FindActionMap("Mouse");
             mouseClick = mouseMap.FindAction("LeftClick");
