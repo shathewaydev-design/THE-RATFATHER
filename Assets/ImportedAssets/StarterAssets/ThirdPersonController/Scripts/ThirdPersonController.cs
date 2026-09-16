@@ -347,13 +347,24 @@ namespace StarterAssets
                 float lookX = _input.look.x;
                 float lookY = _input.look.y;
 
+                // Apply inversion from settings
+                InvertX = SettingsManager.Instance.invertMouseX;
+                InvertY = SettingsManager.Instance.invertMouseY;
                 // Apply inversion
-                if (InvertX) lookX *= -1f;
-                if (InvertY) lookY *= -1f;
+                if (InvertX) 
+                {
+                    lookX *= -1f;
+                }
+                if (InvertY) 
+                {
+                    lookY *= -1f;
+                }
 
-                // Apply sensitivity
-                lookX *= MouseSensitivity;
-                lookY *= MouseSensitivity;
+                // Apply mouse sensitivity from Settings
+                float mouseSettingSensitivity = SettingsManager.Instance.mouseSensitivity;
+                //Apply sensitivity
+                lookX *= mouseSettingSensitivity;
+                lookY *= mouseSettingSensitivity;
                 _cinemachineTargetYaw += lookX * deltaTimeMultiplier;
                 _cinemachineTargetPitch += lookY * deltaTimeMultiplier;
                 //^original below
