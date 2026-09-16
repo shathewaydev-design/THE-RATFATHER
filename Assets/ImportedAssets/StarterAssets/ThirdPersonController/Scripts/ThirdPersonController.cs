@@ -251,7 +251,6 @@ namespace StarterAssets
 
             toggleCursor.performed += ctx => OnToggleCursor?.Invoke();
 
-            // OPTIONAL: if you have interact in Player map
             var playerMap = _playerInput.actions.FindActionMap("Player");
             if (playerMap != null)
             {
@@ -261,6 +260,12 @@ namespace StarterAssets
                 openInventory = playerMap.FindAction("OpenInventory");
                 if (openInventory != null)                    
                     openInventory.performed += ctx => OnOpenInventory?.Invoke();
+            }
+
+            var rebinds = PlayerPrefs.GetString("rebinds");
+            if(!string.IsNullOrEmpty(rebinds))
+            {
+                _playerInput.actions.LoadBindingOverridesFromJson(rebinds);
             }
 #else
 			Debug.LogError( "Starter Assets package is missing dependencies. Please use Tools/Starter Assets/Reinstall Dependencies to fix it");
