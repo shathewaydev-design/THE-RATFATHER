@@ -1,0 +1,12 @@
+﻿title: HelloWorld
+---
+Bob: What brings you here?
+Bob: I hope you're not trying to hurt me :(
+Bob: Testing dialogue options...
+-> I'm looking for cheese.
+    Bob: Ah, you're looking for cheese!
+-> I'm just looking around.
+    Bob: That's fine. Take your time.
+
+===
+

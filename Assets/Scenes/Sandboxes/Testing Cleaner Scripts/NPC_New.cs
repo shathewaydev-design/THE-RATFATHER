@@ -4,6 +4,8 @@ public class NPC_New : MonoBehaviour, IInteractable
 {
     private bool playerInRange = false;
     public ConversationData testingIntro; // WILL BE STORED IN NPC PROFILE, JUST A TEST!!
+
+    public string introConversationNode; // WILL BE STORED IN NPC PROFILE, JUST A TEST!!
     // private npc profile
 
     [Header("UI")]
@@ -26,7 +28,7 @@ public class NPC_New : MonoBehaviour, IInteractable
     {
         // pull up proper dialogue
         Debug.Log("Hello World!");
-        DialogueManager_New.Instance.StartConversation(testingIntro);
+        DialogueManager_New.Instance.StartConversation(introConversationNode); // old: StartConversation(testingIntro)
     }
 
     void OnTriggerEnter(Collider other)
