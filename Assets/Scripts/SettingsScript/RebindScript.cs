@@ -12,6 +12,8 @@ public class RebindScript : MonoBehaviour
     [SerializeField] private InputActionReference m_action;
     [SerializeField] private int m_bindingIndex = 0;//this is when i.e. Interact E and Gamepad: A,...
 
+    [SerializeField] private KeybindText keybindText;//used to update text after rebind is completed
+
     private InputActionRebindingExtensions.RebindingOperation m_rebindingOperation;
     //private InputAction m_interact;//default is E
     [SerializeField] private Button m_rebindButton;
@@ -34,6 +36,7 @@ public class RebindScript : MonoBehaviour
     {
         m_rebindButton.Select();
         m_rebindButton.onClick.AddListener(Rebind);
+        m_rebindLabel.text = "";
     }
     private void OnDisable()
     {
@@ -64,9 +67,11 @@ public class RebindScript : MonoBehaviour
         //string newBinding = m_action.action.bindings[m_bindingIndex].effectivePath;
         string newBinding = m_action.action.GetBindingDisplayString(m_bindingIndex);
         //display readable text
-        m_rebindLabel.text = $"Rebind completed: {newBinding}";
+        m_rebindLabel.text = "Rebind completed!";
 
         SaveRebinds();
+
+        keybindText.RefreshKeyText();
 
         m_playerMap.Enable();
         m_cookingMap.Enable();
