@@ -5,6 +5,8 @@ public class NPC_New : MonoBehaviour, IInteractable
     private bool playerInRange = false;
     public ConversationData testingIntro; // WILL BE STORED IN NPC PROFILE, JUST A TEST!!
 
+    [SerializeField] private NPCProfile_New profile; // make sure to change when completely finished to NPCProfile!!!
+
     public string introConversationNode; // WILL BE STORED IN NPC PROFILE, JUST A TEST!!
     // private npc profile
 
@@ -12,7 +14,7 @@ public class NPC_New : MonoBehaviour, IInteractable
     public Animator promptAnimator;
     [SerializeField] private GameObject promptCanvas;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    // Start is called once before the first execution of Update after the MonoBehaviour is created   
     void Start()
     {
         
@@ -21,7 +23,10 @@ public class NPC_New : MonoBehaviour, IInteractable
     // Update is called once per frame
     void Update()
     {
-        
+        CheckTrustLevel();
+        CheckCurrentDialogueNode(); // perhaps make an event???
+
+
     }
 
     public void Interact()
@@ -29,6 +34,24 @@ public class NPC_New : MonoBehaviour, IInteractable
         // pull up proper dialogue
         Debug.Log("Hello World!");
         DialogueManager_New.Instance.StartConversation(introConversationNode); // old: StartConversation(testingIntro)
+    }
+
+    private void CheckTrustLevel()
+    {
+        if (profile.GetTrustLevel() < 0)
+        {
+            profile.SetTrustLevel(0);
+        }
+
+        if (profile.GetTrustLevel() > 100)
+        {
+            profile.SetTrustLevel(100);
+        }
+    }
+
+    private void CheckCurrentDialogueNode()
+    {
+        return; // stub!!
     }
 
     void OnTriggerEnter(Collider other)
