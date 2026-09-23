@@ -9,8 +9,8 @@ public class SettingsManager : MonoBehaviour
 {
     public static SettingsManager Instance;
 
-    [Header("Input")]
-    public ThirdPersonController thirdPersonController;
+    
+     
     [SerializeField] private Slider mouseSensitivitySlider;
     [Header("UI")]
     [SerializeField] private GameObject SettingsMenuPanel;
@@ -38,8 +38,7 @@ public class SettingsManager : MonoBehaviour
     }
     void Start()
     {
-        // thirdPersonController = ThirdPersonController.Instance;
-        // thirdPersonController.OnPauseGame += PauseGame;//
+       
         SettingsMenuPanel.SetActive(false);//closed when start
     }
     // void Update()
