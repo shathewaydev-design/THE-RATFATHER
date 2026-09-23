@@ -13,9 +13,10 @@ public class SettingsManager : MonoBehaviour
     public ThirdPersonController thirdPersonController;
     [SerializeField] private Slider mouseSensitivitySlider;
     [Header("UI")]
-    [SerializeField] private GameObject PauseMenuPanel;
+    [SerializeField] private GameObject SettingsMenuPanel;
+    [SerializeField] private GameObject PauseGamePanel;
     [Header("Variables")]
-    private bool isPaused = false;
+    private bool isOpened = false;
     public bool invertMouseX = false;
     public bool invertMouseY = false;
     public float mouseSensitivity = 10.0f;
@@ -37,34 +38,26 @@ public class SettingsManager : MonoBehaviour
     }
     void Start()
     {
-        thirdPersonController = ThirdPersonController.Instance;
-        thirdPersonController.OnPauseGame += PauseGame;
-        PauseMenuPanel.SetActive(false);//closed when start
+        // thirdPersonController = ThirdPersonController.Instance;
+        // thirdPersonController.OnPauseGame += PauseGame;//
+        SettingsMenuPanel.SetActive(false);//closed when start
     }
-    void Update()
+    // void Update()
+    // {
+        
+    // }
+
+    public void OpenSettings()
     {
         
+        SettingsMenuPanel.SetActive(true);
+        PauseGamePanel.SetActive(false);
+        
     }
-
-    public void PauseGame()
+    public void CloseSettings()
     {
-        isPaused = !isPaused;
-        if (isPaused)
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-            Time.timeScale = 0.0f;
-
-            PauseMenuPanel.SetActive(true);
-        }
-        else
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-            Time.timeScale = 1.0f;
-
-            PauseMenuPanel.SetActive(false);
-        }
+        SettingsMenuPanel.SetActive(false);
+        PauseGamePanel.SetActive(true);
     }
     public void SetMouseSensitivity(float value)
     {
