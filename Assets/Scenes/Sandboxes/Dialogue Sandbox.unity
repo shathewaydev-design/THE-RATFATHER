@@ -4508,7 +4508,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad38fd13dc4fa5d43aeaf27d41cf676b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPC_New
-  testingIntro: {fileID: 11400000, guid: b24e2d5d188fa204ea070ed809f6180f, type: 2}
+  profile: {fileID: 11400000, guid: eb4f23255b195a64e88309408d32cdb1, type: 2}
   introConversationNode: HelloWorld
   promptAnimator: {fileID: 479189393}
   promptCanvas: {fileID: 1507269134}
@@ -6168,7 +6168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad38fd13dc4fa5d43aeaf27d41cf676b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPC_New
-  testingIntro: {fileID: 11400000, guid: b24e2d5d188fa204ea070ed809f6180f, type: 2}
+  profile: {fileID: 0}
   introConversationNode: 
   promptAnimator: {fileID: 1048414380}
   promptCanvas: {fileID: 1507269134}
@@ -6462,6 +6462,34 @@ PrefabInstance:
       propertyPath: yarnProject
       value: 
       objectReference: {fileID: 7545569452688597077, guid: 35c038f1cfa618f41bca95f75452baf8, type: 3}
+    - target: {fileID: 8309902628685535410, guid: 52571f68872914e24837210513edea1d, type: 3}
+      propertyPath: onDialogueComplete.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8309902628685535410, guid: 52571f68872914e24837210513edea1d, type: 3}
+      propertyPath: onDialogueComplete.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8309902628685535410, guid: 52571f68872914e24837210513edea1d, type: 3}
+      propertyPath: onDialogueComplete.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 675634449}
+    - target: {fileID: 8309902628685535410, guid: 52571f68872914e24837210513edea1d, type: 3}
+      propertyPath: onDialogueComplete.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8309902628685535410, guid: 52571f68872914e24837210513edea1d, type: 3}
+      propertyPath: onDialogueComplete.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: EndDialogue
+      objectReference: {fileID: 0}
+    - target: {fileID: 8309902628685535410, guid: 52571f68872914e24837210513edea1d, type: 3}
+      propertyPath: onDialogueComplete.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: DialogueManager_New, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8309902628685535410, guid: 52571f68872914e24837210513edea1d, type: 3}
+      propertyPath: onDialogueComplete.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 9078442560890639579, guid: 52571f68872914e24837210513edea1d, type: 3}
       propertyPath: m_IsActive
       value: 0

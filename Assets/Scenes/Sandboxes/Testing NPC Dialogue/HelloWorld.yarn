@@ -1,12 +1,23 @@
-﻿title: HelloWorld
+﻿title: Alex_Intro
 ---
 Bob: What brings you here?
 Bob: I hope you're not trying to hurt me :(
 Bob: Testing dialogue options...
 -> I'm looking for cheese.
     Bob: Ah, you're looking for cheese!
+    Bob: I have some info if you want. But it'll cost!
+    -> Cost what?
+        Bob: Do me a favor.
+        <<jump Alex_Favor1_Intro>>
 -> I'm just looking around.
     Bob: That's fine. Take your time.
 
 ===
 
+title: Alex_Favor1_Intro
+---
+Bob: You will do this for me. Okay???
+-> Okay!
+Bob: Go now!!!
+
+===

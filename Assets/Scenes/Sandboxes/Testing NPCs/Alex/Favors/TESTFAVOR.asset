@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbe66fd14b9276742bcf81b3b13184a0, type: 3}
+  m_Name: TESTFAVOR
+  m_EditorClassIdentifier: Assembly-CSharp::Favor
+  favorName: this is a test!
+  description: testing stuffff
+  objectives:
+  - description: Go into the building!
+    npcDialogue: 
+    type: 1
+    targetID: 
+    targetItem: {fileID: 0}
+    targetCheese: {fileID: 0}
+    toBeRemoved: 0
+    targetLocationID: Building Entrance
+    targetNPC: {fileID: 0}
