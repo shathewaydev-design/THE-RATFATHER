@@ -19,12 +19,16 @@ public class NPC_New : MonoBehaviour, IInteractable
     void Start()
     {
         profile.SetMetPlayer(false);
+        if (!profile.GetHasMetPlayer())
+        {
+            profile.GetState().compFavors = 0;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("curr node? " + profile.GetState().CurrDialogueNode(profile));
+        //Debug.Log("" + profile.GetState().compFavors);
     }
 
 
@@ -51,7 +55,7 @@ public class NPC_New : MonoBehaviour, IInteractable
 
 
         string dialogueNode = profile.GetCurrDialogueNode();
-        Debug.Log("Starting Yarn node: " + dialogueNode);
+        //Debug.Log("Starting Yarn node: " + dialogueNode);
 
         //Debug.Log("node: " + profile.GetCurrDialogueNode());
         DialogueManager_New.Instance.StartConversation(dialogueNode, this); // old: StartConversation(testingIntro)

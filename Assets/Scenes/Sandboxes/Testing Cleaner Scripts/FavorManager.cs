@@ -14,6 +14,7 @@ public class FavorManager : MonoBehaviour
     // action on favor complete
     public static event Action<FavorState> OnFavorComplete;
 
+    public static event Action OnTrustReward;
 
     public List<FavorState> activeFavors = new List<FavorState>();
 
@@ -49,6 +50,7 @@ public class FavorManager : MonoBehaviour
     //[YarnCommand("Activate_Favor")]
     public void StartFavor(Favor favor)
     {
+        Debug.Log("Favor: " + favor);
         FavorState newFavor = new FavorState();
 
         newFavor.favor = favor;
@@ -58,28 +60,97 @@ public class FavorManager : MonoBehaviour
         activeFavors.Add(newFavor);
         DialogueManager_New.Instance.SetNode(favor.objectives[newFavor.currentObjective].npcDialogue);
         OnFavorActivated?.Invoke(newFavor);
-        Debug.Log("curr objective: " + activeFavors[0].favor.objectives[activeFavors[0].currentObjective].description); // TESTING
+        //Debug.Log("curr objective: " + activeFavors[0].favor.objectives[activeFavors[0].currentObjective].description); // TESTING
 
     }
 
     public void CompleteCurrentObjective(FavorState favorState)
     {
+
         favorState.currentObjective++;
-        RemoveKeyItems(favorState,
-                favorState.favor.objectives[favorState.currentObjective].toBeRemoved);
+
         OnObjectiveComplete?.Invoke(favorState);
 
-
-        if (favorState.currentObjective >= favorState.favor.objectives.Count) // entire favor complete?
+        // entire favor complete
+        if (favorState.currentObjective >= favorState.favor.objectives.Count)
         {
             favorState.isCompleted = true;
+
             RemoveKeyItems(favorState, true);
+            ApplyRewards(favorState);
             OnFavorComplete?.Invoke(favorState);
-            return; // TESTING
+
+            return;
         }
 
-        DialogueManager_New.Instance.SetNode(favorState.favor.objectives[favorState.currentObjective].npcDialogue);
-        Debug.Log("curr objective: " + activeFavors[0].favor.objectives[activeFavors[0].currentObjective].description); // TESTING
+        // there is another objective
+        RemoveKeyItems(
+            favorState,
+            favorState.favor.objectives[favorState.currentObjective].toBeRemoved
+        );
+
+        DialogueManager_New.Instance.SetNode(
+            favorState.favor.objectives[favorState.currentObjective].npcDialogue
+        );
+
+
+
+        //favorState.currentObjective++;
+        //RemoveKeyItems(favorState,
+        //        favorState.favor.objectives[favorState.currentObjective].toBeRemoved);
+        //OnObjectiveComplete?.Invoke(favorState);
+
+
+        //if (favorState.currentObjective >= favorState.favor.objectives.Count) // entire favor complete
+        //{
+        //    favorState.isCompleted = true;
+        //    RemoveKeyItems(favorState, true);
+        //    ApplyRewards(favorState);
+        //    OnFavorComplete?.Invoke(favorState);
+
+        //    return; // TESTING
+        //}
+
+        //DialogueManager_New.Instance.SetNode(favorState.favor.objectives[favorState.currentObjective].npcDialogue);
+        ////Debug.Log("curr objective: " + activeFavors[0].favor.objectives[activeFavors[0].currentObjective].description); // TESTING
+    }
+
+    public void ApplyRewards(FavorState favorState)
+    {
+        Favor favor = favorState.favor;
+        foreach (FavorReward reward in favor.rewards)
+        {
+            if (reward.type == FavorRewardType.trustReward)
+            {
+                OnTrustReward?.Invoke();
+                Debug.Log("Trust Reward Applied!!! :)");
+                continue;
+            }
+
+            if (reward.type == FavorRewardType.currencyReward)
+            {
+                //currency has not been implemented...
+                Debug.Log("Curreny Reward Applied!!! :)");
+                continue;
+            }
+
+            if (reward.type == FavorRewardType.ingredientReward)
+            {
+                //InventorySystem.Instance.AddIngredientItem(reward.ingredient);
+                Debug.Log("Ingredient Reward Applied!!! :)");
+                continue;
+            }
+
+            if (reward.type == FavorRewardType.cheeseReward)
+            {
+                //InventorySystem.Instance.AddFinalCheese(reward.cheese);
+                Debug.Log("Cheese Reward Applied!!! :)");
+                continue;
+            }
+
+
+
+        }
     }
 
     public void CheckItemObtained(CheeseIngredientData item, FinalResultCheese cheese)
@@ -116,7 +187,7 @@ public class FavorManager : MonoBehaviour
 
     public void CheckLocation(string locationID)
     {
-        Debug.Log("triggered local check");
+        //Debug.Log("triggered local check");
         foreach (FavorState state in activeFavors)
         {
             // get objective player currently working on

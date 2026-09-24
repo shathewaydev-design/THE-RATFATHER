@@ -18,7 +18,4 @@ MonoBehaviour:
   difficultyLevel: 3
   favors:
   - {fileID: 11400000, guid: de6753bc87b687946878c6690efeb541, type: 2}
-  - {fileID: 11400000, guid: 20895f0f1cd07f24fa8c3f08562188e0, type: 2}
-  - {fileID: 11400000, guid: 5f5d393ab2a51dd47bcfd053d7d8f3b5, type: 2}
-  - {fileID: 11400000, guid: 2198392f3f35ef648bc4b82c7e9513de, type: 2}
-  numOfFavors: 3
+  numOfFavors: 1

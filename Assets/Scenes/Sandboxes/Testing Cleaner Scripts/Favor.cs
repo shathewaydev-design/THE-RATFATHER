@@ -9,6 +9,7 @@ public class Favor : ScriptableObject
     public string description;
 
     public List<FavorObjective> objectives;
+    public List<FavorReward> rewards;
 }
 
 public enum FavorObjectiveType
@@ -36,6 +37,30 @@ public class FavorObjective
     public NPCProfile_New targetNPC;
 
 }
+
+public enum FavorRewardType
+{
+    trustReward,
+    currencyReward,
+    cheeseReward,
+    ingredientReward
+}
+
+
+[System.Serializable]
+public class FavorReward
+{
+    public FavorRewardType type;
+
+    public CheeseIngredientData ingredient;
+    public FinalResultCheese cheese;
+    public int currenyAmount;
+
+
+
+}
+
+
 
 [System.Serializable]
 public class FavorState

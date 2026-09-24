@@ -5,7 +5,7 @@ public class LocationCheck : MonoBehaviour
 {
     [SerializeField] private string locationID;
 
-    public static event Action<String> OnLocationEnter;
+    public static event Action<string> OnLocationEnter;
 
     private void OnTriggerEnter(Collider other)
     {

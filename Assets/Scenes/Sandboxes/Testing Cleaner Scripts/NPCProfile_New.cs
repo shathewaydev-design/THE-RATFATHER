@@ -34,9 +34,12 @@ public class NPCProfile_New : ScriptableObject
 
 
     }
+
+
     private void OnEnable()
     {
         FavorManager.OnFavorComplete += IncreaseCompFavors;
+        FavorManager.OnTrustReward += IncreaseTrustLevel;
         FavorManager.OnFavorActivated += SetActiveFavor;
 
     }
@@ -45,13 +48,15 @@ public class NPCProfile_New : ScriptableObject
     {
         FavorManager.OnFavorComplete -= IncreaseCompFavors;
         FavorManager.OnFavorActivated -= SetActiveFavor;
+        FavorManager.OnTrustReward -= IncreaseTrustLevel;
+
 
     }
     public Favor GetCurrentFavor()
     {
-        if (state.compFavors >= favors.Count) // favors.Count
+        if (state.compFavors <= favors.Count - 1) // favors.Count
         {
-            return null;
+            return favors[state.compFavors];
         }
 
 
@@ -119,6 +124,8 @@ public class NPCProfile_New : ScriptableObject
         {
             state.trustLevel = 100;
         }
+
+        Debug.Log("Trust changed! 15? " + state.trustLevel);
 
     }
 
