@@ -55,24 +55,20 @@ public class WithdrawalMechanic : MonoBehaviour
 
     [Header("Cheese / Tolerance")]
 
-    [SerializeField]
-    private float cheeseSatiation = 100f;
+    [SerializeField] private float cheeseSatiation = 100f;
 
-    [SerializeField]
-    private float toleranceIncrease = 0.15f;
+    [SerializeField] private float toleranceIncrease = 1f;
 
-    [SerializeField]
-    private float maximumTolerance = 2f;
+    [SerializeField] private float maximumTolerance = 5f;
 
-    private float cheeseTolerance = 1f;
+    private float cheeseTolerance = 3f;//how many buffs player can have at once.
     // =========================================================
     // EMERGENCY SATIATION
     // =========================================================
 
     [Header("Emergency Satiation")]
 
-    [SerializeField]
-    private float emergencySatiationMultiplier = 1f;
+    [SerializeField] private float emergencySatiationMultiplier = 1f;
 
     [Header("UI")]
     [SerializeField] private GameObject withdrawalIcon;
@@ -375,6 +371,7 @@ public class WithdrawalMechanic : MonoBehaviour
 
     // =========================================================
     // TOLERANCE
+    // Max buff player can have at once. If player eats more than the max, the buff will not be applied.
     // =========================================================
 
     private void IncreaseTolerance()
