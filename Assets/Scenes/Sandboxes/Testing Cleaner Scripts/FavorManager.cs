@@ -14,6 +14,7 @@ public class FavorManager : MonoBehaviour
     // action on favor complete
     public static event Action<FavorState> OnFavorComplete;
 
+
     public List<FavorState> activeFavors = new List<FavorState>();
 
 
@@ -30,17 +31,19 @@ public class FavorManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OnEnable()
     {
         InventorySystem.OnInventoryChange += CheckItemObtained;
+        LocationCheck.OnLocationEnter += CheckLocation;
     }
 
     private void OnDisable()
     {
         InventorySystem.OnInventoryChange -= CheckItemObtained;
+        LocationCheck.OnLocationEnter -= CheckLocation;
     }
 
     //[YarnCommand("Activate_Favor")]
@@ -53,7 +56,10 @@ public class FavorManager : MonoBehaviour
         newFavor.isCompleted = false;
 
         activeFavors.Add(newFavor);
+        DialogueManager_New.Instance.SetNode(favor.objectives[newFavor.currentObjective].npcDialogue);
         OnFavorActivated?.Invoke(newFavor);
+        Debug.Log("curr objective: " + activeFavors[0].favor.objectives[activeFavors[0].currentObjective].description); // TESTING
+
     }
 
     public void CompleteCurrentObjective(FavorState favorState)
@@ -63,12 +69,17 @@ public class FavorManager : MonoBehaviour
                 favorState.favor.objectives[favorState.currentObjective].toBeRemoved);
         OnObjectiveComplete?.Invoke(favorState);
 
+
         if (favorState.currentObjective >= favorState.favor.objectives.Count) // entire favor complete?
         {
             favorState.isCompleted = true;
             RemoveKeyItems(favorState, true);
             OnFavorComplete?.Invoke(favorState);
+            return; // TESTING
         }
+
+        DialogueManager_New.Instance.SetNode(favorState.favor.objectives[favorState.currentObjective].npcDialogue);
+        Debug.Log("curr objective: " + activeFavors[0].favor.objectives[activeFavors[0].currentObjective].description); // TESTING
     }
 
     public void CheckItemObtained(CheeseIngredientData item, FinalResultCheese cheese)
@@ -105,6 +116,7 @@ public class FavorManager : MonoBehaviour
 
     public void CheckLocation(string locationID)
     {
+        Debug.Log("triggered local check");
         foreach (FavorState state in activeFavors)
         {
             // get objective player currently working on
@@ -118,6 +130,7 @@ public class FavorManager : MonoBehaviour
             if (objective.targetLocationID == locationID)
             {
                 CompleteCurrentObjective(state);
+                //Debug.Log("You've entered the building, objective complete! :)");
             }
 
 

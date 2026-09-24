@@ -23,6 +23,11 @@ public class UIManager_New : MonoBehaviour
             Destroy(gameObject);
     }
 
+    private void Update()
+    {
+        
+    }
+
     public void ShowDialoguePanel()
     {
         if (dialoguePanel.activeSelf)

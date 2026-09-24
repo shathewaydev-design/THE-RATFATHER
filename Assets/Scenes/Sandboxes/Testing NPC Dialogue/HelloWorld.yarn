@@ -1,6 +1,8 @@
 ﻿title: Alex_Intro
 ---
+
 Bob: What brings you here?
+<<met_player>>
 Bob: I hope you're not trying to hurt me :(
 Bob: Testing dialogue options...
 -> I'm looking for cheese.
@@ -11,13 +13,33 @@ Bob: Testing dialogue options...
         <<jump Alex_Favor1_Intro>>
 -> I'm just looking around.
     Bob: That's fine. Take your time.
-
 ===
 
 title: Alex_Favor1_Intro
 ---
 Bob: You will do this for me. Okay???
 -> Okay!
-Bob: Go now!!!
+    <<activate_favor>>
+    Bob: Go now!!!
+    <<set_node "Alex_Favor1_Mid">>
+===
+
+title: Alex_Favor1_Mid
+---
+Bob: Why haven't you gone!?
+Bob: Go now!!! >:(
+===
+
+title: Alex_Favor1_Comp
+---
+Bob: You did it! Yay!!
+Bob: There is cheese behind the rock!
+<<set_node "Alex_Sell_Available">>
+===
+
+title: Alex_Sell_Available
+---
+Bob: Now I trust you enough to make a purchase from you~
+Bob: Kiss kiss~
 
 ===

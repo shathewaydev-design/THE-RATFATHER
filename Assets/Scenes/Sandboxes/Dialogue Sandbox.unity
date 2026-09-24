@@ -4509,7 +4509,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPC_New
   profile: {fileID: 11400000, guid: eb4f23255b195a64e88309408d32cdb1, type: 2}
-  introConversationNode: HelloWorld
   promptAnimator: {fileID: 479189393}
   promptCanvas: {fileID: 1507269134}
 --- !u!4 &482781726 stripped
@@ -4950,6 +4949,73 @@ Transform:
   - {fileID: 2112347364}
   m_Father: {fileID: 1992809817}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &620212732
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 620212734}
+  - component: {fileID: 620212733}
+  - component: {fileID: 620212735}
+  m_Layer: 0
+  m_Name: BuildingEntrance
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &620212733
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 620212732}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4.104522, y: 2.442743, z: 1.2352443}
+  m_Center: {x: -1.5522611, y: 0.72137153, z: 0.4075849}
+--- !u!4 &620212734
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 620212732}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.76, y: 0.5, z: 7.31}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &620212735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 620212732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70601e24580f00744ad1767307355e84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocationCheck
+  locationID: BuildingEntrance
 --- !u!1 &626421954
 GameObject:
   m_ObjectHideFlags: 0
@@ -6020,6 +6086,51 @@ Transform:
   - {fileID: 1128736817}
   m_Father: {fileID: 590875964}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1011834219
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1011834220}
+  - component: {fileID: 1011834221}
+  m_Layer: 0
+  m_Name: FavorManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1011834220
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1011834219}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1057299016}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1011834221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1011834219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7241e2d3b4476c945b94b785d641b966, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FavorManager
+  activeFavors: []
 --- !u!1 &1038416052
 GameObject:
   m_ObjectHideFlags: 0
@@ -6073,7 +6184,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1048414379
 Transform:
   m_ObjectHideFlags: 0
@@ -6168,8 +6279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad38fd13dc4fa5d43aeaf27d41cf676b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPC_New
-  profile: {fileID: 0}
-  introConversationNode: 
+  profile: {fileID: 11400000, guid: 3bd59ddd2d8051545b73a47151218346, type: 2}
   promptAnimator: {fileID: 1048414380}
   promptCanvas: {fileID: 1507269134}
 --- !u!1 &1049552762
@@ -6251,6 +6361,7 @@ Transform:
   m_Children:
   - {fileID: 1049552764}
   - {fileID: 675634448}
+  - {fileID: 1011834220}
   - {fileID: 2031616677}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6314,6 +6425,14 @@ PrefabInstance:
       propertyPath: characterNameContainer
       value: 
       objectReference: {fileID: 1198601350}
+    - target: {fileID: 2958262985454349548, guid: 52571f68872914e24837210513edea1d, type: 3}
+      propertyPath: eventHandlers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2958262985454349548, guid: 52571f68872914e24837210513edea1d, type: 3}
+      propertyPath: 'eventHandlers.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1478759407}
     - target: {fileID: 2958262986520364887, guid: 52571f68872914e24837210513edea1d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -7333,6 +7452,17 @@ Transform:
   - {fileID: 1468379384}
   m_Father: {fileID: 356081002}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1478759407 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8877867826578261527, guid: 52571f68872914e24837210513edea1d, type: 3}
+  m_PrefabInstance: {fileID: 1082477715}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fccdb370bbd5a4312a5e44af933974be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1484200332
 GameObject:
   m_ObjectHideFlags: 0
@@ -9714,3 +9844,4 @@ SceneRoots:
   - {fileID: 1664024250}
   - {fileID: 556550649}
   - {fileID: 2071042807}
+  - {fileID: 620212734}

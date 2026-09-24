@@ -13,14 +13,24 @@ MonoBehaviour:
   m_Name: TESTFAVOR
   m_EditorClassIdentifier: Assembly-CSharp::Favor
   favorName: this is a test!
+  favorID: 
   description: testing stuffff
   objectives:
   - description: Go into the building!
-    npcDialogue: 
+    npcDialogue: Alex_Favor1_Mid
     type: 1
     targetID: 
     targetItem: {fileID: 0}
     targetCheese: {fileID: 0}
     toBeRemoved: 0
-    targetLocationID: Building Entrance
+    targetLocationID: BuildingEntrance
     targetNPC: {fileID: 0}
+  - description: Go back to Alex!
+    npcDialogue: Alex_Favor1_Comp
+    type: 2
+    targetID: 
+    targetItem: {fileID: 0}
+    targetCheese: {fileID: 0}
+    toBeRemoved: 0
+    targetLocationID: 
+    targetNPC: {fileID: 11400000, guid: eb4f23255b195a64e88309408d32cdb1, type: 2}

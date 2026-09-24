@@ -17,6 +17,7 @@ public class NPCProfile_New : ScriptableObject
     [SerializeField] private string introNode;
     private NPCState_New state;
     [SerializeField] private int difficultyLevel;
+    [SerializeField] private List<Favor> favors;
     [SerializeField] private int numOfFavors;
     private float maxTrust = 100f;
 
@@ -25,12 +26,36 @@ public class NPCProfile_New : ScriptableObject
         state = new NPCState_New();
 
         state.hasMetPlayer = false;
-        state.dialogueNode = "";
+        state.dialogueNode = introNode;
         state.activeFavor = null;
         state.activeObjective = null;
         state.trustLevel = 0f;
         state.compFavors = 0;
 
+
+    }
+    private void OnEnable()
+    {
+        FavorManager.OnFavorComplete += IncreaseCompFavors;
+        FavorManager.OnFavorActivated += SetActiveFavor;
+
+    }
+
+    private void OnDisable()
+    {
+        FavorManager.OnFavorComplete -= IncreaseCompFavors;
+        FavorManager.OnFavorActivated -= SetActiveFavor;
+
+    }
+    public Favor GetCurrentFavor()
+    {
+        if (state.compFavors >= favors.Count) // favors.Count
+        {
+            return null;
+        }
+
+
+        return favors[state.compFavors]; 
     }
 
     public NPCState_New GetState()
@@ -49,10 +74,10 @@ public class NPCProfile_New : ScriptableObject
         return state.hasMetPlayer;
     }
 
-    [YarnCommand("met_player")]
-    public void MetPlayer()
+    //[YarnCommand("met_player")]
+    public void SetMetPlayer(bool met)
     {
-        state.hasMetPlayer = false;
+        state.hasMetPlayer = met;
     }
 
     public float GetTrustLevel()
@@ -120,7 +145,7 @@ public class NPCProfile_New : ScriptableObject
 
     }
 
-    public void IncreaseCompFavors()
+    public void IncreaseCompFavors(FavorState favorState)
     {
         state.compFavors++;
 
@@ -135,6 +160,11 @@ public class NPCProfile_New : ScriptableObject
         return state.CurrDialogueNode(this);
     }
 
+    public void SetActiveFavor(FavorState favorState)
+    {
+        state.activeFavor = favorState.favor;
+    }
+
 
 
 }
@@ -146,7 +176,7 @@ public class NPCState_New
 
     public string dialogueNode;
 
-    public FavorState activeFavor; // one active favor PER NPC!!
+    public Favor activeFavor; // one active favor PER NPC!!
     public FavorObjective activeObjective;
 
     public float trustLevel = 0;
@@ -161,7 +191,19 @@ public class NPCState_New
             return dialogueNode;
         }
 
-        return "";
+        if (string.IsNullOrEmpty(dialogueNode))
+        {
+            Debug.LogWarning("NPC has met player but has no dialogue node. Using intro node.");
+            dialogueNode = profile.GetIntroNode();
+        }
+
+        return dialogueNode;
+    }
+
+    public string SetDialogueNode(string newNode)
+    {
+        dialogueNode = newNode;
+        return dialogueNode;
     }
 
 

@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using Yarn.Unity;
 
@@ -17,16 +18,13 @@ public class NPC_New : MonoBehaviour, IInteractable
     // Start is called once before the first execution of Update after the MonoBehaviour is created   
     void Start()
     {
-        
+        profile.SetMetPlayer(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        //CheckTrustLevel();
-        CheckCurrentDialogueNode(); // perhaps make an event???
-
-
+        Debug.Log("curr node? " + profile.GetState().CurrDialogueNode(profile));
     }
 
 
@@ -48,11 +46,15 @@ public class NPC_New : MonoBehaviour, IInteractable
     {
         // pull up proper dialogue
         //Debug.Log("Hello World!");
-        if (!profile.GetHasMetPlayer())
-            profile.MetPlayer();
+        //if (!profile.GetHasMetPlayer())
+        //    profile.MetPlayer();
+
+
+        string dialogueNode = profile.GetCurrDialogueNode();
+        Debug.Log("Starting Yarn node: " + dialogueNode);
 
         //Debug.Log("node: " + profile.GetCurrDialogueNode());
-        DialogueManager_New.Instance.StartConversation(profile.GetCurrDialogueNode()); // old: StartConversation(testingIntro)
+        DialogueManager_New.Instance.StartConversation(dialogueNode, this); // old: StartConversation(testingIntro)
     }
 
     private void CheckTrustLevel(float lvl)
@@ -70,22 +72,22 @@ public class NPC_New : MonoBehaviour, IInteractable
         
     }
 
-    [YarnCommand("Activate_Favor")]
-    public void StartFavor()
-    {
-
-        FavorManager.Instance.StartFavor(profile.GetState().activeFavor.favor);
+    //public void ActivateFavor()
+    //{
+    //    //profile.GetState().activeFavor.favor = null;
+    //    Debug.Log("Activate favor command called!");
+    //    FavorManager.Instance.StartFavor(profile.GetCurrentFavor());
  
-    }
-
-    private string CheckCurrentDialogueNode()
-    {
-        return ""; // stub!!
-    }
+    //}
 
     private void CompletedFavor(FavorState favor)
     {
-        profile.IncreaseCompFavors();
+        profile.IncreaseCompFavors(favor);
+    }
+
+    public NPCProfile_New GetProfile()
+    {
+        return profile;
     }
 
     void OnTriggerEnter(Collider other)
@@ -93,7 +95,7 @@ public class NPC_New : MonoBehaviour, IInteractable
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
-            Debug.Log("playerInRange is " + playerInRange);
+            //Debug.Log("playerInRange is " + playerInRange);
 
 
             if (promptAnimator != null)
@@ -111,7 +113,7 @@ public class NPC_New : MonoBehaviour, IInteractable
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
-            Debug.Log("playerInRange is "+playerInRange);
+            //Debug.Log("playerInRange is "+playerInRange);
 
             if (promptAnimator != null)
             {

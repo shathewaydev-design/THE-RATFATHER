@@ -24,6 +24,8 @@ public class DialogueManager_New : MonoBehaviour
     private bool justStartedDialogue = false;
     public bool isPaused = false;
 
+    private NPC_New currentNPC;
+
     [Header("Input")]//player inputs
     public ThirdPersonController thirdPersonController;
 
@@ -37,7 +39,29 @@ public class DialogueManager_New : MonoBehaviour
         else
             Destroy(gameObject);
 
+        dialogueRunner.AddCommandHandler("activate_favor", ActivateFavor);
+        dialogueRunner.AddCommandHandler("met_player", MetPlayer);
+        //dialogueRunner.AddCommandHandler<string>("set_node", SetNode);
+
+        dialogueRunner.AddCommandHandler<string>(
+            "set_node",
+            (node) => SetNode(node)
+        );
+
+
+
     }
+
+    private void OnEnable()
+    {
+        //FavorManager.OnObjectiveComplete += SetNode;
+    }
+
+    private void OnDisable()
+    {
+        //FavorManager.OnObjectiveComplete += SetNode;
+    }
+
 
 
     public void PauseDialogue()
@@ -64,15 +88,25 @@ public class DialogueManager_New : MonoBehaviour
 
     // start dialogue
     // Call this to start a conversation
-    public void StartConversation(string dialogueNode) // old: (ConversationData conversation)
+    public void StartConversation(string dialogueNode, NPC_New npc) // old: (ConversationData conversation)
     {
-        if (dialogueNode == null)
+        //Debug.Log("START CONVERSATION CALLED");
+        //Debug.Log("Node: " + dialogueNode);
+
+
+        if (string.IsNullOrEmpty(dialogueNode))
         {
-            Debug.LogError("Tried to start conversation with NULL data!");
+            Debug.LogError("Tried to start dialogue with NULL or empty node!");
             return;
         }
 
+        currentNPC = npc;
+
         UIManager.ShowDialoguePanel();  // turn MY panel on
+        dialogueRunner.StartDialogue(dialogueNode); // let yarn spinner handle running dialogue TESTING
+
+        //Debug.Log("StartDialogue finished.");
+
 
         isDialogueActive = true;
         justStartedDialogue = true;
@@ -82,14 +116,52 @@ public class DialogueManager_New : MonoBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
 
-        dialogueRunner.StartDialogue(dialogueNode); // let yarn spinner handle running dialogue
-
-
-
-        //currentConversation = conversation;
-        //currentLineIndex = 0;
-        //ShowCurrentLine();
     }
+
+    //[YarnCommand("met_player")]
+    public void MetPlayer()
+    {
+        currentNPC.GetProfile().SetMetPlayer(true);
+    }
+
+    //[YarnCommand("activate_favor")]
+    public void ActivateFavor()
+    {
+        if (currentNPC == null)
+        {
+            Debug.LogError("No current NPC!");
+            return;
+        }
+
+        FavorManager.Instance.StartFavor(currentNPC.GetProfile().GetCurrentFavor());
+    }
+
+    public void SetNode(string newNode)
+    {
+        currentNPC.GetProfile().GetState().SetDialogueNode(newNode);
+    }
+
+    //public void SetNodeFromFavor(FavorState state)
+    //{
+    //    //currentNPC.GetProfile().GetState().
+    //}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // display next line in dialogue
     //public void ShowCurrentLine()
@@ -107,7 +179,7 @@ public class DialogueManager_New : MonoBehaviour
     //    UIManager.SetText(line.text);
 
     //    // Show options if they exist
-        
+
 
     //}
 

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Favor : ScriptableObject
 {
     public string favorName;
+    public string favorID;
     public string description;
 
     public List<FavorObjective> objectives;
