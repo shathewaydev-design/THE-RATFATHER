@@ -1045,7 +1045,6 @@ MonoBehaviour:
   Gravity: -15
   JumpTimeout: 0.3
   FallTimeout: 0.15
-  maxJumps: 3
   jumpCount: 0
   Grounded: 1
   GroundedOffset: -0.14
@@ -1058,6 +1057,10 @@ MonoBehaviour:
   BottomClamp: -30
   CameraAngleOverride: 0
   LockCameraPosition: 0
+  MouseSensitivity: 1
+  GamepadSensitivity: 100
+  InvertY: 0
+  InvertX: 0
   stopInteract:
     m_Name: Stop Interact
     m_Type: 0
@@ -1108,6 +1111,24 @@ MonoBehaviour:
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: c22a331d-942b-4361-85a9-f172d2a3d0c2
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  openInventory:
+    m_Name: Open Inventory
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: e9cc20ef-e219-40d4-95d5-c896f79698ce
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  toggleCursor:
+    m_Name: Toggle Cursor
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 6e11309b-2957-4d50-ae7f-08c2a94ac767
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -1321,6 +1342,7 @@ MonoBehaviour:
   dialogueText: {fileID: 716395546}
   dialoguePanel: {fileID: 1968265069}
   optionsPanel: {fileID: 182009873}
+  optionsBoundary: {fileID: 0}
   optionButtonPrefab: {fileID: 4194591245645032271, guid: d0996697f7c6b31448c5aee0234d1829, type: 3}
   questManager: {fileID: 406422873}
   gameManger: {fileID: 1568370274}
@@ -1332,7 +1354,6 @@ MonoBehaviour:
   recruitLog: {fileID: 474337915}
   sellingPanel: {fileID: 1549379438}
   sellButton: {fileID: 4730915769155612170, guid: 5b03c2f88623c56449ee7dfbb0212d98, type: 3}
-  player: {fileID: 96748652}
 --- !u!4 &137707843
 Transform:
   m_ObjectHideFlags: 0
@@ -1485,6 +1506,7 @@ MonoBehaviour:
   inventorySlot:
     itemData: {fileID: 0}
     quantity: 0
+  isSelected: 0
 --- !u!114 &147569585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2515,6 +2537,7 @@ MonoBehaviour:
   inventoryTest: []
   cheeseInventory: []
   inventoryUI: {fileID: 1478750092}
+  cheeseInventoryUI: {fileID: 0}
 --- !u!4 &268306858
 Transform:
   m_ObjectHideFlags: 0
@@ -4207,6 +4230,7 @@ MonoBehaviour:
   inventorySlot:
     itemData: {fileID: 0}
     quantity: 0
+  isSelected: 0
 --- !u!114 &674617785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5749,6 +5773,7 @@ MonoBehaviour:
   inventorySlot:
     itemData: {fileID: 0}
     quantity: 0
+  isSelected: 0
 --- !u!114 &1103737270
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7325,6 +7350,7 @@ MonoBehaviour:
   inventorySlot:
     itemData: {fileID: 0}
     quantity: 0
+  isSelected: 0
 --- !u!114 &1378360534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8800,9 +8826,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9008af81e2cb564cb4593056c4f4c2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  InGameScenes: []
+  JunkYardEntrance: {fileID: 0}
   correctCheese: 1
   sellConvo: {fileID: 0}
   firstBossDefeated: 0
+  currHealth: 0
+  health: []
+  healthBar: {fileID: 0}
+  cutsceneIndex: 0
+  blackScreenPanel: {fileID: 0}
+  cutsceneText: {fileID: 0}
+  bossCutsceneLines: []
+  thirdPersonController: {fileID: 0}
+  tutorialManager: {fileID: 0}
+  inBossScene: 0
 --- !u!4 &1568370275
 Transform:
   m_ObjectHideFlags: 0
@@ -9000,9 +9038,9 @@ MonoBehaviour:
   currentConversation: {fileID: 0}
   currentLineIndex: 0
   UIManager: {fileID: 137707842}
-  player: {fileID: 96748652}
   isDialogueActive: 0
   isPaused: 0
+  thirdPersonController: {fileID: 0}
 --- !u!4 &1622711475
 Transform:
   m_ObjectHideFlags: 0
@@ -9451,6 +9489,7 @@ MonoBehaviour:
   inventorySlot:
     itemData: {fileID: 0}
     quantity: 0
+  isSelected: 0
 --- !u!114 &1750626853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10229,6 +10268,7 @@ MonoBehaviour:
   inventorySlot:
     itemData: {fileID: 0}
     quantity: 0
+  isSelected: 0
 --- !u!114 &1841136445
 MonoBehaviour:
   m_ObjectHideFlags: 0

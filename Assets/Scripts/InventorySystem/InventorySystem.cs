@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
+using System;
 
 public class InventorySystem : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class InventorySystem : MonoBehaviour
     [SerializeField] private UI_Inventory inventoryUI;//for ingredients
     [SerializeField] private UI_CheeseInventory cheeseInventoryUI;//for cheese
     private Dictionary<CheeseIngredientData, int> inventory = new Dictionary<CheeseIngredientData, int>();
+
+    public static event Action<CheeseIngredientData, FinalResultCheese> OnInventoryChange; // soph added
     public IReadOnlyDictionary<CheeseIngredientData, int> Inventory => inventory; // so inventory can be read for quest requirements, etc.
     //this is like creating new definition in a dictionary, then put them in pages
     void Awake()
@@ -30,6 +33,7 @@ public class InventorySystem : MonoBehaviour
         // this checks if the data from ScriptableObject is added to the dictionary, 
         //if yes, count up, i.e. 1 cowMilk ingredient (already in inventory) + 1 cowMilk = 2 cowMilk
         // if not adds data 
+
         if (inventory.ContainsKey(item))
         {
             inventory[item]++;
@@ -38,6 +42,8 @@ public class InventorySystem : MonoBehaviour
         {
             inventory.Add(item, 1);
         }
+
+        OnInventoryChange?.Invoke(item, null); // soph added!! null my NOT be the right way to go
 
         //Debug.Log(item.ingredientName + " added. Total: " + inventory[item]);
     }
@@ -72,6 +78,8 @@ public class InventorySystem : MonoBehaviour
             inventory[foundKey]--;
 
         }
+
+        OnInventoryChange?.Invoke(item, null); // soph added
 
         //Debug.Log(foundKey.ingredientName + " removed.");
 
@@ -124,6 +132,7 @@ public class InventorySystem : MonoBehaviour
         }
 
         RefreshIngredientUI();
+        OnInventoryChange?.Invoke(item, null); // soph added
 
         //Debug.Log($"Added {item.ingredientName}");
     }
@@ -157,6 +166,7 @@ public class InventorySystem : MonoBehaviour
         }
 
         RefreshIngredientUI();
+        OnInventoryChange?.Invoke(item, null); // soph added
     }
     /// Add and remove final result cheese
     public void AddFinalCheese(FinalResultCheese cheese, int amount = 1)
@@ -198,6 +208,7 @@ public class InventorySystem : MonoBehaviour
         }
 
         RefreshCheeseUI();
+        OnInventoryChange?.Invoke(null, cheese); // soph added
 
         //Debug.Log($"Added {item.ingredientName}");
     }
@@ -244,8 +255,10 @@ public class InventorySystem : MonoBehaviour
         }
 
         RefreshCheeseUI();
+        OnInventoryChange?.Invoke(null, cheese); // soph added
+
     }
-    
+
     private void RefreshIngredientUI()
     {
         inventoryUI.Refresh(inventoryTest);
