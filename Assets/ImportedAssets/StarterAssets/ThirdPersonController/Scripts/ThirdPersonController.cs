@@ -101,6 +101,7 @@ namespace StarterAssets
         public event Action OnMouseClick; 
         //public event Action OnMousePositionChange; 
         public event Action OnOpenInventory; 
+        public event Action OnPauseGame; 
         private InputActionMap playerMap;
         private InputActionMap cookingMap;
         private InputActionMap mouseMap;
@@ -114,6 +115,7 @@ namespace StarterAssets
         public InputAction openInventory;//press Tab
 
         public InputAction toggleCursor;//unlock cursor for debugging
+        public InputAction pauseGame;//press Esc to pause game
         public event Action OnToggleCursor;
         public event Action<Vector2> OnMousePosition;
         public event Action<bool> OnMouseDrag;
@@ -130,6 +132,8 @@ namespace StarterAssets
 
             mouseClick.performed += OnMouseClickPerformed;
             mouseClick.canceled += OnMouseClickCanceled;
+
+            pauseGame.performed += OnPauseGamePerformed;
             
         #endif
         }
@@ -145,6 +149,8 @@ namespace StarterAssets
 
             mouseClick.performed -= OnMouseClickPerformed;
             mouseClick.canceled -= OnMouseClickCanceled;
+
+            pauseGame.performed -= OnPauseGamePerformed;
         #endif
         }
 
@@ -221,7 +227,6 @@ namespace StarterAssets
 
             tiltLeft = cookingMap.FindAction("TiltLeft");
             tiltRight = cookingMap.FindAction("TiltRight");
-            //stopInteract = cookingMap.FindAction("StopInteract");
             sprinkle = cookingMap.FindAction("Sprinkle");
             var mouseMap = _playerInput.actions.FindActionMap("Mouse");
             mouseClick = mouseMap.FindAction("LeftClick");
@@ -236,12 +241,15 @@ namespace StarterAssets
 
                 if (stopInteract != null)
                     stopInteract.performed += OnStopInteractPerformed;
+
+                pauseGame = globalMap.FindAction("PauseGame");
+                if (pauseGame != null)
+                    pauseGame.performed += OnPauseGamePerformed;
             }
             toggleCursor = globalMap.FindAction("ToggleCursor");
 
             toggleCursor.performed += ctx => OnToggleCursor?.Invoke();
 
-            // OPTIONAL: if you have interact in Player map
             var playerMap = _playerInput.actions.FindActionMap("Player");
             if (playerMap != null)
             {
@@ -251,6 +259,12 @@ namespace StarterAssets
                 openInventory = playerMap.FindAction("OpenInventory");
                 if (openInventory != null)                    
                     openInventory.performed += ctx => OnOpenInventory?.Invoke();
+            }
+
+            var rebinds = PlayerPrefs.GetString("rebinds");
+            if(!string.IsNullOrEmpty(rebinds))
+            {
+                _playerInput.actions.LoadBindingOverridesFromJson(rebinds);
             }
 #else
 			Debug.LogError( "Starter Assets package is missing dependencies. Please use Tools/Starter Assets/Reinstall Dependencies to fix it");
@@ -337,13 +351,24 @@ namespace StarterAssets
                 float lookX = _input.look.x;
                 float lookY = _input.look.y;
 
+                // Apply inversion from settings
+                InvertX = SettingsManager.Instance.invertMouseX;
+                InvertY = SettingsManager.Instance.invertMouseY;
                 // Apply inversion
-                if (InvertX) lookX *= -1f;
-                if (InvertY) lookY *= -1f;
+                if (InvertX) 
+                {
+                    lookX *= -1f;
+                }
+                if (InvertY) 
+                {
+                    lookY *= -1f;
+                }
 
-                // Apply sensitivity
-                lookX *= MouseSensitivity;
-                lookY *= MouseSensitivity;
+                // Apply mouse sensitivity from Settings
+                float mouseSettingSensitivity = SettingsManager.Instance.mouseSensitivity;
+                //Apply sensitivity
+                lookX *= mouseSettingSensitivity;
+                lookY *= mouseSettingSensitivity;
                 _cinemachineTargetYaw += lookX * deltaTimeMultiplier;
                 _cinemachineTargetPitch += lookY * deltaTimeMultiplier;
                 //^original below
@@ -590,6 +615,10 @@ namespace StarterAssets
         private void OnStopInteractPerformed(InputAction.CallbackContext ctx)
         {
             OnStopInteract?.Invoke();
+        }
+        private void OnPauseGamePerformed(InputAction.CallbackContext ctx)
+        {
+            OnPauseGame?.Invoke();
         }
         private void OnOpenInventoryPerformed(InputAction.CallbackContext ctx)
         {

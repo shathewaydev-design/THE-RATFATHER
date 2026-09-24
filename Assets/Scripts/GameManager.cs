@@ -1,4 +1,3 @@
-using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -90,7 +89,7 @@ public class GameManager : MonoBehaviour
         //}
 
         //CutsceneManager.Instance.currCutscene = InGameScenes[0];
-        if (!inBossScene)
+        if (!inBossScene) // ADDING MORE LEVELS -- CLEAN UP
         {
             CutsceneManager.Instance.currCutscene = InGameScenes[0];
             CutsceneManager.Instance.StartCutscene();

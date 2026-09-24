@@ -17,6 +17,7 @@ public class Quest : ScriptableObject
 
     public List<QuestRequirement> requirements;
     public List<string> objectives;
+    //public List<CheeseIngredientData> keyItems; // distinguish between ingredients and other items later!!
     public List<QuestReward> rewards;
 
 
