@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58db679ab499abc4ca540cbe7482c9ef, type: 3}
+  m_Name: Alex_Profile
+  m_EditorClassIdentifier: Assembly-CSharp::NPCProfile_New
+  description: Alex is a cool rat :0
+  portrait: {fileID: 0}
+  introNode: Alex_Intro
+  difficultyLevel: 3
+  favors:
+  - {fileID: 11400000, guid: de6753bc87b687946878c6690efeb541, type: 2}
+  numOfFavors: 1
