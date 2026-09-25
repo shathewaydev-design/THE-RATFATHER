@@ -46,6 +46,14 @@ public class WithdrawalMechanic : MonoBehaviour
 
     [Range(0f, 1f)]
     [SerializeField] private float criticalThreshold = 0.25f;
+     //this state is opened from 15%-0% to increase tension
+    //player can choose to enter Emergency Satiation Mode
+    //player in withdrawal state and can eat as much cheese as they want 
+    //without increasing cheeseBuffCapacity 
+    //but doesnt count the buff either.
+    //20s duration
+    //unlock this state again when timeUntilWithdrawal is at 15%
+    //camera and UIs shake --->when exit state, stabilizes
 
     [Range(0f, 1f)]
     [SerializeField] private float emergencyThreshold = 0.05f;
@@ -60,8 +68,12 @@ public class WithdrawalMechanic : MonoBehaviour
     [SerializeField] private float toleranceIncrease = 1f;
 
     [SerializeField] private float maximumTolerance = 5f;
-
+    //max cheese can eat to apply buff
+    //if eat more than 3 cheese, the buff will not be applied
+    //Player feedback: "You can't handle another dose."
     private float cheeseTolerance = 3f;//how many buffs player can have at once.
+    [SerializeField] private float currentCheeseBuffs = 0f;
+    [SerializeField] private string warningText = "You can't handle another dose.";
     // =========================================================
     // EMERGENCY SATIATION
     // =========================================================
@@ -71,7 +83,7 @@ public class WithdrawalMechanic : MonoBehaviour
     [SerializeField] private float emergencySatiationMultiplier = 1f;
 
     [Header("UI")]
-    [SerializeField] private GameObject withdrawalIcon;
+    [SerializeField] private GameObject[] withdrawalIcons;
     //show player how much left until withdrawal
     //can be hovered to see %
     //UI effect, white opaque background
@@ -84,19 +96,10 @@ public class WithdrawalMechanic : MonoBehaviour
 
     //this will be changed by the cheese rarity
     [SerializeField] private bool isEmergencySatiation = false;
-    //this state is opened from 15%-0% to increase tension
-    //player can choose to enter Emergency Satiation Mode
-    //player in withdrawal state and can eat as much cheese as they want 
-    //without increasing cheeseBuffCapacity 
-    //but doesnt count the buff either.
-    //20s duration
-    //unlock this state again when timeUntilWithdrawal is at 15%
-    //camera and UIs shake --->when exit state, stabilizes
+   
     
-    [SerializeField] private int cheeseBuffCapacity = 3;
-    //max cheese can eat to apply buff
-    //if eat more than 3 cheese, the buff will not be applied
-    //Player feedback: "You can't handle another dose."
+
+ 
 
     // =========================================================
     // EVENTS
@@ -117,7 +120,10 @@ public class WithdrawalMechanic : MonoBehaviour
     void Start()
     {
         timeUntilWithdrawal = maximumWithdrawalTime;
-        withdrawalIcon.SetActive(false);
+        foreach (GameObject icon in withdrawalIcons)
+        {
+            icon.SetActive(false);
+        }
         UpdateWithdrawalStage();
     }
     
@@ -229,7 +235,11 @@ public class WithdrawalMechanic : MonoBehaviour
         Debug.Log("Player is stable.");
 
         // UI:
-        // Hide withdrawal icon
+        // Hide all withdrawal icons
+        foreach (GameObject icon in withdrawalIcons)
+        {
+            icon.SetActive(false);
+        }
 
         // Animation:
         // Normal idle
@@ -244,8 +254,12 @@ public class WithdrawalMechanic : MonoBehaviour
 
         // UI:
         // Show small cheese icon
+        withdrawalIcons[0].SetActive(true);//green outline
+        withdrawalIcons[1].SetActive(false);
+        withdrawalIcons[2].SetActive(false);
         // Green outline
         // Slight shaking animation
+        //vingrette effect on screen
 
         // NPC:
         // Normal dialogue
@@ -258,7 +272,9 @@ public class WithdrawalMechanic : MonoBehaviour
         // UI:
         // Cheese icon partly eaten
         // Orange outline
-
+        withdrawalIcons[0].SetActive(false);
+        withdrawalIcons[1].SetActive(true);//orange outline
+        withdrawalIcons[2].SetActive(false);
         // VFX:
         // Occasional screen shake
         // Other symptoms
@@ -274,7 +290,9 @@ public class WithdrawalMechanic : MonoBehaviour
         // UI:
         // More eaten cheese icon
         // Red outline
-
+        withdrawalIcons[0].SetActive(false);
+        withdrawalIcons[1].SetActive(false);
+        withdrawalIcons[2].SetActive(true);//red outline
         // Animation:
         // Player looks around / appears nervous
 
@@ -293,6 +311,7 @@ public class WithdrawalMechanic : MonoBehaviour
 
         // VFX:
         // Stronger symptoms
+        //stronger screen shake every 1min 
 
         // Player can now use Emergency Satiation.
     }
@@ -346,17 +365,12 @@ public class WithdrawalMechanic : MonoBehaviour
 
         // Emergency cheese restores withdrawal
         // without applying a cheese buff.
-        float actualSatiation =
-            satiationAmount *
-            emergencySatiationMultiplier;
+        //not sure if we want a multiplier to gain more cheese satiation.
+        float actualSatiation = satiationAmount;// * emergencySatiationMultiplier;
 
         timeUntilWithdrawal += actualSatiation;
 
-        timeUntilWithdrawal = Mathf.Clamp(
-            timeUntilWithdrawal,
-            0f,
-            maximumWithdrawalTime
-        );
+        timeUntilWithdrawal = Mathf.Clamp(timeUntilWithdrawal, 0f, maximumWithdrawalTime);
 
         // IMPORTANT:
         // Emergency eating does NOT increase tolerance.
@@ -452,7 +466,7 @@ public class WithdrawalMechanic : MonoBehaviour
     }
 
     // =========================================================
-    // FUNCTIONS THAT GET CURRENT DATA FOR VARIABLESw
+    // FUNCTIONS THAT GET CURRENT DATA FOR VARIABLESs
     // =========================================================
 
     public float GetWithdrawalTime()
