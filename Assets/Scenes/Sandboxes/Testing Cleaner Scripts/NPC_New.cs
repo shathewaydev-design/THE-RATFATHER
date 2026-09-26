@@ -49,9 +49,6 @@ public class NPC_New : MonoBehaviour, IInteractable
     public void Interact()
     {
         // pull up proper dialogue
-        //Debug.Log("Hello World!");
-        //if (!profile.GetHasMetPlayer())
-        //    profile.MetPlayer();
 
 
         string dialogueNode = profile.GetCurrDialogueNode();
