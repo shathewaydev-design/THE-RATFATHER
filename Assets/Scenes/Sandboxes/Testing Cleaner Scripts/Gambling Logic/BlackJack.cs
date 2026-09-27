@@ -30,7 +30,10 @@ public class BlackJack : MonoBehaviour, IInteractable
     [SerializeField] GameObject betPanel;
     [SerializeField] Slider betSlider;
     [SerializeField] TextMeshProUGUI currSliderNum;
-    [SerializeField] float playerBet; 
+    [SerializeField] float playerBet;
+
+    //private bool playerWon;
+    //private bool tie;
 
 
     public Button hitButton;
@@ -49,6 +52,8 @@ public class BlackJack : MonoBehaviour, IInteractable
     void Awake()
     {
         Instance = this;
+        //playerWon = false;
+        //tie = false;
     }
 
     public void SetBet()
@@ -59,17 +64,18 @@ public class BlackJack : MonoBehaviour, IInteractable
         // if bet is higher than player's current currency, don't allow them to play
     }
     
-    public void HandleBet(bool playerWon)
+    public void HandleBet(bool playerWon, bool tie)
     {
-        if (playerWon)
+        if (playerWon && !tie)
         {
             InventorySystem.Instance.AddToCurrency(playerBet);
         }
-        else if (!playerWon && playerSum == dealerSum)
+        else if (!playerWon && tie)
         {
+            exitButton.enabled = true;
             return;
         } 
-        else if (!playerWon) 
+        else if (!playerWon && !tie) 
         {
             InventorySystem.Instance.SubtractFromCurrency(playerBet);
         }
@@ -359,32 +365,32 @@ public class BlackJack : MonoBehaviour, IInteractable
             {
                 onRoundEnd.text = "Winner: Dealer!";
                 // lose bet
-                HandleBet(false);
+                HandleBet(false, false);
             }
             else if (dealerSum > 21)
             {
                 onRoundEnd.text = "Winner: You!";
                 // win bet
-                HandleBet(true);
+                HandleBet(true, false);
             }
             // both player and dealer have < 21
             else if (playerSum == dealerSum)
             {
                 onRoundEnd.text = "Winner: Tie!";
                 // bet returned
-                HandleBet(false);
+                HandleBet(false, true);
             }
             else if (playerSum > dealerSum)
             {
                 onRoundEnd.text = "Winner: You!";
                 // bet won (doubled and returned)
-                HandleBet(true);
+                HandleBet(true, false);
             }
             else if (playerSum < dealerSum)
             {
                 onRoundEnd.text = "Winner: Dealer!";
                 // bet lost (money lost)
-                HandleBet(false);
+                HandleBet(false, false);
             }
 
 
