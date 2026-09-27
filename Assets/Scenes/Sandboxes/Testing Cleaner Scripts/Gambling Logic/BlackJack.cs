@@ -23,6 +23,19 @@ public class BlackJack : MonoBehaviour, IInteractable
 
     [SerializeField] TextMeshProUGUI dealerTotal;
     [SerializeField] TextMeshProUGUI playerTotal;
+    [SerializeField] TextMeshProUGUI playerBetDisplay;
+
+    [SerializeField] TextMeshProUGUI onRoundEnd;
+
+    [SerializeField] GameObject betPanel;
+    [SerializeField] Slider betSlider;
+    [SerializeField] TextMeshProUGUI currSliderNum;
+    [SerializeField] float playerBet; 
+
+
+    public Button hitButton;
+    public Button stayButton;
+    public Button exitButton;
 
 
     [Header("UI")]
@@ -38,16 +51,31 @@ public class BlackJack : MonoBehaviour, IInteractable
         Instance = this;
     }
 
-    void Start()
+    public void SetBet()
     {
-        //Debug.Log("Code running?");
-        //BlackJack blackjack = new BlackJack();
+        currSliderNum.text = "Bet: " + betSlider.value;
+        playerBet = betSlider.value;
 
+        // if bet is higher than player's current currency, don't allow them to play
     }
-
-    void Update()
+    
+    public void HandleBet(bool playerWon)
     {
-        
+        if (playerWon)
+        {
+            InventorySystem.Instance.AddToCurrency(playerBet);
+        }
+        else if (!playerWon && playerSum == dealerSum)
+        {
+            return;
+        } 
+        else if (!playerWon) 
+        {
+            InventorySystem.Instance.SubtractFromCurrency(playerBet);
+        }
+
+        exitButton.enabled = true;
+
     }
 
     public class Card
@@ -106,10 +134,23 @@ public class BlackJack : MonoBehaviour, IInteractable
     int playerSum;
     int playerAceCount;
 
-
-
     public void StartGame()
     {
+        // if bet is higher than player's current currency, don't allow them to play
+        if (playerBet > InventorySystem.Instance.GetCurrency())
+        {
+            Debug.Log("Not enough money to play!");
+            ExitGame();
+            return;
+        }
+
+        // exit button no longer available
+        exitButton.enabled = false;
+
+        // display bet
+        playerBetDisplay.text = "Your bet: " + playerBet;
+        betPanel.SetActive(false);
+
         // deck
         BuildDeck();
         ShuffleDeck();
@@ -146,26 +187,28 @@ public class BlackJack : MonoBehaviour, IInteractable
 
         }
 
+        // moved draw cards to here
+        DrawCards();
+        DrawTotals();
 
-        //Debug.Log("PLAYER HAND: ");
-        //foreach (Card c in playerHand)
-        //{
-        //    Debug.Log(c);
-        //}
-        //Debug.Log("player sum: " + playerSum);
-        //Debug.Log("player ace count: " + playerAceCount);
+        // make sure button is enabled
+        hitButton.enabled = true;
+        stayButton.enabled = true;
 
+    }
 
+    public void ExitGame()
+    {
+        //Debug.Log("game exited");
 
-        //Debug.Log("DEALER HAND: ");
-        //Debug.Log("hidden card: " + hiddenCard);
-        //foreach (Card c in dealerHand)
-        //{
-        //    Debug.Log(c);
-        //}
-        //Debug.Log("dealer sum: " + dealerSum);
-        //Debug.Log(" dealer ace count: " + dealerAceCount);
+        // reset everything after game is over and player exits
+        ClearCards();
+        ClearText();
 
+        blackjackPanel.SetActive(false);
+        thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void BuildDeck()
@@ -182,14 +225,6 @@ public class BlackJack : MonoBehaviour, IInteractable
                 deck.Add(card);
             }
         }
-
-        //Debug.Log("BUILD DECK: ");
-        //foreach (Card card in deck)
-        //{
-        //    Debug.Log(card);
-        //}
-        //Debug.Log(deck.ToString());
-
     }
 
     public void ShuffleDeck()
@@ -203,17 +238,80 @@ public class BlackJack : MonoBehaviour, IInteractable
             deck[j] = currCard;
 
         }
+    }
 
+    public void Hit()
+    {
+        Card c = deck[deck.Count - 1];
+        deck.RemoveAt(deck.Count - 1);
+        playerSum += c.GetValue();
+        playerAceCount += c.IsAce() ? 1 : 0;
+        playerHand.Add(c);
 
+        if(ReducePlayerAce() > 21)
+        {
+            hitButton.enabled = false;
+        }
+        // making it so dealer also draws after player hits << TESTING
+        // seems to work
+        if (dealerSum < 17)
+        {
+            c = deck[deck.Count - 1];
+            deck.RemoveAt(deck.Count - 1);
+            dealerSum += c.GetValue();
+            dealerAceCount += c.IsAce() ? 1 : 0;
+            dealerHand.Add(c);
+
+        }
+
+        RedrawCards();
+        DrawTotals();
+    }
+
+    public void Stay()
+    {
+        hitButton.enabled = false;
+        stayButton.enabled = false;
+
+        while (dealerSum < 17)
+        {
+            Card c = deck[deck.Count - 1];
+            deck.RemoveAt(deck.Count - 1);
+            dealerSum += c.GetValue();
+            dealerAceCount += c.IsAce() ? 1 : 0;
+            dealerHand.Add(c);
+
+        }
+
+        RedrawCards();
+        DrawTotals();
 
     }
 
+    public int ReducePlayerAce()
+    {
+        while (playerSum > 21 && playerAceCount > 0)
+        {
+            playerSum -= 10;
+            playerAceCount -= 1;
+        }
+
+        return playerSum;
+    }
+
+    public int ReduceDealerAce()
+    {
+        while (dealerSum > 21 && dealerAceCount > 0)
+        {
+            dealerSum -= 10;
+            dealerAceCount -= 1;
+        }
+
+        return dealerSum;
+    }
 
     public void DrawCards()
     {
-        //Debug.Log("drawing cards!");
-
-
         foreach (Card c in playerHand)
         {
             GameObject newCard = Instantiate(cardPrefab, playerArea.transform);
@@ -221,7 +319,6 @@ public class BlackJack : MonoBehaviour, IInteractable
             cardDisplay.SetCard(c);
 
         }
-
         DrawHiddenCard();
         foreach (Card c in dealerHand)
         {
@@ -230,7 +327,14 @@ public class BlackJack : MonoBehaviour, IInteractable
             cardDisplay.SetCard(c);
         }
 
-        //DrawHiddenCard();
+
+        if (!stayButton.enabled)
+        {
+            dealerSum = ReduceDealerAce();
+            playerSum = ReducePlayerAce();
+
+        }
+
     }
 
     public void DrawHiddenCard()
@@ -247,7 +351,88 @@ public class BlackJack : MonoBehaviour, IInteractable
         dealerTotal.text = "Dealer's total: " + hiddenTotal + " + ???";
 
         // need to add logic for when winner is revealed, dealer sum fully revealed
+        if (!stayButton.enabled)
+        {
+            dealerTotal.text = "Dealer's total: " + dealerSum;
+
+            if (playerSum > 21)
+            {
+                onRoundEnd.text = "Winner: Dealer!";
+                // lose bet
+                HandleBet(false);
+            }
+            else if (dealerSum > 21)
+            {
+                onRoundEnd.text = "Winner: You!";
+                // win bet
+                HandleBet(true);
+            }
+            // both player and dealer have < 21
+            else if (playerSum == dealerSum)
+            {
+                onRoundEnd.text = "Winner: Tie!";
+                // bet returned
+                HandleBet(false);
+            }
+            else if (playerSum > dealerSum)
+            {
+                onRoundEnd.text = "Winner: You!";
+                // bet won (doubled and returned)
+                HandleBet(true);
+            }
+            else if (playerSum < dealerSum)
+            {
+                onRoundEnd.text = "Winner: Dealer!";
+                // bet lost (money lost)
+                HandleBet(false);
+            }
+
+
+        }
     }
+
+    public void RedrawCards()
+    {
+        ClearCards();
+        DrawCards();
+
+
+    }
+
+    private void ClearCards()
+    {
+        foreach (Transform child in playerArea.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        foreach (Transform child in dealerArea.transform)
+        {
+            Destroy(child.gameObject);
+        }
+    }
+
+    private void ClearText()
+    {
+        dealerSum = 0;
+        playerSum = 0;
+        playerAceCount = 0;
+        dealerAceCount = 0;
+
+        playerTotal.text = "Player's total: " + playerSum;
+        dealerTotal.text = "Dealer's total: ???";
+        playerBetDisplay.text = "Your bet: " + 0;
+        onRoundEnd.text = "";
+
+
+    }
+
+
+
+
+
+
+
 
 
 
@@ -277,6 +462,12 @@ public class BlackJack : MonoBehaviour, IInteractable
         if (inRange == true)
         {
             blackjackPanel.SetActive(true);
+            betPanel.SetActive(true);
+
+            // while setting the bet, player can't press the hit or stay buttons 
+            hitButton.enabled = true;
+            stayButton.enabled = true;
+            exitButton.enabled = true;
 
             thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Mouse");
             Cursor.visible = true;
@@ -285,10 +476,10 @@ public class BlackJack : MonoBehaviour, IInteractable
 
             //Debug.Log("Playing blackjack...");
             //BlackJack blackjack = new BlackJack();
-            StartGame();
+            //StartGame();
             // need to create cards somewhere
-            DrawCards();
-            DrawTotals();
+            //DrawCards();
+            //DrawTotals();
 
 
         }

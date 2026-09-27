@@ -13,6 +13,10 @@ public class InventorySystem : MonoBehaviour
     private Dictionary<CheeseIngredientData, int> inventory = new Dictionary<CheeseIngredientData, int>();
 
     public static event Action<CheeseIngredientData, FinalResultCheese> OnInventoryChange; // soph added
+    //public List<InventorySlot> keyItemsInventory = new(); // soph added
+    public static event Action OnCurrencyChange; // soph added
+
+    private float currencyInInventory;
     public IReadOnlyDictionary<CheeseIngredientData, int> Inventory => inventory; // so inventory can be read for quest requirements, etc.
     //this is like creating new definition in a dictionary, then put them in pages
     void Awake()
@@ -25,6 +29,24 @@ public class InventorySystem : MonoBehaviour
 
         RefreshIngredientUI();
         RefreshCheeseUI();
+        currencyInInventory = 100f;
+    }
+
+    public float GetCurrency() // soph added
+    {
+        return currencyInInventory;
+    }
+
+    public void AddToCurrency(float amount) // soph added
+    {
+        currencyInInventory += amount;
+        OnCurrencyChange?.Invoke();
+    }
+
+    public void SubtractFromCurrency(float amount) // soph added
+    {
+        currencyInInventory -= amount;
+        OnCurrencyChange?.Invoke();
     }
 
     public void AddItem(CheeseIngredientData item)

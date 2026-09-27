@@ -12,8 +12,10 @@ public class UIManager_New : MonoBehaviour
     public TextMeshProUGUI speakerText;     // UI element for the speaker's name
     public TextMeshProUGUI dialogueText;    // UI element for the line text
     public GameObject dialoguePanel;   // parent panel for dialogue and name
-
     public GameObject optionsPanel;
+
+    //public TextMeshProUGUI currency;
+    public TextMeshProUGUI playerCurrencyDisplay;
 
     void Awake()
     {
@@ -23,10 +25,38 @@ public class UIManager_New : MonoBehaviour
             Destroy(gameObject);
     }
 
+    private void Start()
+    {
+        //UpdateCurrency();
+        UpdateCurrency();
+    }
+
     private void Update()
     {
-        
+        //Debug.Log(InventorySystem.Instance.GetCurrency());
     }
+
+    private void OnEnable()
+    {
+        InventorySystem.OnCurrencyChange += UpdateCurrency;
+    }
+
+    private void OnDisable()
+    {
+        InventorySystem.OnCurrencyChange -= UpdateCurrency;
+    }
+
+    // display currency
+    public void UpdateCurrency()
+    {
+
+        //Debug.Log("Display: " + playerCurrencyDisplay);
+        //Debug.Log("Inventory: " + InventorySystem.Instance);
+        float currencyUpdate = InventorySystem.Instance.GetCurrency();
+
+        playerCurrencyDisplay.text = "Currency: " + currencyUpdate;
+    }
+
 
     public void ShowDialoguePanel()
     {
