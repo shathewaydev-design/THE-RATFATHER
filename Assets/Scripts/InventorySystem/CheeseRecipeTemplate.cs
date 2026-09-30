@@ -4,7 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Cheese Template", menuName = "Scriptable Objects/Cheese Recipe Template")]
 public class CheeseRecipeTemplate : ScriptableObject
 {
-    public string cheeseName;
+    public string cheeseRecipeName;
 
     public Sprite icon;
 

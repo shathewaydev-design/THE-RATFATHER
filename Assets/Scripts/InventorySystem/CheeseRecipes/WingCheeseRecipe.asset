@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afb98a8dbf6864716942009340b32fae, type: 3}
   m_Name: WingCheeseRecipe
   m_EditorClassIdentifier: Assembly-CSharp::CheeseRecipeTemplate
-  cheeseName: WingCheese
+  cheeseRecipeName: Moldy Cashew Cheese Recipe
   icon: {fileID: 21300000, guid: af21f5339af7a4829b4f43668337b01c, type: 3}
   requiredIngredients:
   - {fileID: 11400000, guid: 8b19c1d70f0c444c982b3174595004da, type: 2}
