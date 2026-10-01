@@ -80,6 +80,8 @@ public class WithdrawalMechanic : MonoBehaviour
     [Header("Cheese / Tolerance")]
 
     [SerializeField] private float cheeseSatiation = 100f;
+    [SerializeField] private CheeseSatiationAmountScript cheeseSatiationAmountScript;
+    //this script holds the satiation amount for each cheese rarity
 
     [SerializeField] private float toleranceIncrease = 1f;
 
@@ -308,6 +310,8 @@ public class WithdrawalMechanic : MonoBehaviour
         withdrawalIcons[0].SetActive(false);
         withdrawalIcons[1].SetActive(false);
         withdrawalIcons[2].SetActive(true);//red outline
+
+        canEnterDesperateFix = true;
         // Animation:
         // Player looks around / appears nervous
 
@@ -335,15 +339,26 @@ public class WithdrawalMechanic : MonoBehaviour
     // CHEESE CONSUMPTION
     // =========================================================
 
-    public void EatCheese(float cheeseSatiationAmount)
+    public void EatCheese(CheeseRarity cheeseRarity)
     {
         if (currentStage == WithdrawalStage.PassedOut)
             return;
 
-        // Normal cheese consumption.
+        
+        if(isInDesperateFix)
+        {
+            float cheeseSatiationAmount = cheeseSatiationAmountScript.GetSatiationAmount(cheeseRarity);
+            timeUntilWithdrawal += cheeseSatiationAmount * desperateFixMultiplier;
 
-        timeUntilWithdrawal += cheeseSatiationAmount;
-
+            Debug.Log("Player has entered Desperate Fix mode.");
+            // Start a timer for the duration of Desperate Fix mode.
+            StartCoroutine(DesperateFixTimer());
+        }
+        else
+        {
+            // Normal cheese consumption
+            timeUntilWithdrawal += cheeseSatiationAmount;
+        }
         timeUntilWithdrawal = Mathf.Clamp(timeUntilWithdrawal, 0f, baseWithdrawalTime);
         
         IncreaseTolerance();// Increase tolerance after eating.
@@ -378,7 +393,7 @@ public class WithdrawalMechanic : MonoBehaviour
         return currentStage == WithdrawalStage.Emergency;
     }
 
-    public void EmergencyEatCheese(float cheeseSatiationAmount)
+    /*public void EmergencyEatCheese(float cheeseSatiationAmount)
     {
         if (!CanEnterDesperateFix())
         {
@@ -404,7 +419,7 @@ public class WithdrawalMechanic : MonoBehaviour
         Debug.Log(
             $"Emergency cheese consumed. Restored {actualSatiation:F1} seconds."
         );
-    }
+    }*/
 
     // =========================================================
     // TOLERANCE
@@ -518,4 +533,11 @@ public class WithdrawalMechanic : MonoBehaviour
 //     {
 //         return cheeseTolerance;
 //     }
+    public IEnumerator DesperateFixTimer()
+    {
+        yield return new WaitForSeconds(desperateFixDuration);
+        isInDesperateFix = false;
+        canEnterDesperateFix = false;
+        Debug.Log("Desperate Fix mode has ended.");
+    }
 }

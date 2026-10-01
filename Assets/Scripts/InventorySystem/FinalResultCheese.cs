@@ -4,7 +4,7 @@ using UnityEngine;
 public class FinalResultCheese : ScriptableObject
 {
     public string cheeseName;
-    public CheeseRarity rarity;
+    public CheeseRarity cheeseRarity;
 
     public Sprite icon;
 

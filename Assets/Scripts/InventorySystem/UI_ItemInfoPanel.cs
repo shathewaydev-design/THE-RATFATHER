@@ -28,7 +28,7 @@ public class UI_ItemInfoPanel : MonoBehaviour
         itemInfoPanelGameObject.SetActive(true);
 
         nameText.text = data.ingredientName;
-        rarityText.text = data.rarity.ToString();
+        rarityText.text = data.ingredientRarity.ToString();
         descriptionText.text = data.description;
         ingredientTypeText.text = data.type.ToString();
 
@@ -45,7 +45,7 @@ public class UI_ItemInfoPanel : MonoBehaviour
         itemInfoPanelGameObject.SetActive(true);
 
         nameText.text = data.cheeseName;
-        rarityText.text = data.rarity.ToString();
+        rarityText.text = data.cheeseRarity.ToString();
         descriptionText.text = data.description;
         basePriceText.text = data.basePrice.ToString();
         //Show fields relevant to cheese
