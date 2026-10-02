@@ -29,7 +29,7 @@ public class InventorySystem : MonoBehaviour
 
         RefreshIngredientUI();
         RefreshCheeseUI();
-        currencyInInventory = 100f;
+        currencyInInventory = 10000f;
     }
 
     public float GetCurrency() // soph added

@@ -266,7 +266,8 @@ public class GameManager : MonoBehaviour
         if (bossCutsceneStarted)
             return true;
 
-        if (playerState.soldTo.Count > 0 && playerState.recruitedRats.Count > 0)
+        // CONDITIONS MUST CHANGE!!!!
+        if (playerState.soldTo.Count > 0 && playerState.recruitedRats.Count > 0) // && ThirdPersonController.Instance.canDoubleJump == true;
         {
             thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Mouse");
             FirstBossCutscene();
