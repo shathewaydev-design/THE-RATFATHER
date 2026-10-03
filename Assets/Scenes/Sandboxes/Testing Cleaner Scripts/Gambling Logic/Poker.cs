@@ -182,15 +182,20 @@ public class Poker : MonoBehaviour, IInteractable
             // AI has something to call
             action = PokerAction.Call;
             SetText(dealerLastAction, "Dealer Last Action: Call");
+            ProcessAction(ai, action);
         }
         else
         {
             // Nothing to call
-            action = PokerAction.Check;
-            SetText(dealerLastAction, "Dealer Last Action: Check");
+            //action = PokerAction.Check;
+            //SetText(dealerLastAction, "Dealer Last Action: Check");
+
+            action = PokerAction.Raise;
+            SetText(dealerLastAction, "Dealer Last Action: Raise");
+            ProcessAction(ai, action, currentBet + 10);
         }
 
-        ProcessAction(ai, action);
+        
     }
 
     //handle ai dealer
@@ -291,6 +296,8 @@ public class Poker : MonoBehaviour, IInteractable
 
     public void PostBlinds() // called by button
     {
+        canCloseGame = false;
+
         // set blinds (initial bets)
         player = new PokerPlayer();
         ai = new PokerPlayer();
@@ -359,27 +366,65 @@ public class Poker : MonoBehaviour, IInteractable
 
     public void EndBettingRound()
     {
+
+        Debug.Log("Ending betting round: " + currentPhase);
+        Debug.Log("Community cards BEFORE dealing: " + communityCards.Count);
+
         switch (currentPhase)
         {
             case PokerPhase.PreFlop:
+
                 DealFlop();
                 StartBettingRound(PokerPhase.Flop);
+
                 break;
 
             case PokerPhase.Flop:
+
                 DealTurn();
                 StartBettingRound(PokerPhase.Turn);
+
                 break;
 
             case PokerPhase.Turn:
+
                 DealRiver();
                 StartBettingRound(PokerPhase.River);
+
                 break;
 
             case PokerPhase.River:
+
                 ShowDown();
+
                 break;
         }
+
+        Debug.Log("Community cards AFTER dealing: " + communityCards.Count);
+
+
+
+        //switch (currentPhase)
+        //{
+        //    case PokerPhase.PreFlop:
+        //        DealFlop();
+        //        StartBettingRound(PokerPhase.Flop);
+        //        break;
+
+        //    case PokerPhase.Flop:
+        //        DealTurn();
+        //        StartBettingRound(PokerPhase.Turn);
+        //        break;
+
+        //    case PokerPhase.Turn:
+        //        DealRiver();
+        //        StartBettingRound(PokerPhase.River);
+        //        break;
+
+        //    case PokerPhase.River:
+        //        ShowDown();
+        //        break;
+        //}
     }
 
 
@@ -396,18 +441,24 @@ public class Poker : MonoBehaviour, IInteractable
         // switch to preflop phase
         // start preflop bet
 
+
     }
 
     //DealFlop();
     public void DealFlop()
     {
+        if (communityCards.Count != 0)
+            return;
+
         BurnCard();
 
         communityCards.Add(DrawCard());
         communityCards.Add(DrawCard());
         communityCards.Add(DrawCard());
 
-        currentPhase = PokerPhase.Flop;
+        //currentPhase = PokerPhase.Flop;
+        Debug.Log("Flop dealt. Community cards: " + communityCards.Count);
+
         RedrawCards();
         // start flop bet
     }
@@ -415,11 +466,17 @@ public class Poker : MonoBehaviour, IInteractable
     //DealTurn();
     public void DealTurn()
     {
+        if (communityCards.Count != 3)
+            return;
+
         BurnCard();
 
         communityCards.Add(DrawCard());
 
-        currentPhase = PokerPhase.Turn;
+        //currentPhase = PokerPhase.Turn;
+
+        Debug.Log("Turn dealt. Community cards: " + communityCards.Count);
+
         RedrawCards();
         // start turn bet
     }
@@ -427,11 +484,17 @@ public class Poker : MonoBehaviour, IInteractable
     //DealRiver();
     public void DealRiver()
     {
+        if (communityCards.Count != 4)
+            return;
+
         BurnCard();
 
         communityCards.Add(DrawCard());
 
-        currentPhase = PokerPhase.River;
+        //currentPhase = PokerPhase.River;
+
+        Debug.Log("River dealt. Community cards: " + communityCards.Count);
+
         RedrawCards();
         // start river, then showdown!
     }
@@ -493,8 +556,17 @@ public class Poker : MonoBehaviour, IInteractable
             case PokerAction.Fold:
 
                 actingPlayer.folded = true;
-                CloseGame();
-                //EndHand();
+
+                if (actingPlayer == player)
+                {
+                    SetText(winnerAnnouncement, "Winner: Dealer!");
+                }
+                else
+                {
+                    SetText(winnerAnnouncement, "Winner: Player!");
+                }
+
+                EndHand();
 
                 return;
 
@@ -651,16 +723,13 @@ public class Poker : MonoBehaviour, IInteractable
         return true;
     }
 
-    bool canCloseGame = false;
+    
     public void EndHand()
     {
 
         canCloseGame = true;
+        
 
-        CloseGame();
-        // Evaluate winner
-        // Award pot
-        // Reset
     }
 
 
@@ -723,6 +792,10 @@ public class Poker : MonoBehaviour, IInteractable
         }
 
         actionArea.SetActive(true);
+
+        Debug.Log("Player Current Bet: " + player.currentBet);
+        Debug.Log("Current Bet: " + currentBet);
+        Debug.Log("Can Call: " + (player.currentBet < currentBet));
 
         fold.interactable = IsActionValid(PokerAction.Fold);
         check.interactable = IsActionValid(PokerAction.Check);
@@ -1416,12 +1489,33 @@ public class Poker : MonoBehaviour, IInteractable
 
         }
 
+        // show hidden cards
+        RevealHiddenCards();
+
+
+
+
         EndHand();
 
     }
 
 
+    public void RevealHiddenCards()
+    {
 
+        foreach (Transform child in dealerArea.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        foreach (Card c in ai.hand)
+        {
+            GameObject newCard = Instantiate(cardPrefab, dealerArea.transform);
+            CardDisplay cardDisplay = newCard.GetComponent<CardDisplay>();
+            cardDisplay.SetPokerCard(c, true, true);
+        }
+
+    }
 
 
 
@@ -1521,6 +1615,11 @@ public class Poker : MonoBehaviour, IInteractable
             Destroy(child.gameObject);
         }
 
+        foreach (Transform child in tableArea.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
         foreach (Transform child in dealerArea.transform)
         {
             Destroy(child.gameObject);
@@ -1563,6 +1662,10 @@ public class Poker : MonoBehaviour, IInteractable
 
 
     }
+    public void OnExitButton()
+    {
+        TryCloseGame();
+    }
 
     public void CloseGame()
     {
@@ -1581,6 +1684,15 @@ public class Poker : MonoBehaviour, IInteractable
         }
         
 
+    }
+
+    bool canCloseGame = true;
+    public void TryCloseGame()
+    {
+        if (!canCloseGame)
+            return;
+
+        CloseGame();
     }
 
 

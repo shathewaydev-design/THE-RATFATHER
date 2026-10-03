@@ -30,7 +30,7 @@ public class CardDisplay : MonoBehaviour
 
     }
 
-    public void SetPokerCard(Poker.Card card, bool isOpponentCard)
+    public void SetPokerCard(Poker.Card card, bool isOpponentCard, bool showDown = false)
     {
         string imageName = card.ToString();
         Texture cardTexture = Resources.Load<Texture>("cards/" + imageName);
@@ -38,6 +38,13 @@ public class CardDisplay : MonoBehaviour
         if (isOpponentCard)
         {
             // check if hand is over
+            if (showDown)
+            {
+                cardIMG.texture = cardTexture;
+                return;
+
+            }
+
             cardIMG.texture = Resources.Load<Texture>("cards/BACK");
             return;
         }
