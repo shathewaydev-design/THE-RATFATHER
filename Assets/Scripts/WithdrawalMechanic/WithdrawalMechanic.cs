@@ -357,14 +357,14 @@ public class WithdrawalMechanic : MonoBehaviour
         else
         {
             // Normal cheese consumption
-            timeUntilWithdrawal += cheeseSatiationAmount;
+            //timeUntilWithdrawal += cheeseSatiationAmount; //Caused an error cheeseSatiationAmount D.N.E Jordyn change with Sophia permission :)
         }
         timeUntilWithdrawal = Mathf.Clamp(timeUntilWithdrawal, 0f, baseWithdrawalTime);
         
         IncreaseTolerance();// Increase tolerance after eating.
         UpdateWithdrawalStage();
         ApplyCheeseBuff();
-        Debug.Log($"Ate cheese. Restored {cheeseSatiationAmount:F1} seconds.");
+        //Debug.Log($"Ate cheese. Restored {cheeseSatiationAmount:F1} seconds."); //Jordyn commented this out w/ Sophia permission. Hi Charlie!
     }
 
     public void ApplyCheeseBuff() 
