@@ -165,7 +165,7 @@ public class Poker : MonoBehaviour, IInteractable
 
         public int chips;
         public int currentBet;
-        public int totalBet;
+        //public int totalBet;
 
         public bool folded;
 
@@ -175,44 +175,129 @@ public class Poker : MonoBehaviour, IInteractable
 
     public void AIAction()
     {
-        PokerAction action;
+        List<PokerAction> legalActions = GetAILegalActions();
 
-        if (ai.currentBet < currentBet)
+        PokerAction action = ChooseAIAction(legalActions);
+
+        switch (action)
         {
-            // AI has something to call
-            action = PokerAction.Call;
-            SetText(dealerLastAction, "Dealer Last Action: Call");
-            ProcessAction(ai, action);
-        }
-        else
-        {
-            // Nothing to call
-            //action = PokerAction.Check;
-            //SetText(dealerLastAction, "Dealer Last Action: Check");
+            case PokerAction.Fold:
 
-            action = PokerAction.Raise;
-            SetText(dealerLastAction, "Dealer Last Action: Raise");
-            ProcessAction(ai, action, currentBet + 10);
+                SetText(dealerLastAction, "Dealer Last Action: Fold");
+                ProcessAction(ai, PokerAction.Fold);
+
+                break;
+
+
+            case PokerAction.Check:
+
+                SetText(dealerLastAction, "Dealer Last Action: Check");
+                ProcessAction(ai, PokerAction.Check);
+
+                break;
+
+
+            case PokerAction.Call:
+
+                SetText(dealerLastAction, "Dealer Last Action: Call");
+                ProcessAction(ai, PokerAction.Call);
+
+                break;
+
+
+            case PokerAction.Raise:
+
+                int raiseAmount = currentBet + 10;
+
+                SetText(dealerLastAction, "Dealer Last Action: Raise");
+                ProcessAction(ai, PokerAction.Raise, raiseAmount);
+
+                break;
         }
 
-        
+
     }
 
+    private PokerAction ChooseAIAction(List<PokerAction> legalActions)
+    {
+        // 5% chance to fold
+        if (legalActions.Contains(PokerAction.Fold))
+        {
+            int foldChance = random.Next(100);
+
+            if (foldChance < 5)
+            {
+                return PokerAction.Fold;
+            }
+        }
+
+        // remove fold so it doesn't get selected randomly below
+        List<PokerAction> nonFoldActions = new List<PokerAction>(legalActions);
+
+        nonFoldActions.Remove(PokerAction.Fold);
+
+        int randomIndex = random.Next(nonFoldActions.Count);
+
+        return nonFoldActions[randomIndex];
+    }
+
+
     //handle ai dealer
-    //public class AIPlayer : PokerPlayer
-    //{
+    private List<PokerAction> GetAILegalActions()
+    {
+        List<PokerAction> legalActions = new List<PokerAction>();
 
-    //public PokerAction DecideAction()
-    //{
-    //    // AI logic
-    //}
+        // AI can always fold unless preflop
+        // AI cannot fold during preflop
+        if (currentPhase != PokerPhase.PreFlop)
+        {
+            legalActions.Add(PokerAction.Fold);
+        }
 
-    //}
+        // AI can check if it has matched the current bet
+        if (ai.currentBet == currentBet)
+        {
+            legalActions.Add(PokerAction.Check);
+        }
+
+        // AI can call if it is behind the current bet
+        if (ai.currentBet < currentBet)
+        {
+            legalActions.Add(PokerAction.Call);
+        }
+
+        // AI can raise if it has enough chips
+        if (ai.currentBet + ai.chips > currentBet)
+        {
+            legalActions.Add(PokerAction.Raise);
+        }
+
+        return legalActions;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     [Header("Game Logic")]
     // total winnings to be dealt
     public int pot;
-    int smallBlind = 10;
-    int bigBlind = 20;
+    public float currFunds;
 
     // player
     //List<Card> playerHand; // 2
@@ -247,6 +332,8 @@ public class Poker : MonoBehaviour, IInteractable
     public void StartGame()
     {
         // set blinds panel false
+        currFunds = InventorySystem.Instance.GetCurrency();
+        SetText(playerChips, "Player Chips " + player.chips);
 
         // Build then shuffle the deck
         BuildDeck();
@@ -270,27 +357,10 @@ public class Poker : MonoBehaviour, IInteractable
         currentPhase = PokerPhase.PreFlop;
         StartBettingRound(currentPhase);
 
+        UpdateBettingRoundText();
+
         DrawCards();
 
-
-
-
-
-        // ---------------------------
-
-        // Reset players
-
-        // Determine dealer // may not need?
-
-        // Post blinds
-
-        // Deal 2 cards to each player
-
-        // Set phase to PreFlop
-
-        // Determine whose turn it is
-
-        // Wait for player/AI action
 
     }
 
@@ -298,24 +368,22 @@ public class Poker : MonoBehaviour, IInteractable
     {
         canCloseGame = false;
 
-        // set blinds (initial bets)
         player = new PokerPlayer();
         ai = new PokerPlayer();
         communityCards = new List<Card>();
 
         ai.chips = 10000;
-        player.chips = (int)InventorySystem.Instance.GetCurrency();
+        player.chips = (int)blindSlider.value;
 
-        ai.currentBet = smallBlind;
-        player.currentBet = bigBlind;
+        player.currentBet = 0;
+        ai.currentBet = 0;
 
-        ai.chips -= smallBlind;
-        player.chips -= bigBlind;
+        //player.totalBet = 0;
+        //ai.totalBet = 0;
 
-        pot = smallBlind + bigBlind;
-        currentBet = bigBlind;
+        pot = 0;
+        currentBet = 0;
 
-        
         StartGame();
 
 
@@ -328,15 +396,7 @@ public class Poker : MonoBehaviour, IInteractable
         playerActed = false;
         aiActed = false;
 
-        if (currentPlayer == player) // debugging
-        {
-            Debug.Log("PLAYER'S TURN!!"); // DEBUGGING
-        }
-        else
-        {
-            Debug.Log("DEALER'S TURN!!"); // DEBUGGING
-        }
-
+        UpdateBettingRoundText();
 
         if (phase == PokerPhase.PreFlop)
         {
@@ -402,29 +462,6 @@ public class Poker : MonoBehaviour, IInteractable
 
         Debug.Log("Community cards AFTER dealing: " + communityCards.Count);
 
-
-
-        //switch (currentPhase)
-        //{
-        //    case PokerPhase.PreFlop:
-        //        DealFlop();
-        //        StartBettingRound(PokerPhase.Flop);
-        //        break;
-
-        //    case PokerPhase.Flop:
-        //        DealTurn();
-        //        StartBettingRound(PokerPhase.Turn);
-        //        break;
-
-        //    case PokerPhase.Turn:
-        //        DealRiver();
-        //        StartBettingRound(PokerPhase.River);
-        //        break;
-
-        //    case PokerPhase.River:
-        //        ShowDown();
-        //        break;
-        //}
     }
 
 
@@ -559,12 +596,16 @@ public class Poker : MonoBehaviour, IInteractable
 
                 if (actingPlayer == player)
                 {
+                    playerWon = false;
                     SetText(winnerAnnouncement, "Winner: Dealer!");
                 }
                 else
                 {
+                    playerWon = true;
                     SetText(winnerAnnouncement, "Winner: Player!");
                 }
+
+                RevealHiddenCards();
 
                 EndHand();
 
@@ -585,7 +626,7 @@ public class Poker : MonoBehaviour, IInteractable
                 actingPlayer.chips -= amountToCall;
                 actingPlayer.currentBet += amountToCall;
 
-                actingPlayer.totalBet += amountToCall;
+                //actingPlayer.totalBet += amountToCall;
 
                 pot += amountToCall;
                 SetText(potDisplay, "Pot: " + pot);
@@ -593,14 +634,14 @@ public class Poker : MonoBehaviour, IInteractable
                 if (actingPlayer == player)
                 {
                     SetText(playerCurrBet, "Player Current Bet: " + player.currentBet);
-                    SetText(playerTotalBet, "Player Total Bet: " + player.totalBet);
+                    //SetText(playerTotalBet, "Player Total Bet: " + player.totalBet);
                     SetText(playerChips, "Player Chips: " + player.chips);
 
                 } 
                 else
                 {
                     SetText(DealerCurrBet, "Dealer Current Bet: " + ai.currentBet);
-                    SetText(dealerTotalBet, "Dealer Total Bet: " + ai.totalBet);
+                    //SetText(dealerTotalBet, "Dealer Total Bet: " + ai.totalBet);
                 }
 
                     SetPlayerActed(actingPlayer);
@@ -615,18 +656,18 @@ public class Poker : MonoBehaviour, IInteractable
                 actingPlayer.chips -= amountToRaise;
                 actingPlayer.currentBet += amountToRaise;
 
-                actingPlayer.totalBet += amountToRaise;
+                //actingPlayer.totalBet += amountToRaise;
 
                 if (actingPlayer == player)
                 {
                     SetText(playerCurrBet, "Player Current Bet: " + player.currentBet);
-                    SetText(playerTotalBet, "Player Total Bet: " + player.totalBet);
+                   // SetText(playerTotalBet, "Player Total Bet: " + player.totalBet);
                     SetText(playerChips, "Player Chips: " + player.chips);
                 }
                 else
                 {
                     SetText(DealerCurrBet, "Dealer Current Bet: " + ai.currentBet);
-                    SetText(dealerTotalBet, "Dealer Total Bet: " + ai.totalBet);
+                    //SetText(dealerTotalBet, "Dealer Total Bet: " + ai.totalBet);
                 }
 
                 pot += amountToRaise;
@@ -723,11 +764,22 @@ public class Poker : MonoBehaviour, IInteractable
         return true;
     }
 
-    
+    public bool playerWon;
     public void EndHand()
     {
 
-        canCloseGame = true;
+        if (InventorySystem.Instance.GetCurrency() < currFunds + pot && playerWon)
+        {
+
+            InventorySystem.Instance.AddToCurrency(pot);
+
+        }
+        else if (InventorySystem.Instance.GetCurrency() > currFunds - pot && !playerWon)
+        {
+            InventorySystem.Instance.SubtractFromCurrency(pot);
+
+        }
+            canCloseGame = true;
         
 
     }
@@ -1462,12 +1514,14 @@ public class Poker : MonoBehaviour, IInteractable
             player.chips += pot;
             InventorySystem.Instance.AddToCurrency(pot);
             SetText(winnerAnnouncement, "Winner: You!");
+            playerWon = true;
         }
         else if (result < 0)
         {
             // AI wins
             InventorySystem.Instance.SubtractFromCurrency(pot);
             SetText(winnerAnnouncement, "Winner: Dealer!");
+            playerWon = false;
         }
         else
         {
@@ -1548,16 +1602,6 @@ public class Poker : MonoBehaviour, IInteractable
 
 
     // Poker UI>>>
-
-    // >>Player Card Images
-    // >>AI Card Images
-    // >>Community Card Images
-    // >>Chips
-    // >>Fold Button
-    // >>Check Button
-    // >>Call Button
-    // >>Raise Button
-    // >>Raise Amount UI
     [Header("Panel UI")]
     public Slider raiseSlider;
     public Slider blindSlider;
@@ -1570,13 +1614,15 @@ public class Poker : MonoBehaviour, IInteractable
 
     public TextMeshProUGUI dealerLastAction;
     public TextMeshProUGUI DealerCurrBet;
-    public TextMeshProUGUI dealerTotalBet;
+    public TextMeshProUGUI currBetRound;
 
     public TextMeshProUGUI playerChips;
     public TextMeshProUGUI playerCurrBet;
-    public TextMeshProUGUI playerTotalBet;
+    //public TextMeshProUGUI playerTotalBet;
 
     public TextMeshProUGUI potDisplay;
+    public TextMeshProUGUI raiseBetTo;
+    public TextMeshProUGUI chipSet;
 
     public TextMeshProUGUI winnerAnnouncement;
 
@@ -1641,13 +1687,15 @@ public class Poker : MonoBehaviour, IInteractable
 
         dealerLastAction.text = "Dealer Last Action: ";
         DealerCurrBet.text = "Dealer Current Bet: ";
-        dealerTotalBet.text = "Dealer Total Bet: ";
+        //dealerTotalBet.text = "Dealer Total Bet: ";
+        currBetRound.text = "Current Betting Round: ";
 
         playerChips.text = "Player Chips: ";
         playerCurrBet.text = "Player Current Bet: ";
-        playerTotalBet.text = "Player Total Bet: ";
+        //playerTotalBet.text = "Player Total Bet: ";
 
         winnerAnnouncement.text = "";
+        raiseBetTo.text = "Raising Bet To: ";
     }
 
     public void SetPot()
@@ -1662,6 +1710,49 @@ public class Poker : MonoBehaviour, IInteractable
 
 
     }
+
+    public void UpdateRaiseText()
+    {
+        raiseBetTo.text = "Raise Bet To: " + Mathf.RoundToInt(raiseSlider.value);
+    }
+
+    public void UpdateChipSetText()
+    {
+        chipSet.text = blindSlider.value + " Chips";
+     
+    }
+
+    public void UpdateBettingRoundText()
+    {
+        switch (currentPhase)
+        {
+            case PokerPhase.PreFlop:
+                currBetRound.text = "Current Betting Round: Pre-Flop";
+                break;
+
+            case PokerPhase.Flop:
+                currBetRound.text = "Current Betting Round: Flop";
+                break;
+
+            case PokerPhase.Turn:
+                currBetRound.text = "Current Betting Round: Turn";
+                break;
+
+            case PokerPhase.River:
+                currBetRound.text = "Current Betting Round: River";
+                break;
+
+            case PokerPhase.Showdown:
+                currBetRound.text = "Showdown";
+                break;
+
+            case PokerPhase.HandOver:
+                currBetRound.text = "Hand Over";
+                break;
+        }
+    }
+
+
     public void OnExitButton()
     {
         TryCloseGame();
@@ -1721,6 +1812,10 @@ public class Poker : MonoBehaviour, IInteractable
         {
             Debug.Log("Playing poker...");
             pokerPanel.SetActive(true);
+            blindPanel.SetActive(true);
+
+            blindSlider.maxValue = InventorySystem.Instance.GetCurrency();
+            blindSlider.minValue = 50;
 
             thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Mouse");
             Cursor.visible = true;
@@ -1728,7 +1823,7 @@ public class Poker : MonoBehaviour, IInteractable
 
 
 
-            //StartGame();
+         
         }
     }
 
