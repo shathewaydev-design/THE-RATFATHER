@@ -79,11 +79,9 @@ public class WithdrawalMechanic : MonoBehaviour
 
     [Header("Cheese / Tolerance")]
 
-    [SerializeField] private float cheeseSatiation = 100f;
     [SerializeField] private CheeseSatiationAmountScript cheeseSatiationAmountScript;
     //this script holds the satiation amount for each cheese rarity
 
-    [SerializeField] private float toleranceIncrease = 1f;
 
     [SerializeField] private float maximumTolerance = 5f;
     //max cheese can eat to apply buff
@@ -357,14 +355,15 @@ public class WithdrawalMechanic : MonoBehaviour
         else
         {
             // Normal cheese consumption
-            //timeUntilWithdrawal += cheeseSatiationAmount; //Caused an error cheeseSatiationAmount D.N.E Jordyn change with Sophia permission :)
+            float cheeseSatiationAmount = cheeseSatiationAmountScript.GetSatiationAmount(cheeseRarity);
+            timeUntilWithdrawal += cheeseSatiationAmount;
         }
         timeUntilWithdrawal = Mathf.Clamp(timeUntilWithdrawal, 0f, baseWithdrawalTime);
         
         IncreaseTolerance();// Increase tolerance after eating.
         UpdateWithdrawalStage();
         ApplyCheeseBuff();
-        //Debug.Log($"Ate cheese. Restored {cheeseSatiationAmount:F1} seconds."); //Jordyn commented this out w/ Sophia permission. Hi Charlie!
+
     }
 
     public void ApplyCheeseBuff() 
