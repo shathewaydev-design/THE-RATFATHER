@@ -1,0 +1,11 @@
+title: Enforcer_Dialogue
+---
+Officer: What are you doing sneaking around here like this? Stater your business!
+    -> I was just on my way to visit someone...
+        Officer: Nice try, but no one here is expecting visitors! I'll need to search you.
+        <<activate_inventory_consequence>>
+    -> I was only tring to get home...
+        Officer: Nice try, but no one lives here that I don't know about! I'll need to search you.
+        <<activate_currency_consequence>>
+
+===
