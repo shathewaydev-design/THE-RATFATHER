@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
-using UnityEngine.InputSystem;
 using StarterAssets;
 using UnityEngine.SceneManagement; 
 

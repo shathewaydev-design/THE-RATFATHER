@@ -53,6 +53,7 @@ namespace StarterAssets
         [Header("Player Grounded and DoubleJump logic")]
         [Tooltip("If the character is grounded or not. Not part of the CharacterController built in grounded check")]
         private int maxJumps = 1;
+        public bool canDoubleJump = false;
         [SerializeField] private int jumpCount = 0;
         //private bool _jumpPressedLastFrame;
         public bool Grounded = true;
