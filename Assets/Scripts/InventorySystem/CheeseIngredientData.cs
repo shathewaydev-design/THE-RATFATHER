@@ -17,7 +17,7 @@ public class CheeseIngredientData : ScriptableObject
     
     public Sprite icon;
     [Header("Gameplay")]
-    public IngredientRarity rarity;
+    public IngredientRarity ingredientRarity;
     public IngredientType type;
 
     [Header("Economy")]
