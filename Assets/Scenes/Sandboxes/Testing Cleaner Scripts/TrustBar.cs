@@ -4,7 +4,6 @@ public class TrustBar : MonoBehaviour
 {
     [SerializeField] private RectTransform indicator;
 
-
     private void OnEnable()
     {
         DialogueManager_New.OnTrustChange += UpdateTrustBar;
