@@ -172,6 +172,21 @@ public class NPCProfile_New : ScriptableObject
         state.activeFavor = favorState.favor;
     }
 
+    public void CheckPreference()
+    {
+        // triggered when selling, 
+        // check specific difficulty level
+        // set selling range?
+        // based on difficulty level
+        // bar from selling if quality doesn't match preference
+        // maybe decrease trust?
+
+        // ALSO CHECK TRUST LEVEL
+        // increase or decrease price range based on current trust
+        // need to ask charlie how to access cheese data and price 
+        // to implement
+    }
+
 
 
 }

@@ -1,4 +1,5 @@
 using StarterAssets;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Yarn.Unity;
@@ -15,8 +16,10 @@ public class DialogueManager_New : MonoBehaviour
     public UIManager_New UIManager;
     [SerializeField] private DialogueRunner dialogueRunner;
 
+    [Header("UI")]
+    [SerializeField] private GameObject TrustBar;
 
-
+    [Header("Bools")]
     //private Queue<string> lines = new Queue<string>();
     public bool isDialogueActive = false;
     private bool canAdvance = true; // help w typewriter effect -- always true for now
@@ -28,6 +31,9 @@ public class DialogueManager_New : MonoBehaviour
 
     [Header("Input")]//player inputs
     public ThirdPersonController thirdPersonController;
+
+    public static event Action<float> OnTrustChange;
+    public static event Action<float> OnTrustBarActivated;
 
 
     private void Awake()
@@ -41,6 +47,8 @@ public class DialogueManager_New : MonoBehaviour
 
         dialogueRunner.AddCommandHandler("activate_favor", ActivateFavor);
         dialogueRunner.AddCommandHandler("met_player", MetPlayer);
+        dialogueRunner.AddCommandHandler("activate_selling", ActivateSelling);
+        dialogueRunner.AddCommandHandler("update_trust", UpdateTrust);
         //dialogueRunner.AddCommandHandler<string>("set_node", SetNode);
 
         dialogueRunner.AddCommandHandler<string>(
@@ -48,7 +56,16 @@ public class DialogueManager_New : MonoBehaviour
             (node) => SetNode(node)
         );
 
+    }
 
+    void Update()
+    {
+
+        if (justStartedDialogue)
+        {
+            justStartedDialogue = false;
+            return;
+        }
 
     }
 
@@ -60,29 +77,6 @@ public class DialogueManager_New : MonoBehaviour
     private void OnDisable()
     {
         //FavorManager.OnObjectiveComplete += SetNode;
-    }
-
-
-
-    public void PauseDialogue()
-    {
-
-        isPaused = true;
-    }
-
-    public void ResumeDialogue(bool advanceLine = false)
-    {
-        isPaused = false;
-
-        if (currentConversation != null)
-        {
-            if (advanceLine)
-            {
-                currentLineIndex++; // advance once
-            }
-
-            //ShowCurrentLine();
-        }
     }
 
 
@@ -103,6 +97,7 @@ public class DialogueManager_New : MonoBehaviour
         currentNPC = npc;
 
         UIManager.ShowDialoguePanel();  // turn MY panel on
+        ToggleTrustPanel();
         dialogueRunner.StartDialogue(dialogueNode); // let yarn spinner handle running dialogue TESTING
 
         //Debug.Log("StartDialogue finished.");
@@ -118,6 +113,8 @@ public class DialogueManager_New : MonoBehaviour
 
     }
 
+
+    // ----------YARN COMMANDS----------
     //[YarnCommand("met_player")]
     public void MetPlayer()
     {
@@ -136,89 +133,36 @@ public class DialogueManager_New : MonoBehaviour
         FavorManager.Instance.StartFavor(currentNPC.GetProfile().GetCurrentFavor());
     }
 
+    public void ActivateSelling()
+    {
+        // pull up sell screen (may need to keep mouse map on, then sell button handles giving back player controls)
+        // sell button should handle NPC preference and such!!!
+        UIManager_New.Instance.OpenCheeseInventory();
+    }
+
+    public void UpdateTrust()
+    {
+        if (currentNPC == null)
+        {
+            Debug.LogError("No current NPC!");
+            return;
+        }
+
+        currentNPC.GetProfile().IncreaseTrustLevel();
+        OnTrustChange?.Invoke(currentNPC.GetProfile().GetTrustLevel());
+    }
+
     public void SetNode(string newNode)
     {
         currentNPC.GetProfile().GetState().SetDialogueNode(newNode);
     }
 
-    //public void SetNodeFromFavor(FavorState state)
-    //{
-    //    //currentNPC.GetProfile().GetState().
-    //}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // display next line in dialogue
-    //public void ShowCurrentLine()
-    //{
-    //    if (currentLineIndex >= currentConversation.lines.Count)
-    //    {
-    //        EndDialogue();
-    //        return;
-    //    }
-
-    //    DialogueLine line = currentConversation.lines[currentLineIndex];
-
-    //    // Show line in the UI
-    //    UIManager.SetSpeaker(line.speaker);
-    //    UIManager.SetText(line.text);
-
-    //    // Show options if they exist
-
-
-    //}
-
-
-    // Called when player clicks an option
-    //public void OnOptionSelected(int selectedOptionIndex)
-    //{
-    //    //UIManager.HideOptions();
-    //    DialogueOption selected = currentConversation.lines[currentLineIndex].options[selectedOptionIndex];
-    //    selected.GiveQuest();
-    //    selected.Recruit();
-
-    //    if (selected.openSellScreen)
-    //    {
-    //        selected.Sell();
-    //        PauseDialogue();   // pause before anything else
-    //        return;            // no advancing dialogue
-    //    }
-
-    //    if (selected.endConversation)
-    //    {
-    //        EndDialogue(); // panel hides, flow stops
-    //        return;
-    //    }
-
-    //    if (selected.nextLineIndex >= 0)
-    //        currentLineIndex = selected.nextLineIndex;
-    //    else
-    //        currentLineIndex++;
-
-    //    //ShowCurrentLine();
-    //}
 
     // end dialogue
     public void EndDialogue()
     {
-        UIManager.HideDialoguePanel(); 
-        // currentConversation = null;
-        // currentLineIndex = 0;
+        UIManager.HideDialoguePanel();
+        ToggleTrustPanel();
 
         isDialogueActive = false;
 
@@ -226,6 +170,21 @@ public class DialogueManager_New : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         //Debug.Log("Conversation ended!");
+    }
+
+    // ----------DIALOGUE UI----------
+    private void ToggleTrustPanel()
+    {
+        if (TrustBar.activeSelf == false)
+        {
+            TrustBar.SetActive(true);
+
+            OnTrustBarActivated?.Invoke(currentNPC.GetProfile().GetTrustLevel());
+
+            return;
+        }
+        TrustBar.SetActive(false);
+
     }
 
     public void StartOptions()
@@ -239,43 +198,5 @@ public class DialogueManager_New : MonoBehaviour
     }
 
 
-    void Update()
-    {
 
-        //if (isPaused)
-        //{
-        //    return;
-
-        //}
-
-
-        if (justStartedDialogue)
-        {
-            justStartedDialogue = false;
-            return;
-        }
-
-        //if (currentConversation == null)
-        //    return;
-
-        //if (currentLineIndex < currentConversation.lines.Count &&
-        //    currentConversation.lines[currentLineIndex].endConversation &&
-        //     Keyboard.current.eKey.wasPressedThisFrame) //Keyboard.current.eKey.wasPressedThisFrame
-        //{
-        //    EndDialogue();
-        //    return;
-        //}
-
-        //// Only advance with E if no options are active
-        //if ((currentConversation.lines.Count > currentLineIndex) &&
-        //    (currentConversation.lines[currentLineIndex].options == null ||
-        //     currentConversation.lines[currentLineIndex].options.Count == 0))
-        //{
-        //    if (Mouse.current.leftButton.wasPressedThisFrame)//Keyboard.current.eKey.wasPressedThisFrame // thirdPersonController.mouseClick.WasPressedThisFrame()
-        //    {
-        //        currentLineIndex++;
-        //        // ShowCurrentLine();
-        //    }
-        //}
-    }
 }

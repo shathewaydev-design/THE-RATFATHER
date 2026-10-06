@@ -86,6 +86,14 @@ public class UIManager_New : MonoBehaviour
         optionsPanel.SetActive(false);
     }
 
+    public void OpenCheeseInventory()
+    {
+        // open the inventory that stores CHEESE
+        // activate a button that SELLS selected cheese
+        Debug.Log("Opened Inventory to SELL");
+    }
+
+
     // Show a single line
     public void SetSpeaker(string speaker)
     {

@@ -14,6 +14,9 @@ public class NPC_New : MonoBehaviour, IInteractable
     [Header("UI")]
     public Animator promptAnimator;
     [SerializeField] private GameObject promptCanvas;
+    [SerializeField] private GameObject TrustPanel;
+    [SerializeField] private GameObject TrustIndicator;
+    // public Slider TrustSlider   ????
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created   
     void Start()
@@ -23,12 +26,16 @@ public class NPC_New : MonoBehaviour, IInteractable
         {
             profile.GetState().compFavors = 0;
         }
+
+        profile.SetTrustLevel(0f);
+
     }
 
     // Update is called once per frame
     void Update()
     {
         //Debug.Log("" + profile.GetState().compFavors);
+        Debug.Log("current trust: " + profile.GetTrustLevel());
     }
 
 
@@ -37,6 +44,7 @@ public class NPC_New : MonoBehaviour, IInteractable
         // laptop.PriceChanged += OnPriceChanged;
         NPCProfile_New.OnTrustLevelChange += CheckTrustLevel;
         FavorManager.OnFavorComplete += CompletedFavor;
+
 
     }
 
@@ -73,13 +81,11 @@ public class NPC_New : MonoBehaviour, IInteractable
         
     }
 
-    //public void ActivateFavor()
-    //{
-    //    //profile.GetState().activeFavor.favor = null;
-    //    Debug.Log("Activate favor command called!");
-    //    FavorManager.Instance.StartFavor(profile.GetCurrentFavor());
- 
-    //}
+    public void SetTrustUI()
+    {
+
+    }
+
 
     private void CompletedFavor(FavorState favor)
     {

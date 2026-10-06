@@ -13,7 +13,6 @@ public class InventorySystem : MonoBehaviour
     private Dictionary<CheeseIngredientData, int> inventory = new Dictionary<CheeseIngredientData, int>();
 
     public static event Action<CheeseIngredientData, FinalResultCheese> OnInventoryChange; // soph added
-    //public List<InventorySlot> keyItemsInventory = new(); // soph added
     public static event Action OnCurrencyChange; // soph added
 
     private float currencyInInventory;
@@ -45,6 +44,11 @@ public class InventorySystem : MonoBehaviour
 
     public void SubtractFromCurrency(float amount) // soph added
     {
+        if (currencyInInventory - amount < 0)
+        {
+            currencyInInventory = 0;
+            return;
+        }
         currencyInInventory -= amount;
         OnCurrencyChange?.Invoke();
     }

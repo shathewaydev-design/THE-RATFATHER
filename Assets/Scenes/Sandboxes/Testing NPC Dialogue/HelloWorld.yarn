@@ -33,6 +33,7 @@ Bob: Go now!!! >:(
 title: Alex_Favor1_Comp
 ---
 Bob: You did it! Yay!!
+<<update_trust>>
 Bob: There is cheese behind the rock!
 <<set_node "Alex_Sell_Available">>
 ===
@@ -41,5 +42,5 @@ title: Alex_Sell_Available
 ---
 Bob: Now I trust you enough to make a purchase from you~
 Bob: Kiss kiss~
-
+<<activate_selling>>
 ===
