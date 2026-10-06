@@ -93,7 +93,7 @@ public class DayNightManager : MonoBehaviour
     void StartNextDay()
     {
         currentDay++;
-
+        WithdrawalMechanic.Instance.NewDay(); // partial cheese drain rate recovery
         if (currentDay > maxDays)
         {
             EndWeek();

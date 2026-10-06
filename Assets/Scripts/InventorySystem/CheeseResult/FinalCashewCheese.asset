@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9893e5880382441db8a8118def70e82a, type: 3}
-  m_Name: FinalMoldyCashewCheese
+  m_Name: FinalCashewCheese
   m_EditorClassIdentifier: Assembly-CSharp::FinalResultCheese
-  cheeseName: Moldy Cashew Cheese
+  cheeseName: Cashew Cheese
   cheeseRarity: 0
-  icon: {fileID: 21300000, guid: d1b00156ddb3d4323b036128055baffc, type: 3}
+  icon: {fileID: 21300000, guid: 96d52f2cd04a2449c95693ec05545a97, type: 3}
   description: 
   basePrice: 0
   grantsDoubleJump: 0

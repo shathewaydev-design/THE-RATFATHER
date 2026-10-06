@@ -18,5 +18,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8b19c1d70f0c444c982b3174595004da, type: 2}
   - {fileID: 11400000, guid: 554e8a2ea4b5e4c16af6be62fd31b0c5, type: 2}
   - {fileID: 11400000, guid: ed50e61f9e5dc488188cf5c9df08ef36, type: 2}
-  resultCheese: {fileID: 11400000, guid: fa691ec12a0304e26ba019ca699dec8c, type: 2}
+  resultCheese: {fileID: 11400000, guid: ca6e0c3d96c224b079a1288f82a5988c, type: 2}
   stability: 0

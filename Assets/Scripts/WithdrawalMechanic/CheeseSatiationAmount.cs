@@ -6,10 +6,10 @@ public class CheeseSatiationAmountScript : MonoBehaviour
 {
 
     [Header("Satiation by Rarity")]
-    public float commonAmount = 400f;
-    public float rareAmount = 600f;
-    public float epicAmount = 850f;
-    public float legendaryAmount = 1200f;
+    [SerializeField] private float commonAmount = 400f;
+    [SerializeField] private float rareAmount = 600f;
+    [SerializeField] private float epicAmount = 850f;
+    [SerializeField] private float legendaryAmount = 1200f;
 
     public float GetSatiationAmount(CheeseRarity cheeseRarity)
     {
