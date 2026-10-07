@@ -16,7 +16,6 @@ public class SettingsManager : MonoBehaviour
     [SerializeField] private GameObject SettingsMenuPanel;
     [SerializeField] private GameObject PauseGamePanel;
     [Header("Variables")]
-    private bool isOpened = false;
     public bool invertMouseX = false;
     public bool invertMouseY = false;
     public float mouseSensitivity = 10.0f;

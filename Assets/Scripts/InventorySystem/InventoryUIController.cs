@@ -150,6 +150,7 @@ public class InventoryUIController : MonoBehaviour
         if (useButtonScript.cheeseButtonRef.cheeseInventorySlot.finalCheeseData.grantsDoubleJump)
         {
             ThirdPersonController.Instance.EnableDoubleJump();
+            ThirdPersonController.Instance.canDoubleJump = true;
         }
     }
     private void ClearCheeseSelection()

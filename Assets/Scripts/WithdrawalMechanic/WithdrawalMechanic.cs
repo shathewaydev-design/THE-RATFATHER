@@ -79,11 +79,9 @@ public class WithdrawalMechanic : MonoBehaviour
 
     [Header("Cheese / Tolerance")]
 
-    [SerializeField] private float cheeseSatiation = 100f;
     [SerializeField] private CheeseSatiationAmountScript cheeseSatiationAmountScript;
     //this script holds the satiation amount for each cheese rarity
 
-    [SerializeField] private float toleranceIncrease = 1f;
 
     [SerializeField] private float maximumTolerance = 5f;
     //max cheese can eat to apply buff
@@ -102,10 +100,11 @@ public class WithdrawalMechanic : MonoBehaviour
     //withdrawal recovery rate is increased by 15% when player is in desperate fix mode
     [SerializeField] private float desperateFixDuration = 20f;
     [SerializeField] private bool canEnterDesperateFix = false;
-    [SerializeField] private bool isInDesperateFix = false;
+    public bool isInDesperateFix = false;
 
     [Header("UI")]
     [SerializeField] private GameObject[] withdrawalIcons;
+    [SerializeField] private GameObject desperateFixButton;
     //show player how much left until withdrawal
     //can be hovered to see %
     //UI effect, white opaque background
@@ -141,6 +140,9 @@ public class WithdrawalMechanic : MonoBehaviour
         {
             icon.SetActive(false);
         }
+
+        desperateFixButton.SetActive(false);
+
         UpdateWithdrawalStage();
     }
     
@@ -258,6 +260,7 @@ public class WithdrawalMechanic : MonoBehaviour
             icon.SetActive(false);
         }
 
+        desperateFixButton.SetActive(false);
         // Animation:
         // Normal idle
 
@@ -274,6 +277,8 @@ public class WithdrawalMechanic : MonoBehaviour
         withdrawalIcons[0].SetActive(true);//green outline
         withdrawalIcons[1].SetActive(false);
         withdrawalIcons[2].SetActive(false);
+
+        desperateFixButton.SetActive(false);
         // Green outline
         // Slight shaking animation
         //vingrette effect on screen
@@ -292,6 +297,8 @@ public class WithdrawalMechanic : MonoBehaviour
         withdrawalIcons[0].SetActive(false);
         withdrawalIcons[1].SetActive(true);//orange outline
         withdrawalIcons[2].SetActive(false);
+
+        desperateFixButton.SetActive(false);
         // VFX:
         // Occasional screen shake
         // Other symptoms
@@ -312,6 +319,7 @@ public class WithdrawalMechanic : MonoBehaviour
         withdrawalIcons[2].SetActive(true);//red outline
 
         canEnterDesperateFix = true;
+        desperateFixButton.SetActive(false);
         // Animation:
         // Player looks around / appears nervous
 
@@ -324,7 +332,7 @@ public class WithdrawalMechanic : MonoBehaviour
     private void EnterEmergency()
     {
         Debug.Log("Player is in emergency withdrawal.");
-
+        desperateFixButton.SetActive(true);
         // UI:
         // Strong warning
 
@@ -343,28 +351,36 @@ public class WithdrawalMechanic : MonoBehaviour
     {
         if (currentStage == WithdrawalStage.PassedOut)
             return;
-
         
         if(isInDesperateFix)
         {
+            // Emergency cheese restores withdrawal
+            // without applying a cheese buff.
+            // Emergency eating does NOT increase tolerance.
+            // It also does NOT give the cheese's normal buff.
             float cheeseSatiationAmount = cheeseSatiationAmountScript.GetSatiationAmount(cheeseRarity);
+            //grab how much satiation the cheese gives 
+            // from CheeseSatiationAmountScript 
+            // (where we store how much satiation each cheese rarity gives)
             timeUntilWithdrawal += cheeseSatiationAmount * desperateFixMultiplier;
 
-            Debug.Log("Player has entered Desperate Fix mode.");
+            
             // Start a timer for the duration of Desperate Fix mode.
-            StartCoroutine(DesperateFixTimer());
+            //StartCoroutine(DesperateFixTimer());
         }
         else
         {
             // Normal cheese consumption
-            //timeUntilWithdrawal += cheeseSatiationAmount; //Caused an error cheeseSatiationAmount D.N.E Jordyn change with Sophia permission :)
+            float cheeseSatiationAmount = cheeseSatiationAmountScript.GetSatiationAmount(cheeseRarity);
+            timeUntilWithdrawal += cheeseSatiationAmount;
+            IncreaseTolerance();// Increase tolerance after eating.
         }
         timeUntilWithdrawal = Mathf.Clamp(timeUntilWithdrawal, 0f, baseWithdrawalTime);
         
-        IncreaseTolerance();// Increase tolerance after eating.
+        
         UpdateWithdrawalStage();
         ApplyCheeseBuff();
-        //Debug.Log($"Ate cheese. Restored {cheeseSatiationAmount:F1} seconds."); //Jordyn commented this out w/ Sophia permission. Hi Charlie!
+
     }
 
     public void ApplyCheeseBuff() 
@@ -384,42 +400,6 @@ public class WithdrawalMechanic : MonoBehaviour
         }
     }
 
-    // =========================================================
-    // EMERGENCY CHEESE
-    // =========================================================
-
-    public bool CanEnterDesperateFix()
-    {
-        return currentStage == WithdrawalStage.Emergency;
-    }
-
-    /*public void EmergencyEatCheese(float cheeseSatiationAmount)
-    {
-        if (!CanEnterDesperateFix())
-        {
-            Debug.Log("Emergency satiation is not available yet.");
-            return;
-        }
-
-        // Emergency cheese restores withdrawal
-        // without applying a cheese buff.
-        //not sure if we want a multiplier to gain more cheese satiation.
-        float actualSatiation = cheeseSatiationAmount * desperateFixMultiplier;
-
-        timeUntilWithdrawal += actualSatiation;
-
-        timeUntilWithdrawal = Mathf.Clamp(timeUntilWithdrawal, 0f, baseWithdrawalTime);
-
-        // IMPORTANT:
-        // Emergency eating does NOT increase tolerance.
-        // It also does NOT give the cheese's normal buff.
-
-        UpdateWithdrawalStage();
-
-        Debug.Log(
-            $"Emergency cheese consumed. Restored {actualSatiation:F1} seconds."
-        );
-    }*/
 
     // =========================================================
     // TOLERANCE
@@ -439,24 +419,12 @@ public class WithdrawalMechanic : MonoBehaviour
     public void NewDay()
     {
         // Partially reset withdrawal.
-        /*baseWithdrawalTime -= resetAmountEndOfDay * maximumWithdrawalTime;
-        if(baseWithdrawalTime <= maximumWithdrawalTime)
-        {
-            baseWithdrawalTime = maximumWithdrawalTime;
-        }
-        timeUntilWithdrawal = baseWithdrawalTime;*/
-
-        withdrawalDrainRate -= resetAmountEndOfDay; 
+        withdrawalDrainRate -= resetAmountEndOfDay*withdrawalDrainRate;
+        //recover 15% of drain rate? 
         if(withdrawalDrainRate <= maximumWithdrawalDrainRate)
         {
             withdrawalDrainRate = maximumWithdrawalDrainRate;
         }
-
-        // currentStage = WithdrawalStage.Stable;
-
-        // OnWithdrawalStageChanged?.Invoke(
-        //     WithdrawalStage.Stable
-        // );
 
         Debug.Log("New day. Withdrawal and tolerance partial reset.");
     }
