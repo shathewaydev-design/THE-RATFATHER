@@ -110,17 +110,17 @@ public class UseButton : MonoBehaviour
             
         }
     }
-    // void UpdateButtonText()
-    // {
-    //     if (isSelling)
-    //     {
-    //         useButtonText.text = "Sell";
-    //     }
-    //     else if (isConsuming)
-    //     {
-    //         useButtonText.text = "Eat";
-    //     }
-    // }
+    void UpdateButtonText()
+    {
+        if (isSelling)
+        {
+            useButtonText.text = "Sell";
+        }
+        else if (isConsuming)
+        {
+            useButtonText.text = "Eat";
+        }
+    }
 
     
     

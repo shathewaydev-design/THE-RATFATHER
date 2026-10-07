@@ -147,6 +147,7 @@ public class InventoryUIController : MonoBehaviour
             UseButton useButtonScript = useButton.GetComponent<UseButton>();
             useButtonScript.isSelling = isSelling;
             useButtonScript.isConsuming = isConsuming;
+            useButtonScript.UpdateButtonText();
             useButtonScript.cheeseButtonRef = selectedCheeses[0];//pass the reference of the selected cheese button to the use button
             //note about this: if we want to support multiple cheese selection in the future, 
             // we can modify the use button to handle multiple cheeses instead of just one;
