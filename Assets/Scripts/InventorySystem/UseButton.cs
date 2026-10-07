@@ -54,18 +54,18 @@ public class UseButton : MonoBehaviour
         }
         
     }
-    public void IsSellingCheese()
-    {
-        isSelling = true;
-        isConsuming = false;
-        UpdateButtonText();
-    }
-    public void IsConsumingCheese()
-    {
-        isSelling = false;
-        isConsuming = true;
-        UpdateButtonText();
-    }
+    // public void IsSellingCheese()
+    // {
+    //     isSelling = true;
+    //     isConsuming = false;
+    //     UpdateButtonText();
+    // }
+    // public void IsConsumingCheese()
+    // {
+    //     isSelling = false;
+    //     isConsuming = true;
+    //     UpdateButtonText();
+    // }
     void ConsumeCheese()
     {
         InventorySystem inventorySystem = InventorySystem.Instance;
