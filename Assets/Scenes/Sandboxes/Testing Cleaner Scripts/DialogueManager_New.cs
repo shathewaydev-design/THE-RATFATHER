@@ -143,8 +143,10 @@ public class DialogueManager_New : MonoBehaviour
         // inventory big panel set active, use button set to sell
         // add yarn action to: InventoryUIController controller, toggleinventory
 
+        InventoryUIController.Instance.IsSellingCheese();
+        Debug.Log("Attempted to sell!");
         InventoryUIController.Instance.ToggleInventory();
-        // InventoryUIController.Instance.IsSellingCheese();
+        
         //at the end, call
         
 
@@ -188,7 +190,7 @@ public class DialogueManager_New : MonoBehaviour
 
         // CHANGE LOCATION LATER, MAKE A YARN COMMAND???
 
-        //InventoryUIController.Instance.IsConsumingCheese();
+        InventoryUIController.Instance.IsConsumingCheese();
 
     }
 

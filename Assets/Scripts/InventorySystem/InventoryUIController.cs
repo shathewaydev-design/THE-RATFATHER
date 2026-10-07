@@ -83,7 +83,7 @@ public class InventoryUIController : MonoBehaviour
         }
         else
         {
-            if (DialogueManager.Instance.isDialogueActive)
+            if (DialogueManager_New.Instance.isDialogueActive)
             {
                 CursorManager.Instance.UnlockCursor();
             }
@@ -122,6 +122,17 @@ public class InventoryUIController : MonoBehaviour
         logPanel.SetActive(true);
         
         itemInfoPanel.Hide();
+    }
+    public void IsSellingCheese()
+    {
+        isSelling = true;
+
+        isConsuming = false;
+    }
+    public void IsConsumingCheese()
+    {
+        isSelling = false;
+        isConsuming = true;
     }
     public void UpdateUseButton()
     //initialize the use button with the selected cheese; 

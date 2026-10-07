@@ -35,7 +35,7 @@ public class NPC_New : MonoBehaviour, IInteractable
     void Update()
     {
         //Debug.Log("" + profile.GetState().compFavors);
-        Debug.Log("current trust: " + profile.GetTrustLevel());
+        //Debug.Log("current trust: " + profile.GetTrustLevel());
     }
 
 

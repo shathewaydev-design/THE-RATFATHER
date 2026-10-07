@@ -13,6 +13,7 @@ Bob: Testing dialogue options...
         <<jump Alex_Favor1_Intro>>
 -> I'm just looking around.
     Bob: That's fine. Take your time.
+     <<activate_selling>>
 ===
 
 title: Alex_Favor1_Intro
