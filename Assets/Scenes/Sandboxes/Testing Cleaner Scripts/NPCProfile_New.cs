@@ -172,7 +172,7 @@ public class NPCProfile_New : ScriptableObject
         state.activeFavor = favorState.favor;
     }
 
-    public void CheckPreference()
+    public void CheckPreference(FinalResultCheese cheese) // maybe in NPC_New to send through specific profile?
     {
         // triggered when selling, 
         // check specific difficulty level
@@ -187,7 +187,10 @@ public class NPCProfile_New : ScriptableObject
         // to implement
 
         // rat says no/warning if preference doesn't match
-        // to access quality: 
+        // to access quality: stability (enum)
+        // cheese.stability
+        // low, med, high
+
     }
 
 
