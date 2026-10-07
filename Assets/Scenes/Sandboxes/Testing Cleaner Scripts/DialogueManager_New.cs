@@ -145,6 +145,7 @@ public class DialogueManager_New : MonoBehaviour
 
         InventoryUIController.Instance.IsSellingCheese();
         Debug.Log("Attempted to sell!");
+        Debug.Log("Selling true? " + InventoryUIController.Instance.isSelling);
         InventoryUIController.Instance.ToggleInventory();
         
         //at the end, call
@@ -190,7 +191,7 @@ public class DialogueManager_New : MonoBehaviour
 
         // CHANGE LOCATION LATER, MAKE A YARN COMMAND???
 
-        InventoryUIController.Instance.IsConsumingCheese();
+        //InventoryUIController.Instance.IsConsumingCheese();
 
     }
 
