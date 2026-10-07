@@ -185,6 +185,9 @@ public class NPCProfile_New : ScriptableObject
         // increase or decrease price range based on current trust
         // need to ask charlie how to access cheese data and price 
         // to implement
+
+        // rat says no/warning if preference doesn't match
+        // to access quality: 
     }
 
 

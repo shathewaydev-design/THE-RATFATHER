@@ -137,7 +137,21 @@ public class DialogueManager_New : MonoBehaviour
     {
         // pull up sell screen (may need to keep mouse map on, then sell button handles giving back player controls)
         // sell button should handle NPC preference and such!!!
-        UIManager_New.Instance.OpenCheeseInventory();
+        //UIManager_New.Instance.OpenCheeseInventory();
+
+
+        // inventory big panel set active, use button set to sell
+        // add yarn action to: InventoryUIController controller, toggleinventory
+
+        // InventoryUIController.Instance.ToggleInventory();
+        // UseButton.Instance.IsSellingCheese();
+        // at the end, call UseButton.Instance.IsConsumingCheese();
+
+
+
+
+
+
     }
 
     public void UpdateTrust()

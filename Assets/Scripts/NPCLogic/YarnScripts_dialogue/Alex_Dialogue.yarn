@@ -1,0 +1,15 @@
+﻿title: Alex_Dialogue
+---
+
+===
+
+title: Alex_Introduction
+---
+<<met_player>>
+Alex: ...? What do you want? It's rude to stare y'know.
+ -> You look like you could use a little pick me up. Interested in some cheese?
+    Alex: Hey, hey! Who do you think you're talkin' to like that? You're either stupid or... just stupid 
+    sayin' something like that out in the open!
+ -> Dang, who pissed in your cornflakes?
+
+===
