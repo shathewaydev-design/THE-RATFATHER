@@ -127,13 +127,11 @@ public class InventoryUIController : MonoBehaviour
     {
         isSelling = true;
         isConsuming = false;
-        UpdateButtonText();
     }
     public void IsConsumingCheese()
     {
         isSelling = false;
         isConsuming = true;
-        UpdateButtonText();
     }
     public void UpdateUseButton()
     //initialize the use button with the selected cheese; 
