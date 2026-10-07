@@ -110,7 +110,7 @@ public class UseButton : MonoBehaviour
             
         }
     }
-    void UpdateButtonText()
+    public void UpdateButtonText()
     {
         if (isSelling)
         {
