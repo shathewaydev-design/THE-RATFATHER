@@ -123,6 +123,18 @@ public class InventoryUIController : MonoBehaviour
         
         itemInfoPanel.Hide();
     }
+    public void IsSellingCheese()
+    {
+        isSelling = true;
+        isConsuming = false;
+        UpdateButtonText();
+    }
+    public void IsConsumingCheese()
+    {
+        isSelling = false;
+        isConsuming = true;
+        UpdateButtonText();
+    }
     public void UpdateUseButton()
     //initialize the use button with the selected cheese; 
     // this is called in CheeseButton when player selects a cheese
