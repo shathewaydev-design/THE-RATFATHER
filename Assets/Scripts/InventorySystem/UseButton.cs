@@ -96,6 +96,9 @@ public class UseButton : MonoBehaviour
             // Consume the cheese (can add more logic here, e.g., apply effects to the player)
             {
                 Debug.Log("Sold cheese: " + cheeseSlot.finalCheeseData.cheeseName);
+                //cheeseSlot.finalCheeseData.stability;
+                //the stability enum is from FinalResultCheese script that lives on CheeseInventory
+                
                 //InventoryUIController.Instance.ApplyEffect();
                 //DialogueManager_New.Instance.ResumeDialogue(true);//continue dialogue
                 UIManager.Instance.ToggleSellScreen();
