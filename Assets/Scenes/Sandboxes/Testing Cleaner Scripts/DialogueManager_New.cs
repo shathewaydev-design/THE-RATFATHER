@@ -143,9 +143,10 @@ public class DialogueManager_New : MonoBehaviour
         // inventory big panel set active, use button set to sell
         // add yarn action to: InventoryUIController controller, toggleinventory
 
-        // InventoryUIController.Instance.ToggleInventory();
-        // UseButton.Instance.IsSellingCheese();
-        // at the end, call UseButton.Instance.IsConsumingCheese();
+        InventoryUIController.Instance.ToggleInventory();
+        // InventoryUIController.Instance.IsSellingCheese();
+        //at the end, call
+        
 
 
 
@@ -184,6 +185,11 @@ public class DialogueManager_New : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         //Debug.Log("Conversation ended!");
+
+        // CHANGE LOCATION LATER, MAKE A YARN COMMAND???
+
+        //InventoryUIController.Instance.IsConsumingCheese();
+
     }
 
     // ----------DIALOGUE UI----------
