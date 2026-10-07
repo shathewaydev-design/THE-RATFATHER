@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 120d3d027806d4cd1847f3d2433ceeca
   - enabled: 1
-    path: Assets/Scenes/DO NOT TOUCH/CharlieSceneSep102026.unity
+    path: Assets/Scenes/DO NOT TOUCH/CharlieSceneOct62026.unity
     guid: 95ef488ec61d2410bbea6aa38c37201a
   - enabled: 0
     path: Assets/Scenes/FinalLevel1Scene/Level1SceneFinal.unity

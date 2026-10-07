@@ -1,21 +1,35 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using System.Collections.Generic;
 
 public class UseButton : MonoBehaviour
 {
     //this script is for the use button that appears when player selects a cheese; 
     // it allows player to consume the cheese or sell it to NPC
+    public static UseButton Instance;
     public CheeseButton cheeseButtonRef;//ref to the cheese button 
     public IngredientButton ingredientButtonRef;//ref to the cheese button 
+
+    [SerializeField] private TMP_Text useButtonText; // Reference to the Text component of the button
 
     [Header("Selling/Consuming")]
     public bool isSelling = false;
     public bool isConsuming = true;
 
+    private void Awake()//this is necessary to avoid bugs
+    {
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
+
+    }
+
     void Start()
     {
-        
+        // Set the initial text of the button based on the current state
+        UpdateButtonText();
     }
     
     public void UseButtonInteracted()
@@ -39,6 +53,18 @@ public class UseButton : MonoBehaviour
             ConsumeCheese();
         }
         
+    }
+    public void IsSellingCheese()
+    {
+        isSelling = true;
+        isConsuming = false;
+        UpdateButtonText();
+    }
+    public void IsConsumingCheese()
+    {
+        isSelling = false;
+        isConsuming = true;
+        UpdateButtonText();
     }
     void ConsumeCheese()
     {
@@ -82,6 +108,17 @@ public class UseButton : MonoBehaviour
             
             InventoryUIController.Instance.useButton.SetActive(false);
             
+        }
+    }
+    void UpdateButtonText()
+    {
+        if (isSelling)
+        {
+            useButtonText.text = "Sell";
+        }
+        else if (isConsuming)
+        {
+            useButtonText.text = "Eat";
         }
     }
 
