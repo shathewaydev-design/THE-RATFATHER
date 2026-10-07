@@ -161,8 +161,10 @@ public class DragObject : MonoBehaviour
             {
                 newScale.y = currentScale;
             }
-
-            objectToScale.transform.localScale = newScale;
+            if(objectToScale != null)
+            {
+                objectToScale.transform.localScale = newScale;
+            }
         }
     }
     /*

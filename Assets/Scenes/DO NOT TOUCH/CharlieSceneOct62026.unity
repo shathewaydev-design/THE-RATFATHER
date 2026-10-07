@@ -54134,7 +54134,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &415744229
 Transform:
   m_ObjectHideFlags: 0
@@ -97143,7 +97143,7 @@ MonoBehaviour:
   moveRotation: 1
   maxRotation: 23
   minRotation: 0
-  objectToScale: {fileID: 0}
+  objectToScale: {fileID: 5728146364422557038}
   maxScale: 1.5
   minScale: 0.5
   scaleAxis: {x: 0, y: 0, z: 1}
@@ -105271,8 +105271,8 @@ MonoBehaviour:
   donessSpeed: 20
   coolDownSpeed: 6
   pumpWaitTime: 0.15
-  targetMinRotation: -106.934
-  targetMaxRotation: -90
+  targetMinRotation: 0
+  targetMaxRotation: 10
   heatUpTargetMax: 90
   heatUpTargetMin: 70
   canPump: 1
@@ -202107,7 +202107,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2000352288
 RectTransform:
   m_ObjectHideFlags: 0
@@ -216184,7 +216184,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &3099290640913261055
 GameObject:
   m_ObjectHideFlags: 0
