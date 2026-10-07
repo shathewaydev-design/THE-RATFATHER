@@ -27,6 +27,18 @@ public class DragObject : MonoBehaviour
     [SerializeField] private float maxRotation = 28f;
     [SerializeField] private float minRotation = 0f;
 
+    [Header("Bellow Scale")]
+    [SerializeField] private GameObject objectToScale;
+
+    [SerializeField] private float maxScale = 1.5f;
+    [SerializeField] private float minScale = 0.5f;
+
+    // Change this if you want the bellows to scale on a different axis.
+    // Vector3.forward = Z axis
+    // Vector3.right = X axis
+    // Vector3.up = Y axis
+    [SerializeField] private Vector3 scaleAxis = Vector3.forward;
+
     [SerializeField] private LayerMask draggableMask;
 
     private void Start()
@@ -73,6 +85,7 @@ public class DragObject : MonoBehaviour
         else if (moveRotation)
         {
             RotateObject(ray);
+            //ScaleObject(ray);
         }
 
         /*Vector3 screenPoint = new Vector3(mousePos.x, mousePos.y, distanceFromCamera);
@@ -122,8 +135,87 @@ public class DragObject : MonoBehaviour
             angle = Mathf.Clamp(angle, minRotation, maxRotation);
 
             transform.rotation = Quaternion.Euler(0, 0, angle);
+            ///====
+            /// SCALE OBJECT BELOW
+            ///====
+            // Convert the rotation range into a 0-1 value.
+            // 0 = minimum rotation
+            // 1 = maximum rotation
+            float scalePercent = Mathf.InverseLerp(minRotation,maxRotation,angle);
+
+            // Convert the 0-1 value into our desired scale range.
+            float currentScale = Mathf.Lerp(minScale,maxScale,scalePercent);
+
+            Vector3 newScale = objectToScale.transform.localScale;
+
+            // Apply the scale only to the selected axis.
+            if (scaleAxis == Vector3.forward)
+            {
+                newScale.z = currentScale;
+            }
+            else if (scaleAxis == Vector3.right)
+            {
+                newScale.x = currentScale;
+            }
+            else if (scaleAxis == Vector3.up)
+            {
+                newScale.y = currentScale;
+            }
+
+            objectToScale.transform.localScale = newScale;
         }
     }
+    /*
+    private void ScaleObject(Ray ray)
+    {
+        Plane rotationPlane = new Plane(Vector3.forward, transform.position);
+
+        if (rotationPlane.Raycast(ray, out float distance))
+        {
+            Vector3 point = ray.GetPoint(distance);
+
+            Vector3 direction = point - transform.position;
+
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+            angle = Mathf.Clamp(angle, minRotation, maxRotation);
+
+            // Convert the rotation range into a 0-1 value.
+            // 0 = minimum rotation
+            // 1 = maximum rotation
+            float scalePercent = Mathf.InverseLerp(
+                minRotation,
+                maxRotation,
+                angle
+            );
+
+            // Convert the 0-1 value into our desired scale range.
+            float currentScale = Mathf.Lerp(
+                minScale,
+                maxScale,
+                scalePercent
+            );
+
+            Vector3 newScale = objectToScale.transform.localScale;
+
+            // Apply the scale only to the selected axis.
+            if (scaleAxis == Vector3.forward)
+            {
+                newScale.z = currentScale;
+            }
+            else if (scaleAxis == Vector3.right)
+            {
+                newScale.x = currentScale;
+            }
+            else if (scaleAxis == Vector3.up)
+            {
+                newScale.y = currentScale;
+            }
+
+            objectToScale.transform.localScale = newScale;
+        }
+    }
+    */
 
     void OnTriggerEnter(Collider other)
     {

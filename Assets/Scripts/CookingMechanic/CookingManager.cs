@@ -26,7 +26,8 @@ public class CookingManager : MonoBehaviour, IInteractable
 
     [Header("Camera")]
     public CinemachineCamera playerCamera;
-    public GameObject mainCamera;
+    public CinemachineCamera mainCamera;
+    public CinemachineCamera cookingPotCamera;
     public Transform cookingPot;//view cooking pot
     [SerializeField] private GameObject cookingPotGeo;// cooking pot
     private Vector3 savedMainCameraPosition;
@@ -74,6 +75,8 @@ public class CookingManager : MonoBehaviour, IInteractable
         cookingPotGeo.SetActive(true);
         thirdPersonController = ThirdPersonController.Instance;
         thirdPersonController.OnStopInteract += ExitCookingMode;
+        mainCamera.Priority = 10;
+        cookingPotCamera.Priority = 0;
     }
 
     // Update is called once per frame
@@ -109,15 +112,9 @@ public class CookingManager : MonoBehaviour, IInteractable
         Cursor.lockState = CursorLockMode.None;
 
         thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Cooking");
-        
-        //Save current camera data
-        savedMainCameraPosition = mainCamera.transform.position;
-        savedMainCameraRotation = mainCamera.transform.rotation;
-        // Camera zoom to pot
-        playerCamera.Follow = cookingPot;
-        mainCamera.transform.position = new Vector3(3.747427f, 2.5f, -5.494404f);
-        mainCamera.transform.rotation = Quaternion.Euler(14.08f, -0.086f, -0.025f);
-        
+        //swap camera to cooking pot camera
+        mainCamera.Priority = 0;
+        cookingPotCamera.Priority = 10;
     
     } 
 
@@ -134,10 +131,9 @@ public class CookingManager : MonoBehaviour, IInteractable
         playerGeo.SetActive(true);
 
         exitCookingModeUI.SetActive(false);
-
-        playerCamera.Follow = player.transform;
-        mainCamera.transform.position = savedMainCameraPosition;
-        mainCamera.transform.rotation = savedMainCameraRotation;
+        //swap camera back to player camera
+        mainCamera.Priority = 10;
+        cookingPotCamera.Priority = 0;
         
         ResetSteps();
         ResetUI();
