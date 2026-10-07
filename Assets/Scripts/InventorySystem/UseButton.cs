@@ -97,7 +97,7 @@ public class UseButton : MonoBehaviour
             {
                 Debug.Log("Sold cheese: " + cheeseSlot.finalCheeseData.cheeseName);
                 //InventoryUIController.Instance.ApplyEffect();
-                DialogueManager.Instance.ResumeDialogue(true);//continue dialogue
+                //DialogueManager_New.Instance.ResumeDialogue(true);//continue dialogue
                 UIManager.Instance.ToggleSellScreen();
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
