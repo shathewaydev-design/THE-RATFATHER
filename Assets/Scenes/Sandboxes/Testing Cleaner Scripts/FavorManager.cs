@@ -93,26 +93,6 @@ public class FavorManager : MonoBehaviour
             favorState.favor.objectives[favorState.currentObjective].npcDialogue
         );
 
-
-
-        //favorState.currentObjective++;
-        //RemoveKeyItems(favorState,
-        //        favorState.favor.objectives[favorState.currentObjective].toBeRemoved);
-        //OnObjectiveComplete?.Invoke(favorState);
-
-
-        //if (favorState.currentObjective >= favorState.favor.objectives.Count) // entire favor complete
-        //{
-        //    favorState.isCompleted = true;
-        //    RemoveKeyItems(favorState, true);
-        //    ApplyRewards(favorState);
-        //    OnFavorComplete?.Invoke(favorState);
-
-        //    return; // TESTING
-        //}
-
-        //DialogueManager_New.Instance.SetNode(favorState.favor.objectives[favorState.currentObjective].npcDialogue);
-        ////Debug.Log("curr objective: " + activeFavors[0].favor.objectives[activeFavors[0].currentObjective].description); // TESTING
     }
 
     public void ApplyRewards(FavorState favorState)

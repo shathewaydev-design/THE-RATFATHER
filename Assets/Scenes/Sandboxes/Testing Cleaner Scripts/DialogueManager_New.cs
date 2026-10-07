@@ -97,7 +97,7 @@ public class DialogueManager_New : MonoBehaviour
         currentNPC = npc;
 
         UIManager.ShowDialoguePanel();  // turn MY panel on
-        ToggleTrustPanel();
+        ToggleTrustPanel(npc == null);
         dialogueRunner.StartDialogue(dialogueNode); // let yarn spinner handle running dialogue TESTING
 
         //Debug.Log("StartDialogue finished.");
@@ -162,7 +162,7 @@ public class DialogueManager_New : MonoBehaviour
     public void EndDialogue()
     {
         UIManager.HideDialoguePanel();
-        ToggleTrustPanel();
+        ToggleTrustPanel(currentNPC == null);
 
         isDialogueActive = false;
 
@@ -173,16 +173,22 @@ public class DialogueManager_New : MonoBehaviour
     }
 
     // ----------DIALOGUE UI----------
-    private void ToggleTrustPanel()
+    private void ToggleTrustPanel(bool isEnforcer = false)
     {
+        if (isEnforcer)
+            return;
+        
+
         if (TrustBar.activeSelf == false)
         {
+
             TrustBar.SetActive(true);
 
             OnTrustBarActivated?.Invoke(currentNPC.GetProfile().GetTrustLevel());
 
             return;
         }
+
         TrustBar.SetActive(false);
 
     }
