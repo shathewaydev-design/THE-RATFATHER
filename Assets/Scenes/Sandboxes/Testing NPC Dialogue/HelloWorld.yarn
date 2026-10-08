@@ -11,9 +11,10 @@ Bob: Testing dialogue options...
     -> Cost what?
         Bob: Do me a favor.
         <<jump Alex_Favor1_Intro>>
--> I'm just looking around.
+-> I'm just looking to sell cheese.
+    <<activate_selling>>
     Bob: That's fine. Take your time.
-     <<activate_selling>>
+     
 ===
 
 title: Alex_Favor1_Intro

@@ -86,6 +86,7 @@ public class InventoryUIController : MonoBehaviour
             if (DialogueManager_New.Instance.isDialogueActive)
             {
                 CursorManager.Instance.UnlockCursor();
+                DialogueManager_New.Instance.ResumeDialogue();
             }
             else
             {

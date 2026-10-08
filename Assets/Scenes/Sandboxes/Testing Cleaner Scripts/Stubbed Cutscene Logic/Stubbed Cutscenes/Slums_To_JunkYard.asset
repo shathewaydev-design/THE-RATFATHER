@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57b0ef09dd7573e48a448d61de597dd8, type: 3}
+  m_Name: Slums_To_JunkYard
+  m_EditorClassIdentifier: Assembly-CSharp::StubbedCutsceneData
+  panels:
+  - {fileID: 21300000, guid: 0e32f6fdc1055074d8ab3c099bd553e7, type: 3}
+  - {fileID: 21300000, guid: 2c87f85ba05dd3d40abefd06d6f0dccb, type: 3}
+  - {fileID: 21300000, guid: d2fd356812ef491439ac075a6978eb3e, type: 3}
+  - {fileID: 21300000, guid: 8479de0b1a871b948897710cf2744ff3, type: 3}
+  teleportsPlayerOnFinish: 0
+  opensNewScene: 1
+  scenename: BossSceneTesting

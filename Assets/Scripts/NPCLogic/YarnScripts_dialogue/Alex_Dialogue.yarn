@@ -11,5 +11,114 @@ Alex: ...? What do you want? It's rude to stare y'know.
     Alex: Hey, hey! Who do you think you're talkin' to like that? You're either stupid or... just stupid 
     sayin' something like that out in the open!
  -> Dang, who pissed in your cornflakes?
+    Alex: Oh shut up... So can I help you or...?
+    -> I'm looking for a rat named Tommy. I last saw him getting dragged around by a couple of rats.
+      Alex: Can't say that I have. I remember there being some reports of a few kidnappings.
+      Alex: Apparently some witnesses say they could see two almost identical rats as the perps.
+      Alex: All I know though. Haven't seen anything personally, sorry.
+      <<jump Alex_Anything_Else_1>>
+
+    -> I'm new to the city. Any tips?
+
+    -> Would you have any interest in some cheese?
+      Alex: Bold of you to ask something like that so casually. But my answer is no.
+      -> What? Why not?
+         Alex: Word travels fast around here. It's like the damn walls have ears. Besides, got my own dealer already...
+         -> You sure there's nothing I can do to convince you? Discounted price...?
+            Alex: ...Listen, you seem really adamant, I see that. But you have to understand my apprehension.
+            Alex: Maybe if you do me a favor? Then I might be able to help you out...
+               -> Really? Alright, as long as it's not a ridiculous task...
+               -> Sorry man, not worth it...
+                  <<set_node Alex_Favor1_Change_Mind>>
 
 ===
+
+title: Alex_Favor1_Change_Mind
+---
+Alex: ...Come back to help me?
+-> Sure, what do you want me to do?
+-> Any updates on seeing Tommy?
+-> No, nevermind...
+
+===
+
+title: Alex_Anything_Else_1
+---
+Alex: Anything else?
+   -> I'm new to the city, any tips?
+      Alex: Hm... I'd say watch out for any officers or mafia enforcers.
+      Alex: There's been an increase of them being sent here to patrol. They'll search you, 
+      and literally find any reason to take what you have. Money, precious items, you name it.
+
+   -> Would you have any interest in some cheese?
+   <<jump Alex_Atempt_Sell_1>>
+
+   -> No, thanks for your time.
+      Alex: See you around.
+===
+
+title: Alex_Atempt_Sell_1
+---
+Alex: Bold of you to ask something like that so casually. But my answer is no.
+   -> What? Why not?
+      Alex: Word travels fast around here. It's like the damn walls have ears. Besides, got my own dealer already...
+         -> You sure there's nothing I can do to convince you? Discounted price...?
+            Alex: ...Listen, you seem really adamant, I see that. But you have to understand my apprehension.
+            Alex: Maybe if you do me a favor? Then I might be able to help you out...
+               -> Really? Alright, as long as it's not a ridiculous task...
+               <<jump Alex_Favor_1_Intro>>
+               -> Sorry man, not worth it...
+                  <<set_node "Alex_Favor1_Change_Mind">>
+
+===
+
+title: Alex_1st_Full_Convo_Over
+---
+
+Alex: You actually seem pretty chill.
+   -> Interested in any more cheese?
+      Alex: Woah, slow your roll there, pal. 
+      Alex: Check back tomorrow. Then maybe we can talk.
+   
+
+===
+
+// FIRST FAVOR DIALOGUE
+title: Alex_Favor_1_Intro
+---
+Alex: Alright, thanks in advance man!
+Alex: Okay, so listen. I have this... Delivery I gotta make. Crate full of precious stuff.
+Alex: Now don't go opening it, alright? It's not your business, and we gotta keep this discreet.
+Alex: Now, there's this area near the casino... a hangout of sorts. Need ya to talk to talk to one of the rats there.
+Alex: You can give them the crate. I kinda owe them quite a lot, so I'd rather save my face from getting punched and have a
+delivery boy do it for me.
+Alex: Oh! And I here there's someone patroling near there. Just try not to get caught with this crate, okay? Trust me, just don't.
+   -> Yeesh, to scared to deliver this yourself? Alright, I'll do it. Just don't forget our agreement.
+      Alex: Yeah, yeah, I won't. I'm counting on you!
+      <<activate_favor>>
+      <<set_node "Alex_Favor_1_Mid">>
+
+===
+
+title: Alex_Favor_1_Mid
+---
+Alex: Remember, look for some rats near the casino, okay?
+
+===
+
+title: Alex_Favor_1_Comp
+---
+Alex: You did it? Hell yeah! You have no idea how much trouble you saved me, heh!
+<<update_trust>>
+   -> Yeah, yeah, whatever. Remember our deal?
+      Alex: Oh sure, pal! Lemme see what you got. I like the strong stuff, y'know?
+      <<activate_selling>>
+      Alex: Ooh, not bad, not bad... And you really don't get you're supply from the mafia? Impressive, man.
+      Alex: Maybe I'll let you come by more often...
+      <<set_node "Alex_1st_Full_Convo_Over">>
+
+===
+
+// SECOND FAVOR DIALOGUE
+
+// THIRD FAVOR DIALOGUE

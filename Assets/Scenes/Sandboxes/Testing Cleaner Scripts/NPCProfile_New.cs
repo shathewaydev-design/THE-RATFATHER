@@ -41,6 +41,7 @@ public class NPCProfile_New : ScriptableObject
         FavorManager.OnFavorComplete += IncreaseCompFavors;
         FavorManager.OnTrustReward += IncreaseTrustLevel;
         FavorManager.OnFavorActivated += SetActiveFavor;
+        UseButton.OnSellAttempt += CheckPreference;
 
     }
 
@@ -49,6 +50,7 @@ public class NPCProfile_New : ScriptableObject
         FavorManager.OnFavorComplete -= IncreaseCompFavors;
         FavorManager.OnFavorActivated -= SetActiveFavor;
         FavorManager.OnTrustReward -= IncreaseTrustLevel;
+        UseButton.OnSellAttempt -= CheckPreference;
 
 
     }
@@ -172,8 +174,9 @@ public class NPCProfile_New : ScriptableObject
         state.activeFavor = favorState.favor;
     }
 
-    public void CheckPreference(FinalResultCheese cheese) // maybe in NPC_New to send through specific profile?
+    public bool CheckPreference(FinalResultCheese cheese) // maybe in NPC_New to send through specific profile?
     {
+        bool canSell = false;
         // triggered when selling, 
         // check specific difficulty level
         // set selling range?
@@ -190,6 +193,47 @@ public class NPCProfile_New : ScriptableObject
         // to access quality: stability (enum)
         // cheese.stability
         // low, med, high
+
+        if (cheese.stability == StabilityLevel.High)
+        {
+            if (difficultyLevel == 3 || difficultyLevel == 2 || difficultyLevel == 1)
+            {
+                canSell = true;
+                return canSell;
+            }
+
+            return true;
+
+        } 
+        else if (cheese.stability == StabilityLevel.Medium)
+        {
+            if (difficultyLevel == 2 || difficultyLevel == 1)
+            {
+                canSell = true;
+                return canSell;
+            }
+            else
+            {
+                canSell = false;
+                return canSell;
+            }
+
+        }
+        else if (cheese.stability == StabilityLevel.Low)
+        {
+            if (difficultyLevel == 1)
+            {
+                canSell = true;
+                return canSell;
+            }
+            else
+            {
+                canSell = false;
+                return canSell;
+            }
+        }
+
+            return canSell;
 
     }
 

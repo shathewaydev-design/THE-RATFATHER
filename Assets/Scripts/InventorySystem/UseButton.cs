@@ -2,9 +2,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
+using System;
 
 public class UseButton : MonoBehaviour
 {
+
+    public static Func<FinalResultCheese, bool> OnSellAttempt;
+
     //this script is for the use button that appears when player selects a cheese; 
     // it allows player to consume the cheese or sell it to NPC
     //public static UseButton Instance;
@@ -95,22 +99,58 @@ public class UseButton : MonoBehaviour
             if (cheeseSlot.quantity > 0)
             // Consume the cheese (can add more logic here, e.g., apply effects to the player)
             {
-                Debug.Log("Sold cheese: " + cheeseSlot.finalCheeseData.cheeseName);
+
+                // check npc preference by triggering event
+                bool canSell = OnSellAttempt.Invoke(cheeseSlot.finalCheeseData);
+
+                if (canSell)
+                {
+                    inventorySystem.RemoveFinalCheese(cheeseSlot.finalCheeseData, 1); // successful sell? remove cheese
+
+                    int newPrice = cheeseSlot.finalCheeseData.basePrice;
+
+                    // if there are selling buffs, can set here w new int!
+                    // new func to grab from npc_prof?
+
+
+                    inventorySystem.AddToCurrency(newPrice + 100); // succesful sell? give player money
+                    Debug.Log("Added to currency: " + (cheeseSlot.finalCheeseData.basePrice + 100));
+
+                    Debug.Log("Sold cheese: " + cheeseSlot.finalCheeseData.cheeseName);
+
+                }
+                else
+                {
+                    Debug.Log("NPC will not purchase this cheese!");
+
+                    // now access dialogue manager, at least to trigger a new fail node
+                }
+
                 //cheeseSlot.finalCheeseData.stability;
                 //the stability enum is from FinalResultCheese script that lives on CheeseInventory
-                
+
                 //InventoryUIController.Instance.ApplyEffect();
                 //DialogueManager_New.Instance.ResumeDialogue(true);//continue dialogue
-                UIManager.Instance.ToggleSellScreen();
-                Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.None;
-                inventorySystem.RemoveFinalCheese(cheeseSlot.finalCheeseData, 1);
+
+
+                //UIManager.Instance.ToggleSellScreen();
+                //Cursor.visible = true;
+                //Cursor.lockState = CursorLockMode.None;
+
+
+                //inventorySystem.RemoveFinalCheese(cheeseSlot.finalCheeseData, 1);
+
                 // After using the cheese, you might want to refresh the UI or perform other actions    
             }
+
             
-            
+            InventoryUIController.Instance.IsConsumingCheese();
+
+            InventoryUIController.Instance.ToggleInventory();
+
             InventoryUIController.Instance.useButton.SetActive(false);
             
+
         }
     }
     public void UpdateButtonText()

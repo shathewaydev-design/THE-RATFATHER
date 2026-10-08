@@ -15,6 +15,9 @@ public class DialogueManager_New : MonoBehaviour
 
     public UIManager_New UIManager;
     [SerializeField] private DialogueRunner dialogueRunner;
+    //[SerializeField] private LineAdvancer lineAdvancer;
+    [SerializeField] private CustomLineAdvancer customLineAdvancer;
+    //[SerializeField] private InputActionReference advanceAction;
 
     [Header("UI")]
     [SerializeField] private GameObject TrustBar;
@@ -98,6 +101,7 @@ public class DialogueManager_New : MonoBehaviour
 
         UIManager.ShowDialoguePanel();  // turn MY panel on
         ToggleTrustPanel(npc == null);
+        customLineAdvancer.OnDialogueStarted(); // MAY NOT BE NEEDED
         dialogueRunner.StartDialogue(dialogueNode); // let yarn spinner handle running dialogue TESTING
 
         //Debug.Log("StartDialogue finished.");
@@ -135,21 +139,25 @@ public class DialogueManager_New : MonoBehaviour
 
     public void ActivateSelling()
     {
-        // pull up sell screen (may need to keep mouse map on, then sell button handles giving back player controls)
-        // sell button should handle NPC preference and such!!!
-        //UIManager_New.Instance.OpenCheeseInventory();
-
-
         // inventory big panel set active, use button set to sell
         // add yarn action to: InventoryUIController controller, toggleinventory
 
+        // find a way to pause yarnspinner dialogue...
+        // and resume it...
+
+        customLineAdvancer.inputEnabled = false;
+
+
         InventoryUIController.Instance.IsSellingCheese();
+
         Debug.Log("Attempted to sell!");
         Debug.Log("Selling true? " + InventoryUIController.Instance.isSelling);
+
         InventoryUIController.Instance.ToggleInventory();
-        
+        InventoryUIController.Instance.OpenCheeseInventory();
+
         //at the end, call
-        
+
 
 
 
@@ -157,6 +165,22 @@ public class DialogueManager_New : MonoBehaviour
 
 
     }
+
+    public void ResumeDialogue()
+    {
+
+        //thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Mouse");
+        //advanceAction.action.Enable();
+        customLineAdvancer.inputEnabled = true;
+        //advanceAction.action.Enable();
+
+        //thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Mouse");
+        //Cursor.visible = true;
+        //Cursor.lockState = CursorLockMode.None;
+
+
+    }
+
 
     public void UpdateTrust()
     {
@@ -184,14 +208,16 @@ public class DialogueManager_New : MonoBehaviour
 
         isDialogueActive = false;
 
+        customLineAdvancer.OnDialogueComplete(); // MAY NOT NEED
+
         thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         //Debug.Log("Conversation ended!");
 
         // CHANGE LOCATION LATER, MAKE A YARN COMMAND???
+        // moved InventoryUIController.Instance.IsConsumingCheese(); back to use button
 
-        //InventoryUIController.Instance.IsConsumingCheese();
 
     }
 
