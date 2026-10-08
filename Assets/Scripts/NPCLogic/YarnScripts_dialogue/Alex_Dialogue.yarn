@@ -17,9 +17,7 @@ Alex: ...? What do you want? It's rude to stare y'know.
       Alex: Apparently some witnesses say they could see two almost identical rats as the perps.
       Alex: All I know though. Haven't seen anything personally, sorry.
       <<jump Alex_Anything_Else_1>>
-
     -> I'm new to the city. Any tips?
-
     -> Would you have any interest in some cheese?
       Alex: Bold of you to ask something like that so casually. But my answer is no.
       -> What? Why not?
@@ -28,6 +26,7 @@ Alex: ...? What do you want? It's rude to stare y'know.
             Alex: ...Listen, you seem really adamant, I see that. But you have to understand my apprehension.
             Alex: Maybe if you do me a favor? Then I might be able to help you out...
                -> Really? Alright, as long as it's not a ridiculous task...
+                  <<jump Alex_Favor_1_Intro>>
                -> Sorry man, not worth it...
                   <<set_node Alex_Favor1_Change_Mind>>
 
@@ -37,7 +36,9 @@ title: Alex_Favor1_Change_Mind
 ---
 Alex: ...Come back to help me?
 -> Sure, what do you want me to do?
+   <<jump Alex_Favor_1_Intro>>
 -> Any updates on seeing Tommy?
+   Alex: No, sorry...
 -> No, nevermind...
 
 ===
@@ -48,11 +49,9 @@ Alex: Anything else?
    -> I'm new to the city, any tips?
       Alex: Hm... I'd say watch out for any officers or mafia enforcers.
       Alex: There's been an increase of them being sent here to patrol. They'll search you, 
-      and literally find any reason to take what you have. Money, precious items, you name it.
-
+      Alex: and literally find any reason to take what you have. Money, precious items, you name it.
    -> Would you have any interest in some cheese?
-   <<jump Alex_Atempt_Sell_1>>
-
+      <<jump Alex_Atempt_Sell_1>>
    -> No, thanks for your time.
       Alex: See you around.
 ===
@@ -66,7 +65,7 @@ Alex: Bold of you to ask something like that so casually. But my answer is no.
             Alex: ...Listen, you seem really adamant, I see that. But you have to understand my apprehension.
             Alex: Maybe if you do me a favor? Then I might be able to help you out...
                -> Really? Alright, as long as it's not a ridiculous task...
-               <<jump Alex_Favor_1_Intro>>
+                  <<jump Alex_Favor_1_Intro>>
                -> Sorry man, not worth it...
                   <<set_node "Alex_Favor1_Change_Mind">>
 
@@ -91,7 +90,7 @@ Alex: Okay, so listen. I have this... Delivery I gotta make. Crate full of preci
 Alex: Now don't go opening it, alright? It's not your business, and we gotta keep this discreet.
 Alex: Now, there's this area near the casino... a hangout of sorts. Need ya to talk to talk to one of the rats there.
 Alex: You can give them the crate. I kinda owe them quite a lot, so I'd rather save my face from getting punched and have a
-delivery boy do it for me.
+Alex: delivery boy do it for me.
 Alex: Oh! And I here there's someone patroling near there. Just try not to get caught with this crate, okay? Trust me, just don't.
    -> Yeesh, to scared to deliver this yourself? Alright, I'll do it. Just don't forget our agreement.
       Alex: Yeah, yeah, I won't. I'm counting on you!
@@ -111,11 +110,21 @@ title: Alex_Favor_1_Comp
 Alex: You did it? Hell yeah! You have no idea how much trouble you saved me, heh!
 <<update_trust>>
    -> Yeah, yeah, whatever. Remember our deal?
-      Alex: Oh sure, pal! Lemme see what you got. I like the strong stuff, y'know?
       <<activate_selling>>
+      Alex: Oh sure, pal! Lemme see what you got. I like the strong stuff, y'know?
       Alex: Ooh, not bad, not bad... And you really don't get you're supply from the mafia? Impressive, man.
       Alex: Maybe I'll let you come by more often...
       <<set_node "Alex_1st_Full_Convo_Over">>
+
+===
+
+title: Alex_Favor_1_Other_Rat
+---
+???: Who are you? State your business.
+   -> I mean you guys no harm...! I just have a delivery here for you. It's from an "Alex".
+      ???: Ah, so the bastard finally came through, huh? But was to shy to come deliver it himself, huh?
+      ???: Well, not like it matters now. Thanks.
+      <<set_node "Alex_Favor_1_Comp">>
 
 ===
 

@@ -102,7 +102,7 @@ public class NPC_New : MonoBehaviour, IInteractable
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
-            //Debug.Log("playerInRange is " + playerInRange);
+            Debug.Log("playerInRange is " + playerInRange);
 
 
             if (promptAnimator != null)

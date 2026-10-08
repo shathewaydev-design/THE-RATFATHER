@@ -69,6 +69,7 @@ public class ObjectiveManager : MonoBehaviour
                 objectivePanel.SetActive(true);
 
                 currPageIndex = 0;
+                ClearObjectives();
                 SetAndDisplayPage();
 
                 //change to Mouse Map
@@ -125,7 +126,16 @@ public class ObjectiveManager : MonoBehaviour
             if (favorstate.favor.name.Equals(page.favorMain))
             {
                 if (favorstate.isCompleted)
+                {
                     return;
+                }
+
+                if (favorstate.currentObjective >= favorstate.favor.objectives.Count)
+                {
+                    //RemovePage(currPageIndex);
+                    return;
+                }
+
 
                 page.objectives.Add(favorstate.favor.objectives
                     [favorstate.currentObjective].description);
@@ -165,6 +175,7 @@ public class ObjectiveManager : MonoBehaviour
         currPageIndex++;
         currPage = pages[currPageIndex];
         SetAndDisplayPage();
+
 
     }
 

@@ -37,6 +37,7 @@ public class DialogueManager_New : MonoBehaviour
 
     public static event Action<float> OnTrustChange;
     public static event Action<float> OnTrustBarActivated;
+    public static event Action<NPCProfile_New> OnDialogueActivated;
 
 
     private void Awake()
@@ -98,6 +99,12 @@ public class DialogueManager_New : MonoBehaviour
         }
 
         currentNPC = npc;
+
+        if (currentNPC != null) 
+        {
+            OnDialogueActivated?.Invoke(npc.GetProfile());
+        }
+        //OnDialogueActivated?.Invoke(npc.GetProfile());
 
         UIManager.ShowDialoguePanel();  // turn MY panel on
         ToggleTrustPanel(npc == null);

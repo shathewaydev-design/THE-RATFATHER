@@ -39,12 +39,14 @@ public class FavorManager : MonoBehaviour
     {
         InventorySystem.OnInventoryChange += CheckItemObtained;
         LocationCheck.OnLocationEnter += CheckLocation;
+        DialogueManager_New.OnDialogueActivated += CheckNPC;
     }
 
     private void OnDisable()
     {
         InventorySystem.OnInventoryChange -= CheckItemObtained;
         LocationCheck.OnLocationEnter -= CheckLocation;
+        DialogueManager_New.OnDialogueActivated -= CheckNPC;
     }
 
     //[YarnCommand("Activate_Favor")]
@@ -192,6 +194,11 @@ public class FavorManager : MonoBehaviour
     {
         foreach (FavorState state in activeFavors)
         {
+            if (state.currentObjective >= state.favor.objectives.Count)
+            {
+                return;
+            }
+
             // get objective player currently working on
             FavorObjective objective = state.favor.objectives[state.currentObjective];
 
@@ -235,6 +242,11 @@ public class FavorManager : MonoBehaviour
     {
         if (toBeRemoved) // going back and removing for all objectives if removal didn't happen beforehand
         {
+            if (favorState.currentObjective >= favorState.favor.objectives.Count)
+            {
+                return;
+            }
+
             FavorObjective objective = favorState.favor.objectives[favorState.currentObjective];
 
             if (objective.type != FavorObjectiveType.ObtainItem)

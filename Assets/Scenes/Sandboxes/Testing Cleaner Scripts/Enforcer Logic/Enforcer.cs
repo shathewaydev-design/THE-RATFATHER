@@ -79,7 +79,7 @@ public class Enforcer : MonoBehaviour
         // start conversation
         // give player proper consequence
 
-        DialogueManager_New.Instance.StartConversation("Enforcer_Dialogue", null);
+        DialogueManager_New.Instance.StartConversation("Enforcer_1_Dialogue", null);
         agent.isStopped = true;
 
         // need to teleport player away after as well
@@ -105,7 +105,7 @@ public class Enforcer : MonoBehaviour
 
         float subNum = InventorySystem.Instance.GetCurrency();
         InventorySystem.Instance.SubtractFromCurrency(subNum);
-
+        UIManager_New.Instance.UpdateCurrency();
         // later, check if player has no money. If so, do a different 
         // consequence
         OnConsequenceComplete?.Invoke(resetTeleport);

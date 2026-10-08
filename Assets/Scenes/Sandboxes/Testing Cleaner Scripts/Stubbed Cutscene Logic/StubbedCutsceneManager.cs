@@ -51,19 +51,41 @@ public class StubbedCutsceneManager : MonoBehaviour
     // cycle through each custcene panel on click, and display it
     public void OpenCutscene(int cutsceneNum)
     {
-        stubbedCutsceneScreen.SetActive(true);
+        //stubbedCutsceneScreen.SetActive(true);
         currStubbedCutscene = allStubbedCutscenes[cutsceneNum];
         currPanelIndex = 0;
+
+        StartCoroutine(OpenCutsceneCoroutine());
+
+        thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Mouse");
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+
+
         // trigger fade in
-        FadeIn();
-        inCutscene = true;
+        //FadeIn();
+        //inCutscene = true;
         currPanel.sprite = currStubbedCutscene.panels[0];
         currPanelIndex++;
+    }
+
+    private IEnumerator OpenCutsceneCoroutine()
+    {
+        inCutscene = true;
+
+        yield return StartCoroutine(FadePanel(1f));
+
+        stubbedCutsceneScreen.SetActive(true);
     }
 
     public void CloseCutscene()
     {
         StartCoroutine(CloseCutsceneCoroutine());
+
+        thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
     }
 
     private IEnumerator CloseCutsceneCoroutine()
@@ -77,9 +99,7 @@ public class StubbedCutsceneManager : MonoBehaviour
 
     public void CycleThroughCutscene()
     {
-        thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Mouse");
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
+        
 
         if (currPanelIndex >= currStubbedCutscene.panels.Count)
         {
