@@ -83,14 +83,15 @@ public class InventoryUIController : MonoBehaviour
         }
         else
         {
-            if (DialogueManager_New.Instance.isDialogueActive)
-            {
-                CursorManager.Instance.UnlockCursor();
-            }
-            else
-            {
-                CursorManager.Instance.LockCursor();
-            }
+            // if (DialogueManager_New.Instance.isDialogueActive)
+            // {
+            //     CursorManager.Instance.UnlockCursor();
+            // }
+            // else
+            // {
+            //     CursorManager.Instance.LockCursor();
+            // }
+            CursorManager.Instance.LockCursor();
         }
     }
     public void OpenIngredientInventory()
