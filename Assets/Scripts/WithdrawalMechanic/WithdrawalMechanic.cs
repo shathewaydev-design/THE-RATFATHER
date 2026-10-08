@@ -455,7 +455,8 @@ public class WithdrawalMechanic : MonoBehaviour
         currentStage = WithdrawalStage.PassedOut;
         passOutAnimationController.SetTrigger("PassOut");
         DayNightManager.Instance.StartNextDay();
-        
+
+        timeUntilWithdrawal = baseWithdrawalTime;//restart withdrawal timer for next day
         Debug.Log(
             "Player has passed out due to withdrawal."
         );
