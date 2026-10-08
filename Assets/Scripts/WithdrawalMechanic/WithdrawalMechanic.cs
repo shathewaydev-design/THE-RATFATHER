@@ -106,6 +106,8 @@ public class WithdrawalMechanic : MonoBehaviour
     [SerializeField] private GameObject[] withdrawalIcons;
     [SerializeField] private GameObject[] withdrawalVignette;
     [SerializeField] private GameObject desperateFixButton;
+    [SerializeField] private Animator passOutAnimationController;
+
     //show player how much left until withdrawal
     //can be hovered to see %
     //UI effect, white opaque background
@@ -265,7 +267,7 @@ public class WithdrawalMechanic : MonoBehaviour
         }
         withdrawalVignette[0].SetActive(false);
         withdrawalVignette[1].SetActive(false);
-    
+
         desperateFixButton.SetActive(false);
         // Animation:
         // Normal idle
@@ -451,7 +453,9 @@ public class WithdrawalMechanic : MonoBehaviour
             return;
 
         currentStage = WithdrawalStage.PassedOut;
-
+        passOutAnimationController.SetTrigger("PassOut");
+        DayNightManager.Instance.StartNextDay();
+        
         Debug.Log(
             "Player has passed out due to withdrawal."
         );
