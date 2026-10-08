@@ -26,6 +26,10 @@ public class DragObject : MonoBehaviour
     [SerializeField] private bool moveRotation = false;
     [SerializeField] private float maxRotation = 28f;
     [SerializeField] private float minRotation = 0f;
+    [Header("Choose Rotation Axis")]
+    [SerializeField] private bool rotateX = false;
+    [SerializeField] private bool rotateY = false;
+    [SerializeField] private bool rotateZ = true;
 
     [Header("Bellow Scale")]
     [SerializeField] private GameObject objectToScale;
@@ -133,8 +137,20 @@ public class DragObject : MonoBehaviour
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
             angle = Mathf.Clamp(angle, minRotation, maxRotation);
-
-            transform.rotation = Quaternion.Euler(0, 0, angle);
+            //we dont want multiple axis rotation, 
+            // so we will only rotate on one axis at a time
+            if (rotateX)
+            {
+                transform.rotation = Quaternion.Euler(angle, 0, 0);
+            }
+            else if (rotateY)
+            {
+                transform.rotation = Quaternion.Euler(0, angle, 0);
+            }
+            else if (rotateZ)
+            {
+                transform.rotation = Quaternion.Euler(0, 0, angle);
+            }
             ///====
             /// SCALE OBJECT BELOW
             ///====
@@ -145,25 +161,25 @@ public class DragObject : MonoBehaviour
 
             // Convert the 0-1 value into our desired scale range.
             float currentScale = Mathf.Lerp(minScale,maxScale,scalePercent);
-
-            Vector3 newScale = objectToScale.transform.localScale;
-
-            // Apply the scale only to the selected axis.
-            if (scaleAxis == Vector3.forward)
-            {
-                newScale.z = currentScale;
-            }
-            else if (scaleAxis == Vector3.right)
-            {
-                newScale.x = currentScale;
-            }
-            else if (scaleAxis == Vector3.up)
-            {
-                newScale.y = currentScale;
-            }
             if(objectToScale != null)
             {
-                objectToScale.transform.localScale = newScale;
+                Vector3 newScale = objectToScale.transform.localScale;
+
+                // Apply the scale only to the selected axis.
+                if (scaleAxis == Vector3.forward)
+                {
+                    newScale.z = currentScale;
+                }
+                else if (scaleAxis == Vector3.right)
+                {
+                    newScale.x = currentScale;
+                }
+                else if (scaleAxis == Vector3.up)
+                {
+                    newScale.y = currentScale;
+                }
+                
+                    objectToScale.transform.localScale = newScale;
             }
         }
     }
