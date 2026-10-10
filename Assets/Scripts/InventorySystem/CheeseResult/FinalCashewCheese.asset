@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FinalCashewCheese
   m_EditorClassIdentifier: Assembly-CSharp::FinalResultCheese
   cheeseName: Cashew Cheese
-  cheeseRarity: 0
+  cheeseRarity: 1
   icon: {fileID: 21300000, guid: 96d52f2cd04a2449c95693ec05545a97, type: 3}
   description: 
   basePrice: 0

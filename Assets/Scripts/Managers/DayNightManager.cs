@@ -90,7 +90,7 @@ public class DayNightManager : MonoBehaviour
         OnNightStart?.Invoke();
     }
 
-    void StartNextDay()
+    public void StartNextDay()
     {
         currentDay++;
         WithdrawalMechanic.Instance.NewDay(); // partial cheese drain rate recovery

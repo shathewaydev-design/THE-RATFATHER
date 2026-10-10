@@ -22,7 +22,7 @@ public class WithdrawalMechanic : MonoBehaviour
     }
 
     [Header("Current State")]
-    [SerializeField] private WithdrawalStage currentStage = WithdrawalStage.Stable;
+    public WithdrawalStage currentStage = WithdrawalStage.Stable;
 
     // =========================================================
     // WITHDRAWAL TIMER
@@ -104,7 +104,10 @@ public class WithdrawalMechanic : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] private GameObject[] withdrawalIcons;
+    [SerializeField] private GameObject[] withdrawalVignette;
     [SerializeField] private GameObject desperateFixButton;
+    [SerializeField] private Animator passOutAnimationController;
+
     //show player how much left until withdrawal
     //can be hovered to see %
     //UI effect, white opaque background
@@ -142,7 +145,10 @@ public class WithdrawalMechanic : MonoBehaviour
         }
 
         desperateFixButton.SetActive(false);
-
+        foreach (GameObject vignette in withdrawalVignette)
+        {
+            vignette.SetActive(false);
+        }
         UpdateWithdrawalStage();
     }
     
@@ -259,6 +265,8 @@ public class WithdrawalMechanic : MonoBehaviour
         {
             icon.SetActive(false);
         }
+        withdrawalVignette[0].SetActive(false);
+        withdrawalVignette[1].SetActive(false);
 
         desperateFixButton.SetActive(false);
         // Animation:
@@ -277,6 +285,8 @@ public class WithdrawalMechanic : MonoBehaviour
         withdrawalIcons[0].SetActive(true);//green outline
         withdrawalIcons[1].SetActive(false);
         withdrawalIcons[2].SetActive(false);
+        withdrawalVignette[0].SetActive(false);
+        withdrawalVignette[1].SetActive(false);
 
         desperateFixButton.SetActive(false);
         // Green outline
@@ -297,6 +307,8 @@ public class WithdrawalMechanic : MonoBehaviour
         withdrawalIcons[0].SetActive(false);
         withdrawalIcons[1].SetActive(true);//orange outline
         withdrawalIcons[2].SetActive(false);
+        withdrawalVignette[0].SetActive(true);
+        withdrawalVignette[1].SetActive(false);
 
         desperateFixButton.SetActive(false);
         // VFX:
@@ -317,9 +329,11 @@ public class WithdrawalMechanic : MonoBehaviour
         withdrawalIcons[0].SetActive(false);
         withdrawalIcons[1].SetActive(false);
         withdrawalIcons[2].SetActive(true);//red outline
+        withdrawalVignette[0].SetActive(false);
+        withdrawalVignette[1].SetActive(true);
 
         canEnterDesperateFix = true;
-        desperateFixButton.SetActive(false);
+        desperateFixButton.SetActive(true);
         // Animation:
         // Player looks around / appears nervous
 
@@ -439,7 +453,10 @@ public class WithdrawalMechanic : MonoBehaviour
             return;
 
         currentStage = WithdrawalStage.PassedOut;
+        passOutAnimationController.SetTrigger("PassOut");
+        DayNightManager.Instance.StartNextDay();
 
+        timeUntilWithdrawal = baseWithdrawalTime;//restart withdrawal timer for next day
         Debug.Log(
             "Player has passed out due to withdrawal."
         );
@@ -503,7 +520,9 @@ public class WithdrawalMechanic : MonoBehaviour
 //     }
     public IEnumerator DesperateFixTimer()
     {
+        withdrawalVignette[2].SetActive(true);
         yield return new WaitForSeconds(desperateFixDuration);
+        withdrawalVignette[2].SetActive(false);
         isInDesperateFix = false;
         canEnterDesperateFix = false;
         Debug.Log("Desperate Fix mode has ended.");

@@ -129,6 +129,10 @@ public class DesperateFixButton : MonoBehaviour,
                 Debug.Log("Desperate Fix mode has ended.");
                 // Additional logic for ending Desperate Fix mode can be added here
             }
+            if (WithdrawalMechanic.Instance.currentStage == WithdrawalMechanic.WithdrawalStage.Critical || WithdrawalMechanic.Instance.currentStage == WithdrawalMechanic.WithdrawalStage.Emergency)
+            {
+                ShowDesperateFixText();
+            }
         }
     }
     private void ActivateDesperateFix()
@@ -146,6 +150,7 @@ public class DesperateFixButton : MonoBehaviour,
 
         WithdrawalMechanic.Instance.isInDesperateFix = true;
         StartCoroutine(WithdrawalMechanic.Instance.DesperateFixTimer());
+        
         //run a dureation for desperate fix mode
         ResetProgress();
 
