@@ -7,24 +7,19 @@ public class DayNightManager : MonoBehaviour
     public static DayNightManager Instance;
 
     [Header("Time Settings")]
-    public float dayDuration = 180f;
-    public float nightDuration = 180f;
+    public float dayDuration = 360f;
 
     private float timer;
     private bool isDay = true;
 
     [Header("Day Count")]
-    public int currentDay = 1;
-    public int maxDays = 5;
+    public int currentDay = 1;//current day of the week
+    public int maxDays = 7;
 
     [Header("UI")]
     public GameObject sunIcon;
-    public GameObject moonIcon;
     public Text dayText;
 
-    [Header("Lighting")]
-    public GameObject dayLight;
-    public GameObject nightLight;
 
     [Header("End Game")]
     public bool allQuestsAreCompleted;
@@ -50,14 +45,9 @@ public class DayNightManager : MonoBehaviour
 
         if (isDay && timer >= dayDuration)
         {
-            StartNight();
-        }
-        else if (!isDay && timer >= nightDuration)
-        {
             StartNextDay();
         }
-
-        //UpdateLightRotation();
+    
     }
 
     void StartDay()
@@ -66,31 +56,13 @@ public class DayNightManager : MonoBehaviour
         timer = 0f;
 
         sunIcon.SetActive(true);
-        moonIcon.SetActive(false);
-
-        if (dayLight) dayLight.SetActive(true);
-        if (nightLight) nightLight.SetActive(false);
 
         UpdateUI();
 
         OnNewDay?.Invoke(); // 🔥 Ingredient spawn trigger
     }
 
-    void StartNight()
-    {
-        isDay = false;
-        timer = 0f;
-
-        sunIcon.SetActive(false);
-        moonIcon.SetActive(true);
-
-        if (dayLight) dayLight.SetActive(false);
-        if (nightLight) nightLight.SetActive(true);
-
-        OnNightStart?.Invoke();
-    }
-
-    public void StartNextDay()
+    public void StartNextDay()//run this function when day is over, and start next day.
     {
         currentDay++;
         WithdrawalMechanic.Instance.NewDay(); // partial cheese drain rate recovery
@@ -106,24 +78,6 @@ public class DayNightManager : MonoBehaviour
     void UpdateUI()
     {
         dayText.text = "Day " + currentDay;
-    }
-
-    void UpdateLightRotation()
-    {
-        // OPTIONAL: smooth sun movement
-        if (dayLight && isDay)
-        {
-            float t = timer / dayDuration;
-            float angle = Mathf.Lerp(0, 180, t);
-            dayLight.transform.rotation = Quaternion.Euler(angle, 0, 0);
-        }
-
-        if (nightLight && !isDay)
-        {
-            float t = timer / nightDuration;
-            float angle = Mathf.Lerp(180, 360, t);
-            nightLight.transform.rotation = Quaternion.Euler(angle, 0, 0);
-        }
     }
 
     void EndWeek()

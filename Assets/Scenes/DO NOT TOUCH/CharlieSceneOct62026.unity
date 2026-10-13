@@ -105376,7 +105376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0217034509c3940f2adb1f4001cc5988, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InventorySystem
-  inventoryTest: []
+  ingredientInventory: []
   cheeseInventory: []
   inventoryUI: {fileID: 544144420}
   cheeseInventoryUI: {fileID: 1150305615}
@@ -107042,14 +107042,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DayNightManager
   dayDuration: 180
-  nightDuration: 180
   currentDay: 1
   maxDays: 7
   sunIcon: {fileID: 1729815750}
-  moonIcon: {fileID: 1765669762}
   dayText: {fileID: 1395747259}
-  dayLight: {fileID: 0}
-  nightLight: {fileID: 0}
   allQuestsAreCompleted: 0
   gameOverUI: {fileID: 1728187941}
 --- !u!4 &1046254696
@@ -129680,6 +129676,26 @@ PrefabInstance:
     - target: {fileID: 4442335720035743178, guid: ad626c9a846d942609e2731be646a531, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8683332092817113694, guid: ad626c9a846d942609e2731be646a531, type: 3}
+      propertyPath: m_Transition
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8683332092817113694, guid: ad626c9a846d942609e2731be646a531, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8683332092817113694, guid: ad626c9a846d942609e2731be646a531, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8683332092817113694, guid: ad626c9a846d942609e2731be646a531, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8683332092817113694, guid: ad626c9a846d942609e2731be646a531, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: IngredientButton, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
