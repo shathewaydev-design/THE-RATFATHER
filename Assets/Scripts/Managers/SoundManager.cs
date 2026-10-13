@@ -9,6 +9,7 @@ public class SoundManager : MonoBehaviour
 
     [Header("Sources")]
     public AudioSource musicSource;
+    public AudioSource AmbientSource3D;
     public AudioSource uiSource;
     public AudioSource sfxSource;
 
@@ -26,6 +27,11 @@ public class SoundManager : MonoBehaviour
     public AudioClip bellowSound;//air blow or spray
     public AudioClip sprinkleAddictive;//sprinkle salt
     public AudioClip cookingComplete;//
+    [Header("Levels")]
+    [SerializeField] private bool slumpsLevel = false;
+    [SerializeField] private bool NewRatYorkLevel = false;
+    public AudioClip slumpsMusic;
+    public AudioClip NewRatYorkMusic;
 
     private void Awake()
     {
@@ -37,6 +43,17 @@ public class SoundManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+        }
+    }
+    private void Start()
+    {
+        if (slumpsLevel)
+        {
+            PlayMusic(slumpsMusic);
+        }
+        else if (NewRatYorkLevel)
+        {
+            PlayMusic(NewRatYorkMusic);
         }
     }
 
