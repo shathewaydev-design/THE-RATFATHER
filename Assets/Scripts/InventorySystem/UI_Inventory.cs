@@ -15,14 +15,14 @@ public class UI_Inventory : MonoBehaviour
     {
         inventorySystem = InventorySystem.Instance;
     }
-    public void Refresh(List<InventorySlot> inventoryTest)
+    public void Refresh(List<InventorySlot> ingredientInventory)//refresh the inventory UI when a new item is added to the inventory
     {
         foreach (Transform child in slotParent)
         {
             Destroy(child.gameObject);
         }
 
-        foreach (InventorySlot slot in inventoryTest)//based on the order of each item inside the InventorySlot (place store all the data)
+        foreach (InventorySlot slot in ingredientInventory)//based on the order of each item inside the InventorySlot (place store all the data)
         {//; add inventory slots on the UI when a new item is collected
             GameObject slotObject = Instantiate(slotPrefab, slotParent);
             UIInventorySlot uiSlot =

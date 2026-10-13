@@ -85,7 +85,8 @@ public class UseButton : MonoBehaviour
                 inventorySystem.RemoveFinalCheese(cheeseSlot.finalCheeseData, 1);
                 // After using the cheese, you might want to refresh the UI or perform other actions    
             }
-            
+            // HIDE INFO PANEL
+            InventoryUIController.Instance.HideCheeseInfo();
             InventoryUIController.Instance.useButton.SetActive(false);
             
         }
@@ -143,7 +144,8 @@ public class UseButton : MonoBehaviour
                 // After using the cheese, you might want to refresh the UI or perform other actions    
             }
 
-            
+            // HIDE INFO PANEL
+            InventoryUIController.Instance.HideCheeseInfo();
             InventoryUIController.Instance.IsConsumingCheese();
 
             InventoryUIController.Instance.ToggleInventory();

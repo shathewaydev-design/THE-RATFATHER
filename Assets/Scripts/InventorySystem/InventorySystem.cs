@@ -6,7 +6,7 @@ using System;
 public class InventorySystem : MonoBehaviour
 {
     public static InventorySystem Instance;
-    public List<InventorySlot> inventoryTest = new();//test new system; inventory
+    public List<InventorySlot> ingredientInventory = new();//test new system; inventory
     public List<CheeseInventorySlot> cheeseInventory = new();//cheese inventory
     [SerializeField] private UI_Inventory inventoryUI;//for ingredients
     [SerializeField] private UI_CheeseInventory cheeseInventoryUI;//for cheese
@@ -124,7 +124,7 @@ public class InventorySystem : MonoBehaviour
         int remaining = amount;
 
         // fill existing stacks first
-        foreach (InventorySlot slot in inventoryTest)
+        foreach (InventorySlot slot in ingredientInventory)
         {
             if (slot.itemData == item && !slot.IsFull())
             {
@@ -152,7 +152,7 @@ public class InventorySystem : MonoBehaviour
             InventorySlot newSlot =
                 new InventorySlot(item, amountToAdd);
 
-            inventoryTest.Add(newSlot);
+            ingredientInventory.Add(newSlot);
 
             remaining -= amountToAdd;
         }
@@ -167,11 +167,11 @@ public class InventorySystem : MonoBehaviour
     {
         int remaining = amount;
 
-        for (int i = inventoryTest.Count - 1; i >= 0; i--)//check every item inside the inventorySlot
+        for (int i = ingredientInventory.Count - 1; i >= 0; i--)//check every item inside the inventorySlot
         //if the item data matches the one we want to remove, check if the quantity is enough to remove, 
         // if yes, keep removing from the stacks until 1. then remove from the list
         {
-            InventorySlot slot = inventoryTest[i];
+            InventorySlot slot = ingredientInventory[i];
 
             if (slot.itemData == item)
             {
@@ -183,7 +183,7 @@ public class InventorySystem : MonoBehaviour
                 else
                 {
                     remaining -= slot.quantity;
-                    inventoryTest.RemoveAt(i);
+                    ingredientInventory.RemoveAt(i);
                 }
             }
 
@@ -287,7 +287,7 @@ public class InventorySystem : MonoBehaviour
 
     private void RefreshIngredientUI()
     {
-        inventoryUI.Refresh(inventoryTest);
+        inventoryUI.Refresh(ingredientInventory);
     }
     private void RefreshCheeseUI()
     {
