@@ -118,6 +118,8 @@ public class HeatProgressTracker : MonoBehaviour
         Debug.Log("Dish is done!");
         currentDoness = 0f;//reset doness for next time
         donessProgressBar.fillAmount = 0f;
+        canPump = true;
+        waitCoroutine = null;
 
         heatStepUI.gameObject.SetActive(false);
 
