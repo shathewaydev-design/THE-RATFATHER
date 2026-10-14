@@ -1,4 +1,6 @@
+using StarterAssets;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerTeleport : MonoBehaviour
 {
@@ -30,6 +32,13 @@ public class PlayerTeleport : MonoBehaviour
         controller.enabled = false;
         transform.position = teleportLocation.position;
         controller.enabled = true;
+
+
+        GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
+
     }
 
 }

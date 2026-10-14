@@ -133102,6 +133102,7 @@ MonoBehaviour:
   thirdPersonController: {fileID: 1103609271}
   tutorialManager: {fileID: 766932655}
   inBossScene: 0
+  dialogueRunner: {fileID: 501820399}
 --- !u!1 &1295441771
 GameObject:
   m_ObjectHideFlags: 0

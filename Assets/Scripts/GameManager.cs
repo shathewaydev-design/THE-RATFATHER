@@ -1,14 +1,16 @@
+using StarterAssets;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Video;
 using UnityEngine.Windows;
-using UnityEngine.SceneManagement;
-using StarterAssets;
+using Yarn.Unity;
 
 
 public class GameManager : MonoBehaviour
@@ -53,6 +55,9 @@ public class GameManager : MonoBehaviour
 
     private bool waitingForClick = false;
 
+    [SerializeField] private DialogueRunner dialogueRunner;
+   public static event Action EnforcerSequenceComplete;
+
 
 
     private void Awake()
@@ -75,6 +80,32 @@ public class GameManager : MonoBehaviour
 
         };
         thirdPersonController = ThirdPersonController.Instance;
+
+
+
+        dialogueRunner.AddCommandHandler("activate_inventory_consequence", ActivateInventoryConsequence);
+        dialogueRunner.AddCommandHandler("activate_currency_consequence", ActivateCurrencyConsequence);
+
+    }
+
+    public void ActivateInventoryConsequence()
+    {
+        // go through inventory and take cheese
+        // just removes one for now, will take more later
+        //InventorySystem.Instance.RemoveFinalCheese(InventorySystem.Instance.cheeseInventory[0].finalCheeseData);
+        //OnConsequenceComplete?.Invoke(resetTeleport);
+        EnforcerSequenceComplete?.Invoke();
+    }
+
+    public void ActivateCurrencyConsequence()
+    {
+        // take a set number of money from player
+
+        float subNum = InventorySystem.Instance.GetCurrency();
+        InventorySystem.Instance.SubtractFromCurrency(subNum);
+        UIManager_New.Instance.UpdateCurrency();
+        EnforcerSequenceComplete?.Invoke();
+
     }
 
 

@@ -17482,7 +17482,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0217034509c3940f2adb1f4001cc5988, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InventorySystem
-  inventoryTest: []
+  ingredientInventory: []
   cheeseInventory:
   - finalCheeseData: {fileID: 11400000, guid: fa691ec12a0304e26ba019ca699dec8c, type: 2}
     quantity: 1
@@ -30941,7 +30941,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1301521948
 Transform:
   m_ObjectHideFlags: 0
@@ -48863,6 +48863,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SoundManager
   musicSource: {fileID: 1983978527}
+  AmbientSource3D: {fileID: 0}
   uiSource: {fileID: 2004351446}
   sfxSource: {fileID: 68179676}
   uiHover: {fileID: 8300000, guid: 2385d95fb8f8d40d59d0f9ca5040ebfd, type: 3}
@@ -48877,6 +48878,10 @@ MonoBehaviour:
   bellowSound: {fileID: 8300000, guid: 124b5be89bc77417e8cb006e1b238866, type: 3}
   sprinkleAddictive: {fileID: 8300000, guid: 17fcc8efa143a48a693c090ca8b252c3, type: 3}
   cookingComplete: {fileID: 8300000, guid: 8dcc77ede40024aaeb84f4c4d0dc3a1e, type: 3}
+  slumpsLevel: 0
+  NewRatYorkLevel: 0
+  slumpsMusic: {fileID: 0}
+  NewRatYorkMusic: {fileID: 0}
 --- !u!82 &1983978527
 AudioSource:
   m_ObjectHideFlags: 0

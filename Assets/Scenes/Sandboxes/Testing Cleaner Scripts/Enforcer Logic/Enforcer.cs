@@ -14,13 +14,14 @@ public class Enforcer : MonoBehaviour
     // -------------global variables---------------
     [SerializeField] float waitTimeOnWayPoint;
     [SerializeField] EnforcerPath path;
+    [SerializeField] private string enforcerDialogueNode;
 
     NavMeshAgent agent;
     [SerializeField] Animator animator;
 
     float time = 0f;
 
-    [SerializeField] private DialogueRunner dialogueRunner;
+    //[SerializeField] private DialogueRunner dialogueRunner;
     
     [SerializeField] private Transform resetTeleport;
     public static event Action<Transform> OnConsequenceComplete;
@@ -31,8 +32,8 @@ public class Enforcer : MonoBehaviour
         
         agent = GetComponent<NavMeshAgent>();
         //animator = GetComponent<Animator>();
-        dialogueRunner.AddCommandHandler("activate_inventory_consequence", ActivateInventoryConsequence);
-        dialogueRunner.AddCommandHandler("activate_currency_consequence", ActivateCurrencyConsequence);
+        //dialogueRunner.AddCommandHandler("activate_inventory_consequence", ActivateInventoryConsequence);
+        //dialogueRunner.AddCommandHandler("activate_currency_consequence", ActivateCurrencyConsequence);
 
 
     }
@@ -47,11 +48,13 @@ public class Enforcer : MonoBehaviour
     private void OnEnable()
     {
         FieldOfView.OnPlayerSeen += CatchPlayer;
+        GameManager.EnforcerSequenceComplete += ConsequenceComplete;
     }
 
     private void OnDisable()
     {
         FieldOfView.OnPlayerSeen -= CatchPlayer;
+        GameManager.EnforcerSequenceComplete -= ConsequenceComplete;
     }
 
     // Update is called once per frame
@@ -79,7 +82,7 @@ public class Enforcer : MonoBehaviour
         // start conversation
         // give player proper consequence
 
-        DialogueManager_New.Instance.StartConversation("Enforcer_Dialogue", null);
+        DialogueManager_New.Instance.StartConversation(enforcerDialogueNode, null);
         agent.isStopped = true;
 
         // need to teleport player away after as well
@@ -87,25 +90,25 @@ public class Enforcer : MonoBehaviour
 
     }
 
-    public void ActivateInventoryConsequence()
-    {
+    //public void ActivateInventoryConsequence()
+    //{
 
-        // go through inventory and take cheese
-        // just removes one for now, will take more later
-        InventorySystem.Instance.RemoveFinalCheese(InventorySystem.Instance.cheeseInventory[0].finalCheeseData);
-        OnConsequenceComplete?.Invoke(resetTeleport);
-        agent.isStopped = false;
+    //    // go through inventory and take cheese
+    //    // just removes one for now, will take more later
+    //    //InventorySystem.Instance.RemoveFinalCheese(InventorySystem.Instance.cheeseInventory[0].finalCheeseData);
+    //    OnConsequenceComplete?.Invoke(resetTeleport);
+    //    agent.isStopped = false;
         
 
-    }
+    //}
 
-    public void ActivateCurrencyConsequence() 
+    public void ConsequenceComplete() 
     {
         // take a set number of money from player
 
-        float subNum = InventorySystem.Instance.GetCurrency();
-        InventorySystem.Instance.SubtractFromCurrency(subNum);
-        UIManager_New.Instance.UpdateCurrency();
+        //float subNum = InventorySystem.Instance.GetCurrency();
+        //InventorySystem.Instance.SubtractFromCurrency(subNum);
+        //UIManager_New.Instance.UpdateCurrency();
         // later, check if player has no money. If so, do a different 
         // consequence
         OnConsequenceComplete?.Invoke(resetTeleport);
