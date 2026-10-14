@@ -2,15 +2,25 @@ using UnityEngine;
 
 public class NRYLevelManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
+    // handle checks:
+
+    // how much money player has
+
+    // what day it is
+
+    // how many sold to this level
+
+    // current part of main story
+
+    // update main objective
+
+    // boss fight? (rigged poker?)
+
+
+
+
+
+
 }
