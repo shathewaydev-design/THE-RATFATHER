@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using Yarn.Unity;
@@ -12,6 +13,7 @@ public class NPC_New : MonoBehaviour, IInteractable
     [SerializeField] private NPCProfile_New profile; // make sure to change when completely finished to NPCProfile!!!
 
     [Header("UI")]
+    [SerializeField] private TextMeshProUGUI npcName;
     public Animator promptAnimator;
     [SerializeField] private GameObject promptCanvas;
     [SerializeField] private GameObject TrustPanel;
@@ -29,6 +31,7 @@ public class NPC_New : MonoBehaviour, IInteractable
 
         profile.SetTrustLevel(0f);
 
+        npcName.text = profile.GetName();
     }
 
     // Update is called once per frame

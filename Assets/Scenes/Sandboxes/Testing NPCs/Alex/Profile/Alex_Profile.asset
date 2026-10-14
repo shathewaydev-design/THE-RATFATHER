@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58db679ab499abc4ca540cbe7482c9ef, type: 3}
   m_Name: Alex_Profile
   m_EditorClassIdentifier: Assembly-CSharp::NPCProfile_New
+  name: Alex
   description: Alex is a cool rat :0
   portrait: {fileID: 0}
-  introNode: Alex_Intro
+  introNode: Alex_Introduction
   difficultyLevel: 3
   favors:
-  - {fileID: 11400000, guid: de6753bc87b687946878c6690efeb541, type: 2}
+  - {fileID: 11400000, guid: f75b8732f6f6eef4c8b06d2e1f0e78c3, type: 2}
   numOfFavors: 1

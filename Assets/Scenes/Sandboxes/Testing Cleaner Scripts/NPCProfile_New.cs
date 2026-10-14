@@ -12,6 +12,7 @@ public class NPCProfile_New : ScriptableObject
 
     public static event Action<float> OnTrustLevelChange;
 
+    [SerializeField] private string name;
     [SerializeField] private string description;
     [SerializeField] private Sprite portrait;
     [SerializeField] private string introNode;
@@ -53,6 +54,11 @@ public class NPCProfile_New : ScriptableObject
         UseButton.OnSellAttempt -= CheckPreference;
 
 
+    }
+
+    public string GetName()
+    {
+        return name;
     }
     public Favor GetCurrentFavor()
     {
@@ -177,6 +183,8 @@ public class NPCProfile_New : ScriptableObject
     public bool CheckPreference(FinalResultCheese cheese) // maybe in NPC_New to send through specific profile?
     {
         bool canSell = false;
+
+        return true; // for playtesting placeholder!!!!!
         // triggered when selling, 
         // check specific difficulty level
         // set selling range?
