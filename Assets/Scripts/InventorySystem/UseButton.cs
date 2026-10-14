@@ -111,10 +111,11 @@ public class UseButton : MonoBehaviour
                     int newPrice = cheeseSlot.finalCheeseData.basePrice;
 
                     newPrice = 75; // FOR PLAYTESTING PLACEHOLDER
+
                     // if there are selling buffs, can set here w new int!
                     // new func to grab from npc_prof?
 
-                    //UIManager.Instance.
+                    UIManager_New.Instance.UpdateCurrency();
 
                     inventorySystem.AddToCurrency(newPrice); // succesful sell? give player money
 
