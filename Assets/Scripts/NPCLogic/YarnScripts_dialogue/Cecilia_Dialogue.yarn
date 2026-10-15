@@ -1,0 +1,17 @@
+﻿title: Cecilia_Dialogue
+---
+Cecilia: What do you want?
+    -> I'm looking for a rat.
+        You: Looking for a friend Name's Tommy. He was... taken by a couple of shady looking rats.
+        Cecilia: Hm... Can't say I've seen anything. But I'll keep an eye out.
+    -> I'm new to the area. Any tips?
+        Cecilia: Heh, well, good luck out here. But if I had to say anything...
+        Cecilia: If you see any rats that look like they're patrolling, stay away!
+        Cecilia: Security has been increased recently. They don't care who you are, they'll
+        Cecilia: Search ya and take everything you've got!
+    -> Interested in some cheese?
+        // update trust 
+        <<update_trust>>
+        <<activate_selling>>
+        Cecilia: Ooh, let's see what you've got!
+===

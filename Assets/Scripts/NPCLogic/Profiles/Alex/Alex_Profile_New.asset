@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58db679ab499abc4ca540cbe7482c9ef, type: 3}
   m_Name: Alex_Profile_New
   m_EditorClassIdentifier: Assembly-CSharp::NPCProfile_New
+  name: Alex
   description: A sneaky looking dude.
   portrait: {fileID: 0}
   introNode: Alex_Introduction

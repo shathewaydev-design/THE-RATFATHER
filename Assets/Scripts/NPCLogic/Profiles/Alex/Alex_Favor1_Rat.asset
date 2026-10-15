@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58db679ab499abc4ca540cbe7482c9ef, type: 3}
   m_Name: Alex_Favor1_Rat
   m_EditorClassIdentifier: Assembly-CSharp::NPCProfile_New
+  name: 
   description: 
   portrait: {fileID: 0}
   introNode: Alex_Favor_1_Other_Rat
-  difficultyLevel: 0
+  difficultyLevel: 2
   favors: []
   numOfFavors: 0
