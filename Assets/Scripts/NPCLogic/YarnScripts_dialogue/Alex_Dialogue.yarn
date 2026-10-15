@@ -9,15 +9,17 @@ title: Alex_Introduction
 Alex: ...? What do you want? It's rude to stare y'know.
  -> You look like you could use a little pick me up. Interested in some cheese?
     Alex: Hey, hey! Who do you think you're talkin' to like that? You're either stupid or... just stupid 
-    sayin' something like that out in the open!
+    Alex: sayin' something like that out in the open!
  -> Dang, who pissed in your cornflakes?
     Alex: Oh shut up... So can I help you or...?
-    -> I'm looking for a rat named Tommy. I last saw him getting dragged around by a couple of rats.
+    -> I'm looking for a rat named Tommy. 
+      You: I last saw him getting dragged around by a couple of rats.
       Alex: Can't say that I have. I remember there being some reports of a few kidnappings.
       Alex: Apparently some witnesses say they could see two almost identical rats as the perps.
       Alex: All I know though. Haven't seen anything personally, sorry.
       <<jump Alex_Anything_Else_1>>
     -> I'm new to the city. Any tips?
+      Alex: No.
     -> Would you have any interest in some cheese?
       Alex: Bold of you to ask something like that so casually. But my answer is no.
       -> What? Why not?
@@ -125,7 +127,6 @@ title: Alex_Favor_1_Other_Rat
       ???: Ah, so the bastard finally came through, huh? But was to shy to come deliver it himself, huh?
       ???: Well, not like it matters now. Thanks.
       <<set_node "Alex_Favor_1_Comp">>
-
 ===
 
 // SECOND FAVOR DIALOGUE

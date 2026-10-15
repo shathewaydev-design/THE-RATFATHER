@@ -12,6 +12,8 @@ public class NPCRoaming : MonoBehaviour
 
     private float waitTimer;
 
+    private Vector3 startingPosition;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -20,7 +22,7 @@ public class NPCRoaming : MonoBehaviour
         {
             agent = GetComponent<NavMeshAgent>();
         }
-
+        startingPosition = transform.position;
         // Wait a little before choosing the first destination.
         ChooseRandomDestination();
     }
@@ -52,23 +54,56 @@ public class NPCRoaming : MonoBehaviour
 
     private void ChooseRandomDestination()
     {
+
         waitTimer = 0f;
 
-        // Pick a random point near the NPC.
-        Vector3 randomDirection =
-            Random.insideUnitSphere * roamRadius;
+        // Choose a random point within the radius
+        // of the NPC's original starting position.
+        Vector2 randomCircle = Random.insideUnitCircle * roamRadius;
 
-        randomDirection += transform.position;
+        Vector3 randomPosition = new Vector3(
+            startingPosition.x + randomCircle.x,
+            startingPosition.y,
+            startingPosition.z + randomCircle.y
+        );
 
-        // Find the closest valid point on the NavMesh.
+        // Find a valid point on the NavMesh near that position.
         if (NavMesh.SamplePosition(
-            randomDirection,
+            randomPosition,
             out NavMeshHit hit,
-            roamRadius,
+            2f,
             NavMesh.AllAreas))
         {
-            agent.SetDestination(hit.position);
+            // Make sure the destination is still within
+            // the allowed radius of the starting position.
+            Vector3 destinationOffset = hit.position - startingPosition;
+            destinationOffset.y = 0f;
+
+            if (destinationOffset.magnitude <= roamRadius)
+            {
+                agent.SetDestination(hit.position);
+            }
         }
+
+
+
+        //waitTimer = 0f;
+
+        //// Pick a random point near the NPC.
+        //Vector3 randomDirection =
+        //    Random.insideUnitSphere * roamRadius;
+
+        //randomDirection += transform.position;
+
+        //// Find the closest valid point on the NavMesh.
+        //if (NavMesh.SamplePosition(
+        //    randomDirection,
+        //    out NavMeshHit hit,
+        //    roamRadius,
+        //    NavMesh.AllAreas))
+        //{
+        //    agent.SetDestination(hit.position);
+        //}
     }
 
 

@@ -82,6 +82,11 @@ public class Enforcer : MonoBehaviour
         // start conversation
         // give player proper consequence
 
+        if (DialogueManager_New.Instance.isDialogueActive)
+        {
+            return;
+        }
+
         DialogueManager_New.Instance.StartConversation(enforcerDialogueNode, null);
         agent.isStopped = true;
 

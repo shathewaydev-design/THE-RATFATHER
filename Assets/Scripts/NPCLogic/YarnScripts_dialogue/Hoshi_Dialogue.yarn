@@ -1,0 +1,16 @@
+﻿title: Hoshi_Dialogue
+---
+Hoshi: What do you want?
+    -> I'm looking for a rat.
+        You: Looking for a friend Name's Tommy. He was... taken by a couple of shady looking rats.
+        Hoshi: Hm... Can't say I've seen anything. But I'll keep an eye out.
+    -> I'm new to the area. Any tips?
+        Hoshi: Heh, well, good luck out here. But if I had to say anything...
+        Hoshi: If you're looking for a quick way to earn money, try the casino.
+        Hoshi: High risk, but high reward.
+    -> Interested in some cheese?
+        // update trust 
+        <<update_trust>>
+        <<activate_selling>>
+        Hoshi: Ooh, let's see what you've got!
+===

@@ -23,7 +23,7 @@ MonoBehaviour:
     targetItem: {fileID: 0}
     targetCheese: {fileID: 0}
     toBeRemoved: 0
-    targetLocationID: Alex_Favor1_Location1
+    targetLocationID: ALEX_FAVOR_1
     targetNPC: {fileID: 0}
   - description: Talk to one of the rats.
     npcDialogue: Alex_Favor_1_Comp
