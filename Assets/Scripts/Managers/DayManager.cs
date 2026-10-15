@@ -2,9 +2,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
-public class DayNightManager : MonoBehaviour
+public class DayManager : MonoBehaviour
 {
-    public static DayNightManager Instance;
+    public static DayManager Instance;
 
     [Header("Time Settings")]
     public float dayDuration = 360f;
