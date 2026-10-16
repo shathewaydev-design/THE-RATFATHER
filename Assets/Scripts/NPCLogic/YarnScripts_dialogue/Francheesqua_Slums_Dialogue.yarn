@@ -1,0 +1,24 @@
+﻿title: Francheesqua_Slums_Dialogue
+---
+<<met_player>>
+Francheesqua: Hey baby... it'll be okay. Maybe it's time you found your own path?
+Francheesqua: Why don't you start cooking your own supply?
+Francheesqua: That'll be a quick way to earn cash. You can set your own prices, use the ingredients you want...
+Francheesqua: I've found some ingredients you can collect, and your cooking station is set up right next to us.
+Francheesqua: Go interact with the cooking pot and make some cheese to sell!
+Francheesqua: After, go find some desparate rats to sell to. But remember to be discreet!
+Francheesqua: It wouldn't be good if the mafia found out you were selling on their turf after being cut off of their supply...
+Francheesqua: And now, you'll be able to consume your own supply without anyone breathing down your neck.
+Francheesqua: I know how withdrawal can effect you...
+<<set_node Francheesqua_Slums_Mid>>
+===
+
+title: Francheesqua_Slums_Mid
+---
+Francheesqua: Go ahead and start cooking!
+===
+
+title: Francheesqua_Slums_Done
+---
+Francheesqua: Awesome! Now go sell!
+===

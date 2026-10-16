@@ -1,5 +1,6 @@
 ﻿title: Hoshi_Dialogue
 ---
+<<met_player>>
 Hoshi: What do you want?
     -> I'm looking for a rat.
         You: Looking for a friend Name's Tommy. He was... taken by a couple of shady looking rats.

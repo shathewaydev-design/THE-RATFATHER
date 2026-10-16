@@ -103,6 +103,8 @@ public class DialogueManager_New : MonoBehaviour
         if (currentNPC != null) 
         {
             OnDialogueActivated?.Invoke(npc.GetProfile());
+            currentNPC.GetProfile().GetState().numOfTimesSpoken++;
+
         }
         //OnDialogueActivated?.Invoke(npc.GetProfile());
 
@@ -210,7 +212,7 @@ public class DialogueManager_New : MonoBehaviour
     // end dialogue
     public void EndDialogue()
     {
-        UIManager.HideDialoguePanel();
+        //UIManager.HideDialoguePanel();
         ToggleTrustPanel(currentNPC == null);
 
         isDialogueActive = false;

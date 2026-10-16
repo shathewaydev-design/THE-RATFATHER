@@ -32,6 +32,7 @@ public class NPCProfile_New : ScriptableObject
         state.activeObjective = null;
         state.trustLevel = 0f;
         state.compFavors = 0;
+        state.numOfTimesSpoken = 0;
 
 
     }
@@ -255,6 +256,8 @@ public class NPCState_New
     public bool hasMetPlayer;
 
     public string dialogueNode;
+
+    public int numOfTimesSpoken;
 
     public Favor activeFavor; // one active favor PER NPC!!
     public FavorObjective activeObjective;

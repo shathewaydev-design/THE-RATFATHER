@@ -95,6 +95,7 @@ public class DayManager : MonoBehaviour
     void FightMafiaBoss()
     {
         Debug.Log("Prepare for the final showdown with a Mafia Boss!");
+        // teleport player?
         ResetWeek();
     }
 

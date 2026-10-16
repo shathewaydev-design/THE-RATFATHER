@@ -6,14 +6,17 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class ObjectiveManager : MonoBehaviour
 {
+    public static ObjectiveManager Instance;
+
     [SerializeField] private InputActionReference openObjectives;
     public bool canOpenObjectives = true;
     //private int index = 0;
 
-    [SerializeField] private List<ObjectivesPage> pages = new List<ObjectivesPage>();
+    [SerializeField] public List<ObjectivesPage> pages = new List<ObjectivesPage>();
     //[SerializeField] private List<ObjectiveVisual> objs = new List<ObjectiveVisual>(); // may not be needed
     private ObjectivesPage currPage;
     [SerializeField] private int currPageIndex;
@@ -21,6 +24,8 @@ public class ObjectiveManager : MonoBehaviour
     [Header("UI")]
     [SerializeField] private GameObject objectivePanel;
     [SerializeField] private GameObject fullFavorDisplayPrefab;
+
+    [SerializeField] private Button arrow;
 
     [SerializeField] private TextMeshProUGUI favorText;
     [SerializeField] private TextMeshProUGUI objectiveTextPrefab;
@@ -30,6 +35,13 @@ public class ObjectiveManager : MonoBehaviour
 
     private void Awake()
     {
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
+
+
+
         ObjectivesPage mainObj = new ObjectivesPage(); // set somewhere else?
         objectivePanel.SetActive(false);
 
@@ -39,6 +51,7 @@ public class ObjectiveManager : MonoBehaviour
         currPage = pages[0];
 
     }
+
 
     private void OnEnable()
     {
@@ -57,7 +70,15 @@ public class ObjectiveManager : MonoBehaviour
         if (canOpenObjectives && openObjectives.action.WasPressedThisFrame())
         {
             ToggleObjectivePanel();
+
+            Debug.Log("Arrow active: " + arrow.gameObject.activeInHierarchy);
+            Debug.Log("Arrow interactable: " + arrow.interactable);
+            Debug.Log("Panel active: " + objectivePanel.activeInHierarchy);
+
+
         }
+
+
     }
 
     public void ToggleObjectivePanel()
@@ -159,8 +180,8 @@ public class ObjectiveManager : MonoBehaviour
 
     public void CyclePage()
     {
-        if(pages.Count == 1)
-            return;
+        //if (pages.Count <= 1)
+        //    return;
         
 
         if (currPageIndex == pages.Count - 1)
@@ -207,10 +228,30 @@ public class ObjectiveManager : MonoBehaviour
         }
     }
 
+    public void ClearObjectives(int index)
+    {
+        foreach (Transform tran in fullFavorDisplayPrefab.transform)
+        {
+            Destroy(tran.gameObject);
+        }
+
+
+        //foreach (string child in pages[index].objectives)
+        //{
+        //    pages[index].objectives.Remove(child);
+
+        //    foreach (Transform tran in fullFavorDisplayPrefab.transform)
+        //    {
+        //        Destroy(tran.gameObject);
+        //    }
+        //}
+    }
+
     public void OnArrowClick()
     {
-        if (pages.Count <= 0)
+        if (pages.Count < 1)
             return;
+
 
         ClearObjectives();
         CyclePage();

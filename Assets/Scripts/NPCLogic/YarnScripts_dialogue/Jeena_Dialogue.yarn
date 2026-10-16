@@ -1,0 +1,23 @@
+﻿title: Jeena_Dialogue
+---
+<<met_player>>
+Jeena: What do you want?
+    -> I'm new to the area. Any tips?
+        Jeena: There's a rough looking rat looking for any excuse to pat us down. Try and stay away!
+    -> Interested in some cheese?
+        // update trust 
+        <<update_trust>>
+        <<activate_selling>>
+        Jeena: Ooh, let's see what you've got!
+        <<set_node Jeena_Met>>
+===
+title: Jeena_Met
+---
+Jeena: What do you want?
+    -> I'm new to the area. Any tips?
+        Jeena: There's a rough looking rat looking for any excuse to pat us down. Try and stay away!
+    -> Interested in some more cheese?
+        <<activate_selling>>
+        Jeena: Fine, I'll indulge again...
+        <<set_node >>
+===
