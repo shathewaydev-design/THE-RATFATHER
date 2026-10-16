@@ -2,25 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
-[CreateAssetMenu(fileName = "New Cheese Ingredient", menuName = "Scriptable Objects/CheeseIngredientData")]
+public enum ItemCategory
+{
+    Ingredient,
+    Cheese,
+    KeyItem
+}
+[CreateAssetMenu(fileName = "New Item", menuName = "Scriptable Objects/CheeseIngredientData")]
 public class CheeseIngredientData : ScriptableObject
 {
     
     [Header("ID")]
     public string itemID; //for save system
-    [Header("Ingredient Info")]
+    [Header("Item Info")]
     
     [TextArea] public string description;
-    public string ingredientName;
+    public string itemName;
     [Header("Visual")]
     
     public Sprite icon;
-    [Header("Gameplay")]
+    [Header("Category")]
+    public ItemCategory category;
+    [Header("Item Info")]
+
+    // Only relevant when category == Ingredient
     public IngredientRarity ingredientRarity;
     public IngredientType type;
 
-    [Header("Economy")]
+    
     public string price;
     public int basePrice;
 

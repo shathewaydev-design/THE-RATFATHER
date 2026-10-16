@@ -130052,26 +130052,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8683332092817113694, guid: ad626c9a846d942609e2731be646a531, type: 3}
-      propertyPath: m_Transition
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8683332092817113694, guid: ad626c9a846d942609e2731be646a531, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8683332092817113694, guid: ad626c9a846d942609e2731be646a531, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8683332092817113694, guid: ad626c9a846d942609e2731be646a531, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8683332092817113694, guid: ad626c9a846d942609e2731be646a531, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: IngredientButton, Assembly-CSharp
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -216971,6 +216951,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1852573889}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1890759497393423432
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1349907357595776269, guid: c19a4c9ddbac440fb805eb1b57d7a985, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -25.015772
+      objectReference: {fileID: 0}
+    - target: {fileID: 1349907357595776269, guid: c19a4c9ddbac440fb805eb1b57d7a985, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.836
+      objectReference: {fileID: 0}
+    - target: {fileID: 1349907357595776269, guid: c19a4c9ddbac440fb805eb1b57d7a985, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 62.372047
+      objectReference: {fileID: 0}
+    - target: {fileID: 1349907357595776269, guid: c19a4c9ddbac440fb805eb1b57d7a985, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1349907357595776269, guid: c19a4c9ddbac440fb805eb1b57d7a985, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1349907357595776269, guid: c19a4c9ddbac440fb805eb1b57d7a985, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1349907357595776269, guid: c19a4c9ddbac440fb805eb1b57d7a985, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1349907357595776269, guid: c19a4c9ddbac440fb805eb1b57d7a985, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1349907357595776269, guid: c19a4c9ddbac440fb805eb1b57d7a985, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1349907357595776269, guid: c19a4c9ddbac440fb805eb1b57d7a985, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2701599465238420182, guid: c19a4c9ddbac440fb805eb1b57d7a985, type: 3}
+      propertyPath: m_Name
+      value: PickUpObjectSwissArmyKnife
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c19a4c9ddbac440fb805eb1b57d7a985, type: 3}
 --- !u!1 &1933822562021175814
 GameObject:
   m_ObjectHideFlags: 0
@@ -217000,10 +217037,6 @@ PrefabInstance:
     - target: {fileID: 754365280662673632, guid: ad56b18092bb54219a89667788ac6b26, type: 3}
       propertyPath: m_Name
       value: cheeseSlotTemplate
-      objectReference: {fileID: 0}
-    - target: {fileID: 1376366979852921897, guid: ad56b18092bb54219a89667788ac6b26, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 3.0999756
       objectReference: {fileID: 0}
     - target: {fileID: 7530887930181904159, guid: ad56b18092bb54219a89667788ac6b26, type: 3}
       propertyPath: m_Pivot.x
@@ -217225,6 +217258,67 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!1001 &2388930767707500177
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2120092044989899041, guid: 110bd4fd524d0412a875632a6e6b140a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -27.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 2120092044989899041, guid: 110bd4fd524d0412a875632a6e6b140a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.836
+      objectReference: {fileID: 0}
+    - target: {fileID: 2120092044989899041, guid: 110bd4fd524d0412a875632a6e6b140a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 62.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 2120092044989899041, guid: 110bd4fd524d0412a875632a6e6b140a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2120092044989899041, guid: 110bd4fd524d0412a875632a6e6b140a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2120092044989899041, guid: 110bd4fd524d0412a875632a6e6b140a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2120092044989899041, guid: 110bd4fd524d0412a875632a6e6b140a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2120092044989899041, guid: 110bd4fd524d0412a875632a6e6b140a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2120092044989899041, guid: 110bd4fd524d0412a875632a6e6b140a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2120092044989899041, guid: 110bd4fd524d0412a875632a6e6b140a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3549871017037028289, guid: 110bd4fd524d0412a875632a6e6b140a, type: 3}
+      propertyPath: cheeseIngredientData
+      value: 
+      objectReference: {fileID: 11400000, guid: 8ad74bdd2e3354b0b8b309062f4559b7, type: 2}
+    - target: {fileID: 8387333788516774673, guid: 110bd4fd524d0412a875632a6e6b140a, type: 3}
+      propertyPath: m_Name
+      value: PickUpObjectSealedCrate
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 110bd4fd524d0412a875632a6e6b140a, type: 3}
 --- !u!114 &2430256844512705174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219773,3 +219867,5 @@ SceneRoots:
   - {fileID: 1123966315}
   - {fileID: 2118941866}
   - {fileID: 293631401}
+  - {fileID: 1890759497393423432}
+  - {fileID: 2388930767707500177}

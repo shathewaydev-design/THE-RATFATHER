@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2105947207227788917}
   - component: {fileID: 898959159147657550}
   m_Layer: 0
-  m_Name: IngredientName
+  m_Name: ItemName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -137,7 +137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9056604, g: 0.525354, b: 0.08116765, a: 0.72156864}
+  m_Color: {r: 0.9056604, g: 0.525354, b: 0.08116765, a: 0.65882355}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -169,6 +169,7 @@ GameObject:
   - component: {fileID: 954326202565339361}
   - component: {fileID: 871365943031978651}
   - component: {fileID: 7342431580952815156}
+  - component: {fileID: 5459755836833053803}
   m_Layer: 0
   m_Name: itemSlotTemplate
   m_TagString: Untagged
@@ -259,7 +260,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 0
+  m_Transition: 3
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.98039216, g: 0.5568628, b: 0, a: 1}
@@ -328,7 +329,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UIInventorySlot
   icon: {fileID: 2257183300137635528}
   quantityText: {fileID: 8703385768577586682}
-  ingredientNameText: {fileID: 898959159147657550}
+  itemNameText: {fileID: 898959159147657550}
   ingredientButton: {fileID: 954326202565339361}
 --- !u!114 &7342431580952815156
 MonoBehaviour:
@@ -343,6 +344,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIButtonSound
   hoverCooldown: 0.05
+--- !u!95 &5459755836833053803
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2122427893728435538}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a687189ab871d444e9fddfce816c7913, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2209289485277761131
 GameObject:
   m_ObjectHideFlags: 0

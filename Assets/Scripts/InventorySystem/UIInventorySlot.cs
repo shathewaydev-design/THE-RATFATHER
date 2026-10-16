@@ -8,7 +8,7 @@ public class UIInventorySlot : MonoBehaviour
     public Image icon;
     // public TextMeshProUGUI quantityText;
     public Text quantityText;
-    public Text ingredientNameText;
+    public Text itemNameText;
     public IngredientButton ingredientButton;
     private RecipeMenuUI recipeMenuUI;
     private Button button;
@@ -27,7 +27,7 @@ public class UIInventorySlot : MonoBehaviour
     {
         ingredientButton.Initialize(recipeMenuUI);
         icon.sprite = slot.itemData.icon;
-        ingredientNameText.text = slot.itemData.ingredientName;
+        itemNameText.text = slot.itemData.itemName;
 
         quantityText.text = slot.quantity.ToString();
         ingredientButton.type = slot.itemData.type;

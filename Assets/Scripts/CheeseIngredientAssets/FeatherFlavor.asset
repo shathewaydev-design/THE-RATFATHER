@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CheeseIngredientData
   itemID: featherFlavor
   description: A light feather. Maybe using this might make you become lighter
-  ingredientName: Feather
+  itemName: Feather Flavor
   icon: {fileID: -969290372, guid: 8d91357996e7540b9be70982afa7a121, type: 3}
-  rarity: 0
+  category: 0
+  ingredientRarity: 0
   type: 1
   price: 100
   basePrice: 100

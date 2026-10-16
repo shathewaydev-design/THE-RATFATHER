@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f73af059b830c41b381bc1c07d47d9e9, type: 3}
   m_Name: Cashew
   m_EditorClassIdentifier: Assembly-CSharp::CheeseIngredientData
-  itemID: Cashew
+  itemID: cashew
   description: Cashew
-  ingredientName: Cashew
+  itemName: Cashew
   icon: {fileID: 21300000, guid: 1196a90066fe8421a92333ed2c9c8a38, type: 3}
-  rarity: 1
+  category: 0
+  ingredientRarity: 0
   type: 1
-  price: 
-  basePrice: 0
+  price: 50
+  basePrice: 50
   maxStack: 10

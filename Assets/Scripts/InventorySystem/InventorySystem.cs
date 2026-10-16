@@ -6,7 +6,7 @@ using System;
 public class InventorySystem : MonoBehaviour
 {
     public static InventorySystem Instance;
-    public List<InventorySlot> ingredientInventory = new();//test new system; inventory
+    public List<InventorySlot> itemInventory = new();//item inventory including ingredient and keyitem
     public List<CheeseInventorySlot> cheeseInventory = new();//cheese inventory
     [SerializeField] private UI_Inventory inventoryUI;//for ingredients
     [SerializeField] private UI_CheeseInventory cheeseInventoryUI;//for cheese
@@ -71,7 +71,7 @@ public class InventorySystem : MonoBehaviour
 
         OnInventoryChange?.Invoke(item, null); // soph added!! null my NOT be the right way to go
 
-        //Debug.Log(item.ingredientName + " added. Total: " + inventory[item]);
+        //Debug.Log(item.itemName + " added. Total: " + inventory[item]);
     }
 
     public void RemoveItem(CheeseIngredientData item) // removing an item (soph added for quest completion)
@@ -81,7 +81,7 @@ public class InventorySystem : MonoBehaviour
 
         foreach (var key in inventory.Keys)
         {
-            if (key.ingredientName == item.ingredientName)
+            if (key.itemName == item.itemName)
             {
                 foundKey = key;
                 break;
@@ -90,7 +90,7 @@ public class InventorySystem : MonoBehaviour
 
         if (foundKey == null)
         {
-            //Debug.LogWarning("Item not found in inventory: " + item.ingredientName);
+            //Debug.LogWarning("Item not found in inventory: " + item.itemName);
             return;
         }
 
@@ -107,7 +107,7 @@ public class InventorySystem : MonoBehaviour
 
         OnInventoryChange?.Invoke(item, null); // soph added
 
-        //Debug.Log(foundKey.ingredientName + " removed.");
+        //Debug.Log(foundKey.itemName + " removed.");
 
     }
 
@@ -124,7 +124,7 @@ public class InventorySystem : MonoBehaviour
         int remaining = amount;
 
         // fill existing stacks first
-        foreach (InventorySlot slot in ingredientInventory)
+        foreach (InventorySlot slot in itemInventory)
         {
             if (slot.itemData == item && !slot.IsFull())
             {
@@ -152,7 +152,7 @@ public class InventorySystem : MonoBehaviour
             InventorySlot newSlot =
                 new InventorySlot(item, amountToAdd);
 
-            ingredientInventory.Add(newSlot);
+            itemInventory.Add(newSlot);
 
             remaining -= amountToAdd;
         }
@@ -160,18 +160,18 @@ public class InventorySystem : MonoBehaviour
         RefreshIngredientUI();
         OnInventoryChange?.Invoke(item, null); // soph added
 
-        //Debug.Log($"Added {item.ingredientName}");
+        //Debug.Log($"Added {item.itemName}");
     }
 
     public void RemoveIngredientItem(CheeseIngredientData item, int amount = 1)
     {
         int remaining = amount;
 
-        for (int i = ingredientInventory.Count - 1; i >= 0; i--)//check every item inside the inventorySlot
+        for (int i = itemInventory.Count - 1; i >= 0; i--)//check every item inside the inventorySlot
         //if the item data matches the one we want to remove, check if the quantity is enough to remove, 
         // if yes, keep removing from the stacks until 1. then remove from the list
         {
-            InventorySlot slot = ingredientInventory[i];
+            InventorySlot slot = itemInventory[i];
 
             if (slot.itemData == item)
             {
@@ -183,7 +183,7 @@ public class InventorySystem : MonoBehaviour
                 else
                 {
                     remaining -= slot.quantity;
-                    ingredientInventory.RemoveAt(i);
+                    itemInventory.RemoveAt(i);
                 }
             }
 
@@ -236,7 +236,7 @@ public class InventorySystem : MonoBehaviour
         RefreshCheeseUI();
         OnInventoryChange?.Invoke(null, cheese); // soph added
 
-        //Debug.Log($"Added {item.ingredientName}");
+        //Debug.Log($"Added {item.itemName}");
     }
     public bool ContainsCheese(FinalResultCheese cheese)
     {
@@ -284,10 +284,32 @@ public class InventorySystem : MonoBehaviour
         OnInventoryChange?.Invoke(null, cheese); // soph added
 
     }
+    public bool HasKeyItem(CheeseIngredientData keyitem, int requiredAmount = 1)
+    {//returns a boolean value if the player has the required amount of a key item in their inventory
+        if (keyitem == null || requiredAmount <= 0)
+        return false;
+
+        int totalAmount = 0;
+
+        foreach (InventorySlot slot in itemInventory)
+        {
+            if (slot.itemData == keyitem)
+            {
+                totalAmount += slot.quantity;
+            }
+
+            if (totalAmount >= requiredAmount)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
     private void RefreshIngredientUI()
     {
-        inventoryUI.Refresh(ingredientInventory);
+        inventoryUI.Refresh(itemInventory);
     }
     private void RefreshCheeseUI()
     {

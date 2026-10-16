@@ -27,7 +27,7 @@ public class UI_ItemInfoPanel : MonoBehaviour
     {
         itemInfoPanelGameObject.SetActive(true);
 
-        nameText.text = data.ingredientName;
+        nameText.text = data.itemName;
         rarityText.text = data.ingredientRarity.ToString();
         descriptionText.text = data.description;
         ingredientTypeText.text = data.type.ToString();
