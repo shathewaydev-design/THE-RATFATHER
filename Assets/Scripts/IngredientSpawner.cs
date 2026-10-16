@@ -28,43 +28,43 @@ public class IngredientSpawner : MonoBehaviour
     /*private void OnEnable()
     {
 
-        if (DayNightManager.Instance == null)
+        if (DayManager.Instance == null)
         {
-            Debug.LogWarning("DayNightManager not ready yet!");
+            Debug.LogWarning("DayManager not ready yet!");
             return;
         }
 
-        DayNightManager.Instance.OnNewDay += HandleNewDay;
+        DayManager.Instance.OnNewDay += HandleNewDay;
         
         if (clearAtNight)
-            DayNightManager.Instance.OnNightStart += ClearIngredients;
+            DayManager.Instance.OnNightStart += ClearIngredients;
     }
 
     private void OnDisable()
     {
-        if (DayNightManager.Instance != null)
+        if (DayManager.Instance != null)
         {
-            DayNightManager.Instance.OnNewDay -= HandleNewDay;
+            DayManager.Instance.OnNewDay -= HandleNewDay;
 
             if (clearAtNight)
-                DayNightManager.Instance.OnNightStart -= ClearIngredients;
+                DayManager.Instance.OnNightStart -= ClearIngredients;
         }
     }*/
     private void Start()
     {
-        if (DayNightManager.Instance != null)
+        if (DayManager.Instance != null)
         {
-            DayNightManager.Instance.OnNewDay += HandleNewDay;
+            DayManager.Instance.OnNewDay += HandleNewDay;
 
             if (clearAtNight)
-                DayNightManager.Instance.OnNightStart += ClearIngredients;
+                DayManager.Instance.OnNightStart += ClearIngredients;
 
             // Spawn immediately for Day 1
             HandleNewDay();
         }
         else
         {
-            Debug.LogWarning("DayNightManager not ready yet!");
+            Debug.LogWarning("DayManager not ready yet!");
         }
     }
     void HandleNewDay()
@@ -78,7 +78,7 @@ public class IngredientSpawner : MonoBehaviour
     }
     void SpawnIngredients()
     {
-        int currentDay = DayNightManager.Instance.currentDay;
+        int currentDay = DayManager.Instance.currentDay;
 
         foreach (var spawnpoint in spawnPoints)
         {
