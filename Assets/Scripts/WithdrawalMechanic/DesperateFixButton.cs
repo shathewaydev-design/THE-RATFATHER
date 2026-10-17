@@ -123,7 +123,6 @@ public class DesperateFixButton : MonoBehaviour,
             UpdateDesperateFixProgress(duration);
             if (desperateFixTimer <= 0f)
             {
-                WithdrawalMechanic.Instance.isInDesperateFix = false;
                 desperateFixDurationFillUI.SetActive(false);
                 desperateFixTimer = desperateFixDuration;
                 Debug.Log("Desperate Fix mode has ended.");
@@ -148,7 +147,6 @@ public class DesperateFixButton : MonoBehaviour,
         // Tell the withdrawal system to enter
         // emergency satiation mode.
 
-        WithdrawalMechanic.Instance.isInDesperateFix = true;
         StartCoroutine(WithdrawalMechanic.Instance.DesperateFixTimer());
         
         //run a dureation for desperate fix mode

@@ -65,7 +65,7 @@ public class DayManager : MonoBehaviour
     public void StartNextDay()//run this function when day is over, and start next day.
     {
         currentDay++;
-        WithdrawalMechanic.Instance.NewDay(); // partial cheese drain rate recovery
+        //WithdrawalMechanic.Instance.NewDay(); // partial cheese drain rate recovery
         if (currentDay > maxDays)
         {
             EndWeek();
