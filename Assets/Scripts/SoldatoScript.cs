@@ -197,16 +197,28 @@ public class SoldatoScript : MonoBehaviour
         }
     }
 
-
+    bool triggeredCutscene = false;
     void CheckHealth()
     {
         if (health <= 0)
         {
             // trigger ending (for now comic ending + demo ending)
-            GameManager.Instance.blackScreenPanel.SetActive(true);
-            GameManager.Instance.cutsceneText.text = "Thank you for playing the vertical slice of THE RAT FATHER. ALT+F4 to quit.";
+            //GameManager.Instance.blackScreenPanel.SetActive(true);
+            //GameManager.Instance.cutsceneText.text = "Thank you for playing the vertical slice of THE RAT FATHER. ALT+F4 to quit.";
             // triggered in game manager
+
+
+
             Debug.Log("Boss is dead!!!");
+
+            if (!triggeredCutscene)
+            {
+                StubbedCutsceneManager.Instance.OpenCutscene(0);
+                triggeredCutscene = true;
+            }
+
+            //StubbedCutsceneManager.Instance.OpenCutscene(0);
+
             agent.isStopped = true;
 
         }

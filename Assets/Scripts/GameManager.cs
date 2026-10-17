@@ -253,6 +253,7 @@ public class GameManager : MonoBehaviour
 
         Debug.Log("You Died!");
         // start whole scene over
+        
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
     }

@@ -21,6 +21,7 @@ public class CraneScript : MonoBehaviour
     [Header("UI")]
     public Animator promptAnimator;
 
+    public GameObject pushPrompt;
 
 
     // remember to set animation bools false when another is set true
@@ -45,6 +46,11 @@ public class CraneScript : MonoBehaviour
             ResetTimer();
         }
 
+        if (hitBoss)
+        {
+            pushPrompt.SetActive(false);
+        }
+
 
     }
 
@@ -63,6 +69,7 @@ public class CraneScript : MonoBehaviour
             craneAnimator.SetBool("ButtonPressed", false);
             craneAnimator.SetBool("HasSwung&Missed", false);
             craneAnimator.SetBool("HasReset", false);
+
 
             return;
         }
@@ -116,11 +123,11 @@ public class CraneScript : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log("Press E to Swing Crane!");
-            if(promptAnimator != null)
-            {
-                promptAnimator.SetBool("UIappeared", true);
-                promptAnimator.SetTrigger("UIappearing");
-            }
+            //if(promptAnimator != null)
+            //{
+            //    //promptAnimator.SetBool("UIappeared", true);
+            //    //promptAnimator.SetTrigger("UIappearing");
+            //}
             inRange = true;
 
         }
@@ -129,11 +136,11 @@ public class CraneScript : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (promptAnimator != null)
-            {
-                promptAnimator.SetBool("UIappeared", false);
-                promptAnimator.SetTrigger("UIdisappearing");
-            }
+            //if (promptAnimator != null)
+            //{
+            //    //promptAnimator.SetBool("UIappeared", false);
+            //    //promptAnimator.SetTrigger("UIdisappearing");
+            //}
             inRange = false;
         }
     }

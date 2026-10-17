@@ -48,20 +48,20 @@ public class StubbedCutsceneManager : MonoBehaviour
         if (inCutscene && click.action.WasPressedThisFrame()) // && action is pressed, cycle through cutscene.
         {
             
-            if (!justClicked)
-            {
+           // if (!justClicked)
+            //{
                 //Debug.Log("please for the love of god CLIIIIIIICK!!!!");
                 Debug.Log("index: " + currPanelIndex);
 
                 CycleThroughCutscene();
 
                 justClicked = true;
-            }
-            else
-            {
-                justClicked = false;
-                return;
-            }
+            //}
+            //else
+            //{
+             //   justClicked = false;
+             //   return;
+            //}
             
         }
         
