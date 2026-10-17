@@ -140,6 +140,11 @@ public class FavorManager : MonoBehaviour
         foreach (FavorState state in activeFavors)
         {
 
+            if (state.currentObjective > state.favor.objectives.Count - 1)
+            {
+                return;
+            }
+
             // get objective player currently working on
             FavorObjective objective = state.favor.objectives[state.currentObjective];
 

@@ -6,17 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
-    guid: 120d3d027806d4cd1847f3d2433ceeca
-  - enabled: 0
-    path: Assets/Scenes/FinalLevel1Scene/Level1SceneFinal.unity
-    guid: aaff7c017ab3243d7b8257f64dab0036
-  - enabled: 1
     path: Assets/Scenes/Updated Maps/Slumps -Update.unity
     guid: 2adc1f01742cc49688eedd69f5f216bd
   - enabled: 1
-    path: Assets/Scenes/Updated Maps/SoldatoBoss - Update.unity
-    guid: 636bf190e950c49ccbaa92ebccbb0116
+    path: Assets/Scenes/Updated Maps/New Rat York - Update.unity
+    guid: fa947c9f9d8548143b506cac7dc7671d
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 9e7be553448fa2546aea5752021cbcf7, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

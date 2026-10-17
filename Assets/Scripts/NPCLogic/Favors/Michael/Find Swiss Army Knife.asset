@@ -16,7 +16,7 @@ MonoBehaviour:
   favorID: 
   description: Find Michael's swiss army knife.
   objectives:
-  - description: FInd Michael's swiss army knife.
+  - description: Find Michael's swiss army knife.
     npcDialogue: Michael_Favor_1_Mid
     type: 0
     targetID: 
@@ -27,7 +27,7 @@ MonoBehaviour:
     targetNPC: {fileID: 0}
   - description: Return to Michael.
     npcDialogue: Michael_Favor_1_Done
-    type: 0
+    type: 2
     targetID: 
     targetItem: {fileID: 0}
     targetCheese: {fileID: 0}

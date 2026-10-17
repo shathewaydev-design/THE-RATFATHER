@@ -10,6 +10,7 @@ Jeena: What do you want?
         <<activate_selling>>
         Jeena: Ooh, let's see what you've got!
         <<set_node Jeena_Met>>
+        <<end_dialogue>>
 ===
 title: Jeena_Met
 ---
@@ -19,5 +20,5 @@ Jeena: What do you want?
     -> Interested in some more cheese?
         <<activate_selling>>
         Jeena: Fine, I'll indulge again...
-        <<set_node >>
+        <<end_dialogue>>
 ===
