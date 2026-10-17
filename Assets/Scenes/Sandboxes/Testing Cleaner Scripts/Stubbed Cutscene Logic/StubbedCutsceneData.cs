@@ -10,13 +10,18 @@ public class StubbedCutsceneData : ScriptableObject
 
     [SerializeField] private bool teleportsPlayerOnFinish;
 
-    [SerializeField] private bool opensNewScene;
+    public bool opensNewScene;
     [SerializeField] private string scenename;
 
 
     public bool TeleportsPlayer()
     {
         return teleportsPlayerOnFinish;
+    }
+
+    public bool OpensNewScene()
+    {
+        return opensNewScene;
     }
 
     public string GetSceneName()

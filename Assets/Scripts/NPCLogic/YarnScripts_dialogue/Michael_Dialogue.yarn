@@ -1,5 +1,6 @@
 ﻿title: Michael_Dialogue
 ---
+<<met_player>>
 Michael: ...Need something?
  -> I'm new to the area. Any tips?
         Michael: There's a rough looking rat looking for any excuse to pat us down. Try and stay away!
@@ -34,12 +35,12 @@ Michael: ...
 title: Michael_Favor_1_Intro
 ---
 
-Michael: I lost py precious swiss army knife round here somewhere. Don't know if someone took it.
+Michael: I lost my precious swiss army knife round here somewhere. Don't know if someone took it.
 Michael: But if you found that, I'd owe ya. And possibly take a look at your supply.
     -> Sure, I got you!
-        <<set_node Micheal_Favor_1_Mid>>
-        Michael: Thanks bro!
         <<activate_favor>>
+        <<set_node Michael_Favor_1_Mid>>
+        Michael: Thanks bro!
     -> No way...
         <<set_node Micheal_Met_1>>
     

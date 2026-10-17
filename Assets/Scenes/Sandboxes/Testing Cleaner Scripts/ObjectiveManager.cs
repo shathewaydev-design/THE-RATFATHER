@@ -25,7 +25,8 @@ public class ObjectiveManager : MonoBehaviour
     [SerializeField] private GameObject objectivePanel;
     [SerializeField] private GameObject fullFavorDisplayPrefab;
 
-    [SerializeField] private Button arrow;
+    //[SerializeField] private Button arrow;
+    //[SerializeField] private GameObject arrowSetter;
 
     [SerializeField] private TextMeshProUGUI favorText;
     [SerializeField] private TextMeshProUGUI objectiveTextPrefab;
@@ -71,9 +72,9 @@ public class ObjectiveManager : MonoBehaviour
         {
             ToggleObjectivePanel();
 
-            Debug.Log("Arrow active: " + arrow.gameObject.activeInHierarchy);
-            Debug.Log("Arrow interactable: " + arrow.interactable);
-            Debug.Log("Panel active: " + objectivePanel.activeInHierarchy);
+            //Debug.Log("Arrow active: " + arrow.gameObject.activeInHierarchy);
+            //Debug.Log("Arrow interactable: " + arrow.interactable);
+            //Debug.Log("Panel active: " + objectivePanel.activeInHierarchy);
 
 
         }
@@ -89,6 +90,7 @@ public class ObjectiveManager : MonoBehaviour
             {
                 objectivePanel.SetActive(true);
 
+
                 currPageIndex = 0;
                 ClearObjectives();
                 SetAndDisplayPage();
@@ -102,6 +104,7 @@ public class ObjectiveManager : MonoBehaviour
             }
 
             objectivePanel.SetActive(false);
+
 
             //change to Player Map
             thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");

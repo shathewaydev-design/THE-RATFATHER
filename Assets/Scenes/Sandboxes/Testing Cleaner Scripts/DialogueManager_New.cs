@@ -60,6 +60,8 @@ public class DialogueManager_New : MonoBehaviour
             (node) => SetNode(node)
         );
 
+        dialogueRunner.AddCommandHandler("end_dialogue", EndDialogue);
+
     }
 
     void Update()
@@ -69,6 +71,12 @@ public class DialogueManager_New : MonoBehaviour
         {
             justStartedDialogue = false;
             return;
+        }
+
+
+        if (!isDialogueActive)
+        {
+            TrustBar.SetActive(false);
         }
 
     }
@@ -153,24 +161,26 @@ public class DialogueManager_New : MonoBehaviour
 
         // find a way to pause yarnspinner dialogue...
         // and resume it...
+        if (InventorySystem.Instance.cheeseInventory.Count < 1)
+        {
+            //DialogueManager_New.Instance.EndDialogue();
+            return;
+        } 
+        else if (InventorySystem.Instance.cheeseInventory.Count >= 1) 
+        {
+            customLineAdvancer.inputEnabled = false;
 
-        customLineAdvancer.inputEnabled = false;
 
+            InventoryUIController.Instance.IsSellingCheese();
 
-        InventoryUIController.Instance.IsSellingCheese();
+            Debug.Log("Attempted to sell!");
+            Debug.Log("Selling true? " + InventoryUIController.Instance.isSelling);
 
-        Debug.Log("Attempted to sell!");
-        Debug.Log("Selling true? " + InventoryUIController.Instance.isSelling);
-
-        InventoryUIController.Instance.ToggleInventory();
-        InventoryUIController.Instance.OpenCheeseInventory();
+            InventoryUIController.Instance.ToggleInventory();
+            InventoryUIController.Instance.OpenCheeseInventory();
+        }
 
         //at the end, call
-
-
-
-
-
 
 
     }

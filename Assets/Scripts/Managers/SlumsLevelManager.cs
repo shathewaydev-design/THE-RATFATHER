@@ -10,10 +10,18 @@ public class SlumsLevelManager : MonoBehaviour
 
     public List<GameObject> levelNPCS;
 
+    [SerializeField] private List<ComicCutscene> InGameScenes;
+
+
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        CutsceneManager.Instance.currCutscene = InGameScenes[0];
+        CutsceneManager.Instance.StartCutscene();
+
+
         ObjectiveManager.Instance.pages[0].objectives.Add("Talk to francheesqua.");
     }
 
@@ -56,6 +64,10 @@ public class SlumsLevelManager : MonoBehaviour
 
         EnableNPCs();
 
+        LevelCompCheck();
+
+
+
     }
 
     private void EnableNPCs()
@@ -69,5 +81,35 @@ public class SlumsLevelManager : MonoBehaviour
 
             franTutorialStage++;
         }
+    }
+
+    bool transitionTriggered = false;
+    private void LevelCompCheck()
+    {
+        if (!transitionTriggered)
+        {
+            if (InventorySystem.Instance.GetCurrency() >= 200 && !DialogueManager_New.Instance.isDialogueActive)
+            {
+
+                TransitionToSoldato();
+                transitionTriggered = true;
+            }
+        }
+        else
+        {
+            return;
+        }
+        
+    }
+
+    private void TransitionToSoldato()
+    {
+        // scene management after stubbed cutscene!
+        // add stubbed cutscene manager to level!
+
+        StubbedCutsceneManager.Instance.OpenCutscene(0);
+
+
+
     }
 }
