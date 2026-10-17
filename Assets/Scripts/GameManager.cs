@@ -82,9 +82,12 @@ public class GameManager : MonoBehaviour
         thirdPersonController = ThirdPersonController.Instance;
 
 
+        if (!inBossScene)
+        {
+            dialogueRunner.AddCommandHandler("activate_inventory_consequence", ActivateInventoryConsequence);
+            dialogueRunner.AddCommandHandler("activate_currency_consequence", ActivateCurrencyConsequence);
+        }
 
-        dialogueRunner.AddCommandHandler("activate_inventory_consequence", ActivateInventoryConsequence);
-        dialogueRunner.AddCommandHandler("activate_currency_consequence", ActivateCurrencyConsequence);
 
     }
 
