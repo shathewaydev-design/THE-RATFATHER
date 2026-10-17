@@ -5780,7 +5780,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &15179667
 Transform:
@@ -12835,7 +12835,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &109701031
 Transform:
@@ -15462,7 +15462,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &153649923
 Transform:
@@ -16458,6 +16458,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1bc272a4f507b02409bb2acccde5e425, type: 3}
       propertyPath: m_Name
       value: Metal_Beam (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1bc272a4f507b02409bb2acccde5e425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -19120,7 +19124,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &191136127
 Transform:
@@ -20371,6 +20375,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1bc272a4f507b02409bb2acccde5e425, type: 3}
       propertyPath: m_Name
       value: Metal_Beam (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1bc272a4f507b02409bb2acccde5e425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -27250,7 +27258,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &251468601
 Transform:
@@ -52763,6 +52771,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Metal_Beam (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1bc272a4f507b02409bb2acccde5e425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -54442,7 +54454,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &399475091
 Transform:
@@ -65012,7 +65024,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &549073979
 Transform:
@@ -65324,7 +65336,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &551399847
 Transform:
@@ -69372,6 +69384,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Metal_Beam (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1bc272a4f507b02409bb2acccde5e425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -71834,7 +71850,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &653960215
 Transform:
@@ -79748,6 +79764,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Metal_Beam (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1bc272a4f507b02409bb2acccde5e425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -83327,7 +83347,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &760675800
 Transform:
@@ -95989,7 +96009,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &915932903
 Transform:
@@ -100348,7 +100368,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &935560336
 Transform:
@@ -105260,6 +105280,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1bc272a4f507b02409bb2acccde5e425, type: 3}
       propertyPath: m_Name
       value: Metal_Beam (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1bc272a4f507b02409bb2acccde5e425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -113225,6 +113249,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Metal_Beam (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1bc272a4f507b02409bb2acccde5e425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -117128,7 +117156,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1064357034
 Transform:
@@ -133016,6 +133044,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Metal_Beam (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1bc272a4f507b02409bb2acccde5e425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -138763,7 +138795,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1301947825
 Transform:
@@ -139819,6 +139851,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1bc272a4f507b02409bb2acccde5e425, type: 3}
       propertyPath: m_Name
       value: Metal_Beam (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1bc272a4f507b02409bb2acccde5e425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -162799,7 +162835,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1443111607
 Transform:
@@ -163293,7 +163329,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1445042451
 Transform:
@@ -182528,6 +182564,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Metal_Beam (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1bc272a4f507b02409bb2acccde5e425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -182744,7 +182784,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1651395622
 Transform:
@@ -191560,7 +191600,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1786663075
 Transform:
@@ -195364,6 +195404,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Metal_Beam (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1bc272a4f507b02409bb2acccde5e425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -197016,7 +197060,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1862072077
 Transform:
@@ -197372,7 +197416,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1870548845
 Transform:
@@ -198925,7 +198969,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1896706129
 Transform:
@@ -199111,6 +199155,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1bc272a4f507b02409bb2acccde5e425, type: 3}
       propertyPath: m_Name
       value: Metal_Beam (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1bc272a4f507b02409bb2acccde5e425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -208009,6 +208057,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Metal_Beam (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1bc272a4f507b02409bb2acccde5e425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -210331,6 +210383,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1bc272a4f507b02409bb2acccde5e425, type: 3}
       propertyPath: m_Name
       value: Metal_Beam (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1bc272a4f507b02409bb2acccde5e425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -224254,7 +224310,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3838637440531844108
 Transform:
   m_ObjectHideFlags: 0
