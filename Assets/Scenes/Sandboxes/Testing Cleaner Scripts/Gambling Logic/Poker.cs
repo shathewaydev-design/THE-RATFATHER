@@ -5,6 +5,7 @@ using Unity.Multiplayer.PlayMode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Poker : MonoBehaviour, IInteractable
 {
@@ -17,6 +18,12 @@ public class Poker : MonoBehaviour, IInteractable
     [Header("Input")]//player inputs
     public ThirdPersonController thirdPersonController;
 
+    public static Poker Instance;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     public class Card
     {
@@ -290,6 +297,16 @@ public class Poker : MonoBehaviour, IInteractable
     // game 2 win? play last cutscene 
     // game 2 lose? start scene over
 
+    private void ReloadCurrentScene()
+    {
+        SceneManager.LoadScene(
+            SceneManager.GetActiveScene().buildIndex
+        );
+    }
+
+
+
+
 
 
 
@@ -336,35 +353,86 @@ public class Poker : MonoBehaviour, IInteractable
 
     public void StartGame()
     {
-        // set blinds panel false
+
+        thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Mouse");
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+
+        // Record the player's starting currency
         currFunds = InventorySystem.Instance.GetCurrency();
-        SetText(playerChips, "Player Chips " + player.chips);
 
-        // Build then shuffle the deck
-        BuildDeck();
-        ShuffleDeck();
+        // Initialize players and table
+        player = new PokerPlayer();
+        ai = new PokerPlayer();
 
-        // Set players and table
+        player.chips = (int)currFunds;
+        ai.chips = 10000;
+
+        communityCards = new List<Card>();
+
+        player.currentBet = 0;
+        ai.currentBet = 0;
+
+        pot = 0;
+        currentBet = 0;
 
         playerActed = false;
         aiActed = false;
 
-        // Reset hands
-        ResetHands();
+        playerWon = false;
+        canCloseGame = false;
 
-        // post blinds
-        blindPanel.SetActive(false);
+        // Clear any cards from a previous game
+        ClearCards();
+        ClearText();
 
-        // Deal hole cards
+        // Prepare the deck
+        BuildDeck();
+        ShuffleDeck();
+
+        // Deal the cards
         DealHoleCards();
 
-        // Change phase to preflop
+        // Start the first betting round
         currentPhase = PokerPhase.PreFlop;
         StartBettingRound(currentPhase);
 
         UpdateBettingRoundText();
-
         DrawCards();
+
+        SetText(playerChips, "Player Chips: " + player.chips);
+        SetText(playerCurrBet, "Player Current Bet: ???");
+        SetPot();
+
+        //// set blinds panel false
+        //currFunds = InventorySystem.Instance.GetCurrency();
+        //SetText(playerChips, "Player Chips " + player.chips);
+
+        //// Build then shuffle the deck
+        //BuildDeck();
+        //ShuffleDeck();
+
+        //// Set players and table
+
+        //playerActed = false;
+        //aiActed = false;
+
+        //// Reset hands
+        //ResetHands();
+
+        //// post blinds
+        //blindPanel.SetActive(false);
+
+        //// Deal hole cards
+        //DealHoleCards();
+
+        //// Change phase to preflop
+        //currentPhase = PokerPhase.PreFlop;
+        //StartBettingRound(currentPhase);
+
+        //UpdateBettingRoundText();
+
+        //DrawCards();
 
 
     }
@@ -611,8 +679,12 @@ public class Poker : MonoBehaviour, IInteractable
                 }
 
                 RevealHiddenCards();
-
                 EndHand();
+
+                if (!playerWon)
+                {
+                    ReloadCurrentScene();
+                }
 
                 return;
 
@@ -638,7 +710,8 @@ public class Poker : MonoBehaviour, IInteractable
 
                 if (actingPlayer == player)
                 {
-                    SetText(playerCurrBet, "Player Current Bet: " + player.currentBet);
+                    //SetText(playerCurrBet, "Player Current Bet: " + player.currentBet);
+
                     //SetText(playerTotalBet, "Player Total Bet: " + player.totalBet);
                     SetText(playerChips, "Player Chips: " + player.chips);
 
@@ -1498,6 +1571,9 @@ public class Poker : MonoBehaviour, IInteractable
         return 0;
     }
 
+
+    public int gameNum = 1;
+
     public void ShowDown()
     {
         List<Card> playerCards = new List<Card>();
@@ -1520,6 +1596,20 @@ public class Poker : MonoBehaviour, IInteractable
             InventorySystem.Instance.AddToCurrency(pot);
             SetText(winnerAnnouncement, "Winner: You!");
             playerWon = true;
+
+            if (gameNum == 1)
+            {
+                StubbedCutsceneManager.Instance.OpenCutscene(2);
+                gameNum = 2;
+            }
+            else if (gameNum == 2) 
+            {
+                StubbedCutsceneManager.Instance.OpenCutscene(3);
+            }
+
+    
+
+
         }
         else if (result < 0)
         {
@@ -1527,6 +1617,14 @@ public class Poker : MonoBehaviour, IInteractable
             InventorySystem.Instance.SubtractFromCurrency(pot);
             SetText(winnerAnnouncement, "Winner: Dealer!");
             playerWon = false;
+
+            ReloadCurrentScene();
+
+            //if (result < 0)
+            //{
+            //    ReloadCurrentScene();
+            //}
+
         }
         else
         {
@@ -1696,7 +1794,8 @@ public class Poker : MonoBehaviour, IInteractable
         currBetRound.text = "Current Betting Round: ";
 
         playerChips.text = "Player Chips: ";
-        playerCurrBet.text = "Player Current Bet: ";
+        SetText(playerCurrBet, "Player Current Bet: ???");
+        //playerCurrBet.text = "Player Current Bet: ";
         //playerTotalBet.text = "Player Total Bet: ";
 
         winnerAnnouncement.text = "";
@@ -1813,23 +1912,23 @@ public class Poker : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        if (inRange == true)
-        {
-            Debug.Log("Playing poker...");
-            pokerPanel.SetActive(true);
-            blindPanel.SetActive(true);
+        //if (inRange == true)
+        //{
+        //    Debug.Log("Playing poker...");
+        //    pokerPanel.SetActive(true);
+        //    blindPanel.SetActive(true);
 
-            blindSlider.maxValue = InventorySystem.Instance.GetCurrency();
-            blindSlider.minValue = 50;
+        //    blindSlider.maxValue = InventorySystem.Instance.GetCurrency();
+        //    blindSlider.minValue = 50;
 
-            thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Mouse");
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
+        //    thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Mouse");
+        //    Cursor.visible = true;
+        //    Cursor.lockState = CursorLockMode.None;
 
 
 
          
-        }
+        //}
     }
 
     private void OnTriggerEnter(Collider other)
