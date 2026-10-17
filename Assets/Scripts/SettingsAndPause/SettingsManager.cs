@@ -20,6 +20,7 @@ public class SettingsManager : MonoBehaviour
     public bool invertMouseY = false;
     public float mouseSensitivity = 10.0f;
     public float brightness = 1.0f;
+    [SerializeField] private bool isMainMenu = false;
 
 
     private void Awake()
@@ -54,8 +55,15 @@ public class SettingsManager : MonoBehaviour
     }
     public void CloseSettings()
     {
-        SettingsMenuPanel.SetActive(false);
-        PauseGamePanel.SetActive(true);
+        if(!isMainMenu)
+        {
+            SettingsMenuPanel.SetActive(false);
+            PauseGamePanel.SetActive(true);
+        }
+        else if(isMainMenu)
+        {
+            SettingsMenuPanel.SetActive(false);
+        }
     }
     public void SetMouseSensitivity(float value)
     {
