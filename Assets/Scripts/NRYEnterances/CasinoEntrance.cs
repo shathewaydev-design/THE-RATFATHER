@@ -24,6 +24,7 @@ public class CasinoEntrance : MonoBehaviour
     public ThirdPersonController thirdPersonController;
 
 
+
     public void OnYesButtonEntrance()
     {
         OnEnteredCasino?.Invoke(casinoExit);
@@ -34,17 +35,30 @@ public class CasinoEntrance : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
+
+        if (NRYLevelManager.Instance.hasEnteredClubOnce && InventorySystem.Instance.GetCurrency() >= 500)
+        {
+
+            StubbedCutsceneManager.Instance.OpenCutscene(1);
+
+        }
+
+        yesButton.onClick.RemoveAllListeners();
+
+
     }
 
     public void OnYesButtonExit()
     {
         OnExitedCasino?.Invoke(casinoEntrance);
 
+        entranceCheck.SetActive(false);
+
         thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
-
+        yesButton.onClick.RemoveAllListeners();
     }
 
     public void OnNoButtonEntrance()
@@ -58,7 +72,7 @@ public class CasinoEntrance : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
-
+        noButton.onClick.RemoveAllListeners();
     }
 
     public void OnNoButtonExit()
@@ -71,6 +85,8 @@ public class CasinoEntrance : MonoBehaviour
         thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+
+        noButton.onClick.RemoveAllListeners();
 
 
     }
@@ -92,6 +108,10 @@ public class CasinoEntrance : MonoBehaviour
                 //Debug.Log("Detected player at enterance!");
                 enterPrompt.text = "Enter the casino?";
                 yesButton.onClick.AddListener(OnYesButtonEntrance);
+
+
+
+
                 noButton.onClick.AddListener(OnNoButtonEntrance);
                 //OnEnteredCasino?.Invoke(casinoExit);
             }

@@ -7,8 +7,8 @@ using UnityEngine.UI;
 
 public class CookingHomebaseEntrance : MonoBehaviour
 {
-    public static event Action<Transform> OnEnteredCasino;
-    public static event Action<Transform> OnExitedCasino;
+    public static event Action<Transform> OnEnteredCookingHomeBase;
+    public static event Action<Transform> OnExitedCookingHomeBase;
 
     [SerializeField] Transform cookingHomebaseEntrance;
     [SerializeField] Transform cookingHomebaseExit;
@@ -26,31 +26,23 @@ public class CookingHomebaseEntrance : MonoBehaviour
 
     public void OnYesButtonEntrance()
     {
-        OnEnteredCasino?.Invoke(cookingHomebaseExit);
+        OnEnteredCookingHomeBase?.Invoke(cookingHomebaseExit);
+
+        Debug.Log("Attempting teleport....");
 
         entranceCheck.SetActive(false);
 
         thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+
+        yesButton.onClick.RemoveAllListeners();
 
     }
 
     public void OnYesButtonExit()
     {
-        OnExitedCasino?.Invoke(cookingHomebaseEntrance);
-
-        thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-
-
-    }
-
-    public void OnNoButtonEntrance()
-    {
-
-        OnEnteredCasino?.Invoke(cookingHomebaseEntrance);
+        OnExitedCookingHomeBase?.Invoke(cookingHomebaseEntrance);
 
         entranceCheck.SetActive(false);
 
@@ -58,13 +50,28 @@ public class CookingHomebaseEntrance : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
+        yesButton.onClick.RemoveAllListeners();
+    }
+
+    public void OnNoButtonEntrance()
+    {
+
+        OnExitedCookingHomeBase?.Invoke(cookingHomebaseEntrance);
+
+        entranceCheck.SetActive(false);
+
+        thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
+        noButton.onClick.RemoveAllListeners();
 
     }
 
     public void OnNoButtonExit()
     {
 
-        OnEnteredCasino?.Invoke(cookingHomebaseExit);
+        OnEnteredCookingHomeBase?.Invoke(cookingHomebaseExit);
 
         entranceCheck.SetActive(false);
 
@@ -72,6 +79,7 @@ public class CookingHomebaseEntrance : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
+        noButton.onClick.RemoveAllListeners();
 
     }
 

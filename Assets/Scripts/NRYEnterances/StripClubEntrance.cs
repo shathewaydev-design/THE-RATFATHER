@@ -7,8 +7,8 @@ using UnityEngine.UI;
 
 public class StripClubEntrance : MonoBehaviour
 {
-    public static event Action<Transform> OnEnteredCasino;
-    public static event Action<Transform> OnExitedCasino;
+    public static event Action<Transform> OnEnteredStripClub;
+    public static event Action<Transform> OnExitedStripClub;
 
     [SerializeField] Transform stripClubEntrance;
     [SerializeField] Transform stripClubExit;
@@ -26,53 +26,66 @@ public class StripClubEntrance : MonoBehaviour
     public bool hasEnteredBefore = false;
 
 
+    public static event Action OnSCCutsceneTriggered;
+
+
     public void OnYesButtonEntrance()
     {
 
         if (!hasEnteredBefore)
         {
+
             StubbedCutsceneManager.Instance.OpenCutscene(0);
+
+            OnSCCutsceneTriggered?.Invoke();
 
             entranceCheck.SetActive(false);
 
             hasEnteredBefore = true;
+            NRYLevelManager.Instance.hasEnteredClubOnce = true;
 
             return;
 
 
         }
 
-        OnEnteredCasino?.Invoke(stripClubExit);
+        OnEnteredStripClub?.Invoke(stripClubExit);
 
         entranceCheck.SetActive(false);
 
         thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+
+        yesButton.onClick.RemoveAllListeners();
 
     }
 
     public void OnYesButtonExit()
     {
-        OnExitedCasino?.Invoke(stripClubEntrance);
-
-        thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-
-
-    }
-
-    public void OnNoButtonEntrance()
-    {
-
-        OnEnteredCasino?.Invoke(stripClubEntrance);
+        OnExitedStripClub?.Invoke(stripClubEntrance);
 
         entranceCheck.SetActive(false);
 
         thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+
+        yesButton.onClick.RemoveAllListeners();
+    }
+
+    public void OnNoButtonEntrance()
+    {
+
+        OnEnteredStripClub?.Invoke(stripClubEntrance);
+
+        entranceCheck.SetActive(false);
+
+        thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
+        noButton.onClick.RemoveAllListeners();
 
 
     }
@@ -80,13 +93,15 @@ public class StripClubEntrance : MonoBehaviour
     public void OnNoButtonExit()
     {
 
-        OnEnteredCasino?.Invoke(stripClubExit);
+        OnExitedStripClub?.Invoke(stripClubExit);
 
         entranceCheck.SetActive(false);
 
         thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+
+        noButton.onClick.RemoveAllListeners();
 
 
     }

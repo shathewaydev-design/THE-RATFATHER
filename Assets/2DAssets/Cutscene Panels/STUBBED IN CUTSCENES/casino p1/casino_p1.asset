@@ -12,7 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57b0ef09dd7573e48a448d61de597dd8, type: 3}
   m_Name: casino_p1
   m_EditorClassIdentifier: Assembly-CSharp::StubbedCutsceneData
-  panels: []
+  panels:
+  - {fileID: 21300000, guid: 06a4ea9335274b9448229a05d52c70c2, type: 3}
+  - {fileID: 21300000, guid: 745e3aca2f6684244a7ceb9050e2cf0e, type: 3}
+  - {fileID: 21300000, guid: a85d6f991b6c19643a01cbcd3201a337, type: 3}
+  - {fileID: 21300000, guid: 1113c35ae54fe7444a0b423023dfd69e, type: 3}
   teleportsPlayerOnFinish: 0
+  teleport: {x: 0, y: 0, z: 0}
   opensNewScene: 0
   scenename: 
+  OpensPoker: 1

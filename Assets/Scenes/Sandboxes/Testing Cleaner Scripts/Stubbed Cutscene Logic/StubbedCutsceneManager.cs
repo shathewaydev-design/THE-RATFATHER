@@ -28,6 +28,8 @@ public class StubbedCutsceneManager : MonoBehaviour
     [SerializeField] private CanvasGroup fade;
     [SerializeField] private float fadeDuration = 0.25f;
 
+    public GameObject pokerPanel;
+
     public bool inCutscene;
 
     private void Awake()
@@ -104,10 +106,14 @@ public class StubbedCutsceneManager : MonoBehaviour
         {
             TeleportPlayer();
         }
+        else if (currStubbedCutscene.OpensPoker)
+        {
+            OpenPokerPanel();
+        }
 
 
-        thirdPersonController.GetComponent<PlayerInput>()
-            .SwitchCurrentActionMap("Player");
+            thirdPersonController.GetComponent<PlayerInput>()
+                .SwitchCurrentActionMap("Player");
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
@@ -115,6 +121,10 @@ public class StubbedCutsceneManager : MonoBehaviour
 
     }
 
+    public void OpenPokerPanel()
+    {
+        pokerPanel.SetActive(true);
+    }
 
 
 
