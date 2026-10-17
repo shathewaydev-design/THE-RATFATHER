@@ -51,7 +51,7 @@ public class WithdrawalMechanic : MonoBehaviour
     // DESPERATE FIX TIMER
     // =========================================================
     [Header("Desperate Fix Timer")]
-    private float desperateFixTimeRemaining;
+    public float desperateFixTimeRemaining;
 
     // =========================================================
     // WITHDRAWAL THRESHOLDS
@@ -530,6 +530,13 @@ public class WithdrawalMechanic : MonoBehaviour
     public float GetDesperateFixTimeRemaining()
     {
         return desperateFixTimeRemaining;
+    }
+    public void StartDesperateFix()
+    {
+        if (isInDesperateFix)
+            return;
+
+        StartCoroutine(DesperateFixTimer());
     }
     public IEnumerator DesperateFixTimer()
     {
