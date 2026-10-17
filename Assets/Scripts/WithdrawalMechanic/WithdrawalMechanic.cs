@@ -47,6 +47,11 @@ public class WithdrawalMechanic : MonoBehaviour
     //this will be changed by the cheese rarity
     [SerializeField] private float resetAmountEndOfDay = 0.15f;
     //15% of maximumWithdrawalTime will be reset at the end of each day
+     // =========================================================
+    // DESPERATE FIX TIMER
+    // =========================================================
+    [Header("Desperate Fix Timer")]
+    private float desperateFixTimeRemaining;
 
     // =========================================================
     // WITHDRAWAL THRESHOLDS
@@ -439,7 +444,7 @@ public class WithdrawalMechanic : MonoBehaviour
         {
             withdrawalDrainRate = maximumWithdrawalDrainRate;
         }
-
+        
         Debug.Log("New day. Withdrawal and tolerance partial reset.");
     }
 
@@ -455,8 +460,12 @@ public class WithdrawalMechanic : MonoBehaviour
         currentStage = WithdrawalStage.PassedOut;
         passOutAnimationController.SetTrigger("PassOut");
         DayManager.Instance.StartNextDay();
+        NewDay();// partial cheese drain rate recovery
 
         timeUntilWithdrawal = baseWithdrawalTime;//restart withdrawal timer for next day
+
+        UpdateWithdrawalStage();
+
         Debug.Log(
             "Player has passed out due to withdrawal."
         );
@@ -518,13 +527,48 @@ public class WithdrawalMechanic : MonoBehaviour
 //     {
 //         return cheeseTolerance;
 //     }
+    public float GetDesperateFixTimeRemaining()
+    {
+        return desperateFixTimeRemaining;
+    }
     public IEnumerator DesperateFixTimer()
     {
-        withdrawalVignette[2].SetActive(true);
-        yield return new WaitForSeconds(desperateFixDuration);
-        withdrawalVignette[2].SetActive(false);
-        isInDesperateFix = false;
+        // withdrawalVignette[2].SetActive(true);
+        // yield return new WaitForSeconds(desperateFixDuration);
+        // withdrawalVignette[2].SetActive(false);
+        // isInDesperateFix = false;
+        // canEnterDesperateFix = false;
+        // Debug.Log("Desperate Fix mode has ended.");
+
+        if (isInDesperateFix)
+            yield break;
+
+        isInDesperateFix = true;
         canEnterDesperateFix = false;
+        desperateFixTimeRemaining = desperateFixDuration;
+
+        withdrawalVignette[2].SetActive(true);
+
+        Debug.Log("Desperate Fix mode has started.");
+
+        while (desperateFixTimeRemaining > 0f)
+        {
+            desperateFixTimeRemaining -= Time.deltaTime;
+            yield return null;
+        }
+
+        desperateFixTimeRemaining = 0f;
+
+        // End Desperate Fix independently of the withdrawal stage.
+        isInDesperateFix = false;
+        withdrawalVignette[2].SetActive(false);
+
+        // Allow the player to enter again if they are still
+        // in Critical or Emergency.
+        canEnterDesperateFix =
+            currentStage == WithdrawalStage.Critical ||
+            currentStage == WithdrawalStage.Emergency;
+
         Debug.Log("Desperate Fix mode has ended.");
     }
 }
