@@ -1208,7 +1208,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""1f9d775b-2e98-4ecf-a8a5-6bd7cecc351c"",
                     ""path"": ""<Keyboard>/t"",
-                    ""interactions"": ""Press"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
                     ""action"": ""Sprinkle"",
