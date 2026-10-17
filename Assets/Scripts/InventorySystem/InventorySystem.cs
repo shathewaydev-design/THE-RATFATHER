@@ -28,7 +28,7 @@ public class InventorySystem : MonoBehaviour
 
         RefreshIngredientUI();
         RefreshCheeseUI();
-        currencyInInventory = 500f;
+        currencyInInventory = 0f;
     }
 
 

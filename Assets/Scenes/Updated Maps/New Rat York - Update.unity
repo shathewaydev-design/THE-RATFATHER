@@ -4495,7 +4495,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 874577298}
         m_TargetAssemblyTypeName: Poker, Assembly-CSharp
         m_MethodName: OnRaiseButton
         m_Mode: 1
@@ -122550,6 +122550,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Red_Poker_Table_w_Rings
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e32b905cb1bdb6f44814b2f4b8680a88, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6148596154634031546, guid: e32b905cb1bdb6f44814b2f4b8680a88, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -125168,6 +125172,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 874577297}
+  - component: {fileID: 874577298}
   m_Layer: 5
   m_Name: GAMBLING
   m_TagString: Untagged
@@ -125196,6 +125201,47 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &874577298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 874577296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc2954ecef8f91f42bb18360f9b19113, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Poker
+  promptAnimator: {fileID: 0}
+  promptCanvas: {fileID: 0}
+  thirdPersonController: {fileID: 547920564}
+  pot: 0
+  currFunds: 0
+  playerWon: 0
+  actionArea: {fileID: 1002308823}
+  raise: {fileID: 36104822}
+  check: {fileID: 970526026}
+  fold: {fileID: 1874540464}
+  call: {fileID: 1880417453}
+  gameNum: 1
+  raiseSlider: {fileID: 2018745902}
+  blindSlider: {fileID: 1116581335}
+  pokerPanel: {fileID: 1369440090}
+  blindPanel: {fileID: 1188198641}
+  dealerArea: {fileID: 1734391924}
+  tableArea: {fileID: 885663631}
+  playerArea: {fileID: 965446187}
+  dealerLastAction: {fileID: 1022764876}
+  DealerCurrBet: {fileID: 1073387342}
+  currBetRound: {fileID: 1513954053}
+  playerChips: {fileID: 533683647}
+  playerCurrBet: {fileID: 227426891}
+  potDisplay: {fileID: 1002160883}
+  raiseBetTo: {fileID: 1746740337}
+  chipSet: {fileID: 1632264671}
+  winnerAnnouncement: {fileID: 1861954097}
+  cardPrefab: {fileID: 7886226647759086633, guid: bda00902accdb79409cf6716b21337ff, type: 3}
 --- !u!1001 &875126787
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -134917,7 +134963,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 874577298}
         m_TargetAssemblyTypeName: Poker, Assembly-CSharp
         m_MethodName: OnCheckButton
         m_Mode: 1
@@ -166552,7 +166598,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1188198642
 RectTransform:
   m_ObjectHideFlags: 0
@@ -175144,6 +175190,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 5ca29fb147490164ea9557af489e5d64, type: 3}
       propertyPath: m_Name
       value: Red_Stool (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5ca29fb147490164ea9557af489e5d64, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -186417,6 +186467,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Red_Stool (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5ca29fb147490164ea9557af489e5d64, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -188695,6 +188749,9 @@ MonoBehaviour:
   currPanel: {fileID: 526523977}
   allStubbedCutscenes:
   - {fileID: 11400000, guid: b0ce43beb34852645b93b8e76fb21c5f, type: 2}
+  - {fileID: 11400000, guid: f6f66324a89a79e44978bf00c077dfac, type: 2}
+  - {fileID: 11400000, guid: b65b4791df99b4f40b145a835fcc1274, type: 2}
+  - {fileID: 11400000, guid: f6f66324a89a79e44978bf00c077dfac, type: 2}
   click: {fileID: 6855829365645724083, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   fade: {fileID: 42388250}
   fadeDuration: 0.25
@@ -190080,6 +190137,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 5ca29fb147490164ea9557af489e5d64, type: 3}
       propertyPath: m_Name
       value: Red_Stool
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5ca29fb147490164ea9557af489e5d64, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -233207,6 +233268,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Red_Stool (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5ca29fb147490164ea9557af489e5d64, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -255104,7 +255169,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 874577298}
         m_TargetAssemblyTypeName: Poker, Assembly-CSharp
         m_MethodName: OnFoldButton
         m_Mode: 1
@@ -255669,7 +255734,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 874577298}
         m_TargetAssemblyTypeName: Poker, Assembly-CSharp
         m_MethodName: OnCallButton
         m_Mode: 1
@@ -260713,6 +260778,135 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.003642384, y: 0.040000014, z: 0.04}
   m_Center: {x: 0.0008196108, y: 0.00000039429148, z: 0.020000134}
+--- !u!1001 &1911461628
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 81a80b32e288bc74e9c5dbe2fac51c80, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 81a80b32e288bc74e9c5dbe2fac51c80, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 81a80b32e288bc74e9c5dbe2fac51c80, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 81a80b32e288bc74e9c5dbe2fac51c80, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 199.8
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 81a80b32e288bc74e9c5dbe2fac51c80, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.89
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 81a80b32e288bc74e9c5dbe2fac51c80, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -199.9
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 81a80b32e288bc74e9c5dbe2fac51c80, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 81a80b32e288bc74e9c5dbe2fac51c80, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 81a80b32e288bc74e9c5dbe2fac51c80, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 81a80b32e288bc74e9c5dbe2fac51c80, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 81a80b32e288bc74e9c5dbe2fac51c80, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 81a80b32e288bc74e9c5dbe2fac51c80, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 81a80b32e288bc74e9c5dbe2fac51c80, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 81a80b32e288bc74e9c5dbe2fac51c80, type: 3}
+      propertyPath: m_Name
+      value: Statue_femaleposeyass
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: -5568371526223589888, guid: 81a80b32e288bc74e9c5dbe2fac51c80, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1911461632}
+    - targetCorrespondingSourceObject: {fileID: 4967281762742029970, guid: 81a80b32e288bc74e9c5dbe2fac51c80, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1911461631}
+  m_SourcePrefab: {fileID: 100100000, guid: 81a80b32e288bc74e9c5dbe2fac51c80, type: 3}
+--- !u!1 &1911461629 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4967281762742029970, guid: 81a80b32e288bc74e9c5dbe2fac51c80, type: 3}
+  m_PrefabInstance: {fileID: 1911461628}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1911461630 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -5568371526223589888, guid: 81a80b32e288bc74e9c5dbe2fac51c80, type: 3}
+  m_PrefabInstance: {fileID: 1911461628}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &1911461631
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1911461629}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -3132882046918964358, guid: 81a80b32e288bc74e9c5dbe2fac51c80, type: 3}
+--- !u!64 &1911461632
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1911461630}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2534964839176971238, guid: 81a80b32e288bc74e9c5dbe2fac51c80, type: 3}
 --- !u!1 &1913575303
 GameObject:
   m_ObjectHideFlags: 0
@@ -294940,7 +295134,4 @@ SceneRoots:
   - {fileID: 1729471334}
   - {fileID: 1777203197}
   - {fileID: 2051222053}
-  - {fileID: 1514060614}
-  - {fileID: 127335724}
-  - {fileID: 1901575537}
-  - {fileID: 325045900}
+  - {fileID: 1911461628}

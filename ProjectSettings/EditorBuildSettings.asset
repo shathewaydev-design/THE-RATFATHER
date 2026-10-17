@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Updated Maps/MainMenu - Update.unity
+    guid: afa002d13a10649cea100e384a57809b
+  - enabled: 1
     path: Assets/Scenes/Updated Maps/Slumps -Update.unity
     guid: 2adc1f01742cc49688eedd69f5f216bd
   - enabled: 1

@@ -124,6 +124,12 @@ public class StubbedCutsceneManager : MonoBehaviour
     public void OpenPokerPanel()
     {
         pokerPanel.SetActive(true);
+
+
+
+
+        Poker.Instance.StartGame();
+
     }
 
 
