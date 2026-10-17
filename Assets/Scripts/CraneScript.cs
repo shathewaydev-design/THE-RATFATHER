@@ -18,6 +18,8 @@ public class CraneScript : MonoBehaviour
     private bool hasReset;
 
     public bool hitBoss = false;
+    [Header("UI")]
+    public Animator promptAnimator;
 
 
 
@@ -114,6 +116,11 @@ public class CraneScript : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log("Press E to Swing Crane!");
+            if(promptAnimator != null)
+            {
+                promptAnimator.SetBool("UIappeared", true);
+                promptAnimator.SetTrigger("UIappearing");
+            }
             inRange = true;
 
         }
@@ -122,6 +129,11 @@ public class CraneScript : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            if (promptAnimator != null)
+            {
+                promptAnimator.SetBool("UIappeared", false);
+                promptAnimator.SetTrigger("UIdisappearing");
+            }
             inRange = false;
         }
     }
