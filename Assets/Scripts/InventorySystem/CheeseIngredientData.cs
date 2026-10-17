@@ -38,6 +38,6 @@ public class CheeseIngredientData : ScriptableObject
     {
         Milk,
         Flavor,
-        Addictive
+        ActiveIngredient
     }
     

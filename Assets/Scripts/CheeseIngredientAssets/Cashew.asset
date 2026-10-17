@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Cashew
   m_EditorClassIdentifier: Assembly-CSharp::CheeseIngredientData
   itemID: Cashew
-  description: Cashew
+  description: A handful of nuts plucked from the cashew tree. A rare treat down
+    in the sewers, where even the rats know that good taste comes at a price.
   ingredientName: Cashew
   icon: {fileID: 21300000, guid: 1196a90066fe8421a92333ed2c9c8a38, type: 3}
-  rarity: 1
+  ingredientRarity: 0
   type: 1
   price: 
   basePrice: 0

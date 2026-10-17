@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: FreshCowMilk
   m_EditorClassIdentifier: Assembly-CSharp::CheeseIngredientData
   itemID: FreshCowMilk
-  description: New Cow Milk
+  description: "Fresh from the farm and untouched by time. A quality ingredient for
+    quality cheese\u2014and the kind of thing customers might actually pay extra
+    for."
   ingredientName: Fresh Cow Milk
   icon: {fileID: -361980987, guid: 4361f1649a574439aafbb7a557b55a69, type: 3}
-  rarity: 1
+  ingredientRarity: 0
   type: 0
   price: 
   basePrice: 0

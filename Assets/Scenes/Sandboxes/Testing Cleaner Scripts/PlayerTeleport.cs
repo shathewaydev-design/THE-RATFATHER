@@ -11,6 +11,7 @@ public class PlayerTeleport : MonoBehaviour
         Enforcer.OnConsequenceComplete += TeleportPlayer;
         CasinoEntrance.OnEnteredCasino += TeleportPlayer;
         CasinoEntrance.OnExitedCasino += TeleportPlayer;
+        StubbedCutsceneManager.OnPlayerTeleport += TeleportPlayer;
     }
 
     private void OnDisable()
