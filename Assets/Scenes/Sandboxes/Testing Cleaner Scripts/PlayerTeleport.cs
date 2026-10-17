@@ -12,6 +12,13 @@ public class PlayerTeleport : MonoBehaviour
         CasinoEntrance.OnEnteredCasino += TeleportPlayer;
         CasinoEntrance.OnExitedCasino += TeleportPlayer;
         StubbedCutsceneManager.OnPlayerTeleport += TeleportPlayer;
+        CookingHomebaseEntrance.OnEnteredCookingHomeBase += TeleportPlayer;
+        CookingHomebaseEntrance.OnExitedCookingHomeBase += TeleportPlayer;
+
+        StripClubEntrance.OnEnteredStripClub += TeleportPlayer;
+        StripClubEntrance.OnExitedStripClub += TeleportPlayer;
+
+
     }
 
     private void OnDisable()
@@ -19,6 +26,11 @@ public class PlayerTeleport : MonoBehaviour
         Enforcer.OnConsequenceComplete -= TeleportPlayer;
         CasinoEntrance.OnEnteredCasino -= TeleportPlayer;
         CasinoEntrance.OnExitedCasino -= TeleportPlayer;
+        CookingHomebaseEntrance.OnEnteredCookingHomeBase -= TeleportPlayer;
+        CookingHomebaseEntrance.OnExitedCookingHomeBase -= TeleportPlayer;
+
+        StripClubEntrance.OnEnteredStripClub -= TeleportPlayer;
+        StripClubEntrance.OnExitedStripClub -= TeleportPlayer;
 
     }
 

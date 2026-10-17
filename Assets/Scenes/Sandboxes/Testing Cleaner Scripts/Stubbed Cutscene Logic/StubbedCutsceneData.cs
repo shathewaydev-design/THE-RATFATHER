@@ -14,6 +14,8 @@ public class StubbedCutsceneData : ScriptableObject
     public bool opensNewScene;
     [SerializeField] private string scenename;
 
+    public bool OpensPoker;
+
 
     public bool TeleportsPlayer()
     {
@@ -34,4 +36,6 @@ public class StubbedCutsceneData : ScriptableObject
 
         return scenename;
     }
+
+
 }

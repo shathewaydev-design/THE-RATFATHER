@@ -172520,7 +172520,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e933b0e97b60d7049bd79d16f369a4a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StripClubEntrance
-  stripClubEntrance: {fileID: 1560400417}
+  stripClubEntrance: {fileID: 1036768387}
   stripClubExit: {fileID: 1630213841}
   isEnterance: 0
   isExit: 1
@@ -187659,9 +187659,11 @@ MonoBehaviour:
   currPanel: {fileID: 526523977}
   allStubbedCutscenes:
   - {fileID: 11400000, guid: b0ce43beb34852645b93b8e76fb21c5f, type: 2}
+  - {fileID: 11400000, guid: f6f66324a89a79e44978bf00c077dfac, type: 2}
   click: {fileID: 6855829365645724083, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   fade: {fileID: 42388250}
   fadeDuration: 0.25
+  pokerPanel: {fileID: 1369440090}
   inCutscene: 0
 --- !u!1 &1393631514
 GameObject:
@@ -232086,6 +232088,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1698854340}
   - component: {fileID: 1698854339}
+  - component: {fileID: 1698854341}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -232143,6 +232146,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1181619664}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1698854341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1698854338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af49b2d94cc59244eadca9db8b142933, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NRYLevelManager
+  hasEnteredClubOnce: 0
 --- !u!1 &1700361409
 GameObject:
   m_ObjectHideFlags: 0

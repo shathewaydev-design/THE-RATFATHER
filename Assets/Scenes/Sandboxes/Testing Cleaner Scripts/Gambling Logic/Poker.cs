@@ -282,8 +282,13 @@ public class Poker : MonoBehaviour, IInteractable
 
 
 
+    // need to handle new loss and win system...
 
+    // game 1 - win? open cutscene 3, open game 2
+    // game 1 lose? start scene over
 
+    // game 2 win? play last cutscene 
+    // game 2 lose? start scene over
 
 
 
