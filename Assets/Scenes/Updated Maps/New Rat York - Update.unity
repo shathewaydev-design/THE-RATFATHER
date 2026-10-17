@@ -2332,15 +2332,15 @@ PrefabInstance:
       objectReference: {fileID: 1813116605}
     - target: {fileID: 7624278812443701433, guid: 60fb10d33c98e47c189093930397afd3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.969999
+      value: 0.5000002
       objectReference: {fileID: 0}
     - target: {fileID: 7624278812443701433, guid: 60fb10d33c98e47c189093930397afd3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.625
+      value: 1.375
       objectReference: {fileID: 0}
     - target: {fileID: 7624278812443701433, guid: 60fb10d33c98e47c189093930397afd3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 54.26
+      value: -5.0000005
       objectReference: {fileID: 0}
     - target: {fileID: 7624278812443701433, guid: 60fb10d33c98e47c189093930397afd3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -51823,7 +51823,6 @@ MonoBehaviour:
   mouseSensitivity: 10
   brightness: 1
   isMainMenu: 0
-  isMainMenu: 0
 --- !u!4 &389871089
 Transform:
   m_ObjectHideFlags: 0
@@ -68979,7 +68978,7 @@ Transform:
   m_GameObject: {fileID: 547920557}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10.469999, y: -5, z: 59.26}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -144262,8 +144261,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1145868976}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -25, y: 7, z: 0}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 62.1, y: 1.1, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -144271,7 +144270,7 @@ Transform:
   - {fileID: 1709269852}
   - {fileID: 18301390}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &1146941648
 GameObject:
   m_ObjectHideFlags: 0
@@ -180479,7 +180478,6 @@ MonoBehaviour:
   currPageIndex: 0
   objectivePanel: {fileID: 1823113695}
   fullFavorDisplayPrefab: {fileID: 1215103566}
-  arrow: {fileID: 0}
   favorText: {fileID: 163527579}
   objectiveTextPrefab: {fileID: 1229666337282414480, guid: 0d87a5e566a1b7749a2ebf6ae044f6ac, type: 3}
   thirdPersonController: {fileID: 547920564}
@@ -204339,7 +204337,6 @@ Transform:
   - {fileID: 1803157227}
   - {fileID: 866653697}
   - {fileID: 1906810376}
-  - {fileID: 1505653090}
   - {fileID: 1840687097}
   - {fileID: 1376914425}
   - {fileID: 1738138901}
@@ -217319,15 +217316,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.969999
+      value: 0.5000002
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.625
+      value: 1.375
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 54.26
+      value: -5.0000005
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -221162,7 +221159,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 1170612477}
+  m_Mesh: {fileID: 1585593324}
 --- !u!33 &1749966776
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -271843,3 +271840,13 @@ SceneRoots:
   - {fileID: 1264107726}
   - {fileID: 1963574308}
   - {fileID: 1582857803}
+  - {fileID: 106689131}
+  - {fileID: 151451582}
+  - {fileID: 338575835}
+  - {fileID: 560437844}
+  - {fileID: 648766128}
+  - {fileID: 1163546211}
+  - {fileID: 1729471334}
+  - {fileID: 1777203197}
+  - {fileID: 2004208992}
+  - {fileID: 2051222053}
