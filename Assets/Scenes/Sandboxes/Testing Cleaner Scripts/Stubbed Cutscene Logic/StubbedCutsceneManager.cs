@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using StarterAssets;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,8 @@ public class StubbedCutsceneManager : MonoBehaviour
 {
     public static StubbedCutsceneManager Instance;
     public ThirdPersonController thirdPersonController;
+
+    public static Action<Transform> OnPlayerTeleport;
 
     [SerializeField] private GameObject stubbedCutsceneScreen;
 
@@ -190,7 +193,7 @@ public class StubbedCutsceneManager : MonoBehaviour
         //Debug.Log("CycleThroughCutscene called!");
         Debug.Log("CycleThroughCutscene called!");
 
-        if (currPanelIndex > currStubbedCutscene.panels.Count - 1)
+        if (currPanelIndex >= currStubbedCutscene.panels.Count)
         {
 
             //Debug.Log("CycleThroughCutscene not working!");
@@ -205,9 +208,11 @@ public class StubbedCutsceneManager : MonoBehaviour
         {
             //Debug.Log("index: " + currPanelIndex);
 
-            currPanelIndex++;
+            //currPanelIndex++;
 
             currPanel.sprite = currStubbedCutscene.panels[currPanelIndex];
+
+            currPanelIndex++;
             //currPanelIndex++;
         }
     }
@@ -217,6 +222,25 @@ public class StubbedCutsceneManager : MonoBehaviour
     {
         // call player teleport
         // will invoke 
+
+        //OnPlayerTeleport?.Invoke(currStubbedCutscene.teleport.);
+
+
+        CharacterController controller =
+    thirdPersonController.GetComponent<CharacterController>();
+
+        controller.enabled = false;
+
+        thirdPersonController.transform.position =
+            currStubbedCutscene.teleport;
+
+        controller.enabled = true;
+
+
+
+
+
+
     }
 
     public void OpenScene()
