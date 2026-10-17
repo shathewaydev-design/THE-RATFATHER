@@ -7,7 +7,7 @@ public class RecipeMenuUI : MonoBehaviour
 
     private IngredientButton selectedMilk;
     private IngredientButton selectedFlavor;
-    private IngredientButton selectedAddictive;
+    private IngredientButton selectedActiveIngredient;
     private CheeseRecipeTemplate currentRecipe;//for caching recipe and check if player has selected correct ingredients
 
     public void SelectIngredient(IngredientButton button)
@@ -26,10 +26,10 @@ public class RecipeMenuUI : MonoBehaviour
                 Debug.Log("selected Flavor is "+selectedFlavor);
                 break;
 
-            case IngredientType.Addictive:
-                SetSelection(ref selectedAddictive, button);
+            case IngredientType.ActiveIngredient:
+                SetSelection(ref selectedActiveIngredient, button);
                 //button.Setup(inventorySlot.itemData);
-                Debug.Log("selectedAddictive is "+selectedAddictive);
+                Debug.Log("selectedActiveIngredient is "+selectedActiveIngredient);
                 break;
         }
 
@@ -55,7 +55,7 @@ public class RecipeMenuUI : MonoBehaviour
     void CheckReady()
     {
         
-        bool ready = selectedMilk != null && selectedFlavor != null && selectedAddictive != null;
+        bool ready = selectedMilk != null && selectedFlavor != null && selectedActiveIngredient != null;
         cookButton.interactable = ready;
 
     }
@@ -93,10 +93,10 @@ public class RecipeMenuUI : MonoBehaviour
         selectedFlavor = null;
     }
 
-    if (selectedAddictive != null)
+    if (selectedActiveIngredient != null)
     {
-        selectedAddictive.SetActive(false);
-        selectedAddictive = null;
+        selectedActiveIngredient.SetActive(false);
+        selectedActiveIngredient = null;
     }
 
     cookButton.interactable = false;

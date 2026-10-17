@@ -77,7 +77,7 @@ public class DesperateFixButton : MonoBehaviour,
         {
             StopHolding();
         }
-        DrainingDuration();
+        UpdateDesperateFixUI();
     }
 
     // =========================================================
@@ -112,31 +112,48 @@ public class DesperateFixButton : MonoBehaviour,
 
         UpdateProgress(0f);
     }
-    private void DrainingDuration()
+    private void UpdateDesperateFixUI()
     {
-        if (WithdrawalMechanic.Instance.isInDesperateFix)
-        {
+        // if (WithdrawalMechanic.Instance.isInDesperateFix)
+        // {
             
-            desperateFixTimer -= Time.deltaTime;
-            float duration = desperateFixTimer / desperateFixDuration;
+        //     desperateFixTimer -= Time.deltaTime;
+        //     float duration = desperateFixTimer / desperateFixDuration;
 
-            UpdateDesperateFixProgress(duration);
-            if (desperateFixTimer <= 0f)
-            {
-                desperateFixDurationFillUI.SetActive(false);
-                desperateFixTimer = desperateFixDuration;
-                Debug.Log("Desperate Fix mode has ended.");
-                // Additional logic for ending Desperate Fix mode can be added here
-            }
-            if (WithdrawalMechanic.Instance.currentStage == WithdrawalMechanic.WithdrawalStage.Critical || WithdrawalMechanic.Instance.currentStage == WithdrawalMechanic.WithdrawalStage.Emergency)
-            {
-                ShowDesperateFixText();
-            }
+        //     UpdateDesperateFixProgress(duration);
+        //     if (desperateFixTimer <= 0f)
+        //     {
+        //         desperateFixDurationFillUI.SetActive(false);
+        //         desperateFixTimer = desperateFixDuration;
+        //         Debug.Log("Desperate Fix mode has ended.");
+        //         // Additional logic for ending Desperate Fix mode can be added here
+        //     }
+        //     if (WithdrawalMechanic.Instance.currentStage == WithdrawalMechanic.WithdrawalStage.Critical || WithdrawalMechanic.Instance.currentStage == WithdrawalMechanic.WithdrawalStage.Emergency)
+        //     {
+        //         ShowDesperateFixText();
+        //     }
+        // }
+
+
+        if (WithdrawalMechanic.Instance == null)
+            return;
+
+        bool isActive = WithdrawalMechanic.Instance.isInDesperateFix;
+
+        desperateFixDurationFillUI.SetActive(isActive);
+
+        if (isActive)
+        {
+            float remaining = WithdrawalMechanic.Instance.GetDesperateFixTimeRemaining();
+
+            float progress = remaining / desperateFixDuration;
+
+            UpdateDesperateFixProgress(Mathf.Clamp01(progress));
         }
     }
     private void ActivateDesperateFix()
     {
-        if (isActivating)
+        /*if (isActivating)
             return;
 
         isActivating = true;
@@ -153,7 +170,24 @@ public class DesperateFixButton : MonoBehaviour,
         ResetProgress();
 
         isActivating = false;
-        //this.gameObject.SetActive(false);
+        //this.gameObject.SetActive(false);*/
+
+        if (isActivating)
+            return;
+
+
+        if (WithdrawalMechanic.Instance == null || WithdrawalMechanic.Instance.isInDesperateFix)
+            return;
+
+        isActivating = true;
+
+        HideDesperateFixText();
+        desperateFixDurationFillUI.SetActive(true);
+
+        WithdrawalMechanic.Instance.StartDesperateFix();
+
+        ResetProgress();
+        isActivating = false;
     }
 
     // =========================================================
