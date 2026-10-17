@@ -33,6 +33,8 @@ public class NRYLevelManager : MonoBehaviour
         ObjectiveManager.Instance.pages[0].objectives.Add("Ask around for Tommy.");
         ObjectiveManager.Instance.pages[0].objectives.Add("Continue your 'business'.");
 
+        InventorySystem.Instance.AddToCurrency(500);
+        Debug.Log("Currency: " + InventorySystem.Instance.GetCurrency() );
     }
 
 
