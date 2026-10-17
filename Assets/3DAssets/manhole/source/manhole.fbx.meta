@@ -3,7 +3,12 @@ guid: 4f3c7eae5ad6943d89a610e20434db6a
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: manhole
+    second: {fileID: 2100000, guid: da7a8b01c673841a5914de3e4e9cf701, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
