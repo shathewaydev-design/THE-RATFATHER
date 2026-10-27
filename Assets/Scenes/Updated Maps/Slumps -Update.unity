@@ -56552,6 +56552,7 @@ MonoBehaviour:
   click: {fileID: 6855829365645724083, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   fade: {fileID: 1727933485}
   fadeDuration: 0.25
+  pokerPanel: {fileID: 0}
   inCutscene: 0
 --- !u!1 &437062629
 GameObject:
@@ -170249,7 +170250,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7259078574971343205, guid: 1188741e682aef646baa67a18b7434e0, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -189654,7 +189655,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7259078574971343205, guid: 1188741e682aef646baa67a18b7434e0, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
