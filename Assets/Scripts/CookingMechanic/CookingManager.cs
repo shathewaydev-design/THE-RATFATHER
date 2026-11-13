@@ -224,7 +224,7 @@ public class CookingManager : MonoBehaviour, IInteractable
 
     public void FinishCooking()
     {
-            Debug.Log("COOK BUTTON CLICKED");
+        Debug.Log("COOK BUTTON CLICKED");
 
         CheckRecipe();
         
