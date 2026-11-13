@@ -23261,7 +23261,7 @@ MonoBehaviour:
     m_SingletonActionBindings: []
     m_Flags: 0
   pauseGame:
-    m_Name: 
+    m_Name: Pause Game
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: ef155b34-2021-494a-abbd-29b8eb1fce2b
@@ -34846,6 +34846,7 @@ MonoBehaviour:
   click: {fileID: 6855829365645724083, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   fade: {fileID: 173517540}
   fadeDuration: 0.25
+  pokerPanel: {fileID: 0}
   inCutscene: 0
 --- !u!1 &846803375
 GameObject:

@@ -18,7 +18,7 @@ MonoBehaviour:
   ingredientName: 
   icon: {fileID: -1173774414, guid: 837f3e8591ff748409bfa9c8e0802cca, type: 3}
   ingredientRarity: 0
-  type: 0
+  type: 3
   price: 0
   basePrice: 0
   maxStack: 1
