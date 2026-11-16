@@ -1,114 +1,45 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections.Generic;
 
 public class NPCInteractionScript : MonoBehaviour, IInteractable
 {
-    public static event Action<NPCProfile_New> OnStartInteraction;
-
-    private bool playerInRange = false;
-
-    [SerializeField] private NPCProfile_New profile; // make sure to change when completely finished to NPCProfile!!!
+    [Header("Interaction")]
+    // [SerializeField] private float holdTime = 1.0f;
+    // [SerializeField] private float currentHoldTime = 0f;
+    //private bool playerInRange = false;
 
     [Header("UI")]
-    [SerializeField] private TextMeshProUGUI npcName;
     public Animator promptAnimator;
-    [SerializeField] private GameObject promptCanvas;
-    [SerializeField] private GameObject TrustPanel;
-    [SerializeField] private GameObject TrustIndicator;
-    // public Slider TrustSlider   ????
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created   
-    void Start()
-    {
-        profile.SetMetPlayer(false);
-        if (!profile.GetHasMetPlayer())
-        {
-            profile.GetState().compFavors = 0;
-        }
-
-        profile.SetTrustLevel(0f);
-
-        npcName.text = profile.GetName();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //Debug.Log("" + profile.GetState().compFavors);
-        //Debug.Log("current trust: " + profile.GetTrustLevel());
-    }
+    //public Image holdProgressBar;
 
 
-    void OnEnable()
-    {
-        // laptop.PriceChanged += OnPriceChanged;
-        NPCProfile_New.OnTrustLevelChange += CheckTrustLevel;
-        FavorManager.OnFavorComplete += CompletedFavor;
+    // void Start()
+    // {
+        
+    // }
+
+    // void Update()
+    // {
+        
+    // }
 
 
-    }
-
-    void OnDisable()
-    {
-        NPCProfile_New.OnTrustLevelChange -= CheckTrustLevel;
-        FavorManager.OnFavorComplete -= CompletedFavor;
-    }
 
     public void Interact()
     {
-        // pull up proper dialogue
-
-
-        string dialogueNode = profile.GetCurrDialogueNode();
-        //Debug.Log("Starting Yarn node: " + dialogueNode);
-
-        //Debug.Log("node: " + profile.GetCurrDialogueNode());
-        DialogueManager_New.Instance.StartConversation(dialogueNode, this); // old: StartConversation(testingIntro)
-    }
-
-    private void CheckTrustLevel(float lvl)
-    {
-        if (profile.GetTrustLevel() < 0)
-        {
-            profile.SetTrustLevel(0);
-        }
-
-        if (profile.GetTrustLevel() > profile.GetMaxTrust())
-        {
-            profile.SetTrustLevel(profile.GetMaxTrust());
-        }
-
-        
-    }
-
-    public void SetTrustUI()
-    {
-
-    }
-
-
-    private void CompletedFavor(FavorState favor)
-    {
-        profile.IncreaseCompFavors(favor);
-    }
-
-    public NPCProfile_New GetProfile()
-    {
-        return profile;
+        Debug.Log("Interacting with NPC Template");
     }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            playerInRange = true;
-            Debug.Log("playerInRange is " + playerInRange);
-
-
-            if (promptAnimator != null)
+            //playerInRange = true;
+            if(promptAnimator != null)
             {
-                //promptCanvas.transform.position += new Vector3(0, 2f, 0); // making "E" appear obce npc heads
                 promptAnimator.SetBool("UIappeared", true);
                 promptAnimator.SetTrigger("UIappearing");
             }
@@ -120,14 +51,13 @@ public class NPCInteractionScript : MonoBehaviour, IInteractable
     {
         if (other.CompareTag("Player"))
         {
-            playerInRange = false;
+            //playerInRange = false;
             //Debug.Log("playerInRange is "+playerInRange);
-
-            if (promptAnimator != null)
+            //currentHoldTime = 0f;
+            if(promptAnimator != null)
             {
                 promptAnimator.SetBool("UIappeared", false);
                 promptAnimator.SetTrigger("UIdisappearing");
-                //promptCanvas.transform.position += new Vector3(0, -2f, 0); // go back to below npc heads
             }
         }
     }

@@ -11,19 +11,19 @@ public class UIInventorySlot : MonoBehaviour
     public Text ingredientNameText;
     public IngredientButton ingredientButton;
     private RecipeMenuUI recipeMenuUI;
-    private Button button;
-    private IngredientButton ingredientButtonComponent;
+    //private Button button;
+    //private IngredientButton ingredientButtonComponent;
 
     void Start()
     {
-        button = GetComponent<Button>();
-        ingredientButtonComponent = GetComponent<IngredientButton>();
+        //button = GetComponent<Button>();
+        //ingredientButtonComponent = GetComponent<IngredientButton>();
     }
     public void Initialize(RecipeMenuUI menu)
     {
         recipeMenuUI = menu;
     }
-    public void SetSlot(InventorySlot slot)//grab data from the inventory slot and display the UI elements accordingly
+    public void SetSlot(InventorySlot slot)//grab inventory slot data from the UI Inventory and display the UI elements accordingly
     {
         ingredientButton.Initialize(recipeMenuUI);
         icon.sprite = slot.itemData.icon;

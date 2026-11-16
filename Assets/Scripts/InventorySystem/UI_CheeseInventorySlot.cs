@@ -11,12 +11,12 @@ public class UI_CheeseInventorySlot : MonoBehaviour
     public Text cheeseNameText;
     public CheeseButton cheeseButton;
     //private RecipeMenuUI recipeMenuUI;
-    private Button button;
+    //private Button button;
     //private IngredientButton ingredientButtonComponent;
 
     void Start()
     {
-        button = GetComponent<Button>();
+        //button = GetComponent<Button>();
         //ingredientButtonComponent = GetComponent<IngredientButton>();
     }
     // public void Initialize(RecipeMenuUI menu)
