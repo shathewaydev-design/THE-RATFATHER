@@ -5,6 +5,8 @@ public class FinalResultCheese : ScriptableObject
 {
     public string cheeseName;
     public CheeseRarity cheeseRarity;
+    public CheeseType cheeseType;
+    public StabilityLevel stability;
 
     public Sprite icon;
 
@@ -13,11 +15,10 @@ public class FinalResultCheese : ScriptableObject
 
     public int basePrice;
 
-    public bool grantsDoubleJump;
     
     public int maxStack = 10;
 
-    public StabilityLevel stability;
+    
 }
 public enum StabilityLevel
 {
@@ -26,9 +27,14 @@ public enum StabilityLevel
     High
 }
 public enum CheeseRarity
-    {
-        Common,
-        Rare,
-        Epic,
-        Legendary
-    }
+{
+    Common,
+    Rare,
+    Epic,
+    Legendary
+}
+public enum CheeseType
+{
+    Upper,
+    Downer
+}

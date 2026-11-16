@@ -164,11 +164,11 @@ public class InventoryUIController : MonoBehaviour
         UseButton useButtonScript = useButton.GetComponent<UseButton>();
         // useButtonScript.cheeseButtonRef.cheeseInventorySlot.finalCheeseData.grantsDoubleJump
         // Double jump
-        if (useButtonScript.cheeseButtonRef.cheeseInventorySlot.finalCheeseData.grantsDoubleJump)
-        {
-            ThirdPersonController.Instance.EnableDoubleJump();
-            ThirdPersonController.Instance.canDoubleJump = true;
-        }
+        // if (useButtonScript.cheeseButtonRef.cheeseInventorySlot.finalCheeseData.grantsDoubleJump)
+        // {
+        //     ThirdPersonController.Instance.EnableDoubleJump();
+        //     ThirdPersonController.Instance.canDoubleJump = true;
+        // }
     }
     private void ClearCheeseSelection()
     {
