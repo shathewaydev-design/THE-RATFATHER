@@ -57,6 +57,7 @@ public class NPCInteractionScript : MonoBehaviour, IInteractable
 
     public void Interact()
     {
+        Debug.Log("interacting with NPC");
         // pull up proper dialogue
 
 
