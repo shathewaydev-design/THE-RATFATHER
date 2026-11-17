@@ -25,42 +25,43 @@ public class CheeseButton : MonoBehaviour
             isSelected = false;
             // HIDE INFO PANEL
             InventoryUIController.Instance.HideCheeseInfo();
-            //ClearSelectedCheese();
+            ClearSelectedCheese();
         }
         else//select
         {
             isSelected = true;
             // SHOW INFO PANEL
             InventoryUIController.Instance.ShowCheeseInfo(cheeseInventorySlot.finalCheeseData);
-            //ClearSelectedCheese();//if the player already has a selected cheese, 
-            //CacheSelectedCheese();//replace it with the new one
+            ClearSelectedCheese();//if the player already has a selected cheese, 
+            CacheSelectedCheese();//replace it with the new one
         }
-        if (InventoryUIController.Instance.selectedCheeses.Contains(this))
-        {
-            InventoryUIController.Instance.selectedCheeses.Remove(this);
-            //if player click on the same cheese button, deselect it and remove from selected cheeses list; 
-            //SetActive(false);
-        }
-        else
-        {
-            InventoryUIController.Instance.selectedCheeses.Clear(); // if single select
-            InventoryUIController.Instance.selectedCheeses.Add(this);//cacheSelectedCheese
-            //SetActive(true);
-        }
+        // if (CheeseAbilitySystem.Instance.selectedCheese.Contains(this))
+        // {
+        //     CheeseAbilitySystem.Instance.selectedCheese.Remove(this);
+        //     //if player click on the same cheese button, deselect it and remove from selected cheeses list; 
+        //     //SetActive(false);
+        // }
+        // else
+        // {
+        //     CheeseAbilitySystem.Instance.selectedCheese.Clear(); // if single select
+        //     CheeseAbilitySystem.Instance.selectedCheese.Add(this);//cacheSelectedCheese
+        //     //SetActive(true);
+        // }
 
         InventoryUIController.Instance.UpdateUseButton();
     }
-    // public void CacheSelectedCheese()
-    // {
-    //     if(!InventoryUIController.Instance.selectedCheeses.Contains(this))
-    //     {
-    //         InventoryUIController.Instance.selectedCheeses.Add(this);
-    //         InventoryUIController.Instance.UpdateUseButton();//initialize the use button with the selected cheese;this
-    //     }
-    // }
-    // public void ClearSelectedCheese()
-    // {
-    //     InventoryUIController.Instance.selectedCheeses.Clear();
+    public void CacheSelectedCheese()
+    {
+        
+        CheeseAbilitySystem.Instance.SelectCheese(this);
+        InventoryUIController.Instance.selectedCheeses.Add(this);//initialize the use button with the selected cheese;this
+        
+    }
+    public void ClearSelectedCheese()
+    {
+        CheeseAbilitySystem.Instance.SelectCheese(null);
+        InventoryUIController.Instance.selectedCheeses.Remove(this);//initialize the use button with the selected cheese;this
+    }
     
     // public void RemoveIngredient()
     // {
