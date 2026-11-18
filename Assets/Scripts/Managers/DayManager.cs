@@ -5,19 +5,31 @@ using System;
 public class DayManager : MonoBehaviour
 {
     public static DayManager Instance;
+    WithdrawalMechanic withdrawalMechanicScript = WithdrawalMechanic.Instance;
+    CheeseAbilitySystem cheeseAbilitySystemScript = CheeseAbilitySystem.Instance;
 
     [Header("Time Settings")]
-    public float dayDuration = 360f;
+    [SerializeField] private float dayDuration = 360f;
+    [SerializeField] private float seconds;
+    [SerializeField] private float minutes;
 
-    private float timer;
+    private float timeLeft;
     private bool isDay = true;
+    public Level currentGameLevel;
+    public enum Level
+    {
+        Slumps,
+        NRY
+    }
 
     [Header("Day Count")]
     public int currentDay = 1;//current day of the week
-    public int maxDays = 7;
+    [SerializeField] private int maxDays;
+    [SerializeField] private int maxDaysAtSlumps = 3;
+    [SerializeField] private int maxDaysAtNRY = 7;
 
     [Header("UI")]
-    public GameObject sunIcon;
+    public Image timeLeftUI;
     public Text dayText;
 
 
@@ -41,9 +53,13 @@ public class DayManager : MonoBehaviour
 
     private void Update()
     {
-        timer += Time.deltaTime;
+        timeLeft -= Time.deltaTime;
+        float fillAmount = timeLeft / dayDuration;
+        timeLeftUI.fillAmount = fillAmount;
 
-        if (isDay && timer >= dayDuration)
+        seconds = Mathf.FloorToInt(timeLeft % 60);
+        minutes = Mathf.FloorToInt(timeLeft / 60) % 60;
+        if (isDay && timeLeft <= 0)
         {
             StartNextDay();
         }
@@ -53,19 +69,27 @@ public class DayManager : MonoBehaviour
     void StartDay()
     {
         isDay = true;
-        timer = 0f;
+        timeLeft = dayDuration;
 
-        sunIcon.SetActive(true);
+        //timeLeftUI.SetActive(true);
 
         UpdateUI();
 
-        OnNewDay?.Invoke(); // 🔥 Ingredient spawn trigger
+        OnNewDay?.Invoke(); //  Ingredient spawn trigger
     }
 
     public void StartNextDay()//run this function when day is over, and start next day.
     {
         currentDay++;
-        //WithdrawalMechanic.Instance.NewDay(); // partial cheese drain rate recovery
+        if(withdrawalMechanicScript != null)
+        {
+            withdrawalMechanicScript.NewDay(); // partial cheese drain rate recovery
+        }
+        if(cheeseAbilitySystemScript != null)
+        {
+            cheeseAbilitySystemScript.ResetDailyCheeseLimits(); // reset daily cheese consumption limits
+        }
+
         if (currentDay > maxDays)
         {
             EndWeek();
@@ -78,6 +102,15 @@ public class DayManager : MonoBehaviour
     void UpdateUI()
     {
         dayText.text = "Day " + currentDay;
+    }
+
+    public void AddTime(float additionalTimeFromDownerChese)
+    {
+        timeLeft += additionalTimeFromDownerChese;
+        if (timeLeft >= dayDuration)
+        {
+            timeLeft = dayDuration;
+        }
     }
 
     void EndWeek()

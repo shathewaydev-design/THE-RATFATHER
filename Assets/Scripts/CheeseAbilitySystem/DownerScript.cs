@@ -6,11 +6,12 @@ using System.Collections.Generic;
 public class DownerScript : MonoBehaviour
 {
     //this script is for the downer
-    // add time to game, add time during casino fight
+    // add time to game, make NPCs go to sleep
     
 
     //[SerializeField] private TMP_Text useButtonText; // Reference to the Text component of the button
-
+    [Header("Downer Settings")]
+    [SerializeField] private float downerDuration = 90f;
 
 
 
@@ -23,6 +24,7 @@ public class DownerScript : MonoBehaviour
     public void AddTime()
     {
         Debug.Log("Downer ability activated!");
+        DayManager.Instance.AddTime(downerDuration);
     }
     
     

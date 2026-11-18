@@ -53,13 +53,12 @@ public class CheeseButton : MonoBehaviour
     public void CacheSelectedCheese()
     {
         
-        CheeseAbilitySystem.Instance.SelectCheese(this);
-        InventoryUIController.Instance.selectedCheeses.Add(this);//initialize the use button with the selected cheese;this
+        InventoryUIController.Instance.selectedCheeses.Add(this);
+        //initialize the use button with the selected cheese;this
         
     }
     public void ClearSelectedCheese()
     {
-        CheeseAbilitySystem.Instance.SelectCheese(null);
         InventoryUIController.Instance.selectedCheeses.Remove(this);//initialize the use button with the selected cheese;this
     }
     

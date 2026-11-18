@@ -9,11 +9,15 @@ public class CheeseAbilitySystem : MonoBehaviour
     public static CheeseAbilitySystem Instance;
     
 
-    public CheeseButton selectedCheese;//ref to the cheese button 
-
     //[SerializeField] private TMP_Text useButtonText; // Reference to the Text component of the button
     [SerializeField] private HypervigilanceScript hypervigilanceScript;
     [SerializeField] private DownerScript downerScript;
+    [Header("Cheese Ability Settings")]
+    [SerializeField] private int upperCheeseLimit = 3;
+    [SerializeField] private int currentNumberUpperCheeseTaken = 0;
+    [SerializeField] private int downerCheeseLimit = 3;
+    [SerializeField] private int currentNumberDownerCheeseTaken = 0;
+
 
 
     private void Awake()
@@ -26,27 +30,50 @@ public class CheeseAbilitySystem : MonoBehaviour
     //     // Set the initial text of the button based on the current state
     
     // }
-    public void SelectCheese(CheeseButton cheese)
-    {
-        selectedCheese = cheese;
-    }
+ 
     
-    public void GivePlayerAbility()
+    
+    public bool TryConsumeCheese(FinalResultCheese finalResultCheese)
     {
-        if (selectedCheese == null)
-            return;
-        CheeseType type = selectedCheese.cheeseInventorySlot.finalCheeseData.cheeseType;
-        switch (type)
+        if (finalResultCheese == null)
+            return false;
+
+        switch (finalResultCheese.cheeseType)
         {
             case CheeseType.Upper:
+
+                if (currentNumberUpperCheeseTaken >= upperCheeseLimit)
+                {
+                    NotificationUIController.Instance.ShowNotification("I can't eat more Upper Cheese today.");
+                    return false;
+                }
+
                 hypervigilanceScript.ActivateHypervigilance();
-                break;
+                currentNumberUpperCheeseTaken++;
+                return true;
+
 
             case CheeseType.Downer:
+
+                if (currentNumberDownerCheeseTaken >= downerCheeseLimit)
+                {
+                    NotificationUIController.Instance.ShowNotification("I can't eat more Downer Cheese today.");
+                    return false;
+                }
+
                 downerScript.AddTime();
-                break;
+                currentNumberDownerCheeseTaken++;
+                return true;
         }
-        selectedCheese = null; 
+
+        return false;
+    }
+    public void ResetDailyCheeseLimits()
+    {
+        currentNumberUpperCheeseTaken = 0;
+        currentNumberDownerCheeseTaken = 0;
+
+        Debug.Log("Daily cheese consumption limits reset!");
     }
 
     
