@@ -8,8 +8,8 @@ public class InventorySystem : MonoBehaviour
     public static InventorySystem Instance;
     public List<InventorySlot> ingredientInventory = new();//test new system; inventory
     public List<CheeseInventorySlot> cheeseInventory = new();//cheese inventory
-    [SerializeField] private UI_Inventory inventoryUI;//for ingredients
-    [SerializeField] private UI_CheeseInventory cheeseInventoryUI;//for cheese
+    [SerializeField] private UI_Inventory UIinventory;//for ingredients
+    [SerializeField] private UI_CheeseInventory UIcheeseInventory;//for cheese
     private Dictionary<CheeseIngredientData, int> inventory = new Dictionary<CheeseIngredientData, int>();
 
     public static event Action<CheeseIngredientData, FinalResultCheese> OnInventoryChange; // soph added
@@ -288,10 +288,10 @@ public class InventorySystem : MonoBehaviour
 
     private void RefreshIngredientUI()
     {
-        inventoryUI.Refresh(ingredientInventory);
+        UIinventory.Refresh(ingredientInventory);
     }
     private void RefreshCheeseUI()
     {
-        cheeseInventoryUI.RefreshCheeseUIInventory(cheeseInventory);
+        UIcheeseInventory.RefreshCheeseUIInventory(cheeseInventory);
     }
 }

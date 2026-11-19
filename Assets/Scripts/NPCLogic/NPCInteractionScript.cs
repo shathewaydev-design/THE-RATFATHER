@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 using System.Collections.Generic;
-
+using TMPro;
 public class NPCInteractionScript : MonoBehaviour, IInteractable
 {
     public static event Action<NPCProfile_New> OnStartInteraction;
@@ -57,6 +57,7 @@ public class NPCInteractionScript : MonoBehaviour, IInteractable
 
     public void Interact()
     {
+        Debug.Log("interacting with NPC");
         // pull up proper dialogue
 
 
@@ -64,7 +65,7 @@ public class NPCInteractionScript : MonoBehaviour, IInteractable
         //Debug.Log("Starting Yarn node: " + dialogueNode);
 
         //Debug.Log("node: " + profile.GetCurrDialogueNode());
-        DialogueManager_New.Instance.StartConversation(dialogueNode, this); // old: StartConversation(testingIntro)
+        //DialogueManager_New.Instance.StartConversation(dialogueNode, this); // old: StartConversation(testingIntro)
     }
 
     private void CheckTrustLevel(float lvl)

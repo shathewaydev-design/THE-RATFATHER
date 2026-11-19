@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afb98a8dbf6864716942009340b32fae, type: 3}
+  m_Name: Fresh_ToadstoolUpperCheeseRecipe
+  m_EditorClassIdentifier: Assembly-CSharp::CheeseRecipeTemplate
+  cheeseRecipeName: Fresh Upper Cheese Recipe
+  icon: {fileID: 21300000, guid: b28381f902ae8454ba3020ffda0994bb, type: 3}
+  requiredIngredients:
+  - {fileID: 11400000, guid: 8b19c1d70f0c444c982b3174595004da, type: 2}
+  - {fileID: 11400000, guid: 554e8a2ea4b5e4c16af6be62fd31b0c5, type: 2}
+  - {fileID: 11400000, guid: 92ecc9f3d955a45638bac3a089e2ea8d, type: 2}
+  resultCheese: {fileID: 11400000, guid: 6c936a96a2525447aa51ca01519fec9c, type: 2}
+  stability: 0

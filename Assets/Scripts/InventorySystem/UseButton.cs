@@ -21,6 +21,8 @@ public class UseButton : MonoBehaviour
     public bool isSelling = false;
     public bool isConsuming = true;
 
+    WithdrawalMechanic withdrawalMechanicScript = WithdrawalMechanic.Instance;
+
     // private void Awake()//this is necessary to avoid bugs
     // {
     //     if (Instance == null)
@@ -32,9 +34,10 @@ public class UseButton : MonoBehaviour
 
     // void Start()
     // {
-    //     // Set the initial text of the button based on the current state
-    //     UpdateButtonText();
-    // }
+        // Set the initial text of the button based on the current state
+        //UpdateButtonText();
+        
+    //}
     
     public void UseButtonInteracted()
     {
@@ -77,17 +80,28 @@ public class UseButton : MonoBehaviour
         {
             CheeseInventorySlot cheeseSlot = cheeseButtonRef.cheeseInventorySlot;
             if (cheeseSlot.quantity > 0)
-            // Consume the cheese (can add more logic here, e.g., apply effects to the player)
             {
-                Debug.Log("Used cheese: " + cheeseSlot.finalCheeseData.cheeseRarity);
-                InventoryUIController.Instance.ApplyEffect();
-                WithdrawalMechanic.Instance.EatCheese(cheeseSlot.finalCheeseData.cheeseRarity);
-                inventorySystem.RemoveFinalCheese(cheeseSlot.finalCheeseData, 1);
-                // After using the cheese, you might want to refresh the UI or perform other actions    
+                
+                FinalResultCheese cheeseData = cheeseSlot.finalCheeseData;
+
+                // Check if the player is allowed to consume this cheese.
+                bool canConsume = CheeseAbilitySystem.Instance.TryConsumeCheese(cheeseData);
+                if(canConsume)
+                {
+                    if(withdrawalMechanicScript != null)
+                    {
+                        WithdrawalMechanic.Instance.EatCheese(cheeseSlot.finalCheeseData.cheeseRarity);
+                    }
+                    Debug.Log("Used cheese: " + cheeseSlot.finalCheeseData.cheeseRarity);
+                    inventorySystem.RemoveFinalCheese(cheeseSlot.finalCheeseData, 1);
+                    // HIDE INFO PANEL
+                    InventoryUIController.Instance.HideCheeseInfo();
+                    InventoryUIController.Instance.useButton.SetActive(false);
+                    // After using the cheese, you might want to refresh the UI or perform other actions
+                }
+                    
             }
-            // HIDE INFO PANEL
-            InventoryUIController.Instance.HideCheeseInfo();
-            InventoryUIController.Instance.useButton.SetActive(false);
+            
             
         }
     }
