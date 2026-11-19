@@ -1,111 +1,203 @@
+
 using UnityEngine;
-using UnityEngine.UI;
 using System;
 
 public class DayManager : MonoBehaviour
 {
     public static DayManager Instance;
-    WithdrawalMechanic withdrawalMechanicScript = WithdrawalMechanic.Instance;
-    CheeseAbilitySystem cheeseAbilitySystemScript = CheeseAbilitySystem.Instance;
 
     [Header("Time Settings")]
-    [SerializeField] private float dayDuration = 360f;
-    [SerializeField] private float seconds;
-    [SerializeField] private float minutes;
+    [SerializeField, Min(0.01f)] private float dayDuration = 360f;
+
+    [Header("In-Game Clock")]
+    [SerializeField, Range(0, 23)] private int startingHour = 8;
+    [SerializeField, Range(0, 59)] private int startingMinute = 0;
+
+    [SerializeField, Range(0, 23)] private int endingHour = 18;
+    [SerializeField, Range(0, 59)] private int endingMinute = 0;
+
+    [SerializeField, Min(1)] private int timeIncrementMinutes = 10;
 
     [Header("Day Tracking")]
-
-    private float timeLeft;
+    [SerializeField] private float timeLeft;
     private bool isDayActive = true;
-    private bool isGameCompleted = false;
-    public Level currentGameLevel;
+
+    public int currentDay = 1;
+
     public enum Level
     {
         Slumps,
         NRY
     }
 
+    public Level currentGameLevel;
+
     [Header("Day Count")]
-    public int currentDay = 1;//current day of the week
     [SerializeField] private int maxDays;
     [SerializeField] private int maxDaysAtSlumps = 3;
     [SerializeField] private int maxDaysAtNRY = 7;
 
-    [Header("UI")]
-    public Image timeLeftUI;
-    public Text dayText;
-
-
     [Header("End Game - Soldato Boss")]
-    public bool allSlumpsQuestsAreCompleted;// for Soldato Boss fight
+    public bool allSlumpsQuestsAreCompleted;
     public GameObject gameOverUI;
+
     [Header("End Game - Casino Boss")]
-    public bool allCasinoQuestsAreCompleted;//for Casino Boss fight
+    public bool allCasinoQuestsAreCompleted;
 
+    // UI and gameplay events
+    public event Action<int> OnTimeChanged;
+    public event Action<float> OnTimeProgressChanged;
+    public event Action<int> OnDayChanged;
+
+    //for spawning ingredients.
     public event Action OnNewDay;
-    public event System.Action OnNightStart;
+    public event Action OnNightStart;
 
+    private int lastReportedTime = -1;
+
+    private int StartingTimeInMinutes
+    {
+        get
+        {  
+            return startingHour * 60 + startingMinute;
+        }
+    }
+
+    private int EndingTimeInMinutes
+    {
+        get
+        {
+            return endingHour * 60 + endingMinute;
+        }
+    }
+
+    private int TotalGameMinutes 
+    {
+        get
+        {
+            return EndingTimeInMinutes - StartingTimeInMinutes;
+        }
+    }
+    public float TimeRemainingNormalized
+    {
+        get
+        {
+            return dayDuration > 0f ? timeLeft / dayDuration : 0f;
+        }
+    }
     private void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         Instance = this;
     }
 
     private void Start()
     {
-        UpdateUI();
         StartDay();
     }
 
     private void Update()
     {
-        if(isDayActive)
-        {
-            timeLeft -= Time.deltaTime;
-            float fillAmount = timeLeft / dayDuration;
-            timeLeftUI.fillAmount = fillAmount;
+        if (!isDayActive)
+            return;
 
-            seconds = Mathf.FloorToInt(timeLeft % 60);
-            minutes = Mathf.FloorToInt(timeLeft / 60) % 60;
-            if (timeLeft <= 0)
-            {
-                StartNextDay();
-            }
+        timeLeft -= Time.deltaTime;
+        timeLeft = Mathf.Max(0f, timeLeft);
+
+        // Notify radial timer UI.
+        OnTimeProgressChanged?.Invoke(timeLeft / dayDuration);
+
+        // Notify digital clock only when its displayed time changes.
+        int currentTime = GetCurrentTimeInMinutes();
+
+        if (currentTime != lastReportedTime)
+        {
+            lastReportedTime = currentTime;
+            OnTimeChanged?.Invoke(currentTime);
         }
-    
+
+        if (timeLeft <= 0f)
+        {
+            StartNextDay();
+        }
     }
 
-    void StartDay()
+    public int GetCurrentTimeInMinutes()
     {
-        
+        if (TotalGameMinutes <= 0 || dayDuration <= 0f)
+            return StartingTimeInMinutes;
+
+        float elapsedTime = dayDuration - timeLeft;
+
+        float elapsedGameMinutes = (elapsedTime / dayDuration) * TotalGameMinutes;
+
+        // Snap the clock to the chosen increment, e.g. every 10 minutes.
+        int roundedGameMinutes = Mathf.FloorToInt(elapsedGameMinutes / timeIncrementMinutes)* timeIncrementMinutes;
+
+        // Make sure the clock reaches the exact ending time.
+        roundedGameMinutes = Mathf.Min(roundedGameMinutes, TotalGameMinutes);
+
+        return StartingTimeInMinutes + roundedGameMinutes;
+    }
+
+    private void StartDay()
+    {
         switch (currentGameLevel)
         {
             case Level.Slumps:
                 maxDays = maxDaysAtSlumps;
                 break;
+
             case Level.NRY:
                 maxDays = maxDaysAtNRY;
                 break;
         }
+
+        // Validate the clock configuration.
+        if (TotalGameMinutes <= 0)
+        {
+            Debug.LogError("Ending time must be later than starting time.");
+            isDayActive = false;
+            return;
+        }
+
         timeLeft = dayDuration;
+        isDayActive = true;
+        lastReportedTime = -1;
 
-        //timeLeftUI.SetActive(true);
+        OnDayChanged?.Invoke(currentDay);
+        OnNewDay?.Invoke();
 
-        UpdateUI();
-
-        OnNewDay?.Invoke(); //  Ingredient spawn trigger
+        // Initial UI values.
+        OnTimeChanged?.Invoke(StartingTimeInMinutes);
+        OnTimeProgressChanged?.Invoke(1f);
     }
 
-    public void StartNextDay()//run this function when day is over, and start next day.
+    public void StartNextDay()
     {
+        if (!isDayActive)
+            return;
+
+        isDayActive = false;
+        OnNightStart?.Invoke();
+
+        // Retrieve singleton references when needed, not during field initialization.
+        WithdrawalMechanic withdrawal = WithdrawalMechanic.Instance;
+
+        if (withdrawal != null)
+            withdrawal.NewDay();
+
+        CheeseAbilitySystem cheeseSystem = CheeseAbilitySystem.Instance;
+
+        if (cheeseSystem != null)
+            cheeseSystem.ResetDailyCheeseLimits();
+
         currentDay++;
-        if(withdrawalMechanicScript != null)
-        {
-            withdrawalMechanicScript.NewDay(); // partial cheese drain rate recovery
-        }
-        if(cheeseAbilitySystemScript != null)
-        {
-            cheeseAbilitySystemScript.ResetDailyCheeseLimits(); // reset daily cheese consumption limits
-        }
 
         if (currentDay > maxDays)
         {
@@ -116,31 +208,34 @@ public class DayManager : MonoBehaviour
         StartDay();
     }
 
-    void UpdateUI()
+    public void AddTime(float additionalTime)
     {
-        dayText.text = "Day " + currentDay;
+        timeLeft += additionalTime;
+        timeLeft = Mathf.Min(timeLeft, dayDuration);
+
+        // Refresh the clock and radial display after adding time.
+        int currentTime = GetCurrentTimeInMinutes();
+
+        if (currentTime != lastReportedTime)
+        {
+            lastReportedTime = currentTime;
+            OnTimeChanged?.Invoke(currentTime);
+        }
+
+        OnTimeProgressChanged?.Invoke(timeLeft / dayDuration);
     }
 
-    public void AddTime(float additionalTimeFromDownerChese)
-    {
-        timeLeft += additionalTimeFromDownerChese;
-        if (timeLeft >= dayDuration)
-        {
-            timeLeft = dayDuration;
-        }
-    }
     public void ResumeDay()
     {
-        //call this function when player finishes talking to informant
         isDayActive = true;
     }
+
     public void PauseDay()
     {
-        //call this function when player first go into NRY
         isDayActive = false;
     }
 
-    void EndWeek()
+    private void EndWeek()
     {
         if (allSlumpsQuestsAreCompleted)
         {
@@ -156,31 +251,33 @@ public class DayManager : MonoBehaviour
         }
     }
 
-    void FightSlumpsBoss()
+    private void FightSlumpsBoss()
     {
         Debug.Log("Prepare for the final showdown with a Slumps Boss!");
-        // move player to next level
-        //hook with a Game Manager for Slumps Boss fight
         ResetWeek();
     }
 
-    void FightCasinoBoss()
+    private void FightCasinoBoss()
     {
         Debug.Log("Prepare for the final showdown with a Casino Boss!");
-        // move player to next level
-        //hook with a Game Manager for Casino Boss fight
         ResetWeek();
     }
 
-    void GameOver()
+    private void GameOver()
     {
         gameOverUI.SetActive(true);
         ResetWeek();
     }
 
-    void ResetWeek()
+    private void ResetWeek()
     {
         currentDay = 1;
         StartDay();
+    }
+
+    private void OnDestroy()
+    {
+        if (Instance == this)
+            Instance = null;
     }
 }
