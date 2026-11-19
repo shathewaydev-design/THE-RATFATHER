@@ -145,7 +145,6 @@ public class GameManager : MonoBehaviour
         if (UIManager.Instance != null)
         {
             UIManager.Instance.ToggleLog();
-            RecruitManager();
         }
 
         CheckStatus();
@@ -258,19 +257,7 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void RecruitRat(NPCProfile npc)
-    {
-        playerState.recruitedRats.Add(npc);
-        UIManager.Instance.AddToRecruitLog(npc);
 
-    }
-
-    public void RecruitManager()
-    {
-        // loop through the recruited rats, 
-        // check the type of things they bring back and at what rate,
-        // add each ingrident they bring back to inventory.
-    }
 
     //public void SellingManager()
     //{

@@ -6,22 +6,15 @@ using UnityEngine.UI;
 [CreateAssetMenu(fileName = "NPCProfile", menuName = "Scriptable Objects/NPCProfile")]
 public class NPCProfile : ScriptableObject
 {
-    public string characterName;
-    public string trait;
-    public string description; // include type of cheese they like, and if recruitable, reward rate
 
-    // need to add type of cheese(s) they like >> also need cheese types as well as a way to check if in inventory.
+    public string npcName;
+    public NPCState npcState = new NPCState();
 
-    public Image pfp;
+    public CheeseType typePreference;
+    public StabilityLevel qualityPreference;
+    public int basePrice; // what an npc will offer per cheese before other calculations
 
-    public int trustDifficulty;
-
-    public bool recruited;
-    public bool hasMet = false;
-
-    public List<Quest> quests;
-    public List<string> availability;
-
-    // WORK ON UI TO DISPLAY
+    public string introNode;
+    public string customerNode;
 
 }

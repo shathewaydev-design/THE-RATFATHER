@@ -4,11 +4,10 @@ using System.Collections.Generic;
 using TMPro;
 public class NPCInteractionScript : MonoBehaviour, IInteractable
 {
-    public static event Action<NPCProfile_New> OnStartInteraction;
 
     private bool playerInRange = false;
 
-    [SerializeField] private NPCProfile_New profile; // make sure to change when completely finished to NPCProfile!!!
+    [SerializeField] private NPCProfile profile;
 
     [Header("UI")]
     [SerializeField] private TextMeshProUGUI npcName;
@@ -16,88 +15,63 @@ public class NPCInteractionScript : MonoBehaviour, IInteractable
     [SerializeField] private GameObject promptCanvas;
     [SerializeField] private GameObject TrustPanel;
     [SerializeField] private GameObject TrustIndicator;
-    // public Slider TrustSlider   ????
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created   
     void Start()
     {
-        profile.SetMetPlayer(false);
-        if (!profile.GetHasMetPlayer())
-        {
-            profile.GetState().compFavors = 0;
-        }
+        NPCState npcState = new NPCState();
+        npcState.hasMetPlayer = false;
+        npcState.isCustomer = false;
+        npcState.currDialogueNode = profile.introNode;
 
-        profile.SetTrustLevel(0f);
+        profile.npcState = npcState;
 
-        npcName.text = profile.GetName();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log("" + profile.GetState().compFavors);
-        //Debug.Log("current trust: " + profile.GetTrustLevel());
+
     }
 
 
     void OnEnable()
     {
-        // laptop.PriceChanged += OnPriceChanged;
-        NPCProfile_New.OnTrustLevelChange += CheckTrustLevel;
-        FavorManager.OnFavorComplete += CompletedFavor;
-
 
     }
 
     void OnDisable()
     {
-        NPCProfile_New.OnTrustLevelChange -= CheckTrustLevel;
-        FavorManager.OnFavorComplete -= CompletedFavor;
+
     }
 
     public void Interact()
     {
-        Debug.Log("interacting with NPC");
-        // pull up proper dialogue
-
-
-        string dialogueNode = profile.GetCurrDialogueNode();
-        //Debug.Log("Starting Yarn node: " + dialogueNode);
-
-        //Debug.Log("node: " + profile.GetCurrDialogueNode());
-        //DialogueManager_New.Instance.StartConversation(dialogueNode, this); // old: StartConversation(testingIntro)
-    }
-
-    private void CheckTrustLevel(float lvl)
-    {
-        if (profile.GetTrustLevel() < 0)
+        if (!profile.npcState.hasMetPlayer)
         {
-            profile.SetTrustLevel(0);
+            // ALSO NEED TO CHECK IF THE FREE SAMPLE WAS SUCCESFUL
+            // IF NOT, HAS MET PLAYER NEEDS TO STAY TRUE
+            // FOR NOW, ALL FREE SAMPLE CHECKS CAN BE SUCCESFUL FOR TESTING PURPOSES
+
+
+            profile.npcState.hasMetPlayer = true;
+            // trigger new dialoguemanager (yarnspinner) with profile.introNode
+            return;
         }
 
-        if (profile.GetTrustLevel() > profile.GetMaxTrust())
-        {
-            profile.SetTrustLevel(profile.GetMaxTrust());
-        }
+        // trigger new dialoguemanager (yarnspinner) with profile.customerNode
 
-        
-    }
-
-    public void SetTrustUI()
-    {
 
     }
 
 
-    private void CompletedFavor(FavorState favor)
-    {
-        profile.IncreaseCompFavors(favor);
-    }
 
-    public NPCProfile_New GetProfile()
-    {
-        return profile;
-    }
+
+
+
+
+
+    // UI PROMPT POPUP ---------------------------------------->
 
     void OnTriggerEnter(Collider other)
     {

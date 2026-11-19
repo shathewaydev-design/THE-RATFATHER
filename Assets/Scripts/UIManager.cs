@@ -175,13 +175,6 @@ public class UIManager : MonoBehaviour
     }
 
 
-
-    // Show a single line
-    public void SetSpeaker(NPCProfile speaker)
-    {
-        nameText.text = speaker.characterName; // or whatever your NPCProfile has
-    }
-
     public void SetText(string text)
     {
         dialogueText.text = text;
@@ -349,21 +342,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void AddToSoldLog(NPCProfile npc) 
-    {
-        var newTag = Instantiate(emptyTag, soldLog.transform);
-        newTag.text = npc.characterName + ": example selling desc";
 
-        //activeObjectives.Add(newObj);
-    }
-
-    public void AddToRecruitLog(NPCProfile npc)
-    {
-        var newTag = Instantiate(emptyTag, recruitLog.transform);
-        newTag.text = npc.characterName + ": example rec. desc";
-
-        //activeObjectives.Add(newObj);
-    }
 
 
 

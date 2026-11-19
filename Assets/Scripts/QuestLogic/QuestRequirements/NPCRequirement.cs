@@ -8,7 +8,7 @@ public class NPCRequirement : QuestRequirement
     {
         //throw new System.NotImplementedException();
 
-        return npc.hasMet;
+        return true;
 
     }
 }

@@ -98,7 +98,7 @@ public class DialogueManager : MonoBehaviour
         DialogueLine line = currentConversation.lines[currentLineIndex];
 
         // Show line in the UI
-        UIManager.SetSpeaker(line.speaker);
+        //UIManager.SetSpeaker(line.speaker);
         UIManager.SetText(line.text);
 
         // Show options if they exist

@@ -42,66 +42,66 @@ public class NPC : MonoBehaviour, IInteractable
 
 
         // BLOCK non-tutorial NPCs during tutorial
-        if (TutorialManager.Instance.currentStage != TutorialManager.TutorialStage.Finished)
-        {
-            if (!isTutorialNPC)
-                return;
-        }
+        //if (TutorialManager.Instance.currentStage != TutorialManager.TutorialStage.Finished)
+        //{
+        //    if (!isTutorialNPC)
+        //        return;
+        //}
 
-        // ---------------- TUTORIAL PHASES ----------------
+        //// ---------------- TUTORIAL PHASES ----------------
 
-        if (TutorialManager.Instance.currentStage == TutorialManager.TutorialStage.TalkToNPC)
-        {
-            dialogueManager.StartConversation(currentConvo);
+        //if (TutorialManager.Instance.currentStage == TutorialManager.TutorialStage.TalkToNPC)
+        //{
+        //    dialogueManager.StartConversation(currentConvo);
 
-            TutorialManager.Instance.currentStage = TutorialManager.TutorialStage.CompleteQuest;
+        //    TutorialManager.Instance.currentStage = TutorialManager.TutorialStage.CompleteQuest;
 
-            questManager.ChangeQuestActive(profile.quests[0]);
+        //    questManager.ChangeQuestActive(profile.quests[0]);
 
-            return;
-        }
+        //    return;
+        //}
 
-        if (TutorialManager.Instance.currentStage == TutorialManager.TutorialStage.CompleteQuest)
-        {
-            dialogueManager.StartConversation(profile.quests[0].questQuestioned);
+        //if (TutorialManager.Instance.currentStage == TutorialManager.TutorialStage.CompleteQuest)
+        //{
+        //    dialogueManager.StartConversation(profile.quests[0].questQuestioned);
 
-            return;
-        }
+        //    return;
+        //}
 
-        if (TutorialManager.Instance.currentStage == TutorialManager.TutorialStage.ReturnToNPC)
-        {
-            dialogueManager.StartConversation(profile.quests[0].questCompleted);
+        //if (TutorialManager.Instance.currentStage == TutorialManager.TutorialStage.ReturnToNPC)
+        //{
+        //    dialogueManager.StartConversation(profile.quests[0].questCompleted);
 
-            TutorialManager.Instance.currentStage = TutorialManager.TutorialStage.Finished;
+        //    TutorialManager.Instance.currentStage = TutorialManager.TutorialStage.Finished;
 
-            return;
-        }
+        //    return;
+        //}
 
-        // ---------------- NORMAL NPC LOGIC ----------------
+        //// ---------------- NORMAL NPC LOGIC ----------------
 
-        if (profile.quests.Count == 0)
-            return;
+        //if (profile.quests.Count == 0)
+        //    return;
 
-        Quest relevantQuest = questManager.GetRelevantQuest(profile.quests);
+        //Quest relevantQuest = questManager.GetRelevantQuest(profile.quests);
 
-        if (relevantQuest == null)
-            return;
+        //if (relevantQuest == null)
+        //    return;
 
-        if (!state.hasMetPlayer)
-        {
-            currentConvo = relevantQuest.questIntro;
-        }
-        else
-        {
-            currentConvo = questManager.UpdateDialogue(relevantQuest);
-        }
+        //if (!state.hasMetPlayer)
+        //{
+        //    currentConvo = relevantQuest.questIntro;
+        //}
+        //else
+        //{
+        //    currentConvo = questManager.UpdateDialogue(relevantQuest);
+        //}
 
-        dialogueManager.StartConversation(currentConvo);
+        //dialogueManager.StartConversation(currentConvo);
 
-        state.hasMetPlayer = true;
-        profile.hasMet = true;
+        //state.hasMetPlayer = true;
+        //profile.hasMet = true;
 
-        Debug.Log("Relevant quest: " + relevantQuest.questName);
+        //Debug.Log("Relevant quest: " + relevantQuest.questName);
 
 
 
@@ -217,13 +217,13 @@ public class NPC : MonoBehaviour, IInteractable
         // mabe add this logic to interact method?
         // currentConvo = questManager.UpdateDialogue(profile.quests[0]); // change to loop through all quests to find the active one
 
-        if (TutorialManager.Instance.currentStage == TutorialManager.TutorialStage.CompleteQuest)
-        {
-            if (QuestManager.Instance.compQuests.Contains(profile.quests[0]))
-            {
-                TutorialManager.Instance.currentStage = TutorialManager.TutorialStage.ReturnToNPC;
-            }
-        }
+        //if (TutorialManager.Instance.currentStage == TutorialManager.TutorialStage.CompleteQuest)
+        //{
+        //    if (QuestManager.Instance.compQuests.Contains(profile.quests[0]))
+        //    {
+        //        TutorialManager.Instance.currentStage = TutorialManager.TutorialStage.ReturnToNPC;
+        //    }
+        //}
 
 
 
