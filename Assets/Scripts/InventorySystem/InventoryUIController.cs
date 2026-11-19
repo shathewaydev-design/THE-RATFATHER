@@ -6,6 +6,7 @@ using StarterAssets;
 public class InventoryUIController : MonoBehaviour
 {
     public static InventoryUIController Instance;
+    
     [SerializeField] private GameObject inventoryBigPanel;
     [SerializeField] private GameObject ingredientInventoryPanel;
     [SerializeField] private GameObject cheeseInventoryPanel;
@@ -54,6 +55,13 @@ public class InventoryUIController : MonoBehaviour
         itemInfoPanel.Hide();
 
         inventoryBigPanel.SetActive(isOpen);
+        Debug.Log(
+        $"ToggleInventory CALLED | " +
+        $"Object: {gameObject.name} | " +
+        $"Instance ID: {GetInstanceID()} | " +
+        $"Frame: {Time.frameCount} | " +
+        $"IsOpen: {isOpen}"
+    );
         //ingredientInventoryPanel.SetActive(isOpen);
 
         //play inventory Sounds
@@ -83,10 +91,14 @@ public class InventoryUIController : MonoBehaviour
         }
         else
         {
-            if (DialogueManager_New.Instance.isDialogueActive)
+            DialogueManager_New dialogueManager = DialogueManager_New.Instance;
+            if(dialogueManager != null)
             {
-                CursorManager.Instance.UnlockCursor();
-                DialogueManager_New.Instance.ResumeDialogue();
+                if (DialogueManager_New.Instance.isDialogueActive)
+                {
+                    CursorManager.Instance.UnlockCursor();
+                    DialogueManager_New.Instance.ResumeDialogue();
+                }
             }
             else
             {

@@ -11274,14 +11274,14 @@ RectTransform:
   m_GameObject: {fileID: 74663525}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.64647, y: 0.64647, z: 0.64647}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.39999998, y: 0.39999998, z: 0.39999998}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1063729650}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 899, y: 612}
+  m_AnchoredPosition: {x: 120, y: 612}
   m_SizeDelta: {x: 237, y: 210}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &74663527
@@ -18422,14 +18422,14 @@ RectTransform:
   m_GameObject: {fileID: 182044016}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.62, y: 0.62, z: 0.62}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1063729650}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 899, y: 612}
+  m_AnchoredPosition: {x: 120, y: 612}
   m_SizeDelta: {x: 237, y: 210}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &182044018
@@ -82947,9 +82947,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 288698257fcdd463ead939b3c4723a42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CheeseAbilitySystem
-  selectedCheese: {fileID: 0}
   hypervigilanceScript: {fileID: 1103609278}
   downerScript: {fileID: 1394737265}
+  upperCheeseLimit: 3
+  currentNumberUpperCheeseTaken: 0
+  downerCheeseLimit: 3
+  currentNumberDownerCheeseTaken: 0
 --- !u!1 &751368547
 GameObject:
   m_ObjectHideFlags: 0
@@ -113635,12 +113638,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DayNightManager
   dayDuration: 360
+  seconds: 0
+  minutes: 0
+  currentGameLevel: 0
   currentDay: 1
   maxDays: 7
+  maxDaysAtSlumps: 3
+  maxDaysAtNRY: 7
   timeLeftUI: {fileID: 74663527}
   dayText: {fileID: 1395747259}
-  allQuestsAreCompleted: 0
+  allSlumpsQuestsAreCompleted: 0
   gameOverUI: {fileID: 1728187941}
+  allCasinoQuestsAreCompleted: 0
 --- !u!4 &1046254696
 Transform:
   m_ObjectHideFlags: 0
@@ -146317,7 +146326,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 706, y: 637}
+  m_AnchoredPosition: {x: -27, y: 637}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1395747259

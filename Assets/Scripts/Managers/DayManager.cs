@@ -13,8 +13,11 @@ public class DayManager : MonoBehaviour
     [SerializeField] private float seconds;
     [SerializeField] private float minutes;
 
+    [Header("Day Tracking")]
+
     private float timeLeft;
-    private bool isDay = true;
+    private bool isDayActive = true;
+    private bool isGameCompleted = false;
     public Level currentGameLevel;
     public enum Level
     {
@@ -33,9 +36,11 @@ public class DayManager : MonoBehaviour
     public Text dayText;
 
 
-    [Header("End Game")]
-    public bool allQuestsAreCompleted;
+    [Header("End Game - Soldato Boss")]
+    public bool allSlumpsQuestsAreCompleted;// for Soldato Boss fight
     public GameObject gameOverUI;
+    [Header("End Game - Casino Boss")]
+    public bool allCasinoQuestsAreCompleted;//for Casino Boss fight
 
     public event Action OnNewDay;
     public event System.Action OnNightStart;
@@ -53,22 +58,34 @@ public class DayManager : MonoBehaviour
 
     private void Update()
     {
-        timeLeft -= Time.deltaTime;
-        float fillAmount = timeLeft / dayDuration;
-        timeLeftUI.fillAmount = fillAmount;
-
-        seconds = Mathf.FloorToInt(timeLeft % 60);
-        minutes = Mathf.FloorToInt(timeLeft / 60) % 60;
-        if (isDay && timeLeft <= 0)
+        if(isDayActive)
         {
-            StartNextDay();
+            timeLeft -= Time.deltaTime;
+            float fillAmount = timeLeft / dayDuration;
+            timeLeftUI.fillAmount = fillAmount;
+
+            seconds = Mathf.FloorToInt(timeLeft % 60);
+            minutes = Mathf.FloorToInt(timeLeft / 60) % 60;
+            if (timeLeft <= 0)
+            {
+                StartNextDay();
+            }
         }
     
     }
 
     void StartDay()
     {
-        isDay = true;
+        
+        switch (currentGameLevel)
+        {
+            case Level.Slumps:
+                maxDays = maxDaysAtSlumps;
+                break;
+            case Level.NRY:
+                maxDays = maxDaysAtNRY;
+                break;
+        }
         timeLeft = dayDuration;
 
         //timeLeftUI.SetActive(true);
@@ -112,12 +129,26 @@ public class DayManager : MonoBehaviour
             timeLeft = dayDuration;
         }
     }
+    public void ResumeDay()
+    {
+        //call this function when player finishes talking to informant
+        isDayActive = true;
+    }
+    public void PauseDay()
+    {
+        //call this function when player first go into NRY
+        isDayActive = false;
+    }
 
     void EndWeek()
     {
-        if (allQuestsAreCompleted)
+        if (allSlumpsQuestsAreCompleted)
         {
-            FightMafiaBoss();
+            FightSlumpsBoss();
+        }
+        else if (allCasinoQuestsAreCompleted)
+        {
+            FightCasinoBoss();
         }
         else
         {
@@ -125,10 +156,19 @@ public class DayManager : MonoBehaviour
         }
     }
 
-    void FightMafiaBoss()
+    void FightSlumpsBoss()
     {
-        Debug.Log("Prepare for the final showdown with a Mafia Boss!");
-        // teleport player?
+        Debug.Log("Prepare for the final showdown with a Slumps Boss!");
+        // move player to next level
+        //hook with a Game Manager for Slumps Boss fight
+        ResetWeek();
+    }
+
+    void FightCasinoBoss()
+    {
+        Debug.Log("Prepare for the final showdown with a Casino Boss!");
+        // move player to next level
+        //hook with a Game Manager for Casino Boss fight
         ResetWeek();
     }
 
