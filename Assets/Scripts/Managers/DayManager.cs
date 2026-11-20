@@ -24,6 +24,8 @@ public class DayManager : MonoBehaviour, IDataPersistence
 
     public int currentDay = 1;
 
+    private bool hasLoadedData = false;
+
     public enum Level
     {
         Slumps,
@@ -100,7 +102,15 @@ public class DayManager : MonoBehaviour, IDataPersistence
 
     private void Start()
     {
-        StartDay();
+        if(!hasLoadedData)
+        {
+            StartDay();
+        }
+        else
+        {
+            ResumeLoadedDay();
+        }
+
     }
 
     private void Update()
@@ -171,9 +181,39 @@ public class DayManager : MonoBehaviour, IDataPersistence
         timeLeft = dayDuration;
         isDayActive = true;
         lastReportedTime = -1;
-
+        //notify Ingredient Spawner
         OnDayChanged?.Invoke(currentDay);
         OnNewDay?.Invoke();
+
+        // Initial UI values.
+        OnTimeChanged?.Invoke(StartingTimeInMinutes);
+        OnTimeProgressChanged?.Invoke(1f);
+    }
+    private void ResumeLoadedDay()
+    {
+        switch (currentGameLevel)
+        {
+            case Level.Slumps:
+                maxDays = maxDaysAtSlumps;
+                break;
+
+            case Level.NRY:
+                maxDays = maxDaysAtNRY;
+                break;
+        }
+
+        // Validate the clock configuration.
+        if (TotalGameMinutes <= 0)
+        {
+            Debug.LogError("Ending time must be later than starting time.");
+            isDayActive = false;
+            return;
+        }
+
+        isDayActive = true;
+        lastReportedTime = -1;
+
+        // int currentTime = GetCurrentTimeInMinutes();
 
         // Initial UI values.
         OnTimeChanged?.Invoke(StartingTimeInMinutes);

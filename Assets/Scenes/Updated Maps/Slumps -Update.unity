@@ -54625,6 +54625,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DataPersistenceManager
   fileName: data.json
+  useEncryption: 0
 --- !u!1 &392996084
 GameObject:
   m_ObjectHideFlags: 0
@@ -111649,6 +111650,8 @@ MonoBehaviour:
     quantity: 1
   UIinventory: {fileID: 544144420}
   UIcheeseInventory: {fileID: 1150305615}
+  ingredientDatabase: {fileID: 11400000, guid: 49d021000a3bf43459e5a44d9df3e0bb, type: 2}
+  cheeseDatabase: {fileID: 11400000, guid: 0e1c2654cd67c4e78b96bb2fe93fac08, type: 2}
 --- !u!4 &1012762250
 Transform:
   m_ObjectHideFlags: 0

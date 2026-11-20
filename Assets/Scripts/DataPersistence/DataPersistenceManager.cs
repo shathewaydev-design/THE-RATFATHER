@@ -9,6 +9,7 @@ public class DataPersistenceManager : MonoBehaviour
 {
     [Header("File Storage Config")]
     [SerializeField] private string fileName;
+    [SerializeField] private bool useEncryption;
     private GameData gameData;
     public static DataPersistenceManager Instance { get; private set; }
     private FileDataHandler dataHandler;
@@ -27,7 +28,7 @@ public class DataPersistenceManager : MonoBehaviour
     }
     private void Start()
     {
-        this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
+        this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, useEncryption);
         //Application.persistentDataPath will give the operating system standard directory
         //for persisting data in a unity project
         this.dataPersistenceObjects = FindAllDataPersistenceObjects();
@@ -54,6 +55,7 @@ public class DataPersistenceManager : MonoBehaviour
         {
             dataPersistenceObj.LoadData(gameData);
         }
+        Debug.Log(Application.persistentDataPath);
 
     }
     public void SaveGame()
@@ -77,5 +79,20 @@ public class DataPersistenceManager : MonoBehaviour
         IEnumerable<IDataPersistence> dataPersistenceObjects = FindObjectsOfType<MonoBehaviour>(true).OfType<IDataPersistence>();
         //the scripts also need to be MonoBehaviors with IDataPersistence interface
         return new List<IDataPersistence>(dataPersistenceObjects);
+    }
+    [ContextMenu("Open Save Folder")]
+    public void OpenSaveFolder()
+    {
+        string saveFolder = Application.persistentDataPath;
+        string saveFile = Path.Combine(saveFolder, fileName);
+
+        Debug.Log("Save Folder: " + saveFolder);
+        Debug.Log("Save File: " + saveFile);
+
+    #if UNITY_EDITOR
+        UnityEditor.EditorUtility.RevealInFinder(saveFolder);
+    #else
+        Application.OpenURL(new System.Uri(saveFolder).AbsoluteUri);
+    #endif
     }
 }

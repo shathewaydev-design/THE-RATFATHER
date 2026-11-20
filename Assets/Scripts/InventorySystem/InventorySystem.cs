@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using System;
 
-public class InventorySystem : MonoBehaviour
+public class InventorySystem : MonoBehaviour, IDataPersistence
 {
     public static InventorySystem Instance;
     public List<InventorySlot> ingredientInventory = new();//test new system; inventory
@@ -18,6 +18,10 @@ public class InventorySystem : MonoBehaviour
     private float currencyInInventory;
     public IReadOnlyDictionary<CheeseIngredientData, int> Inventory => inventory; // so inventory can be read for quest requirements, etc.
     //this is like creating new definition in a dictionary, then put them in pages
+
+    //this is for saving and loading data
+    [SerializeField] private IngredientDatabase ingredientDatabase;
+    [SerializeField] private CheeseDatabase cheeseDatabase;
     void Awake()
     {
         // Singleton pattern (simple version); avoid duplicates
@@ -293,5 +297,87 @@ public class InventorySystem : MonoBehaviour
     private void RefreshCheeseUI()
     {
         UIcheeseInventory.RefreshCheeseUIInventory(cheeseInventory);
+    }
+
+    public void LoadData(GameData data)
+    {
+        ingredientInventory.Clear();
+        cheeseInventory.Clear();
+
+        currencyInInventory = data.currencyInInventory;
+        //load ingredients
+        foreach (IngredientSaveData savedItem in data.playerIngredients)
+        {
+            CheeseIngredientData ingredient =
+                ingredientDatabase.GetIngredientByID(savedItem.itemID);
+
+            if (ingredient == null)
+            {
+                Debug.LogWarning("Could not find ingredient: " + savedItem.itemID);
+                continue;
+            }
+
+            InventorySlot newSlot = new InventorySlot(ingredient,savedItem.quantity);
+
+            ingredientInventory.Add(newSlot);
+        }
+        //load cheese
+        foreach (CheeseSaveData savedItem in data.playerCheese)
+        {
+            FinalResultCheese cheese =
+                cheeseDatabase.GetCheeseByID(savedItem.itemID);
+
+            if (cheese == null)
+            {
+                Debug.LogWarning("Could not find cheese: " + savedItem.itemID);
+                continue;
+            }
+
+            CheeseInventorySlot newSlot = new CheeseInventorySlot(cheese, savedItem.quantity);
+
+            cheeseInventory.Add(newSlot);
+        }
+
+        RefreshIngredientUI();
+        RefreshCheeseUI();
+
+        OnCurrencyChange?.Invoke();
+    }
+    public void SaveData(ref GameData data)
+    {
+        //save ingredients
+        data.playerIngredients.Clear();
+
+        foreach (InventorySlot slot in ingredientInventory)
+        {
+            if (slot.itemData == null)
+                continue;
+            //save id and quantity into IngredientSaveData - ScriptableObject
+            //this converts the data from the inventory slot into a format
+            //that can be saved in the GameData class
+            IngredientSaveData savedItem = new IngredientSaveData(
+                slot.itemData.itemID,
+                slot.quantity
+            );
+
+            data.playerIngredients.Add(savedItem);
+        }
+
+        //save cheese
+        data.playerCheese.Clear();
+
+        foreach (CheeseInventorySlot slot in cheeseInventory)
+        {
+            if (slot.finalCheeseData == null)
+                continue;
+
+            CheeseSaveData savedItem = new CheeseSaveData(
+                slot.finalCheeseData.itemID,
+                slot.quantity
+            );
+
+            data.playerCheese.Add(savedItem);
+        }
+        data.currencyInInventory = currencyInInventory;
     }
 }

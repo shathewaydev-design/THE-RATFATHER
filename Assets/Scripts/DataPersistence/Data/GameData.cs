@@ -12,12 +12,15 @@ public class GameData
 
 
 
-    // Positions of all ingredients and which ingredients in that level, make sure the ingredient spawner doesn’t spawn ingredients when player loads the game, only spawn when a new day starts
-        
-    //public SerializableDictionary<string, CheeseIngredientData> playerIngredients = new SerializableDictionary<string, CheeseIngredientData>();
-    //What ingredients the player has
-    //public SerializableDictionary<string, FinalCheeseData> playerCheeses = new SerializableDictionary<string, FinalCheeseData>();
-    // What cheese the player has
+    // Positions of all ingredients and which ingredients in that level, Transform of GameObject
+    // make sure the ingredient spawner doesn’t spawn ingredients when player loads the game, only spawn when a new day starts
+
+    public List<IngredientSaveData> playerIngredients = new List<IngredientSaveData>();
+    //id of ingredient, quantity
+    //What ingredients the player has/ ScriptableObject
+    public List<CheeseSaveData> playerCheese = new List<CheeseSaveData>();
+    //id of cheese, quantity
+    // What cheese the player has/ ScriptableObject
     public float currencyInInventory;
     // Chedz
 // [NPCs]
@@ -41,6 +44,8 @@ public class GameData
         this.currentDay = 1;
         this.currencyInInventory = 0f;
         this.currentGameLevel = Level.Slumps;
+        this.playerIngredients = new List<IngredientSaveData>();
+        this.playerCheese = new List<CheeseSaveData>();
     }
 
 }
