@@ -2,7 +2,7 @@
 using UnityEngine;
 using System;
 
-public class DayManager : MonoBehaviour
+public class DayManager : MonoBehaviour, IDataPersistence
 {
     public static DayManager Instance;
 
@@ -27,7 +27,9 @@ public class DayManager : MonoBehaviour
     public enum Level
     {
         Slumps,
-        NRY
+        Soldato,
+        NRY,
+        CasinoBoss
     }
 
     public Level currentGameLevel;
@@ -279,5 +281,18 @@ public class DayManager : MonoBehaviour
     {
         if (Instance == this)
             Instance = null;
+    }
+
+    public void LoadData(GameData data)
+    {
+        this.currentDay = data.currentDay;
+        this.timeLeft = data.timeLeft;
+        //this.currentGameLevel = data.currentGameLevel;
+    }
+    public void SaveData(ref GameData data)
+    {
+        data.currentDay = this.currentDay;
+        data.timeLeft = this.timeLeft;
+        //data.currentGameLevel = this.currentGameLevel;
     }
 }
