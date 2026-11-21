@@ -23,9 +23,13 @@ public class GameData
     // What cheese the player has/ ScriptableObject
     public float currencyInInventory;
     // Chedz
-// [NPCs]
+    // [NPCs]
     // What Quests are completed
     // Trust level for each NPCs (is there a limited number of NPCs in the level?)
+
+    //[Cutscenes]
+    //check what cutscenes (slumps, NRY) has played so wont play that cutscene again
+
     public Level currentGameLevel;
      public enum Level
     {
