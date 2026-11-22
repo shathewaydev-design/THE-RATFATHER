@@ -61,6 +61,9 @@ public class NPCInteractionScript : MonoBehaviour, IInteractable
             return;
         }
 
+        // NEED TO CHECK IF THEY HAVE AN ACTIVE REQUEST. IF NOT, THEN PLAY THE NOREQUESTNODE
+        
+
         // trigger new dialoguemanager (yarnspinner) with profile.customerNode
         DialogueManager.Instance.StartConversation(profile.customerNode);
 
