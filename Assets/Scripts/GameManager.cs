@@ -275,7 +275,7 @@ public class GameManager : MonoBehaviour
 
         InventorySystem.Instance.RemoveFinalCheese(cheese, 1);
         //increaseCurrency(int.Parse(cheese.basePrice));
-        DialogueManager.Instance.ResumeDialogue(true);
+        //DialogueManager.Instance.ResumeDialogue(true);
         UIManager.Instance.ToggleSellScreen();
     
         Debug.Log("Cheese sold!");

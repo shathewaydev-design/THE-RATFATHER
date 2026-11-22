@@ -15,7 +15,7 @@ public class NPC : MonoBehaviour, IInteractable
 
     public ConversationData currentConvo;
     public DialogueManager dialogueManager;
-    public QuestManager questManager;
+    //public QuestManager questManager;
 
     [SerializeField] private float interactionRadius = 2.0f; // checking distancer manualy, not using triggers
     [SerializeField] private Transform playerTransform;

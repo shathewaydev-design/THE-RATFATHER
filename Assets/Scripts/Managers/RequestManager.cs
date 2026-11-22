@@ -93,7 +93,7 @@ public class RequestManager : MonoBehaviour
         // last check quality
 
 
-
+        // then based on score, give out proper consequence!
     } 
 
 

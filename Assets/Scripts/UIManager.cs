@@ -22,7 +22,7 @@ public class UIManager : MonoBehaviour
     public GameObject optionsBoundary; // allow for a background while filling in this space
     public Button optionButtonPrefab; // prefab for a single option
 
-    public QuestManager questManager;
+    //public QuestManager questManager;
     public GameManager gameManger;
 
     public TextMeshProUGUI objectivePrefab;

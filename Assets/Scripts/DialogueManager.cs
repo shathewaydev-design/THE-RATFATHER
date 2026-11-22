@@ -4,199 +4,97 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Playables;
+using Yarn.Unity;
 
 public class DialogueManager : MonoBehaviour
 {
-
     public static DialogueManager Instance;
 
-    // note for dialogue - specific lines held by NPC, start and stop logic here
-    public ConversationData currentConversation;
-    public int currentLineIndex = 0;
 
-    public UIManager UIManager;
-    //private Queue<string> lines = new Queue<string>();
-    public bool isDialogueActive = false;
-    private bool canAdvance = true; // help w typewriter effect -- always true for now
-                                    // ^^ also can handle in another script, keep in mind for now
-    private bool justStartedDialogue = false;
-    public bool isPaused = false;
-    
-    [Header("Input")]//player inputs
-    public ThirdPersonController thirdPersonController;
+    // EVENTS ------------------------------------------------------->>>
 
+    // VATIABLES ----------------------------------------------------->>>
+
+    // yarnspinner refs
+    [SerializeField] private DialogueRunner dialogueRunner;
+    [SerializeField] private CustomLineAdvancer customLineAdvancer;
+
+
+
+    // METHODS ----------------------------------------------------->>>
+
+
+    public void StartConversation(string dialogueNode)
+    {
+        if (string.IsNullOrEmpty(dialogueNode))
+        {
+            Debug.LogError("Tried to start dialogue with NULL or empty node!");
+            return;
+        }
+
+        // SWITCH INPUT MAP
+        ThirdPersonController.Instance.GetComponent<PlayerInput>().SwitchCurrentActionMap("Mouse");
+        CursorManager.Instance.LockCursor();
+
+        // TELL YARNSPINNER DIALOGUE SYSTEM TO PLAY DIALOGUE
+        customLineAdvancer.OnDialogueStarted();
+        dialogueRunner.StartDialogue(dialogueNode);
+
+    }
+
+    public void EndConversation() // CALLED VIA DIALOGUE RUNNER
+    {
+        // SWITCH INPUT MAP
+        ThirdPersonController.Instance.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
+        CursorManager.Instance.UnlockCursor();
+
+        // DISABLE FURTHER INPUT
+        customLineAdvancer.OnDialogueComplete();
+
+    }
+
+    public void BeginSelling() // should bring up inventory. Only the cheese inventory should be available (other tabs unclickable)
+    {
+        // PLEASE FILL THIS OUT. IT SHOULD BE SIMPLE
+        // YOU ALSO NEED TO FIX UP THE CODE THAT CHECKS WHETHER 
+        // OR NOT IT IS A TIME TO SELL WHEN INVENTORY IS UP.
+        // YOU ALSO NEED TO ACOUNT FOR PLAYERS SELECTING A CERTAIN AMOUNT/TYPE OF CHEESE WITH OUR NEW
+        // REQUEST SYSTEM
+        // PLEASE REVIEW EVERYTHING AND KEEP IT SIMPLE, STUPD, BUT CLEVER!!
+        // REMEMBER, YOU ARE A PROGRAMMER! I SHOULDN'Y HAVE TO HOLD YOUR HAND THROGUH THIS.
+        // I SHOULD BE ABLE TO TRUST THAT I CAN ASK YOU FOR A SIMPLE SYSTEM LIKE THIS
+        // AND YOU'RE ABLE TO REVIEW WHAT YOU NEED AND CREATE IT
+
+    }
+
+
+
+    // Unity Methods --->
 
     private void Awake()
     {
 
-        // Singleton pattern (simple version); avoid duplicates
         if (Instance == null)
             Instance = this;
         else
             Destroy(gameObject);
 
-    }
 
 
-    public void PauseDialogue()
-    {
-        
-        isPaused = true;
-    }
-
-    public void ResumeDialogue(bool advanceLine = false)
-    {
-        isPaused = false;
-
-        if (currentConversation != null)
-        {
-            if (advanceLine)
-            {
-                currentLineIndex++; // advance once
-            }
-
-            ShowCurrentLine();
-        }
-    }
+        // ADD EVENTS THAT CAN BE USED IN YARN SCRIPTS!
+        dialogueRunner.AddCommandHandler("begin_selling", BeginSelling);
 
 
-    // start dialogue
-    // Call this to start a conversation
-    public void StartConversation(ConversationData conversation)
-    {
-        if (conversation == null)
-        {
-            Debug.LogError("Tried to start conversation with NULL data!");
-            return;
-        }
-
-        justStartedDialogue = true;
-        //change to Mouse Map
-        thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Mouse");
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
 
 
-        isDialogueActive = true;
 
-        currentConversation = conversation;
-        currentLineIndex = 0;
 
-        UIManager.ShowDialoguePanel();  // turn panel on
-        ShowCurrentLine();
-    }
 
-    // display next line in dialogue
-    public void ShowCurrentLine()
-    {
-        if (currentLineIndex >= currentConversation.lines.Count)
-        {
-            EndDialogue();
-            return;
-        }
 
-        DialogueLine line = currentConversation.lines[currentLineIndex];
 
-        // Show line in the UI
-        //UIManager.SetSpeaker(line.speaker);
-        UIManager.SetText(line.text);
 
-        // Show options if they exist
-        if (line.options != null && line.options.Count > 0)
-        {
-            UIManager.ShowOptions(line.options, OnOptionSelected);
-        }
-        else
-        {
-            UIManager.HideOptions();
-            // automatically advance when player clicks "Next" button (optional)
-        }
 
     }
 
 
-    // Called when player clicks an option
-    public void OnOptionSelected(int selectedOptionIndex)
-    {
-        //UIManager.HideOptions();
-        DialogueOption selected = currentConversation.lines[currentLineIndex].options[selectedOptionIndex];
-        selected.GiveQuest();
-        selected.Recruit();
-
-        if (selected.openSellScreen)
-        {
-            selected.Sell();
-            PauseDialogue();   // pause before anything else
-            return;            // no advancing dialogue
-        }
-
-        if (selected.endConversation) 
-        {
-            EndDialogue(); // panel hides, flow stops
-            return;
-        }
-
-        if (selected.nextLineIndex >= 0)
-            currentLineIndex = selected.nextLineIndex;
-        else
-            currentLineIndex++;
-
-        ShowCurrentLine();
-    }
-
-    // end dialogue
-    void EndDialogue()
-    {
-        UIManager.HideDialoguePanel();
-        currentConversation = null;
-        currentLineIndex = 0;
-
-        isDialogueActive = false;
-
-        thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        Debug.Log("Conversation ended!");
-    }
-
-
-    void Update()
-    {
-
-        if (isPaused)
-        {
-            return;
-
-        }
-
-
-        if (justStartedDialogue)
-        {
-            justStartedDialogue = false;
-            return;
-        }
-
-        if (currentConversation == null)
-            return;
-
-        if (currentLineIndex < currentConversation.lines.Count &&
-            currentConversation.lines[currentLineIndex].endConversation &&
-             Keyboard.current.eKey.wasPressedThisFrame) //Keyboard.current.eKey.wasPressedThisFrame
-        {
-            EndDialogue();
-            return;
-        }
-
-        // Only advance with E if no options are active
-        if ((currentConversation.lines.Count > currentLineIndex) &&
-            (currentConversation.lines[currentLineIndex].options == null ||
-             currentConversation.lines[currentLineIndex].options.Count == 0))
-        {
-            if (Mouse.current.leftButton.wasPressedThisFrame)//Keyboard.current.eKey.wasPressedThisFrame // thirdPersonController.mouseClick.WasPressedThisFrame()
-            {
-                currentLineIndex++;
-                ShowCurrentLine();
-            }
-        }
-    }
 }

@@ -43,7 +43,7 @@ public class DialogueOption
     {
         if (assignQuest)
         {
-            QuestManager.Instance.ChangeQuestActive(quest);
+            //QuestManager.Instance.ChangeQuestActive(quest);
             Debug.Log("Quest assigned!");
         }
         return;
@@ -63,7 +63,7 @@ public class DialogueOption
         if (openSellScreen)
         {
 
-            DialogueManager.Instance.PauseDialogue();
+            //DialogueManager.Instance.PauseDialogue();
             GameManager.Instance.playerState.soldTo.Add(npc);
             UIManager.Instance.ToggleSellScreen();
             // ui manager open screen

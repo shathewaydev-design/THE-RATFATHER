@@ -56,11 +56,13 @@ public class NPCInteractionScript : MonoBehaviour, IInteractable
 
             profile.npcState.hasMetPlayer = true;
             // trigger new dialoguemanager (yarnspinner) with profile.introNode
+
+            DialogueManager.Instance.StartConversation(profile.introNode);
             return;
         }
 
         // trigger new dialoguemanager (yarnspinner) with profile.customerNode
-
+        DialogueManager.Instance.StartConversation(profile.customerNode);
 
     }
 
