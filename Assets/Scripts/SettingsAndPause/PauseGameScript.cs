@@ -47,4 +47,9 @@ public class PauseGameScript : MonoBehaviour
         Time.timeScale = 1.0f;
         UnityEngine.SceneManagement.SceneManager.LoadScene(mainMenuScene);
     }
+
+    public void SaveGame()
+    {
+        DataPersistenceManager.Instance.SaveGame();
+    }
 }

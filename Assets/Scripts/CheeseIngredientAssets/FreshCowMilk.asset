@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f73af059b830c41b381bc1c07d47d9e9, type: 3}
   m_Name: FreshCowMilk
   m_EditorClassIdentifier: Assembly-CSharp::CheeseIngredientData
-  itemID: FreshCowMilk
+  itemID: freshCowMilk
   description: "Fresh from the farm and untouched by time. A quality ingredient for
     quality cheese\u2014and the kind of thing customers might actually pay extra
     for."

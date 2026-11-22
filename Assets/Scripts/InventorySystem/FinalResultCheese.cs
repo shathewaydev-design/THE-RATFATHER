@@ -3,6 +3,8 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Cheese/Final Cheese Data")]
 public class FinalResultCheese : ScriptableObject
 {
+    [Header("ID")]
+    public string itemID; //for save system
     public string cheeseName;
     public CheeseRarity cheeseRarity;
     public CheeseType cheeseType;

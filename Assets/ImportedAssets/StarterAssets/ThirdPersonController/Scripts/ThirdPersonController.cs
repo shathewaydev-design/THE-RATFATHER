@@ -129,7 +129,18 @@ namespace StarterAssets
             tiltRight.performed += OnTiltRightPerformed;
             //stopInteract.performed += OnStopInteractPerformed;
             sprinkle.performed += OnSprinklePerformed;
-            openInventory.performed += OnOpenInventoryPerformed;
+            //openInventory.performed += OnOpenInventoryPerformed;
+            _playerInput = GetComponent<PlayerInput>();
+
+            var playerMap = _playerInput.actions.FindActionMap("Player");
+
+            if (playerMap != null)
+            {
+                openInventory = playerMap.FindAction("OpenInventory");
+
+                if (openInventory != null)
+                    openInventory.performed += OnOpenInventoryPerformed;
+            }
 
             mouseClick.performed += OnMouseClickPerformed;
             mouseClick.canceled += OnMouseClickCanceled;
@@ -258,8 +269,8 @@ namespace StarterAssets
                 if (interact != null)
                     interact.performed += ctx => OnInteract?.Invoke();
                 openInventory = playerMap.FindAction("OpenInventory");
-                if (openInventory != null)                    
-                    openInventory.performed += ctx => OnOpenInventory?.Invoke();
+                // if (openInventory != null)                    
+                //     openInventory.performed += ctx => OnOpenInventory?.Invoke();
             }
 
             var rebinds = PlayerPrefs.GetString("rebinds");
