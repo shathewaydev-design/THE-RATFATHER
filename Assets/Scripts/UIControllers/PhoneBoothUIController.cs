@@ -147,7 +147,13 @@ public class PhoneBoothUIController : MonoBehaviour
 
     // methods to update prefabs
     //private void FillReputationPrefab(ReputationState repState) { }
-    private void FillObjectivePrefab(ObjectiveData obj) { }
+    private void FillObjectivePrefab(ObjectiveData obj) 
+    { 
+
+
+
+    }
+
     private void FillRequestPrefab(RequestData req, GameObject newReq) 
     {
 
@@ -185,8 +191,8 @@ public class PhoneBoothUIController : MonoBehaviour
         }
 
         string custTypePref = "";
-        string custQualityPref = "Low+ (PLACEHOLDER)";
-
+        string custQualityPref = "";
+        // push through proper cheese type pref
         if (cust.npcProfile.typePreference == CheeseType.Upper)
         {
             custTypePref = "Uppers";
@@ -194,6 +200,20 @@ public class PhoneBoothUIController : MonoBehaviour
         else if (cust.npcProfile.typePreference == CheeseType.Downer)
         {
             custTypePref = "Downers";
+        }
+
+        // push through proper cheese quality pref
+        if (cust.npcProfile.qualityPreference == Quality.Low)
+        {
+            custQualityPref = "Low+";
+        } 
+        else if (cust.npcProfile.qualityPreference == Quality.Medium)
+        {
+            custQualityPref = "Medium+";
+        }
+        else if (cust.npcProfile.qualityPreference == Quality.High)
+        {
+            custQualityPref = "High+";
         }
 
         newCustomer.GetComponent<CustomerUI>().SetPreference(custTypePref, custQualityPref);

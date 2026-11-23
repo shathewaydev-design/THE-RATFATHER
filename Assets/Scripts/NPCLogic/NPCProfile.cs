@@ -11,7 +11,7 @@ public class NPCProfile : ScriptableObject
     public NPCState npcState = new NPCState();
 
     public CheeseType typePreference;
-    public StabilityLevel qualityPreference;
+    public Quality qualityPreference;
     public int basePrice; // what an npc will offer per cheese before other calculations
 
     public string introNode;

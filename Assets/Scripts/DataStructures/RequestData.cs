@@ -6,7 +6,7 @@ public class RequestData
     public CustomerData customer;
     
     public CheeseType requestType;
-    public StabilityLevel requestQuality;
+    public Quality requestQuality;
 
     public int requestQuantity;
     public int estimatedPay;
