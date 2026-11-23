@@ -1,16 +1,16 @@
 [System.Serializable]
 public class CheeseData
 {
-    public float finalStability;
+    public float finalQuality;
     public string cheeseType;
     public int qualityTier;
 
-    public CheeseData(float stability)
+    public CheeseData(float quality)
     {
-        finalStability = stability;
+        finalQuality = quality;
 
-        if (stability >= 90) qualityTier = 3;
-        else if (stability >= 60) qualityTier = 2;
+        if (quality >= 90) qualityTier = 3;
+        else if (quality >= 60) qualityTier = 2;
         else qualityTier = 1;
     }
 }

@@ -12,5 +12,5 @@ public class CheeseRecipeTemplate : ScriptableObject
 
     public FinalResultCheese resultCheese;
 
-    public StabilityLevel stability;
+    public Quality quality;
 }

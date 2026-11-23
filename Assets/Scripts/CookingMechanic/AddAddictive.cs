@@ -120,13 +120,13 @@ public class AddAddictive : MonoBehaviour
     {
 
 
-        CheeseData cheese = new CheeseData(session.stability);
+        //CheeseData cheese = new CheeseData(session.stability);
         //reset values
         session.successfulHits = 0;
         speed = defaultSpeed;
 
         // Send to inventory or manager
-        Debug.Log("Final Stability: " + cheese.finalStability);
+        //Debug.Log("Final Stability: " + cheese.finalQuality);
         
         // TODO: InventorySystem.Add(cheese);
         CookingManager.Instance.FinishCooking();

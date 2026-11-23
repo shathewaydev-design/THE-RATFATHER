@@ -8,7 +8,7 @@ public class FinalResultCheese : ScriptableObject
     public string cheeseName;
     public CheeseRarity cheeseRarity;
     public CheeseType cheeseType;
-    public StabilityLevel stability;
+    public Quality quality;
 
     public Sprite icon;
 
@@ -22,7 +22,7 @@ public class FinalResultCheese : ScriptableObject
 
     
 }
-public enum StabilityLevel
+public enum Quality
 {
     Low,
     Medium,
