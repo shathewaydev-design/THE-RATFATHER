@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
@@ -22,7 +23,13 @@ public class SettingsManager : MonoBehaviour
     public float brightness = 1.0f;
     [SerializeField] private bool isMainMenu = false;
 
+    /// <summary>
+    /// EVENTS
+    /// </summary>
 
+    public event Action<float> OnMouseSensitivityChanged;
+    public event Action<bool> OnInvertMouseX;
+    public event Action<bool> OnInvertMouseY;
     private void Awake()
     {
         if (Instance == null)
@@ -70,13 +77,18 @@ public class SettingsManager : MonoBehaviour
         mouseSensitivity = value;
         PlayerPrefs.SetFloat("MouseSensitivity", value);
         PlayerPrefs.Save();
+
+        OnMouseSensitivityChanged?.Invoke(value);
     }
+
 
     public void SetInvertMouseX(bool value)
     {
         invertMouseX = value;
         PlayerPrefs.SetInt("InvertMouseX", value ? 1 : 0);
         PlayerPrefs.Save();
+
+        OnInvertMouseX?.Invoke(value);
     }
 
     public void SetInvertMouseY(bool value)
@@ -84,6 +96,8 @@ public class SettingsManager : MonoBehaviour
         invertMouseY = value;
         PlayerPrefs.SetInt("InvertMouseY", value ? 1 : 0);
         PlayerPrefs.Save();
+
+        OnInvertMouseY?.Invoke(value);
     }
 
     public void SetBrightness(float value)

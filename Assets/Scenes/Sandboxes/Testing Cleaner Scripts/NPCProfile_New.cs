@@ -203,7 +203,7 @@ public class NPCProfile_New : ScriptableObject
         // cheese.stability
         // low, med, high
 
-        if (cheese.stability == StabilityLevel.High)
+        if (cheese.quality == Quality.High)
         {
             if (difficultyLevel == 3 || difficultyLevel == 2 || difficultyLevel == 1)
             {
@@ -214,7 +214,7 @@ public class NPCProfile_New : ScriptableObject
             return true;
 
         } 
-        else if (cheese.stability == StabilityLevel.Medium)
+        else if (cheese.quality == Quality.Medium)
         {
             if (difficultyLevel == 2 || difficultyLevel == 1)
             {
@@ -228,7 +228,7 @@ public class NPCProfile_New : ScriptableObject
             }
 
         }
-        else if (cheese.stability == StabilityLevel.Low)
+        else if (cheese.quality == Quality.Low)
         {
             if (difficultyLevel == 1)
             {

@@ -122,6 +122,7 @@ namespace StarterAssets
         public event Action<bool> OnMouseDrag;
 
         //[SerializeField] private UI_Inventory uiInventory;
+        private SettingsManager settingsManager;
         private void OnEnable()//used to subscribe to input events, make sure to unsubscribe in OnDisable to avoid bugs
         {
         #if ENABLE_INPUT_SYSTEM
@@ -147,11 +148,16 @@ namespace StarterAssets
 
             pauseGame.performed += OnPauseGamePerformed;
             
+            //SUBSCRIBE TO SETTINGS MANAGER EVENTS//
+            if(settingsManager != null)
+                SubscribeToSettingsEvents();
         #endif
         }
 
         private void OnDisable()
         {
+            UnSubscribeToSettingsEvents();
+
         #if ENABLE_INPUT_SYSTEM
             tiltLeft.performed -= OnTiltLeftPerformed;
             tiltRight.performed -= OnTiltRightPerformed;
@@ -223,6 +229,9 @@ namespace StarterAssets
             }
             //game mechanic input
             Instance = this;
+
+            //assign settings manager first
+            settingsManager = SettingsManager.Instance;
         }
 
         private void Start()
@@ -290,6 +299,9 @@ namespace StarterAssets
 
             //initialize inventory UI
             //uiInventory.SetInventory(inventorySystem);
+            
+            
+            
         }
 
         private void Update()
@@ -364,8 +376,8 @@ namespace StarterAssets
                 float lookY = _input.look.y;
 
                 // Apply inversion from settings
-                InvertX = SettingsManager.Instance.invertMouseX;
-                InvertY = SettingsManager.Instance.invertMouseY;
+                // InvertX = SettingsManager.Instance.invertMouseX;
+                // InvertY = SettingsManager.Instance.invertMouseY;
                 // Apply inversion
                 if (InvertX) 
                 {
@@ -377,10 +389,11 @@ namespace StarterAssets
                 }
 
                 // Apply mouse sensitivity from Settings
-                float mouseSettingSensitivity = SettingsManager.Instance.mouseSensitivity;
+                //float mouseSettingSensitivity = SettingsManager.Instance.mouseSensitivity;
+                //float mouseSettingSensitivity = MouseSensitivity;
                 //Apply sensitivity
-                lookX *= mouseSettingSensitivity;
-                lookY *= mouseSettingSensitivity;
+                lookX *= MouseSensitivity;
+                lookY *= MouseSensitivity;
                 _cinemachineTargetYaw += lookX * deltaTimeMultiplier;
                 _cinemachineTargetPitch += lookY * deltaTimeMultiplier;
                 //^original below
@@ -610,6 +623,30 @@ namespace StarterAssets
             }
         }
 
+        private void SubscribeToSettingsEvents()
+        {
+            if(settingsManager == null)
+                return;
+
+            settingsManager.OnMouseSensitivityChanged -= UpdateMouseSensitivity;
+            settingsManager.OnInvertMouseX -= UpdateMouseX;
+            settingsManager.OnInvertMouseY -= UpdateMouseY;
+
+            settingsManager.OnMouseSensitivityChanged += UpdateMouseSensitivity;
+            settingsManager.OnInvertMouseX += UpdateMouseX;
+            settingsManager.OnInvertMouseY += UpdateMouseY;
+        }
+        private void UnSubscribeToSettingsEvents()
+        {
+            if(settingsManager == null)
+                return;
+
+            settingsManager.OnMouseSensitivityChanged -= UpdateMouseSensitivity;
+            settingsManager.OnInvertMouseX -= UpdateMouseX;
+            settingsManager.OnInvertMouseY -= UpdateMouseY;
+
+        }
+
         private void OnTiltLeftPerformed(InputAction.CallbackContext ctx)
         {
             OnTiltLeft?.Invoke();
@@ -645,6 +682,18 @@ namespace StarterAssets
         private void OnMouseClickCanceled(InputAction.CallbackContext ctx)
         {
             // optional: release event 
+        }
+        private void UpdateMouseSensitivity(float receivedMouseSensitivity)
+        {
+            MouseSensitivity = receivedMouseSensitivity;
+        }
+        private void UpdateMouseX(bool receivedMouseX)
+        {
+            InvertX = receivedMouseX;
+        }
+        private void UpdateMouseY(bool receivedMouseY)
+        {
+            InvertY = receivedMouseY;
         }
     }
 }
