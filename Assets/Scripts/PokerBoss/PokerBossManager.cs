@@ -20,12 +20,12 @@ public class PokerBossManager : MonoBehaviour
     //That's the QTE manager's responsibility.
 
     public BossPhase currentBossPhase;
-    [SerializeField] private PokerBossData currentBoss;//whether the first boss or second boss
+    //[SerializeField] private PokerBossData currentBoss;//whether the first boss or second boss
     [SerializeField] private PokerBossState currentBossState;
     [SerializeField] private QTEManager qteManager;
     [SerializeField] private PokerHypervigilanceManager pokerHypervigilanceManager;
     [SerializeField] private Animator bossAnimationController;
-    [SerializeField] private PokerBossCutsceneManager pokerBossCutsceneManager;
+    //[SerializeField] private PokerBossCutsceneManager pokerBossCutsceneManager;
 
     [SerializeField] private float tellDuration;//tell phase
     [SerializeField] private float reactionDuration;//reaction phase

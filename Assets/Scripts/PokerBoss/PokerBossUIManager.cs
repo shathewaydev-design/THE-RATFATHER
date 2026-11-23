@@ -7,10 +7,10 @@ using System.Collections.Generic;
 
 public class PokerBossUIManager : MonoBehaviour
 {
-    [serializeField] private GameObject ConfidencePanel;
-    [serializeField] private GameObject DealPanel;
-    [serializeField] private GameObject TellPanel;
-    [serializeField] private GameObject ReactionPanel;
-    [serializeField] private GameObject ShowdownPanel;
+    [SerializeField] private GameObject ConfidencePanel;
+    [SerializeField] private GameObject DealPanel;
+    [SerializeField] private GameObject TellPanel;
+    [SerializeField] private GameObject ReactionPanel;
+    [SerializeField] private GameObject ShowdownPanel;
 
 }

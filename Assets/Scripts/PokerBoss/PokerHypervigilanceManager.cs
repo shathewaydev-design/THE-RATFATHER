@@ -11,7 +11,7 @@ public class PokerHypervigilanceManager : MonoBehaviour
     //It simply communicates whether a dose was taken
     //and what timer values should be used.
 
-    [SerializeField] private PokerBossData currentBossData;//Reads dose settings 
+    //[SerializeField] private PokerBossData currentBossData;//Reads dose settings 
     [SerializeField] private PokerBossState currentBossState;//Reads and updates remaining doses
     [SerializeField] private bool doseUsedThisRound;//Tracks whether a dose was taken during Deal 
 

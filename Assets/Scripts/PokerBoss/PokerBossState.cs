@@ -23,10 +23,10 @@ public class PokerBossState : MonoBehaviour
     [SerializeField] private int dosesRemaining;//doses left to use for this boss
     [SerializeField] private float currentPlayerConfidence;
 
-    private void Initialize(PokerBossData pokerBossData)
-    {
-        //Sets initial confidence and doses
-    }
+    // private void Initialize(PokerBossData pokerBossData)
+    // {
+    //     //Sets initial confidence and doses
+    // }
     private void DecreaseBossConfidence(float amount)
     {
         
