@@ -63,6 +63,22 @@ public class RequestManager : MonoBehaviour
 
     } 
 
+
+    public bool HasActiveRequest(NPCProfile npc)
+    {
+        foreach(CustomerData customer in customers)
+        {
+
+            if (customer.npcProfile == npc)
+            {
+                return HasActiveRequest(customer);
+            }
+
+        }
+
+        return false;
+    }
+
     private bool HasActiveRequest(CustomerData customer) // determines whether a customer already has an active request
     { 
         foreach (RequestData req in activeRequests)

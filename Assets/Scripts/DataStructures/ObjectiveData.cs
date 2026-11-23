@@ -16,10 +16,16 @@ public enum ObjectiveStatus
 public class ObjectiveData
 {
     public ObjectiveType objectiveType;
+
     public string objectiveName;
+
     public string objectiveDescription;
+
     public ObjectiveStatus objectiveStatus;
+
     public bool isCall;
+
+    public string callNode; // if there is a call to be made! (isCall == true)
 
 }
 

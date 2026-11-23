@@ -51,18 +51,21 @@ public class NPCInteractionScript : MonoBehaviour, IInteractable
         {
             // ALSO NEED TO CHECK IF THE FREE SAMPLE WAS SUCCESFUL
             // IF NOT, HAS MET PLAYER NEEDS TO STAY TRUE
-            // FOR NOW, ALL FREE SAMPLE CHECKS CAN BE SUCCESFUL FOR TESTING PURPOSES
-
+            // FOR NOW, ALL FREE SAMPLE CHECKS CAN BE SUCCESFUL FOR TESTING PURPOSE
 
             profile.npcState.hasMetPlayer = true;
-            // trigger new dialoguemanager (yarnspinner) with profile.introNode
 
+            // trigger new dialoguemanager (yarnspinner) with profile.introNode
             DialogueManager.Instance.StartConversation(profile.introNode);
             return;
         }
 
         // NEED TO CHECK IF THEY HAVE AN ACTIVE REQUEST. IF NOT, THEN PLAY THE NOREQUESTNODE
-        
+        if (!RequestManager.Instance.HasActiveRequest(profile))
+        {
+            DialogueManager.Instance.StartConversation(profile.noRequestNode);
+            return;
+        }
 
         // trigger new dialoguemanager (yarnspinner) with profile.customerNode
         DialogueManager.Instance.StartConversation(profile.customerNode);
@@ -76,7 +79,7 @@ public class NPCInteractionScript : MonoBehaviour, IInteractable
 
 
 
-    // UI PROMPT POPUP ---------------------------------------->
+    // UI PROMPT POPUP & INTERACTION ---------------------------------------->
 
     void OnTriggerEnter(Collider other)
     {

@@ -13,7 +13,7 @@ public class DialogueManager : MonoBehaviour
 
     // EVENTS ------------------------------------------------------->>>
 
-    // VATIABLES ----------------------------------------------------->>>
+    // VARIABLES ----------------------------------------------------->>>
 
     // yarnspinner refs
     [SerializeField] private DialogueRunner dialogueRunner;
