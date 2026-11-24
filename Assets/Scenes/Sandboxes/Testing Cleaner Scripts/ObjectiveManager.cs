@@ -10,264 +10,105 @@ using UnityEngine.UI;
 
 public class ObjectiveManager : MonoBehaviour
 {
+    // new objective manager
+
     public static ObjectiveManager Instance;
 
-    [SerializeField] private InputActionReference openObjectives;
-    public bool canOpenObjectives = true;
-    //private int index = 0;
+    // EVENTS ---------------------------------------------->>>
 
-    [SerializeField] public List<ObjectivesPage> pages = new List<ObjectivesPage>();
-    //[SerializeField] private List<ObjectiveVisual> objs = new List<ObjectiveVisual>(); // may not be needed
-    private ObjectivesPage currPage;
-    [SerializeField] private int currPageIndex;
 
-    [Header("UI")]
-    [SerializeField] private GameObject objectivePanel;
-    [SerializeField] private GameObject fullFavorDisplayPrefab;
 
-    //[SerializeField] private Button arrow;
-    //[SerializeField] private GameObject arrowSetter;
+    // VARIABLES ---------------------------------------------->>>
 
-    [SerializeField] private TextMeshProUGUI favorText;
-    [SerializeField] private TextMeshProUGUI objectiveTextPrefab;
+    private List<ObjectiveData> activeObjectives = new List<ObjectiveData>();
+    public IReadOnlyList<ObjectiveData> ActiveObjectives => activeObjectives;
 
-    [Header("Input")]//player inputs
-    public ThirdPersonController thirdPersonController;
+    // METHODS ---------------------------------------------->>>
 
-    private void Awake()
+    public void AddObjective(ObjectiveData obj) // CREATE AN OBJECTIVE DATA INT THE SCRIPT YOU CALL THIS METHOD!!!	
     {
-        if (Instance == null)
-            Instance = this;
-        else
+        activeObjectives.Add(obj);
+    }
+
+    public void RemoveObjective(ObjectiveData obj)
+    {
+        activeObjectives.Remove(obj);
+    }
+
+    public void ClearActiveObjectives()
+    {
+        activeObjectives.Clear();
+    }
+
+    // Unity Methods --->>>
+
+    void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
             Destroy(gameObject);
-
-
-
-        ObjectivesPage mainObj = new ObjectivesPage(); // set somewhere else?
-        objectivePanel.SetActive(false);
-
-        mainObj.favorMain = "Main Objective";
-        pages.Add(mainObj);
-
-        currPage = pages[0];
-
-    }
-
-
-    private void OnEnable()
-    {
-        FavorManager.OnFavorActivated += AddPage;
-        FavorManager.OnObjectiveComplete += AddObjective;
-    }
-
-    private void OnDisable()
-    {
-        FavorManager.OnFavorActivated -= AddPage;
-        FavorManager.OnObjectiveComplete -= AddObjective;
-    }
-
-    void Update()
-    {
-        if (canOpenObjectives && openObjectives.action.WasPressedThisFrame())
-        {
-            ToggleObjectivePanel();
-
-            //Debug.Log("Arrow active: " + arrow.gameObject.activeInHierarchy);
-            //Debug.Log("Arrow interactable: " + arrow.interactable);
-            //Debug.Log("Panel active: " + objectivePanel.activeInHierarchy);
-
-
-        }
-
-
-    }
-
-    public void ToggleObjectivePanel()
-    {
-        if (objectivePanel != null)
-        {
-            if (!objectivePanel.activeSelf)
-            {
-                objectivePanel.SetActive(true);
-
-
-                currPageIndex = 0;
-                ClearObjectives();
-                SetAndDisplayPage();
-
-                //change to Mouse Map
-                thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Mouse");
-                Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.None;
-
-                return;
-            }
-
-            objectivePanel.SetActive(false);
-
-
-            //change to Player Map
-            thirdPersonController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-
             return;
         }
 
-        Debug.Log("No objective panel set!!!");
-
+        Instance = this;
     }
 
-    // methods below -> logic goal:
-    // be able to add objective when one is complete.
-    // strikethrough objective when said objective is complete
-    // remove all objectives when entire favor is complete
-    // also, set name of favor (entire main goal of objectives)
-    // arrows to go through main objective, and other favors
-
-    public void SetFavorName(string words)
+    private void Start() // used for testin for now!!!
     {
-        favorText.text = words;
-    }
+        //ObjectiveData obj1 = new ObjectiveData();
+        //obj1.objectiveType = ObjectiveType.MainObjective;
+        //obj1.objectiveName = "Talk to diddy blud";
+        //obj1.objectiveDescription = "He wants to touch you...";
+        //obj1.objectiveStatus = ObjectiveStatus.Incomplete;
+        //obj1.isCall = true;
+        //obj1.callNode = "node";
 
-    public void AddPage(FavorState favorstate)
-    {
-        // when a new favor is added for player (trigger via event?)
-        ObjectivesPage newPage = new ObjectivesPage();
+        //activeObjectives.Add(obj1);
 
-        newPage.favorMain = favorstate.favor.name;
-        newPage.objectives.Add(favorstate.favor.objectives[0].description);
+        //ObjectiveData obj2 = new ObjectiveData();
+        //obj2.objectiveType = ObjectiveType.SideObjective;
+        //obj2.objectiveName = "Talk to diddy blud";
+        //obj2.objectiveDescription = "He wants to touch you...";
+        //obj2.objectiveStatus = ObjectiveStatus.Incomplete;
+        //obj2.isCall = false;
 
-        pages.Add(newPage);
-
-    }
-
-    public void AddObjective(FavorState favorstate)
-    {
-
-        foreach (ObjectivesPage page in pages) 
-        {
-            if (favorstate.favor.name.Equals(page.favorMain))
-            {
-                if (favorstate.isCompleted)
-                {
-                    return;
-                }
-
-                if (favorstate.currentObjective >= favorstate.favor.objectives.Count)
-                {
-                    //RemovePage(currPageIndex);
-                    return;
-                }
+        //activeObjectives.Add(obj2);
 
 
-                page.objectives.Add(favorstate.favor.objectives
-                    [favorstate.currentObjective].description);
+        //ObjectiveData obj3 = new ObjectiveData();
 
-            }
+        //obj3.objectiveType = ObjectiveType.SideObjective;
+        //obj3.objectiveName = "Talk to diddy blud";
+        //obj3.objectiveDescription = "He wants to touch you...";
+        //obj3.objectiveStatus = ObjectiveStatus.Incomplete;
+        //obj3.isCall = false;
 
-        }
+        //activeObjectives.Add(obj3);
 
-    }
 
-    public void StrikeThroughObjective()
-    {
-        // for now, change opacity of text?
-        // set through event!
-    }
+        //ObjectiveData obj4 = new ObjectiveData();
+        //obj4.objectiveType = ObjectiveType.SideObjective;
+        //obj4.objectiveName = "Talk to diddy blud";
+        //obj4.objectiveDescription = "He wants to touch you...";
+        //obj4.objectiveStatus = ObjectiveStatus.Incomplete;
+        //obj4.isCall = false;
 
-    public void RemovePage(int index)
-    {
-        pages.RemoveAt(index);
-    }
+        //activeObjectives.Add(obj4);
 
-    public void CyclePage()
-    {
-        //if (pages.Count <= 1)
-        //    return;
-        
+        //ObjectiveData obj5 = new ObjectiveData();
+        //obj5.objectiveType = ObjectiveType.SideObjective;
+        //obj5.objectiveName = "Talk to diddy blud";
+        //obj5.objectiveDescription = "He wants to touch you...";
+        //obj5.objectiveStatus = ObjectiveStatus.Incomplete;
+        //obj5.isCall = false;
 
-        if (currPageIndex == pages.Count - 1)
-        {
-            currPageIndex = 0;
-            // handle
-            currPage = pages[currPageIndex];
-            SetAndDisplayPage();
-            return;
-        }
-
-        currPageIndex++;
-        currPage = pages[currPageIndex];
-        SetAndDisplayPage();
+        //activeObjectives.Add(obj5);
 
 
     }
 
-    private void SetAndDisplayPage()
-    {
-        favorText.text = currPage.favorMain;
-
-        int i = 0;
-        foreach (string obj in currPage.objectives)
-        {
-            TextMeshProUGUI newText = Instantiate(objectiveTextPrefab, 
-                fullFavorDisplayPrefab.transform);
-
-            newText.text = currPage.objectives[i];
-            i++;
-        }
-
-    }
-
-    private void ClearObjectives()
-    {
-        foreach (ObjectivesPage page in pages)
-        {
-            foreach (Transform child in fullFavorDisplayPrefab.transform)
-            {
-                Destroy(child.gameObject);
-            }
-
-        }
-    }
-
-    public void ClearObjectives(int index)
-    {
-        foreach (Transform tran in fullFavorDisplayPrefab.transform)
-        {
-            Destroy(tran.gameObject);
-        }
 
 
-        //foreach (string child in pages[index].objectives)
-        //{
-        //    pages[index].objectives.Remove(child);
 
-        //    foreach (Transform tran in fullFavorDisplayPrefab.transform)
-        //    {
-        //        Destroy(tran.gameObject);
-        //    }
-        //}
-    }
-
-    public void OnArrowClick()
-    {
-        if (pages.Count < 1)
-            return;
-
-
-        ClearObjectives();
-        CyclePage();
-
-    }
-
-
-    public class ObjectivesPage
-    {
-        public string favorMain = "";
-        public List<string> objectives = new List<string>();
-    }
-
-   
 
 }

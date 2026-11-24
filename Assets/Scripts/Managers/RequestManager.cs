@@ -8,8 +8,8 @@ public class RequestManager : MonoBehaviour
 
     // VARIABLES ---------------------------------------------------->>
     public static RequestManager Instance;
-    private List<CustomerData> customers;
-    private List<RequestData> activeRequests;
+    private List<CustomerData> customers = new List<CustomerData>();
+    private List<RequestData> activeRequests = new List<RequestData>();
     [SerializeField] private float requestInterval;
     [SerializeField] private float requestTimer;
 
@@ -22,8 +22,14 @@ public class RequestManager : MonoBehaviour
 
     // METHODS ---------------------------------------------------->>
 
-    public void RegisterCustomer(CustomerData customer) 
+    public void RegisterCustomer(NPCProfile npc) // called after a succesful free sample
     {
+        CustomerData customer = new CustomerData();
+
+        customer.npcProfile = npc;
+        customer.strikeCount = 0;
+        customer.isActiveCustomer = true;
+
         customers.Add(customer);
     
     }
@@ -53,7 +59,7 @@ public class RequestManager : MonoBehaviour
 
     }
 
-    private void CheckForNewRequests() // checks whether or not customer should generate a request
+    private void CheckForNewRequests() // checks whether or not customer should generate a request MAY NOT BE NEEDED
     {
         //foreach (CustomerData customer in customers)
         //{
@@ -142,12 +148,39 @@ public class RequestManager : MonoBehaviour
         Instance = this;
     }
 
+    private void Start() // for testing for now!!!
+    {
+        RequestData req1 = new RequestData();
+        CustomerData customer1 = new CustomerData();
+
+        customer1.npcProfile = new NPCProfile();
+        customer1.npcProfile.basePrice = 1;
+        customer1.npcProfile.npcName = "Judy";
+        customer1.npcProfile.typePreference = CheeseType.Upper;
+        customer1.npcProfile.qualityPreference = Quality.Low;
+
+        req1.customer = customer1;
+        req1.requestType = customer1.npcProfile.typePreference;
+        req1.requestQuality = customer1.npcProfile.qualityPreference;
+        req1.requestQuantity = 3;
+        req1.estimatedPay = 100;
+
+        customer1.strikeCount = 1;
+        customer1.isActiveCustomer = true;
+
+        customers.Add(customer1);
+        activeRequests.Add(req1);
+
+    }
+
     private void Update()
     {
-        foreach (CustomerData customer in customers)
-        {
-            GenerateRequest(customer);
-        }
+        // GENERATE REQUESTS HERE!!!
+
+        //foreach (CustomerData customer in customers)
+        //{
+        //    GenerateRequest(customer);
+        //}
     }
 
 

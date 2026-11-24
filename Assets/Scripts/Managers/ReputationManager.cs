@@ -76,6 +76,12 @@ public class ReputationManager : MonoBehaviour
         currentReputation = amount;
     
     }
+
+    public int GetReputation()
+    {
+        return currentReputation;
+    }
+
     public float GetReputationMultiplier() 
     { 
         if (GetReputationTier() == ReputationTier.Unknown)
@@ -142,6 +148,8 @@ public class ReputationManager : MonoBehaviour
         }
 
         Instance = this;
+
+        currentReputation = 50;
     }
 
 }

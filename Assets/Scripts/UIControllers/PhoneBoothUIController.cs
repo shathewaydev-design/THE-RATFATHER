@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using StarterAssets;
 using System.Collections.Generic;
 using TMPro;
@@ -37,9 +38,9 @@ public class PhoneBoothUIController : MonoBehaviour
     [SerializeField] private GameObject custPrefab;
 
     // INSTANTIATED OBJECTS
-    private List<GameObject> objObjects;
-    private List<GameObject> reqObjects;
-    private List<GameObject> custObjects;
+    private List<GameObject> objObjects = new List<GameObject>();
+    private List<GameObject> reqObjects = new List<GameObject>();
+    private List<GameObject> custObjects = new List<GameObject>();
 
     // METHODS ----------------------------------------------------->
 
@@ -50,7 +51,7 @@ public class PhoneBoothUIController : MonoBehaviour
 
         // SWITCH INPUT MAP
         ThirdPersonController.Instance.GetComponent<PlayerInput>().SwitchCurrentActionMap("Mouse");
-        CursorManager.Instance.LockCursor();
+        CursorManager.Instance.UnlockCursor();
 
         PopulateObjectives(); // objectives always pops up first
 
@@ -61,7 +62,7 @@ public class PhoneBoothUIController : MonoBehaviour
     public void OnObjectivesButton() 
     {
         // clear everything, then populate objectives
-
+        PopulateObjectives();
 
     
     }
@@ -90,14 +91,60 @@ public class PhoneBoothUIController : MonoBehaviour
         ClearObjectives();
         ClearRequests();
 
-        //foreach ()
-        //{
+        //Debug.Log("Attempting to fill objectives!!!");
 
-        //}
+        //GameObject reputation = Instantiate(repPrefab, contentPanel);
+        //// fill this repPrefab with info from ReputationManager
+        //FillReputationPrefab(reputation);
+        //objObjects.Add(reputation);
 
+        //// set z = 0
+        //RectTransform rect = reputation.GetComponent<RectTransform>();
+        //Vector3 pos = rect.localPosition;
+        //pos.z = 0;
+        //rect.localPosition = pos;
+
+        PopulateReputation();
+
+        // next, fill the UI with the actual objectives
+        foreach (ObjectiveData obj in ObjectiveManager.Instance.ActiveObjectives)
+        {
+
+            GameObject newObj = Instantiate(objPrefab, contentPanel);
+
+            // set z = 0
+            RectTransform rect2 = newObj.GetComponent<RectTransform>();
+            Vector3 pos2 = rect2.localPosition;
+            pos2.z = 0;
+            rect2.localPosition = pos2;
+
+            FillObjectivePrefab(obj, newObj);
+
+            objObjects.Add(newObj);
+
+        }
 
 
     } 
+
+    private void PopulateReputation()
+    {
+        Debug.Log("Attempting to instantiate rep prefab!!!");
+
+        GameObject reputation = Instantiate(repPrefab, contentPanel);
+        // fill this repPrefab with info from ReputationManager
+        FillReputationPrefab(reputation);
+
+        // set z = 0
+        RectTransform rect = reputation.GetComponent<RectTransform>();
+        Vector3 pos = rect.localPosition;
+        pos.z = 0;
+        rect.localPosition = pos;
+
+        objObjects.Add(reputation);
+
+    }
+
     private void PopulateRequests() 
     {
 
@@ -113,6 +160,13 @@ public class PhoneBoothUIController : MonoBehaviour
             
             // fill in the prefab!
             FillRequestPrefab(req, newReq);
+
+            // set z = 0
+            RectTransform rect = newReq.GetComponent<RectTransform>();
+            Vector3 pos = rect.localPosition;
+            pos.z = 0;
+            rect.localPosition = pos;
+
 
             // add the game object to a list to be able to clear on 
             reqObjects.Add(newReq);
@@ -137,6 +191,12 @@ public class PhoneBoothUIController : MonoBehaviour
 
             FillCustomerPrefab(cust, newCustomer);
 
+            // set z = 0
+            RectTransform rect = newCustomer.GetComponent<RectTransform>();
+            Vector3 pos = rect.localPosition;
+            pos.z = 0;
+            rect.localPosition = pos;
+
             custObjects.Add(newCustomer);
 
 
@@ -145,19 +205,84 @@ public class PhoneBoothUIController : MonoBehaviour
 
     }
 
+    private void FillReputationPrefab(GameObject repPrefab)
+    {
+
+        int repValue = ReputationManager.Instance.GetReputation();
+        repPrefab.GetComponent<ReputationUI>().SetRepBar(repValue);
+
+        string repTier = "";
+        if (ReputationManager.Instance.GetReputationTier() == ReputationTier.Unknown)
+        {
+            repTier = "Unknown";
+        } 
+        else if (ReputationManager.Instance.GetReputationTier() == ReputationTier.Recognized)
+        {
+            repTier = "Recognized";
+        }
+        else if (ReputationManager.Instance.GetReputationTier() == ReputationTier.Established)
+        {
+            repTier = "Established";
+        }
+        else if (ReputationManager.Instance.GetReputationTier() == ReputationTier.WellKnown)
+        {
+            repTier = "WellKnown";
+        }
+        else if (ReputationManager.Instance.GetReputationTier() == ReputationTier.Infamous)
+        {
+            repTier = "Infamous";
+        }
+        repPrefab.GetComponent<ReputationUI>().SetTitle(repTier);
+
+        float repMultiplier = ReputationManager.Instance.GetReputationMultiplier();
+        repPrefab.GetComponent<ReputationUI>().SetMultiplier(repMultiplier);
+
+    }
+
     // methods to update prefabs
     //private void FillReputationPrefab(ReputationState repState) { }
-    private void FillObjectivePrefab(ObjectiveData obj) 
-    { 
+    private void FillObjectivePrefab(ObjectiveData obj, GameObject objPrefab) 
+    {
+        string objType = "";
+        Color col = Color.white;
+        if (obj.objectiveType == ObjectiveType.MainObjective)
+        {
+            objType = "Main Objective";
+            col = Color.green;
+        }
+        else if (obj.objectiveType == ObjectiveType.SideObjective)
+        {
+            objType = "Side Objective";
+            col = Color.purple;
+        }
+        objPrefab.GetComponent<ObjectiveUI>().SetType(objType, col);
 
+        string objTitle = obj.objectiveName;
+        objPrefab.GetComponent<ObjectiveUI>().SetTitle(objTitle);
 
+        string objStatus = "";
+        if (obj.objectiveStatus == ObjectiveStatus.Incomplete)
+        {
+            objStatus = "Incomplete";
+        }
+        else if (obj.objectiveStatus == ObjectiveStatus.Complete)
+        {
+            objStatus = "Complete";
+        }
+        objPrefab.GetComponent<ObjectiveUI>().SetStatus(objStatus);
+
+        string objDescription = obj.objectiveDescription;
+        objPrefab.GetComponent<ObjectiveUI>().SetDesc(objTitle);
+
+        bool isCall = obj.isCall;
+        objPrefab.GetComponent<ObjectiveUI>().SetCallButton(isCall);
 
     }
 
     private void FillRequestPrefab(RequestData req, GameObject newReq) 
     {
 
-        newReq.GetComponent<RequestUI>().SetName(req.customer.npcProfile.name);
+        newReq.GetComponent<RequestUI>().SetName(req.customer.npcProfile.npcName);
 
         if (req.requestType == CheeseType.Upper)
         {
@@ -170,7 +295,23 @@ public class PhoneBoothUIController : MonoBehaviour
 
         newReq.GetComponent<RequestUI>().SetQuantity("" + req.requestQuantity);
 
-        newReq.GetComponent<RequestUI>().SetQuality("Low (placeholder)"); // will be an if statement later!!!
+
+        if (req.requestQuality == Quality.Low)
+        {
+            newReq.GetComponent<RequestUI>().SetQuality("Low");
+        }
+        else if (req.requestQuality == Quality.Medium)
+        {
+            newReq.GetComponent<RequestUI>().SetQuality("Medium");
+
+        }
+        else if (req.requestQuality == Quality.High)
+        {
+            newReq.GetComponent<RequestUI>().SetQuality("High");
+        }
+
+
+        //newReq.GetComponent<RequestUI>().SetQuality("Low (placeholder)"); // will be an if statement later!!!
 
         newReq.GetComponent<RequestUI>().SetPayNum("" + req.estimatedPay);
 
@@ -179,7 +320,7 @@ public class PhoneBoothUIController : MonoBehaviour
     private void FillCustomerPrefab(CustomerData cust, GameObject newCustomer) 
     { 
 
-        newCustomer.GetComponent<CustomerUI>().SetName(cust.npcProfile.name);
+        newCustomer.GetComponent<CustomerUI>().SetName(cust.npcProfile.npcName);
 
         if (cust.isActiveCustomer)
         {
@@ -235,6 +376,8 @@ public class PhoneBoothUIController : MonoBehaviour
     // methods to clear ui
     private void ClearObjectives() 
     {
+        // this may not work--may have to ceate a new method to remove the specific reputation prefab
+
         foreach (GameObject obj in objObjects)
         {
             Destroy(obj);
@@ -274,7 +417,7 @@ public class PhoneBoothUIController : MonoBehaviour
 
         // SWITCH INPUT MAP
         ThirdPersonController.Instance.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
-        CursorManager.Instance.UnlockCursor();
+        CursorManager.Instance.LockCursor();
     }
 
 

@@ -29,9 +29,9 @@ public class NRYLevelManager : MonoBehaviour
 
     private void Start()
     {
-        ObjectiveManager.Instance.pages[0].objectives.Clear();
-        ObjectiveManager.Instance.pages[0].objectives.Add("Ask around for Tommy.");
-        ObjectiveManager.Instance.pages[0].objectives.Add("Continue your 'business'.");
+        //ObjectiveManager.Instance.pages[0].objectives.Clear();
+        //ObjectiveManager.Instance.pages[0].objectives.Add("Ask around for Tommy.");
+        //ObjectiveManager.Instance.pages[0].objectives.Add("Continue your 'business'.");
 
         InventorySystem.Instance.AddToCurrency(500);
         Debug.Log("Currency: " + InventorySystem.Instance.GetCurrency() );
@@ -52,7 +52,7 @@ public class NRYLevelManager : MonoBehaviour
 
     public void PrepareForCasinoFight()
     {
-        ObjectiveManager.Instance.pages[0].objectives.Add("Make at least 500 chedz to confront the cassino boss.");
+        //ObjectiveManager.Instance.pages[0].objectives.Add("Make at least 500 chedz to confront the cassino boss.");
 
 
 

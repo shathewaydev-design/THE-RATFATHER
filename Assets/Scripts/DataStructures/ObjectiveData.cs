@@ -27,5 +27,7 @@ public class ObjectiveData
 
     public string callNode; // if there is a call to be made! (isCall == true)
 
+    // may need an objective goal type. However, our level managers may be able to handle such work.
+
 }
 

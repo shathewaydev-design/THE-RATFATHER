@@ -22,7 +22,7 @@ public class SlumsLevelManager : MonoBehaviour
         CutsceneManager.Instance.StartCutscene();
 
 
-        ObjectiveManager.Instance.pages[0].objectives.Add("Talk to francheesqua.");
+        //ObjectiveManager.Instance.pages[0].objectives.Add("Talk to francheesqua.");
     }
 
     // Update is called once per frame
@@ -33,9 +33,9 @@ public class SlumsLevelManager : MonoBehaviour
 
         if (franTutorialStage == 0 && franProf.GetState().hasMetPlayer)
         {
-            ObjectiveManager.Instance.pages[0].objectives.Remove("Talk to francheesqua.");
-            ObjectiveManager.Instance.ClearObjectives(0);
-            ObjectiveManager.Instance.pages[0].objectives.Add("Make a cheese. Grab several different ingredients.");
+            //ObjectiveManager.Instance.pages[0].objectives.Remove("Talk to francheesqua.");
+            //ObjectiveManager.Instance.ClearObjectives(0);
+            //ObjectiveManager.Instance.pages[0].objectives.Add("Make a cheese. Grab several different ingredients.");
 
             franProf.GetState().SetDialogueNode("Francheesqua_Slums_Mid");
 
@@ -45,19 +45,19 @@ public class SlumsLevelManager : MonoBehaviour
 
         if (franTutorialStage == 1 && InventorySystem.Instance.cheeseInventory.Count >= 1)
         {
-            ObjectiveManager.Instance.pages[0].objectives.Remove("Make a cheese. Grab several different ingredients.");
-            ObjectiveManager.Instance.ClearObjectives(0);
-            ObjectiveManager.Instance.pages[0].objectives.Add("Talk to francheesqua again.");
+            //ObjectiveManager.Instance.pages[0].objectives.Remove("Make a cheese. Grab several different ingredients.");
+            //ObjectiveManager.Instance.ClearObjectives(0);
+            //ObjectiveManager.Instance.pages[0].objectives.Add("Talk to francheesqua again.");
             franProf.GetState().SetDialogueNode("Francheesqua_Slums_Done");
             franTutorialStage = 2;
         }
 
         if (franTutorialStage == 2)
         {
-            ObjectiveManager.Instance.pages[0].objectives.Remove("Talk to francheesqua again.");
-            ObjectiveManager.Instance.ClearObjectives(0);
-            ObjectiveManager.Instance.pages[0].objectives.Add("Find other rats to sell to. Make more cheese.");
-            ObjectiveManager.Instance.pages[0].objectives.Add("Make enough money to pay off debt before the end of the week.");
+            //ObjectiveManager.Instance.pages[0].objectives.Remove("Talk to francheesqua again.");
+            //ObjectiveManager.Instance.ClearObjectives(0);
+            //ObjectiveManager.Instance.pages[0].objectives.Add("Find other rats to sell to. Make more cheese.");
+            //ObjectiveManager.Instance.pages[0].objectives.Add("Make enough money to pay off debt before the end of the week.");
             franTutorialStage = 3;
 
         }

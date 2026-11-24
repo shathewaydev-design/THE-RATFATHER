@@ -69,7 +69,7 @@ public class NPCProfile_New : ScriptableObject
         }
 
 
-        return favors[state.compFavors]; 
+        return favors[state.compFavors];
     }
 
     public NPCState_New GetState()
@@ -120,15 +120,15 @@ public class NPCProfile_New : ScriptableObject
         if (difficultyLevel == 1)
         {
             state.trustLevel += 50;
-        } 
+        }
         else if (difficultyLevel == 2)
         {
             state.trustLevel += 25;
-        } 
+        }
         else if (difficultyLevel == 3)
         {
             state.trustLevel += 15;
-        } 
+        }
         else
         {
             state.trustLevel = 100;
@@ -186,12 +186,12 @@ public class NPCProfile_New : ScriptableObject
         bool canSell = false;
 
         return true; // for playtesting placeholder!!!!!
-        // triggered when selling, 
-        // check specific difficulty level
-        // set selling range?
-        // based on difficulty level
-        // bar from selling if quality doesn't match preference
-        // maybe decrease trust?
+                     // triggered when selling, 
+                     // check specific difficulty level
+                     // set selling range?
+                     // based on difficulty level
+                     // bar from selling if quality doesn't match preference
+                     // maybe decrease trust?
 
         // ALSO CHECK TRUST LEVEL
         // increase or decrease price range based on current trust
@@ -203,92 +203,93 @@ public class NPCProfile_New : ScriptableObject
         // cheese.stability
         // low, med, high
 
-        if (cheese.stability == StabilityLevel.High)
-        {
-            if (difficultyLevel == 3 || difficultyLevel == 2 || difficultyLevel == 1)
-            {
-                canSell = true;
-                return canSell;
-            }
+        //    if (cheese.stability == StabilityLevel.High)
+        //    {
+        //        if (difficultyLevel == 3 || difficultyLevel == 2 || difficultyLevel == 1)
+        //        {
+        //            canSell = true;
+        //            return canSell;
+        //        }
 
-            return true;
+        //        return true;
 
-        } 
-        else if (cheese.stability == StabilityLevel.Medium)
-        {
-            if (difficultyLevel == 2 || difficultyLevel == 1)
-            {
-                canSell = true;
-                return canSell;
-            }
-            else
-            {
-                canSell = false;
-                return canSell;
-            }
+        //    } 
+        //    else if (cheese.stability == StabilityLevel.Medium)
+        //    {
+        //        if (difficultyLevel == 2 || difficultyLevel == 1)
+        //        {
+        //            canSell = true;
+        //            return canSell;
+        //        }
+        //        else
+        //        {
+        //            canSell = false;
+        //            return canSell;
+        //        }
 
-        }
-        else if (cheese.stability == StabilityLevel.Low)
-        {
-            if (difficultyLevel == 1)
-            {
-                canSell = true;
-                return canSell;
-            }
-            else
-            {
-                canSell = false;
-                return canSell;
-            }
-        }
+        //    }
+        //    else if (cheese.stability == StabilityLevel.Low)
+        //    {
+        //        if (difficultyLevel == 1)
+        //        {
+        //            canSell = true;
+        //            return canSell;
+        //        }
+        //        else
+        //        {
+        //            canSell = false;
+        //            return canSell;
+        //        }
+        //    }
 
-            return canSell;
+        //        return canSell;
+
+        //}
+
+
 
     }
 
-
-
-}
-
-[System.Serializable]
-public class NPCState_New
-{
-    public bool hasMetPlayer;
-
-    public string dialogueNode;
-
-    public int numOfTimesSpoken;
-
-    public Favor activeFavor; // one active favor PER NPC!!
-    public FavorObjective activeObjective;
-
-    public float trustLevel = 0;
-
-    public int compFavors = 0;
-
-    public string CurrDialogueNode(NPCProfile_New profile)
+    [System.Serializable]
+    public class NPCState_New
     {
-        if (!hasMetPlayer)
+        public bool hasMetPlayer;
+
+        public string dialogueNode;
+
+        public int numOfTimesSpoken;
+
+        public Favor activeFavor; // one active favor PER NPC!!
+        public FavorObjective activeObjective;
+
+        public float trustLevel = 0;
+
+        public int compFavors = 0;
+
+        public string CurrDialogueNode(NPCProfile_New profile)
         {
-            dialogueNode = profile.GetIntroNode();
+            if (!hasMetPlayer)
+            {
+                dialogueNode = profile.GetIntroNode();
+                return dialogueNode;
+            }
+
+            if (string.IsNullOrEmpty(dialogueNode))
+            {
+                Debug.LogWarning("NPC has met player but has no dialogue node. Using intro node.");
+                dialogueNode = profile.GetIntroNode();
+            }
+
             return dialogueNode;
         }
 
-        if (string.IsNullOrEmpty(dialogueNode))
+        public string SetDialogueNode(string newNode)
         {
-            Debug.LogWarning("NPC has met player but has no dialogue node. Using intro node.");
-            dialogueNode = profile.GetIntroNode();
+            dialogueNode = newNode;
+            return dialogueNode;
         }
 
-        return dialogueNode;
+
+
     }
-
-    public string SetDialogueNode(string newNode)
-    {
-        dialogueNode = newNode;
-        return dialogueNode;
-    }
-
-
-
 }
