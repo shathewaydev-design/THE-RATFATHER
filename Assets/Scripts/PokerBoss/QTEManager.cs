@@ -29,8 +29,32 @@ public class QTEManager : MonoBehaviour
     //Current position of the All-In indicator 
     //(where the zone the player wants to hit the skill check)
     //prolly image
+    [Header("QTE Types")]
 
+    [SerializeField] private QuickDraw quickDraw;
 
+    public void StartQuickDraw()
+    {
+        quickDraw.StartQuickDraw(OnQuickDrawFinished);
+        //receiving bool from StarQuickDraw function
+    }
+
+    private void OnQuickDrawFinished(bool success)
+    {
+        if (success)
+        {
+            Debug.Log("Player won the quick draw!");
+
+            // TODO: Boss loses confidence
+            // TODO: Play success animation
+        }
+        else
+        {
+            Debug.Log("Player lost the quick draw!");
+
+            // TODO: player loses confidence
+        }
+    }
     private void SelectRandomQTE()
     {
         //Consumes one dose if available 

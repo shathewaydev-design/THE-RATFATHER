@@ -94,6 +94,7 @@ namespace StarterAssets
         public bool InvertX = false;
         [Header("Game mechanic Input")]
         public static ThirdPersonController Instance;
+        
         public event Action OnStopInteract;
         public event Action OnTiltLeft;
         public event Action OnTiltRight;
@@ -103,9 +104,14 @@ namespace StarterAssets
         //public event Action OnMousePositionChange; 
         public event Action OnOpenInventory; 
         public event Action OnPauseGame; 
+        public event Action OnSkillCheck1; 
+        public event Action OnSkillCheck2; 
+        public event Action OnSkillCheck3; 
+        public event Action OnSkillCheck4; 
         private InputActionMap playerMap;
         private InputActionMap cookingMap;
         private InputActionMap mouseMap;
+        private InputActionMap casinoBossMap;
 
         public InputAction stopInteract;//press Q
         public InputAction tiltLeft;//press A
@@ -117,6 +123,10 @@ namespace StarterAssets
 
         public InputAction toggleCursor;//unlock cursor for debugging
         public InputAction pauseGame;//press Esc to pause game
+        public InputAction skillCheck1;//press 1 for skill check 1
+        public InputAction skillCheck2;//press 2 for skill check 2
+        public InputAction skillCheck3;//press 3 for skill check 3
+        public InputAction skillCheck4;//press 4 for skill check 4
         public event Action OnToggleCursor;
         public event Action<Vector2> OnMousePosition;
         public event Action<bool> OnMouseDrag;
@@ -128,9 +138,9 @@ namespace StarterAssets
         #if ENABLE_INPUT_SYSTEM
             tiltLeft.performed += OnTiltLeftPerformed;
             tiltRight.performed += OnTiltRightPerformed;
-            //stopInteract.performed += OnStopInteractPerformed;
+            
             sprinkle.performed += OnSprinklePerformed;
-            //openInventory.performed += OnOpenInventoryPerformed;
+            
             _playerInput = GetComponent<PlayerInput>();
 
             var playerMap = _playerInput.actions.FindActionMap("Player");
@@ -147,6 +157,11 @@ namespace StarterAssets
             mouseClick.canceled += OnMouseClickCanceled;
 
             pauseGame.performed += OnPauseGamePerformed;
+            //CasinoBoss Skill checks
+            skillCheck1.performed += OnSkillCheck1Performed;
+            skillCheck2.performed += OnSkillCheck2Performed;
+            skillCheck3.performed += OnSkillCheck3Performed;
+            skillCheck4.performed += OnSkillCheck4Performed;
             
             //SUBSCRIBE TO SETTINGS MANAGER EVENTS//
             if(settingsManager != null)
@@ -169,6 +184,12 @@ namespace StarterAssets
             mouseClick.canceled -= OnMouseClickCanceled;
 
             pauseGame.performed -= OnPauseGamePerformed;
+
+            //CasinoBoss Skill checks
+            skillCheck1.performed -= OnSkillCheck1Performed;
+            skillCheck2.performed -= OnSkillCheck2Performed;
+            skillCheck3.performed -= OnSkillCheck3Performed;
+            skillCheck4.performed -= OnSkillCheck4Performed;
         #endif
         }
 
@@ -287,6 +308,24 @@ namespace StarterAssets
             {
                 _playerInput.actions.LoadBindingOverridesFromJson(rebinds);
             }
+
+
+            var casinoBossMap = _playerInput.actions.FindActionMap("CasinoBoss");
+            if(casinoBossMap != null)
+            {
+                skillCheck1 = casinoBossMap.FindAction("Skill Check 1"); 
+                skillCheck2 = casinoBossMap.FindAction("Skill Check 2"); 
+                skillCheck3 = casinoBossMap.FindAction("Skill Check 3"); 
+                skillCheck4 = casinoBossMap.FindAction("Skill Check 4"); 
+                if(skillCheck1 != null)
+                    skillCheck1.performed += ctx => OnSkillCheck1?.Invoke();
+                if(skillCheck2 != null)
+                    skillCheck2.performed += ctx => OnSkillCheck2?.Invoke();
+                if(skillCheck3 != null)
+                    skillCheck3.performed += ctx => OnSkillCheck3?.Invoke();
+                if(skillCheck4 != null)
+                    skillCheck4.performed += ctx => OnSkillCheck4?.Invoke();
+            }
 #else
 			Debug.LogError( "Starter Assets package is missing dependencies. Please use Tools/Starter Assets/Reinstall Dependencies to fix it");
 #endif
@@ -325,11 +364,7 @@ namespace StarterAssets
         #endif
 
             // HandleGameMechanicInput(); // Check for game mechanic input each frame
-            // tiltLeft.performed += ctx => OnTiltLeft?.Invoke();
-            // tiltRight.performed += ctx => OnTiltRight?.Invoke();
-            // stopInteract.performed += ctx => OnStopInteract?.Invoke();  
-            // mouseClick.performed += ctx => OnMouseClick?.Invoke();
-            // mousePosition.performed += ctx => OnMousePositionChange?.Invoke();
+            
         }
 
         private void LateUpdate()
@@ -682,6 +717,22 @@ namespace StarterAssets
         private void OnMouseClickCanceled(InputAction.CallbackContext ctx)
         {
             // optional: release event 
+        }
+        private void OnSkillCheck1Performed(InputAction.CallbackContext ctx)
+        {
+            OnSkillCheck1?.Invoke();
+        }
+        private void OnSkillCheck2Performed(InputAction.CallbackContext ctx)
+        {
+            OnSkillCheck2?.Invoke();
+        }
+        private void OnSkillCheck3Performed(InputAction.CallbackContext ctx)
+        {
+            OnSkillCheck3?.Invoke();
+        }
+        private void OnSkillCheck4Performed(InputAction.CallbackContext ctx)
+        {
+            OnSkillCheck4?.Invoke();
         }
         private void UpdateMouseSensitivity(float receivedMouseSensitivity)
         {

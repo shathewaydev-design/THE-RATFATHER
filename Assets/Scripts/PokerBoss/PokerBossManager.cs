@@ -33,10 +33,10 @@ public class PokerBossManager : MonoBehaviour
     [SerializeField] private bool currentQTESuccess;//Whether the current QTE was completed successfully
     [SerializeField] private bool isEncounterActive;//Prevents gameplay after the encounter ends.
 
-    private void StartEncounter()
+    public void StartEncounter()
     {
         //Initializes a boss encounter 
-
+        qteManager.StartQuickDraw();
 
     }    
     private void StartDealPhase()

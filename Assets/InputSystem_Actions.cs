@@ -159,7 +159,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""name"": ""Next"",
                     ""type"": ""Button"",
                     ""id"": ""b7230bb6-fc9b-4f52-8b25-f5e19cb2c2ba"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -1218,6 +1218,94 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             ]
         },
         {
+            ""name"": ""CasinoBoss"",
+            ""id"": ""315a2fac-7092-47ef-93c0-f915b4f7a072"",
+            ""actions"": [
+                {
+                    ""name"": ""Skill Check 1"",
+                    ""type"": ""Button"",
+                    ""id"": ""272b4bb5-cf4a-4cd8-bea2-59a12199b25a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Skill Check 2"",
+                    ""type"": ""Button"",
+                    ""id"": ""748375d8-d4f0-4c3b-b1af-e30469c507ad"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Skill Check 3"",
+                    ""type"": ""Button"",
+                    ""id"": ""7c9ea8ad-aa9b-4e82-abda-1f59510c8dda"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Skill Check 4"",
+                    ""type"": ""Button"",
+                    ""id"": ""d6482291-452d-42ca-8345-b9a86acbb02f"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""55c93304-12a1-477c-9c95-74ecb84c07f8"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Skill Check 1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""65e1245a-d14a-4d53-9edf-44cc5e537c08"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Skill Check 2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3062f219-0422-4bd7-92d0-8ad5adeca9fa"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Skill Check 3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""560efae1-a8e0-498f-8890-641193e3e098"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Skill Check 4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
             ""name"": ""Mouse"",
             ""id"": ""df6c0551-61d1-47be-9b67-94ba5d4ba36b"",
             ""actions"": [
@@ -1448,6 +1536,12 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Cooking_TiltRight = m_Cooking.FindAction("TiltRight", throwIfNotFound: true);
         m_Cooking_StopInteract = m_Cooking.FindAction("StopInteract", throwIfNotFound: true);
         m_Cooking_Sprinkle = m_Cooking.FindAction("Sprinkle", throwIfNotFound: true);
+        // CasinoBoss
+        m_CasinoBoss = asset.FindActionMap("CasinoBoss", throwIfNotFound: true);
+        m_CasinoBoss_SkillCheck1 = m_CasinoBoss.FindAction("Skill Check 1", throwIfNotFound: true);
+        m_CasinoBoss_SkillCheck2 = m_CasinoBoss.FindAction("Skill Check 2", throwIfNotFound: true);
+        m_CasinoBoss_SkillCheck3 = m_CasinoBoss.FindAction("Skill Check 3", throwIfNotFound: true);
+        m_CasinoBoss_SkillCheck4 = m_CasinoBoss.FindAction("Skill Check 4", throwIfNotFound: true);
         // Mouse
         m_Mouse = asset.FindActionMap("Mouse", throwIfNotFound: true);
         m_Mouse_LeftClick = m_Mouse.FindAction("LeftClick", throwIfNotFound: true);
@@ -1465,6 +1559,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, InputSystem_Actions.Player.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_UI.enabled, "This will cause a leak and performance issues, InputSystem_Actions.UI.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_Cooking.enabled, "This will cause a leak and performance issues, InputSystem_Actions.Cooking.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_CasinoBoss.enabled, "This will cause a leak and performance issues, InputSystem_Actions.CasinoBoss.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_Mouse.enabled, "This will cause a leak and performance issues, InputSystem_Actions.Mouse.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_Global.enabled, "This will cause a leak and performance issues, InputSystem_Actions.Global.Disable() has not been called.");
     }
@@ -2069,6 +2164,135 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     /// </summary>
     public CookingActions @Cooking => new CookingActions(this);
 
+    // CasinoBoss
+    private readonly InputActionMap m_CasinoBoss;
+    private List<ICasinoBossActions> m_CasinoBossActionsCallbackInterfaces = new List<ICasinoBossActions>();
+    private readonly InputAction m_CasinoBoss_SkillCheck1;
+    private readonly InputAction m_CasinoBoss_SkillCheck2;
+    private readonly InputAction m_CasinoBoss_SkillCheck3;
+    private readonly InputAction m_CasinoBoss_SkillCheck4;
+    /// <summary>
+    /// Provides access to input actions defined in input action map "CasinoBoss".
+    /// </summary>
+    public struct CasinoBossActions
+    {
+        private @InputSystem_Actions m_Wrapper;
+
+        /// <summary>
+        /// Construct a new instance of the input action map wrapper class.
+        /// </summary>
+        public CasinoBossActions(@InputSystem_Actions wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action "CasinoBoss/SkillCheck1".
+        /// </summary>
+        public InputAction @SkillCheck1 => m_Wrapper.m_CasinoBoss_SkillCheck1;
+        /// <summary>
+        /// Provides access to the underlying input action "CasinoBoss/SkillCheck2".
+        /// </summary>
+        public InputAction @SkillCheck2 => m_Wrapper.m_CasinoBoss_SkillCheck2;
+        /// <summary>
+        /// Provides access to the underlying input action "CasinoBoss/SkillCheck3".
+        /// </summary>
+        public InputAction @SkillCheck3 => m_Wrapper.m_CasinoBoss_SkillCheck3;
+        /// <summary>
+        /// Provides access to the underlying input action "CasinoBoss/SkillCheck4".
+        /// </summary>
+        public InputAction @SkillCheck4 => m_Wrapper.m_CasinoBoss_SkillCheck4;
+        /// <summary>
+        /// Provides access to the underlying input action map instance.
+        /// </summary>
+        public InputActionMap Get() { return m_Wrapper.m_CasinoBoss; }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+        public void Enable() { Get().Enable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+        public void Disable() { Get().Disable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+        public bool enabled => Get().enabled;
+        /// <summary>
+        /// Implicitly converts an <see ref="CasinoBossActions" /> to an <see ref="InputActionMap" /> instance.
+        /// </summary>
+        public static implicit operator InputActionMap(CasinoBossActions set) { return set.Get(); }
+        /// <summary>
+        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <param name="instance">Callback instance.</param>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+        /// </remarks>
+        /// <seealso cref="CasinoBossActions" />
+        public void AddCallbacks(ICasinoBossActions instance)
+        {
+            if (instance == null || m_Wrapper.m_CasinoBossActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_CasinoBossActionsCallbackInterfaces.Add(instance);
+            @SkillCheck1.started += instance.OnSkillCheck1;
+            @SkillCheck1.performed += instance.OnSkillCheck1;
+            @SkillCheck1.canceled += instance.OnSkillCheck1;
+            @SkillCheck2.started += instance.OnSkillCheck2;
+            @SkillCheck2.performed += instance.OnSkillCheck2;
+            @SkillCheck2.canceled += instance.OnSkillCheck2;
+            @SkillCheck3.started += instance.OnSkillCheck3;
+            @SkillCheck3.performed += instance.OnSkillCheck3;
+            @SkillCheck3.canceled += instance.OnSkillCheck3;
+            @SkillCheck4.started += instance.OnSkillCheck4;
+            @SkillCheck4.performed += instance.OnSkillCheck4;
+            @SkillCheck4.canceled += instance.OnSkillCheck4;
+        }
+
+        /// <summary>
+        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <remarks>
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+        /// </remarks>
+        /// <seealso cref="CasinoBossActions" />
+        private void UnregisterCallbacks(ICasinoBossActions instance)
+        {
+            @SkillCheck1.started -= instance.OnSkillCheck1;
+            @SkillCheck1.performed -= instance.OnSkillCheck1;
+            @SkillCheck1.canceled -= instance.OnSkillCheck1;
+            @SkillCheck2.started -= instance.OnSkillCheck2;
+            @SkillCheck2.performed -= instance.OnSkillCheck2;
+            @SkillCheck2.canceled -= instance.OnSkillCheck2;
+            @SkillCheck3.started -= instance.OnSkillCheck3;
+            @SkillCheck3.performed -= instance.OnSkillCheck3;
+            @SkillCheck3.canceled -= instance.OnSkillCheck3;
+            @SkillCheck4.started -= instance.OnSkillCheck4;
+            @SkillCheck4.performed -= instance.OnSkillCheck4;
+            @SkillCheck4.canceled -= instance.OnSkillCheck4;
+        }
+
+        /// <summary>
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="CasinoBossActions.UnregisterCallbacks(ICasinoBossActions)" />.
+        /// </summary>
+        /// <seealso cref="CasinoBossActions.UnregisterCallbacks(ICasinoBossActions)" />
+        public void RemoveCallbacks(ICasinoBossActions instance)
+        {
+            if (m_Wrapper.m_CasinoBossActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        /// <summary>
+        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+        /// </summary>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// </remarks>
+        /// <seealso cref="CasinoBossActions.AddCallbacks(ICasinoBossActions)" />
+        /// <seealso cref="CasinoBossActions.RemoveCallbacks(ICasinoBossActions)" />
+        /// <seealso cref="CasinoBossActions.UnregisterCallbacks(ICasinoBossActions)" />
+        public void SetCallbacks(ICasinoBossActions instance)
+        {
+            foreach (var item in m_Wrapper.m_CasinoBossActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_CasinoBossActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    /// <summary>
+    /// Provides a new <see cref="CasinoBossActions" /> instance referencing this action map.
+    /// </summary>
+    public CasinoBossActions @CasinoBoss => new CasinoBossActions(this);
+
     // Mouse
     private readonly InputActionMap m_Mouse;
     private List<IMouseActions> m_MouseActionsCallbackInterfaces = new List<IMouseActions>();
@@ -2567,6 +2791,42 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSprinkle(InputAction.CallbackContext context);
+    }
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "CasinoBoss" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="CasinoBossActions.AddCallbacks(ICasinoBossActions)" />
+    /// <seealso cref="CasinoBossActions.RemoveCallbacks(ICasinoBossActions)" />
+    public interface ICasinoBossActions
+    {
+        /// <summary>
+        /// Method invoked when associated input action "Skill Check 1" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSkillCheck1(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Skill Check 2" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSkillCheck2(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Skill Check 3" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSkillCheck3(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Skill Check 4" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSkillCheck4(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Mouse" which allows adding and removing callbacks.
