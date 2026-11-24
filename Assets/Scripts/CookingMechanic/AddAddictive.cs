@@ -6,7 +6,7 @@ using StarterAssets;
 
 public class AddAddictive : MonoBehaviour
 {
-    public ThirdPersonController thirdPersonController;
+    private ThirdPersonController thirdPersonController;
     
     public RectTransform arrow;
     public RectTransform greenZone;
