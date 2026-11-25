@@ -19,6 +19,7 @@ public class QuickDraw : MonoBehaviour
     [SerializeField] private float quickDrawDuration = 1.5f;
     [SerializeField] private float UIStartScale = 0.1f;
     [SerializeField] private float UIEndScale = 1.3f;
+    [SerializeField] private float scaleSpeed = 1.3f;
 
     [SerializeField, Range(0f, 2f)]
     private float successWindowStart = 1.2f;
@@ -26,7 +27,7 @@ public class QuickDraw : MonoBehaviour
     [SerializeField, Range(0f, 2f)]
     private float successWindowEnd = 1.35f;
 
-    private float elapsedTime;
+    [SerializeField] private float elapsedTime;
     private bool isRunning;
 
     private Action<bool> onComplete;
@@ -41,37 +42,38 @@ public class QuickDraw : MonoBehaviour
         skillCheck1.action.performed -= OnSkillCheckPressed;
     }
 
-    public void StartQuickDraw(Action<bool> success)
+    public void StartQuickDraw(float duration, Action<bool> success)
     {
         if(quickDrawPanel != null)
             quickDrawPanel.SetActive(true);
+        quickDrawDuration = duration;
         elapsedTime = 0f;
         isRunning = true;
 
         onComplete = success;//pass bool to QTEManager
 
-        whiteCircle.localScale = Vector3.one * UIStartScale;
+        whiteCircle.localScale = Vector3.one * scaleSpeed * UIStartScale;
     }
 
     private void Update()
     {
-        if (!isRunning)
-            return;
-
-        elapsedTime += Time.deltaTime;
-
-        float progress = Mathf.Clamp01(elapsedTime / quickDrawDuration);
-
-        float currentScale = Mathf.Lerp(UIStartScale, UIEndScale, progress);
-
-        whiteCircle.localScale = Vector3.one * currentScale;
-
-        // Time ran out
-        if (elapsedTime >= quickDrawDuration)
+        if (isRunning)
         {
-            if(quickDrawPanel != null)
-                quickDrawPanel.SetActive(false);
-            FinishQuickDraw(false);
+            elapsedTime += Time.deltaTime;
+
+            float progress = Mathf.Clamp01(elapsedTime / quickDrawDuration);
+
+            float currentScale = Mathf.Lerp(UIStartScale, UIEndScale, progress);
+
+            whiteCircle.localScale = Vector3.one * currentScale;
+
+            // Time ran out
+            if (elapsedTime >= quickDrawDuration)
+            {
+                if(quickDrawPanel != null)
+                    quickDrawPanel.SetActive(false);
+                FinishQuickDraw(false);
+            }
         }
     }
 

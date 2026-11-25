@@ -1,11 +1,12 @@
 using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
 public enum QTEType
 {
     QuickDraw,
-    Read,
+    ReadSequence,
     AllIn
 }
 
@@ -33,10 +34,12 @@ public class QTEManager : MonoBehaviour
 
     [SerializeField] private QuickDraw quickDraw;
     [SerializeField] private AllIn allIn;
+    [SerializeField] private ReadSequence readSequence;
+    public event Action<bool> CompleteQTE;
 
-    public void StartQuickDraw()
+    public void StartQuickDraw(float duration)
     {
-        quickDraw.StartQuickDraw(OnQuickDrawFinished);
+        quickDraw.StartQuickDraw(duration, OnQuickDrawFinished);
         //receiving bool from StarQuickDraw function
     }
 
@@ -45,92 +48,102 @@ public class QTEManager : MonoBehaviour
         if (success)
         {
             Debug.Log("Player won the quick draw!");
-
+            SucceedQTE();
             // TODO: Boss loses confidence
             // TODO: Play success animation
         }
         else
         {
             Debug.Log("Player lost the quick draw!");
-
+            FailQTE();
             // TODO: player loses confidence
         }
     }
-    public void StartAllIn()
+    public void StartAllIn(float duration)
     {
-        allIn.StartAllIn(OnAllInFinished);
+        allIn.StartAllIn(duration, OnAllInFinished);
     }
     private void OnAllInFinished(bool success)
     {
         if (success)
         {
             Debug.Log("Player won the all in!");
-
+            SucceedQTE();
             // TODO: Boss loses confidence
             // TODO: Play success animation
         }
         else
         {
             Debug.Log("Player lost the all in!");
-
+            FailQTE();
             // TODO: player loses confidence
         }
     }
-    private void SelectRandomQTE()
+
+    public void StartReadSequence(float duration)
+    {
+        readSequence.StartReadSequence(duration, OnReadSequenceFinished);
+    }
+    private void OnReadSequenceFinished(bool success)
+    {
+        if (success)
+        {
+            Debug.Log("Player won the all in!");
+            SucceedQTE();
+            // TODO: Boss loses confidence
+            // TODO: Play success animation
+        }
+        else
+        {
+            Debug.Log("Player lost the all in!");
+            FailQTE();
+            // TODO: player loses confidence
+        }
+    }
+    private void SelectRandomQTE(float duration)
     {
         //Consumes one dose if available 
-    }
-    private void StartQTE() 
-    {
-        //Initializes the selected QTE 
+        QTEType[] qteTypes = (QTEType[])Enum.GetValues(typeof(QTEType));
+        //Enum.GetValues(typeof(QTEType))
+        //->Give all the possible values inside the QTEType enum
+        //->[QuickDraw, ReadSequence, AllIn]
+        //(QTEType[]) type casing, converting enum to int
 
+        int randomIndex = UnityEngine.Random.Range(0, qteTypes.Length);
+
+        QTEType selectedQTE = qteTypes[randomIndex];
+
+        switch(selectedQTE)
+        {
+            case QTEType.QuickDraw:
+                StartQuickDraw(duration);
+                break;
+            case QTEType.ReadSequence:
+                StartReadSequence(duration);
+                break;
+            case QTEType.AllIn:
+                StartAllIn(duration);
+                break;
+        }
+    }
+    public void StartQTE(float duration) 
+    {
+        //TODO: Initializes the selected QTE 
+
+        SelectRandomQTE(duration);
 
     }
     
-    private void CheckQTEInput() 
-    {
-        //Determines which QTE input was pressed
-    }
-    private void CheckQuickDraw() 
-    {
-        //Checks whether F was pressed
-    }
-    private void CheckRead() 
-    {
-        //Checks Q → E → F sequence 
-    }
-   
-    private void CheckAllIn() 
-    {
-        //Checks whether Space was pressed in the target zone
-    }
     private void SucceedQTE() 
     {
         //Marks QTE as successful 
+        CompleteQTE?.Invoke(true);
     }
    
     private void FailQTE() 
     {
         //Fail QTE
+        CompleteQTE?.Invoke(false);
     }
    
-    private void EndQTE() 
-    {
-        //Stops accepting input and ends QTE calculations | *Input handling
-
-    }
-   
-    private void GetQTEResult() 
-    {
-        //Returns whether the player succeeded 
-    }
-   
-
-
-
-
-
-
-
-
 }

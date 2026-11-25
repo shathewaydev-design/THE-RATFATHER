@@ -4,7 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
-using System.Diagnostics;
 public class AllIn : MonoBehaviour
 {
     [Header("Input")]
@@ -51,10 +50,11 @@ public class AllIn : MonoBehaviour
     {
         skillCheck1.action.performed -= OnSkillCheckPressed;
     }
-    public void StartAllIn(Action<bool> success)
+    public void StartAllIn(float duration, Action<bool> success)
     {
         if(allInPanel != null)
             allInPanel.SetActive(true);
+        allInDuration = duration;
         elapsedTime = allInDuration;
         isRunning = true;
 
@@ -62,22 +62,20 @@ public class AllIn : MonoBehaviour
     }
     void Update()
     {
-        if (!isRunning)
-            return;
-        MoveArrow();
-
-        elapsedTime -= Time.deltaTime;
-        allInDurationTimer.fillAmount = elapsedTime;
-        //TODO: [VFX] play timer blinking when time is low
-        // if (thirdPersonController.sprinkle.WasPressedThisFrame())
-        // {
-        //     HandleHit();
-        // }
-        if (elapsedTime <= 0 && allInProgress < allInGoal)
+        if (isRunning)
         {
-            if(allInPanel != null)
-                allInPanel.SetActive(false);
-            FinishAllIn(false);//player failed all in
+            MoveArrow();
+
+            elapsedTime -= Time.deltaTime;
+            allInDurationTimer.fillAmount = elapsedTime / allInDuration;
+            //TODO: [VFX] play timer blinking when time is low
+            
+            if (elapsedTime <= 0 && allInProgress < allInGoal)
+            {
+                if(allInPanel != null)
+                    allInPanel.SetActive(false);
+                FinishAllIn(false);//player failed all in
+            }
         }
     }
 
@@ -119,6 +117,10 @@ public class AllIn : MonoBehaviour
             allInProgress += orangeZoneSuccessAmount;
             RandomizeOrangeZone();
             ShowFeedback();
+        }
+        else
+        {
+            //failed skill check VFX (shake bar/poker chips, bar turns red?)
         }
 
         // Clamp stability
