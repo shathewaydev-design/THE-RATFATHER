@@ -6,12 +6,12 @@ public class CursorManager : MonoBehaviour
 {
     public static CursorManager Instance;
     private bool cursorUnlocked= false;
-    public ThirdPersonController thirdPersonController;
+    private ThirdPersonController thirdPersonController;
 
     private void Awake()
     {
         Instance = this;
-        //thirdPersonController = ThirdPersonController.Instance;
+        thirdPersonController = ThirdPersonController.Instance;
     }
     private void Start()
     {

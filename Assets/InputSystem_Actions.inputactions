@@ -73,7 +73,7 @@
                     "name": "Next",
                     "type": "Button",
                     "id": "b7230bb6-fc9b-4f52-8b25-f5e19cb2c2ba",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -1126,6 +1126,94 @@
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "Sprinkle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "CasinoBoss",
+            "id": "315a2fac-7092-47ef-93c0-f915b4f7a072",
+            "actions": [
+                {
+                    "name": "Skill Check 1",
+                    "type": "Button",
+                    "id": "272b4bb5-cf4a-4cd8-bea2-59a12199b25a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Skill Check 2",
+                    "type": "Button",
+                    "id": "748375d8-d4f0-4c3b-b1af-e30469c507ad",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Skill Check 3",
+                    "type": "Button",
+                    "id": "7c9ea8ad-aa9b-4e82-abda-1f59510c8dda",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Skill Check 4",
+                    "type": "Button",
+                    "id": "d6482291-452d-42ca-8345-b9a86acbb02f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "55c93304-12a1-477c-9c95-74ecb84c07f8",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Skill Check 1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "65e1245a-d14a-4d53-9edf-44cc5e537c08",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Skill Check 2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3062f219-0422-4bd7-92d0-8ad5adeca9fa",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Skill Check 3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "560efae1-a8e0-498f-8890-641193e3e098",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Skill Check 4",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -203,49 +203,44 @@ public class NPCProfile_New : ScriptableObject
         // cheese.stability
         // low, med, high
 
-        //    if (cheese.stability == StabilityLevel.High)
-        //    {
-        //        if (difficultyLevel == 3 || difficultyLevel == 2 || difficultyLevel == 1)
-        //        {
-        //            canSell = true;
-        //            return canSell;
-        //        }
+        if (cheese.quality == Quality.High)
+        {
+            if (difficultyLevel == 3 || difficultyLevel == 2 || difficultyLevel == 1)
+            {
+                canSell = true;
+                return canSell;
+            }
 
         //        return true;
 
-        //    } 
-        //    else if (cheese.stability == StabilityLevel.Medium)
-        //    {
-        //        if (difficultyLevel == 2 || difficultyLevel == 1)
-        //        {
-        //            canSell = true;
-        //            return canSell;
-        //        }
-        //        else
-        //        {
-        //            canSell = false;
-        //            return canSell;
-        //        }
+        } 
+        else if (cheese.quality == Quality.Medium)
+        {
+            if (difficultyLevel == 2 || difficultyLevel == 1)
+            {
+                canSell = true;
+                return canSell;
+            }
+            else
+            {
+                canSell = false;
+                return canSell;
+            }
 
-        //    }
-        //    else if (cheese.stability == StabilityLevel.Low)
-        //    {
-        //        if (difficultyLevel == 1)
-        //        {
-        //            canSell = true;
-        //            return canSell;
-        //        }
-        //        else
-        //        {
-        //            canSell = false;
-        //            return canSell;
-        //        }
-        //    }
-
-        //        return canSell;
-
-        //}
-
+        }
+        else if (cheese.quality == Quality.Low)
+        {
+            if (difficultyLevel == 1)
+            {
+                canSell = true;
+                return canSell;
+            }
+            else
+            {
+                canSell = false;
+                return canSell;
+            }
+        }
 
 
     }
