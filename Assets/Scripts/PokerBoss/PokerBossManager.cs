@@ -36,7 +36,8 @@ public class PokerBossManager : MonoBehaviour
     public void StartEncounter()
     {
         //Initializes a boss encounter 
-        qteManager.StartQuickDraw();
+        // qteManager.StartQuickDraw();
+        qteManager.StartAllIn();
 
     }    
     private void StartDealPhase()

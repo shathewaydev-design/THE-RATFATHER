@@ -32,6 +32,7 @@ public class QTEManager : MonoBehaviour
     [Header("QTE Types")]
 
     [SerializeField] private QuickDraw quickDraw;
+    [SerializeField] private AllIn allIn;
 
     public void StartQuickDraw()
     {
@@ -51,6 +52,26 @@ public class QTEManager : MonoBehaviour
         else
         {
             Debug.Log("Player lost the quick draw!");
+
+            // TODO: player loses confidence
+        }
+    }
+    public void StartAllIn()
+    {
+        allIn.StartAllIn(OnAllInFinished);
+    }
+    private void OnAllInFinished(bool success)
+    {
+        if (success)
+        {
+            Debug.Log("Player won the all in!");
+
+            // TODO: Boss loses confidence
+            // TODO: Play success animation
+        }
+        else
+        {
+            Debug.Log("Player lost the all in!");
 
             // TODO: player loses confidence
         }

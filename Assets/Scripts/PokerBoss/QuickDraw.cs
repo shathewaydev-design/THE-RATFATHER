@@ -16,15 +16,15 @@ public class QuickDraw : MonoBehaviour
     [SerializeField] private GameObject quickDrawPanel;
 
     [Header("Timing")]
-    [SerializeField] private float duration = 1.5f;
+    [SerializeField] private float quickDrawDuration = 1.5f;
     [SerializeField] private float UIStartScale = 0.1f;
     [SerializeField] private float UIEndScale = 1.3f;
 
-    [SerializeField, Range(0f, 1f)]
-    private float successWindowStart = 0.7f;
+    [SerializeField, Range(0f, 2f)]
+    private float successWindowStart = 1.2f;
 
-    [SerializeField, Range(0f, 1f)]
-    private float successWindowEnd = 0.85f;
+    [SerializeField, Range(0f, 2f)]
+    private float successWindowEnd = 1.35f;
 
     private float elapsedTime;
     private bool isRunning;
@@ -60,14 +60,14 @@ public class QuickDraw : MonoBehaviour
 
         elapsedTime += Time.deltaTime;
 
-        float progress = Mathf.Clamp01(elapsedTime / duration);
+        float progress = Mathf.Clamp01(elapsedTime / quickDrawDuration);
 
         float currentScale = Mathf.Lerp(UIStartScale, UIEndScale, progress);
 
         whiteCircle.localScale = Vector3.one * currentScale;
 
         // Time ran out
-        if (elapsedTime >= duration)
+        if (elapsedTime >= quickDrawDuration)
         {
             if(quickDrawPanel != null)
                 quickDrawPanel.SetActive(false);
@@ -80,7 +80,7 @@ public class QuickDraw : MonoBehaviour
         if (!isRunning)
             return;
 
-        float progress = elapsedTime / duration;
+        float progress = elapsedTime / quickDrawDuration;
 
         bool success = progress >= successWindowStart && progress <= successWindowEnd;
 
