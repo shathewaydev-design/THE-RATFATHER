@@ -195719,14 +195719,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9520cb64aad6a147b2b475bc962ecb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObjectiveManager
-  openObjectives: {fileID: -8633037700627487836, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  canOpenObjectives: 1
-  currPageIndex: 0
-  objectivePanel: {fileID: 1823113695}
-  fullFavorDisplayPrefab: {fileID: 1215103566}
-  favorText: {fileID: 163527579}
-  objectiveTextPrefab: {fileID: 1229666337282414480, guid: 0d87a5e566a1b7749a2ebf6ae044f6ac, type: 3}
-  thirdPersonController: {fileID: 547920564}
 --- !u!1 &1458057376
 GameObject:
   m_ObjectHideFlags: 0
@@ -276698,7 +276690,7 @@ PrefabInstance:
     - target: {fileID: 8309902628685535410, guid: 52571f68872914e24837210513edea1d, type: 3}
       propertyPath: yarnProject
       value: 
-      objectReference: {fileID: 7545569452688597077, guid: d7e22223dafb6fa498eb1289c68f85a2, type: 3}
+      objectReference: {fileID: 7545569452688597077, guid: 952dbcdd8000d7d449337c5bc7a6be86, type: 3}
     - target: {fileID: 8309902628685535410, guid: 52571f68872914e24837210513edea1d, type: 3}
       propertyPath: onDialogueComplete.m_PersistentCalls.m_Calls.Array.size
       value: 1

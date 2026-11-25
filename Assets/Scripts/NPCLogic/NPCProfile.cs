@@ -17,5 +17,6 @@ public class NPCProfile : ScriptableObject
     public string introNode;
     public string customerNode;
     public string noRequestNode; // thinking this could be lore building dialogue
+    public string noLongerCustomerNode;
 
 }

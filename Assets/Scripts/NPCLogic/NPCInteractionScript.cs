@@ -47,6 +47,11 @@ public class NPCInteractionScript : MonoBehaviour, IInteractable
 
     public void Interact()
     {
+        // NOTE FOR CHARLIE: YOU COULD CHANGE THIS TO UTILIZE A HELPER METHOD THAT SETS NPCSTATE'S 
+        // currDialogueNode, THEN SIMPLY JUST CALL DialogueManager.Instance.StartConversation(profile.introNode); HERE!!!
+        // FIGURE IT OUT PLEASE
+
+
         if (!profile.npcState.hasMetPlayer)
         {
             // ALSO NEED TO CHECK IF THE FREE SAMPLE WAS SUCCESFUL
