@@ -150,26 +150,26 @@ public class RequestManager : MonoBehaviour
 
     private void Start() // for testing for now!!!
     {
-        RequestData req1 = new RequestData();
-        CustomerData customer1 = new CustomerData();
+        //RequestData req1 = new RequestData();
+        //CustomerData customer1 = new CustomerData();
 
-        customer1.npcProfile = new NPCProfile();
-        customer1.npcProfile.basePrice = 1;
-        customer1.npcProfile.npcName = "Judy";
-        customer1.npcProfile.typePreference = CheeseType.Upper;
-        customer1.npcProfile.qualityPreference = Quality.Low;
+        //customer1.npcProfile = new NPCProfile();
+        //customer1.npcProfile.basePrice = 1;
+        //customer1.npcProfile.npcName = "Judy";
+        //customer1.npcProfile.typePreference = CheeseType.Upper;
+        //customer1.npcProfile.qualityPreference = Quality.Low;
 
-        req1.customer = customer1;
-        req1.requestType = customer1.npcProfile.typePreference;
-        req1.requestQuality = customer1.npcProfile.qualityPreference;
-        req1.requestQuantity = 3;
-        req1.estimatedPay = 100;
+        //req1.customer = customer1;
+        //req1.requestType = customer1.npcProfile.typePreference;
+        //req1.requestQuality = customer1.npcProfile.qualityPreference;
+        //req1.requestQuantity = 3;
+        //req1.estimatedPay = 100;
 
-        customer1.strikeCount = 1;
-        customer1.isActiveCustomer = true;
+        //customer1.strikeCount = 1;
+        //customer1.isActiveCustomer = true;
 
-        customers.Add(customer1);
-        activeRequests.Add(req1);
+        //customers.Add(customer1);
+        //activeRequests.Add(req1);
 
     }
 
